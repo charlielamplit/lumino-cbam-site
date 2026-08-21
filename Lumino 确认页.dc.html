@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lumino · 方案确认 CBAM-2026-0821-v1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#F4F7F6;color:#0B100E;font-family:"Instrument Sans","PingFang SC","Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-wrap:pretty}
+h1,h2,h3,p,ul,ol{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:#0E7C5A;text-decoration:none}
+a:hover{color:#0A4F3A}
+button{font:inherit;color:inherit;cursor:pointer}
+@media (prefers-reduced-motion: reduce){*{transition:none !important}}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#F4F7F6;font-size:16px;line-height:1.75">
+
+  <div style="background:#07110E;color:#fff">
+    <div style="max-width:720px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px">
+      <span style="flex:none;font-family:'Instrument Sans',sans-serif;font-size:16px;font-weight:700;letter-spacing:-.02em">LUMINO</span>
+      <div style="display:flex;gap:4px;margin-left:auto">
+        <sc-for list="{{ langOpts }}" as="l" hint-placeholder-count="2">
+          <button type="button" onClick="{{ l.onClick }}" style="flex:none;white-space:nowrap;min-height:36px;padding:0 12px;border:1px solid {{ l.border }};background:{{ l.bg }};color:{{ l.fg }};border-radius:6px;font-size:14px">{{ l.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#F4F7F6;border-bottom:1px solid #C6D1CD">
+    <div style="max-width:720px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;gap:4px 16px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#46524E;font-variant-numeric:tabular-nums">
+      <span style="white-space:nowrap">{{ t.quoteNo }} CBAM-2026-0821-v1</span>
+      <span style="white-space:nowrap">{{ t.fingerprint }} fp-a3f9…c21e</span>
+      <span style="white-space:nowrap">{{ t.frozenAt }} 2026-08-21 10:00 (UTC+8)</span>
+    </div>
+  </div>
+
+  <main style="max-width:720px;margin:0 auto;padding:20px 16px 64px;display:flex;flex-direction:column;gap:20px">
+
+    <section style="background:#fff;border:1px solid #E3E8E6;border-radius:6px;padding:20px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#0E7C5A">{{ t.recordLabel }}</div>
+      <h1 style="margin-top:10px;font-family:'Archivo',sans-serif;font-size:24px;font-weight:600;line-height:1.3">{{ t.title }}</h1>
+      <p style="margin-top:10px;font-size:15px;color:#46524E">{{ t.recordNote }}</p>
+      <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px 20px">
+        <sc-for list="{{ meta }}" as="m" hint-placeholder-count="5">
+          <div>
+            <div style="font-size:13px;color:#67736F">{{ m.label }}</div>
+            <div style="margin-top:2px;font-family:'IBM Plex Mono',monospace;font-size:15px;font-variant-numeric:tabular-nums">{{ m.value }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="background:#fff;border:1px solid #E3E8E6;border-radius:6px;overflow:hidden">
+      <div style="padding:14px 20px;border-bottom:1px solid #E3E8E6;background:#F4F7F6">
+        <h2 style="font-family:'Archivo',sans-serif;font-size:18px;font-weight:600">{{ t.moneyTitle }}</h2>
+        <p style="margin-top:4px;font-size:14px;color:#46524E">{{ t.moneyNote }}</p>
+      </div>
+      <sc-for list="{{ moneyBlocks }}" as="b" hint-placeholder-count="3">
+        <div style="padding:16px 20px;border-bottom:1px solid #EDF1F0;background:{{ b.bg }}">
+          <div style="font-size:14px;color:{{ b.labelFg }}">{{ b.label }}</div>
+          <div style="margin-top:8px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap;color:{{ b.fg }}">{{ b.value }}</span>
+            <sc-if value="{{ b.hasCap }}" hint-placeholder-val="{{ false }}">
+              <span style="flex:none;font-size:13px;color:#67736F">{{ b.capLabel }}</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap;color:{{ b.fg }}">{{ b.cap }}</span>
+            </sc-if>
+          </div>
+          <p style="margin-top:8px;font-size:14px;color:#46524E">{{ b.note }}</p>
+        </div>
+      </sc-for>
+    </section>
+
+    <section style="background:#fff;border:1px solid #E3E8E6;border-radius:6px;overflow:hidden">
+      <div style="padding:14px 20px;border-bottom:1px solid #E3E8E6;background:#F4F7F6">
+        <h2 style="font-family:'Archivo',sans-serif;font-size:18px;font-weight:600">{{ t.unitsTitle }}</h2>
+        <p style="margin-top:4px;font-size:14px;color:#46524E">{{ t.unitsNote }}</p>
+      </div>
+      <div style="overflow-x:auto">
+        <table style="width:100%;min-width:520px;border-collapse:collapse;font-size:14px">
+          <thead>
+            <tr style="background:#FBFCFC">
+              <th style="text-align:left;padding:10px 16px;border-bottom:1px solid #C6D1CD;font-weight:500;font-size:13px;color:#46524E;white-space:nowrap">{{ t.colUnit }}</th>
+              <th style="text-align:left;padding:10px 16px;border-bottom:1px solid #C6D1CD;font-weight:500;font-size:13px;color:#46524E;white-space:nowrap">{{ t.colWhat }}</th>
+              <th style="text-align:right;padding:10px 16px;border-bottom:1px solid #C6D1CD;font-weight:500;font-size:13px;color:#46524E;white-space:nowrap">{{ t.colQty }}</th>
+              <th style="text-align:left;padding:10px 16px;border-bottom:1px solid #C6D1CD;font-weight:500;font-size:13px;color:#46524E;white-space:nowrap">{{ t.colVerdict }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{ unitRows }}" as="u" hint-placeholder-count="7">
+              <tr>
+                <td style="padding:10px 16px;border-bottom:1px solid #EDF1F0;font-family:'IBM Plex Mono',monospace;white-space:nowrap;vertical-align:top">{{ u.id }}</td>
+                <td style="padding:10px 16px;border-bottom:1px solid #EDF1F0;vertical-align:top"><span style="font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums">{{ u.cn }}</span><div style="margin-top:2px;font-size:13px;color:#46524E">{{ u.fac }}</div></td>
+                <td style="padding:10px 16px;border-bottom:1px solid #EDF1F0;text-align:right;font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;white-space:nowrap;vertical-align:top">{{ u.qty }}</td>
+                <td style="padding:10px 16px;border-bottom:1px solid #EDF1F0;vertical-align:top;color:{{ u.color }};white-space:nowrap">{{ u.verdict }}</td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+      <div style="background:#fff;border:1px solid #0E7C5A;border-radius:6px;overflow:hidden">
+        <div style="padding:12px 18px;background:#EDF6F2;font-size:16px;font-weight:600;color:#0A4F3A">{{ t.doTitle }}</div>
+        <ul style="padding:14px 18px;display:flex;flex-direction:column;gap:9px;font-size:15px">
+          <sc-for list="{{ doList }}" as="d" hint-placeholder-count="5">
+            <li style="display:flex;gap:9px"><span style="flex:none;color:#0E7C5A">·</span><span>{{ d.text }}</span></li>
+          </sc-for>
+        </ul>
+      </div>
+      <div style="background:#fff;border:1px solid #0B100E;border-radius:6px;overflow:hidden">
+        <div style="padding:12px 18px;background:#F4F7F6;font-size:16px;font-weight:600">{{ t.dontTitle }}</div>
+        <ul style="padding:14px 18px;display:flex;flex-direction:column;gap:9px;font-size:15px">
+          <sc-for list="{{ dontList }}" as="d" hint-placeholder-count="5">
+            <li style="display:flex;gap:9px"><span style="flex:none;color:#B3402A">×</span><span>{{ d.text }}</span></li>
+          </sc-for>
+        </ul>
+      </div>
+    </section>
+
+    <section style="background:#fff;border:1px solid #E3E8E6;border-radius:6px;overflow:hidden">
+      <div style="padding:14px 20px;border-bottom:1px solid #E3E8E6;background:#F4F7F6">
+        <h2 style="font-family:'Archivo',sans-serif;font-size:18px;font-weight:600">{{ t.gapTitle }}</h2>
+        <p style="margin-top:4px;font-size:14px;color:#46524E">{{ t.gapNote }}</p>
+      </div>
+      <sc-for list="{{ caveats }}" as="c" hint-placeholder-count="6">
+        <div style="padding:14px 20px;border-bottom:1px solid #EDF1F0;background:{{ c.bg }}">
+          <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px">
+            <span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:12px;padding:1px 8px;border:1px solid #C6D1CD;border-radius:4px;color:#46524E;background:#fff;white-space:nowrap">{{ c.tag }}</span>
+            <span style="font-size:16px;font-weight:600;color:{{ c.fg }}">{{ c.title }}</span>
+          </div>
+          <p style="margin-top:6px;font-size:15px;color:#46524E">{{ c.consequence }}</p>
+          <p style="margin-top:6px;font-size:14px">{{ c.askLabel }}{{ c.ask }}</p>
+          <sc-if value="{{ c.confirmable }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+              <button type="button" onClick="{{ c.onConfirm }}" style="flex:none;min-height:44px;padding:0 14px;border:1px solid {{ c.btnBorder }};background:{{ c.btnBg }};color:{{ c.btnFg }};border-radius:6px;font-size:15px;font-weight:{{ c.btnWeight }}" style-hover="border-color:#0B100E" style-focus="outline:2px solid #1B57D6;outline-offset:2px">{{ c.btnLabel }}</button>
+              <span style="font-size:13px;color:#67736F">{{ c.itemNote }}</span>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+      <div style="padding:14px 20px;background:#FBF4DF">
+        <div style="font-size:15px;font-weight:600;color:#8A6A00">{{ t.unverifiedTitle }}</div>
+        <div style="margin-top:3px;font-size:13px;color:#46524E">{{ t.unverifiedNote }}</div>
+        <ol style="margin-top:10px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:6px 18px">
+          <sc-for list="{{ unverified }}" as="u" hint-placeholder-count="12">
+            <li style="display:flex;gap:7px;font-size:14px;line-height:1.6">
+              <span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A6A00;font-variant-numeric:tabular-nums">{{ u.n }}</span>
+              <span>{{ u.text }}</span>
+            </li>
+          </sc-for>
+        </ol>
+      </div>
+    </section>
+
+    <section style="background:#fff;border:2px solid #0B100E;border-radius:6px;overflow:hidden">
+      <div style="padding:14px 20px;border-bottom:1px solid #E3E8E6">
+        <h2 style="font-family:'Archivo',sans-serif;font-size:18px;font-weight:600">{{ t.signTitle }}</h2>
+        <p style="margin-top:4px;font-size:15px;color:#46524E">{{ t.signNote }}</p>
+      </div>
+
+      <sc-if value="{{ notDecided }}" hint-placeholder-val="{{ true }}">
+        <div style="padding:16px 20px;display:flex;flex-direction:column;gap:14px">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+            <label style="display:flex;flex-direction:column;gap:6px">
+              <span style="font-size:14px;color:#46524E">{{ t.fieldName }}</span>
+              <input type="text" value="{{ signName }}" onChange="{{ onName }}" placeholder="{{ t.fieldNamePh }}" style="width:100%;min-height:48px;padding:0 14px;border:1px solid #C6D1CD;border-radius:6px;font-size:16px" style-focus="outline:2px solid #0E7C5A;outline-offset:1px;border-color:#0E7C5A">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:6px">
+              <span style="font-size:14px;color:#46524E">{{ t.fieldRole }}</span>
+              <input type="text" value="{{ signRole }}" onChange="{{ onRole }}" placeholder="{{ t.fieldRolePh }}" style="width:100%;min-height:48px;padding:0 14px;border:1px solid #C6D1CD;border-radius:6px;font-size:16px" style-focus="outline:2px solid #0E7C5A;outline-offset:1px;border-color:#0E7C5A">
+            </label>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+            <button type="button" onClick="{{ doConfirm }}" style="min-height:52px;padding:0 18px;border:1px solid #0E7C5A;background:#0E7C5A;color:#fff;border-radius:6px;font-size:16px;font-weight:600" style-hover="background:#0A4F3A;border-color:#0A4F3A" style-focus="outline:2px solid #1B57D6;outline-offset:2px">{{ t.confirmBtn }}</button>
+            <button type="button" onClick="{{ doReject }}" style="min-height:52px;padding:0 18px;border:1px solid #0B100E;background:#fff;color:#0B100E;border-radius:6px;font-size:16px;font-weight:600" style-hover="background:#F4F7F6" style-focus="outline:2px solid #1B57D6;outline-offset:2px">{{ t.rejectBtn }}</button>
+          </div>
+          <p style="font-size:14px;color:#46524E">{{ t.signHint }}</p>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ confirmed }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:18px 20px;background:#EDF6F2">
+          <div style="font-size:17px;font-weight:600;color:#0A4F3A">{{ t.confirmedTitle }}</div>
+          <p style="margin-top:6px;font-size:15px;color:#46524E">{{ t.confirmedNote }}</p>
+          <div style="margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#46524E;font-variant-numeric:tabular-nums">{{ signedLine }}</div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ rejected }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:18px 20px;background:#F4F7F6">
+          <div style="font-size:17px;font-weight:600">{{ t.rejectedTitle }}</div>
+          <p style="margin-top:6px;font-size:15px;color:#46524E">{{ t.rejectedNote }}</p>
+          <label style="margin-top:12px;display:flex;flex-direction:column;gap:6px">
+            <span style="font-size:14px;color:#46524E">{{ t.rejectReason }}</span>
+            <textarea value="{{ reason }}" onChange="{{ onReason }}" placeholder="{{ t.rejectReasonPh }}" style="width:100%;min-height:96px;padding:12px 14px;border:1px solid #C6D1CD;border-radius:6px;font-size:16px;line-height:1.6;resize:vertical" style-focus="outline:2px solid #0E7C5A;outline-offset:1px;border-color:#0E7C5A"></textarea>
+          </label>
+          <button type="button" onClick="{{ doBack }}" style="margin-top:12px;min-height:48px;padding:0 16px;border:1px solid #C6D1CD;background:#fff;border-radius:6px;font-size:15px" style-hover="border-color:#0B100E">{{ t.backBtn }}</button>
+        </div>
+      </sc-if>
+    </section>
+
+    <p style="font-size:13px;color:#67736F">{{ t.footer }}</p>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:760,&quot;height&quot;:1100},&quot;startLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;zh&quot;,&quot;en&quot;],&quot;default&quot;:&quot;zh&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;语言&quot;}}">
+const COPY = {
+  zh:{
+    lang:'中文', quoteNo:'方案号', fingerprint:'快照指纹', frozenAt:'冻结于',
+    recordLabel:'方案原件 · 只读记录',
+    title:'CBAM 合规服务方案 · 请确认',
+    recordNote:'本页只呈现冻结值，不做任何重算。除最下方签字区外，页面上没有可填写的内容 —— 这是一份记录，不是一张表单。',
+    metaLabels:['客户','申报年度','目的地','出具日','有效期'],
+    metaValues:['玉环威格金属制品有限公司','2026（确定期）','DE / IT','2026-08-21','30 天（至 2026-09-20）'],
+    moneyTitle:'三类钱，分列呈现',
+    moneyNote:'性质不同，不合并计算。任何「合计」只是服务费的合计。',
+    blocks:[
+      { label:'服务费 · 我方收取', value:'¥ 8,000', capLabel:'封顶', cap:'¥ 10,400', note:'下限按 5 个核算单元 + 3 家设施计。每多 1 单元或 1 家设施各 ¥ 600，至封顶为止；超出封顶部分由我方承担。任何上调先告知再执行。' },
+      { label:'转付项 · 第三方核查费', value:'¥ 50,000 – 70,000', note:'核查机构按人天报价，与我方服务费无关：下端对应 1 家设施、无现场核查，上端对应 3 家设施 + 现场核查。由核查机构直接开票，按实际发生额转付，我方不加价、不返点。不并入服务费合计。' },
+      { label:'客户直接成本 · CBAM 证书', value:'¥ 427,998 – 605,565', note:'贵司直接支付，不经我方收取，我方不代购、不代持、不代缴。区间下端对应实测口径，上端对应默认值口径。仅为量级估算。' }
+    ],
+    unitsTitle:'核算单元与结论',
+    unitsNote:'127 条报关行项合并为 9 个 Annex I 商品项、5–6–7 个核算单元。带 ? 的单元来自尚未书面确认的生产设施，只计入上限。',
+    cols:['单元','CN 码 · 生产设施','数量 t','结论'],
+    verdicts:{ M:'必须实测收资', R:'沿用上期已核验', F:'按默认值申报（风险自留）', X:'仅计入上限' },
+    doTitle:'我们做', dontTitle:'我们不做',
+    doList:['梳理报关明细，确定覆盖范围与核算单元','向生产设施收资，含取数模板与逐轮催办','核算隐含排放并出具可供进口商申报的数据包','对接第三方核查机构，配合提问与补充材料','规则包更新时主动复核取值并告知影响'],
+    dontList:['不代客户签署或提交 CBAM 申报表','不出具核查意见','不出具法律意见','不承诺保证通过审核或不被追问','不代购、不代持、不代缴 CBAM 证书'],
+    gapTitle:'缺口清单', gapNote:'以下 6 项影响取值口径，与我方内部界面所列完全一致，未做删减。缺口补齐后价格只会往下走，不会反过来上调。',
+    askLabel:'需要贵司做的：',
+    itemConfirm:'这一项我们现在就确认', itemDone:'✓ 已确认这一项',
+    itemNote:'点了即视为书面确认，会记进签字记录，本原件不变。',
+    itemDoneNote:'已记入签字记录。可再次点击撤回。',
+    unverifiedTitle:'未核实事项 · 12 条',
+    unverifiedNote:'以下法规取值截至出具日尚未逐条核实，仅供规划参考，不作为承诺。',
+    signTitle:'确认或要求修改',
+    signNote:'两个动作权重相同。如口径有异议，请直接选「要求修改」——我们会出新版本，不会改动本原件。',
+    fieldName:'签字人姓名', fieldNamePh:'例如：张伟',
+    fieldRole:'职务', fieldRolePh:'例如：外贸部经理',
+    confirmBtn:'确认本方案', rejectBtn:'要求修改',
+    signHint:'确认即表示接受本页所列的取值口径、缺口清单与三类费用的划分。本原件不会因确认而改变。',
+    confirmedTitle:'已确认，谢谢。', confirmedNote:'我方会在 1 个工作日内发出启动清单与收资模板。本原件保持只读，任何调整都会以新版本出具。',
+    rejectedTitle:'已记录：要求修改', rejectedNote:'请说明需要调整的部分（可以只写一句）。我方会出具新版本，本原件不会被改动。',
+    rejectReason:'需要调整的部分', rejectReasonPh:'例如：第三家设施我们下周能确认，请按已锁定重出一版。',
+    backBtn:'返回',
+    footer:'本方案为初步估算，不构成法律意见，有效期 30 天。本页面为免登录链接，仅包含这一份方案，无账号、无其他导航。'
+  },
+  en:{
+    lang:'English', quoteNo:'Quote no.', fingerprint:'Snapshot', frozenAt:'Frozen at',
+    recordLabel:'Original record · read-only',
+    title:'CBAM compliance service proposal · for your confirmation',
+    recordNote:'This page renders frozen values only and never recalculates. Apart from the signature block at the bottom, there is nothing to fill in — this is a record, not a form.',
+    metaLabels:['Client','Reporting year','Destination','Issued','Valid for'],
+    metaValues:['Yuhuan Weige Metal Products Co., Ltd.','2026 (definitive period)','DE / IT','2026-08-21','30 days (until 2026-09-20)'],
+    moneyTitle:'Three kinds of money, listed separately',
+    moneyNote:'They are different in nature and are never combined. Any total shown is the service-fee total only.',
+    blocks:[
+      { label:'Service fee · charged by us', value:'¥ 8,000', capLabel:'capped at', cap:'¥ 10,400', note:'The lower bound covers 5 calculation units and 3 installations. Each additional unit or installation adds ¥ 600, up to the cap; anything beyond the cap is on us. Any increase is disclosed before it is incurred.' },
+      { label:'Pass-through · third-party verification', value:'¥ 50,000 – 70,000', note:'The verification body prices this by person-day, independently of our service fee: the lower end assumes one installation and no site visit, the upper end three installations with a site visit. Invoiced directly by the verification body and passed through at actual cost. No mark-up, no commission. Not included in the service-fee total.' },
+      { label:'Your direct cost · CBAM certificates', value:'¥ 427,998 – 605,565', note:'Paid by you directly. We neither collect, purchase, hold nor surrender certificates. The lower bound reflects measured data, the upper bound default values. Order-of-magnitude estimate only.' }
+    ],
+    unitsTitle:'Calculation units and conclusions',
+    unitsNote:'127 customs line items consolidate into 9 Annex I goods and 5–6–7 calculation units. Units marked ? come from an installation not yet confirmed in writing and count towards the upper bound only.',
+    cols:['Unit','CN code · installation','Quantity t','Conclusion'],
+    verdicts:{ M:'Measured data required', R:'Verified data reused', F:'Default values applied (risk retained)', X:'Upper bound only' },
+    doTitle:'What we do', dontTitle:'What we do not do',
+    doList:['Consolidate customs data and define the scope and calculation units','Collect data from installations, including templates and follow-up','Calculate embedded emissions and issue a declaration-ready data package','Liaise with the third-party verifier and handle their queries','Re-check this proposal when the rule pack changes and tell you the impact'],
+    dontList:['We do not sign or submit the CBAM declaration for you','We do not issue verification opinions','We do not issue legal opinions','We do not guarantee approval or freedom from queries','We do not purchase, hold or surrender CBAM certificates'],
+    gapTitle:'Open items', gapNote:'These 6 items affect how values are taken. The list is identical to the one in our internal view — nothing has been removed. Closing a gap can only move the price down, never up.',
+    askLabel:'What we need from you: ',
+    itemConfirm:'We confirm this item now', itemDone:'✓ This item confirmed',
+    itemNote:'Clicking counts as written confirmation and is recorded with your signature. The original stays unchanged.',
+    itemDoneNote:'Recorded with your signature. Click again to withdraw.',
+    unverifiedTitle:'Items not yet verified · 12',
+    unverifiedNote:'The regulatory values below had not been verified item by item as of the issue date. For planning only; not a commitment.',
+    signTitle:'Confirm or request changes',
+    signNote:'Both actions carry equal weight. If you disagree with any basis, choose “Request changes” — we will issue a new version and leave this original untouched.',
+    fieldName:'Name of signatory', fieldNamePh:'e.g. Wei Zhang',
+    fieldRole:'Position', fieldRolePh:'e.g. Export sales manager',
+    confirmBtn:'Confirm this proposal', rejectBtn:'Request changes',
+    signHint:'Confirming means accepting the bases, the open-item list and the split of the three kinds of cost as shown on this page. This original does not change when you confirm.',
+    confirmedTitle:'Confirmed. Thank you.', confirmedNote:'We will send the kick-off checklist and data templates within one business day. This original stays read-only; any adjustment is issued as a new version.',
+    rejectedTitle:'Recorded: changes requested', rejectedNote:'Please tell us what needs adjusting — one sentence is enough. We will issue a new version; this original will not be modified.',
+    rejectReason:'What needs adjusting', rejectReasonPh:'e.g. We can confirm the third installation next week — please reissue with it locked.',
+    backBtn:'Back',
+    footer:'This proposal is a preliminary estimate, does not constitute legal advice, and is valid for 30 days. This is a login-free link containing this one proposal: no account, no other navigation.'
+  }
+};
+
+const UNITS = [
+  { id:'U-01', cn:'钢铁制品', facZh:'INST-01 台州华冶特钢 · EAF · 占 48.8%', facEn:'INST-01 Taizhou Huaye Special Steel · EAF · 48.8% share', qty:'580.5', disp:'M' },
+  { id:'U-02', cn:'钢铁基材', facZh:'INST-01 台州华冶特钢 · EAF · 上期已核验', facEn:'INST-01 Taizhou Huaye Special Steel · EAF · verified last period', qty:'158.0', disp:'R' },
+  { id:'U-03', cn:'钢铁制品', facZh:'INST-02 江阴恒晟 · BF-BOF · 前驱体来源变更', facEn:'INST-02 Jiangyin Hengsheng · BF-BOF · precursor source changed', qty:'284.0', disp:'M' },
+  { id:'U-04', cn:'钢铁基材', facZh:'INST-02 江阴恒晟 · BF-BOF · 占 2.0%', facEn:'INST-02 Jiangyin Hengsheng · BF-BOF · 2.0% share', qty:'24.0', disp:'F' },
+  { id:'U-05', cn:'钢铁制品', facZh:'设施未确定 · 经贸易商采购', facEn:'Installation not determined · sourced via trader', qty:'104.0', disp:'M' },
+  { id:'U-06', cn:'钢铁制品', facZh:'设施未确定 · 货量为口述估算', facEn:'Installation not determined · quantity is a verbal estimate', qty:'38.5', disp:'M' },
+  { id:'U-07?', cn:'钢铁制品', facZh:'INST-03 拆分后可能出现的第 7 单元', facEn:'Possible 7th unit if INST-03 splits', qty:'—', disp:'X' }
+];
+
+const CAVEATS = [
+  { tag:{zh:'未锁定',en:'Unconfirmed'}, title:{zh:'1 家生产设施尚未书面确认',en:'One installation not yet confirmed in writing'},
+    consequence:{zh:'该设施下的单元既不能沿用上期结果，也不能按默认值申报，只能落到必须实测；单元数与服务费上限各留一档余量。',en:'Units at that installation can neither reuse verified data nor use default values, so they fall into the measured-data branch. Both the unit count and the fee cap keep one step of headroom.'},
+    ask:{zh:'书面确认这批货的实际生产设施（一封邮件即可，不产生费用）。',en:'Confirm in writing which installation produced these goods (an email is enough; no cost).'} },
+  { tag:{zh:'未闭合',en:'Unreconciled'}, title:{zh:'报关总量与行项之和相差 95.0 t',en:'Customs total and line-item sum differ by 95.0 t'},
+    consequence:{zh:'差额归属不明，按最不利口径计入。核查机构通常会要求解释来源。',en:'The difference is unattributed and is taken on the most conservative basis. Verifiers normally ask where it comes from.'},
+    ask:{zh:'补齐差额对应的报关单，或说明差异原因（退运、样品、拼柜等）。',en:'Provide the missing customs entries, or explain the difference (returns, samples, consolidated shipments).'} },
+  { tag:{zh:'估算',en:'Estimated'}, title:{zh:'3 个单元的产量为估算值',en:'Production volume is estimated for 3 units'},
+    consequence:{zh:'估算值不作为沿用判据或真判定的输入，只能走默认值分支，证书成本因此偏高。',en:'Estimates cannot feed the reuse test or the actual determination, so those units use default values and certificate cost runs higher.'},
+    ask:{zh:'提供该产线同期的产量台账（现有 Excel 即可，不需整理格式）。',en:'Send the production records for the same period (your existing spreadsheet is fine; no formatting needed).'} },
+  { tag:{zh:'待确认',en:'To confirm'}, title:{zh:'2 项商品的 CN 码由品名推断',en:'CN codes for 2 goods were inferred from descriptions'},
+    consequence:{zh:'CN 码决定是否落入覆盖清单与适用哪一档取值；推断值一旦有误，整条判定链失效。',en:'The CN code decides whether goods are in scope and which basis applies. If an inferred code is wrong, the whole determination chain fails.'},
+    ask:{zh:'书面确认这 2 项的 8 位 CN 码（我方已附推断依据）。',en:'Confirm the 8-digit CN codes for these 2 goods (our reasoning is attached).'} },
+  { tag:{zh:'数据路径',en:'Data path'}, title:{zh:'部分批次经贸易商下单，设施信息由第三方转递',en:'Some batches were ordered through a trader; installation data comes via a third party'},
+    consequence:{zh:'数据链多一环，取数周期与失败概率同时上升，核查费取上限的概率更高。',en:'One more link in the chain raises both lead time and failure risk, and makes the upper end of the verification fee more likely.'},
+    ask:{zh:'授权我方直接对接生产设施，或指定贸易商侧对接人。',en:'Authorise us to contact the installation directly, or name a contact at the trader.'} },
+  { tag:{zh:'复购沿用',en:'Reused'}, good:true, title:{zh:'1 个单元沿用上期已核验结果（好消息）',en:'One unit reuses last period’s verified result (good news)'},
+    consequence:{zh:'该单元本期不重复收资、不重复收费，直接省下一个单元的费用。',en:'No new data collection and no repeat fee for that unit — one unit’s cost saved outright.'},
+    ask:{zh:'无需动作。以后每期做过的单元都会形成沿用基线，第二次比第一次便宜。',en:'Nothing needed. Each period’s completed units become a baseline, so the second time costs less than the first.'} }
+];
+
+const UNVERIFIED = [
+  { zh:'CBAM 证书价格的官方取值来源与发布频率', en:'Official source and release frequency of CBAM certificate prices' },
+  { zh:'EUR/CNY 汇率的适用取值日规则', en:'Rule for the applicable EUR/CNY exchange-rate date' },
+  { zh:'使用默认值的逐年加价比例', en:'Year-on-year mark-up applied to default values' },
+  { zh:'小额免征阈值的适用口径与计算单位', en:'Basis and unit of the de minimis threshold' },
+  { zh:'Annex I 覆盖清单的本年度更新内容', en:'This year’s updates to the Annex I scope list' },
+  { zh:'认可核查机构清单与资质有效期', en:'List of accredited verifiers and validity of accreditation' },
+  { zh:'间接排放（外购电力）纳入申报的时点与范围', en:'Timing and scope for including indirect emissions from purchased electricity' },
+  { zh:'原产国已付碳价的抵扣条件与证明材料', en:'Conditions and evidence for deducting carbon price already paid' },
+  { zh:'年度申报的提交截止日与补正窗口', en:'Annual submission deadline and correction window' },
+  { zh:'申报不实或迟报的罚则口径', en:'Penalty basis for incorrect or late declarations' },
+  { zh:'电力排放因子的可选取值口径', en:'Permitted bases for the electricity emission factor' },
+  { zh:'生产路线（EAF / BF-BOF）的判定依据与分界', en:'Criteria distinguishing production routes (EAF / BF-BOF)' }
+];
+
+const DISP_FG = { M:'#B3402A', R:'#0A4F3A', F:'#8A6A00', X:'#67736F' };
+
+class Component extends DCLogic {
+  state = { lang:null, state:'open', name:'', role:'', reason:'', items:{} };
+
+  // 外层壳切换语言时，prop 变化要压过页面内的本地选择，否则整站切换只对首次生效。
+  componentDidUpdate(prev){
+    if (prev.startLang !== this.props.startLang && this.state.lang) this.setState({ lang:null });
+  }
+
+  renderVals(){
+    const st = this.state;
+    const lang = st.lang || this.props.startLang || 'zh';
+    const t = COPY[lang];
+    const zh = lang === 'zh';
+
+    return {
+      t,
+      langOpts:['zh','en'].map(k => ({
+        label:COPY[k].lang, onClick:() => this.setState({ lang:k }),
+        bg: lang === k ? '#fff' : 'transparent',
+        fg: lang === k ? '#07110E' : 'rgba(255,255,255,.85)',
+        border: lang === k ? '#fff' : 'rgba(255,255,255,.4)'
+      })),
+      meta:t.metaLabels.map((label, i) => ({ label, value:t.metaValues[i] })),
+      moneyBlocks:t.blocks.map((b, i) => ({
+        label:b.label, value:b.value, note:b.note,
+        hasCap: !!b.cap, capLabel:b.capLabel || '', cap:b.cap || '',
+        bg: i === 0 ? '#EDF6F2' : i === 1 ? '#fff' : '#EFF3FE',
+        fg: i === 0 ? '#0A4F3A' : i === 1 ? '#46524E' : '#1B57D6',
+        labelFg: i === 0 ? '#0A4F3A' : i === 1 ? '#46524E' : '#1B57D6'
+      })),
+      colUnit:t.cols[0], colWhat:t.cols[1], colQty:t.cols[2], colVerdict:t.cols[3],
+      unitRows:UNITS.map(u => ({
+        id:u.id, cn:u.cn, fac: zh ? u.facZh : u.facEn, qty:u.qty,
+        verdict:t.verdicts[u.disp], color:DISP_FG[u.disp]
+      })),
+      doList:t.doList.map(text => ({ text })),
+      dontList:t.dontList.map(text => ({ text })),
+      caveats:CAVEATS.map((c, i) => {
+        const key = 'c' + i;
+        const on = !!st.items[key];
+        const confirmable = !c.good;
+        return {
+          tag:c.tag[lang], title:c.title[lang], consequence:c.consequence[lang], ask:c.ask[lang],
+          askLabel:t.askLabel,
+          bg: c.good ? '#EDF6F2' : on ? '#FBFCFC' : '#fff',
+          fg: c.good ? '#0A4F3A' : '#0B100E',
+          confirmable,
+          btnLabel: on ? t.itemDone : t.itemConfirm,
+          btnBg: on ? '#EDF6F2' : '#fff',
+          btnFg: on ? '#0A4F3A' : '#0B100E',
+          btnBorder: on ? '#0E7C5A' : '#C6D1CD',
+          btnWeight: on ? '600' : '400',
+          itemNote: on ? t.itemDoneNote : t.itemNote,
+          onConfirm:() => { if (st.state !== 'open') return; const items = Object.assign({}, this.state.items, { [key]: !on }); this.setState({ items }); }
+        };
+      }),
+      itemsConfirmed:Object.keys(st.items).filter(k => st.items[k]).length,
+      unverified:UNVERIFIED.map((u, i) => ({ n:String(i + 1).padStart(2, '0'), text:u[lang] })),
+      notDecided: st.state === 'open',
+      confirmed: st.state === 'confirmed',
+      rejected: st.state === 'rejected',
+      signName:st.name, signRole:st.role, reason:st.reason,
+      onName:e => this.setState({ name:e.target.value }),
+      onRole:e => this.setState({ role:e.target.value }),
+      onReason:e => this.setState({ reason:e.target.value }),
+      doConfirm:() => this.setState({ state:'confirmed' }),
+      doReject:() => this.setState({ state:'rejected' }),
+      doBack:() => this.setState({ state:'open' }),
+      signedLine:(st.name || (zh ? '（未填姓名）' : '(name not given)')) + ' · ' + (st.role || (zh ? '（未填职务）' : '(position not given)')) + ' · 2026-08-21 · fp-a3f9…c21e · ' + (zh ? '逐项确认 ' : 'items confirmed ') + Object.keys(st.items).filter(k => st.items[k]).length + ' / 5'
+    };
+  }
+}
+</script>
+</body>
+</html>

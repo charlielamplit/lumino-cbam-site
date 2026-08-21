@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lumino · Embedded emissions data request</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#F4F7F6;color:#0B100E;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased;text-wrap:pretty}
+h1,h2,h3,p,ul,ol{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:#0E7C5A;text-decoration:underline}
+a:hover{color:#0A4F3A}
+button{font:inherit;color:inherit;cursor:pointer}
+@media print{.noprint{display:none !important}.sheet{max-width:none}}
+@media (prefers-reduced-motion: reduce){*{transition:none !important}}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#F4F7F6;font-size:16px;line-height:1.65">
+
+  <div style="background:#07110E;color:#fff">
+    <div style="max-width:640px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px">
+      <span style="flex:none;font-size:16px;font-weight:700;letter-spacing:-.01em">LUMINO</span>
+      <span style="flex:none;font-size:13px;color:rgba(255,255,255,.7)">{{ t.brandNote }}</span>
+      <div class="noprint" style="display:flex;gap:4px;margin-left:auto">
+        <sc-for list="{{ langOpts }}" as="l" hint-placeholder-count="2">
+          <button type="button" onClick="{{ l.onClick }}" style="flex:none;white-space:nowrap;min-height:36px;padding:0 12px;border:1px solid {{ l.border }};background:{{ l.bg }};color:{{ l.fg }};border-radius:6px;font-size:14px">{{ l.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#F4F7F6;border-bottom:1px solid #C6D1CD">
+    <div style="max-width:640px;margin:0 auto;padding:9px 16px;display:flex;flex-wrap:wrap;gap:4px 14px;font-size:13px;color:#46524E;font-variant-numeric:tabular-nums">
+      <span style="white-space:nowrap">{{ t.tokenLabel }} tk-9f2c…41ab</span>
+      <span style="white-space:nowrap">{{ t.expiryLabel }} 2026-09-05</span>
+      <span style="white-space:nowrap">{{ t.noAccount }}</span>
+    </div>
+  </div>
+
+  <main class="sheet" style="max-width:640px;margin:0 auto;padding:20px 16px 64px;display:flex;flex-direction:column;gap:18px">
+
+    <section style="background:#fff;border:1px solid #E3E8E6;border-radius:6px;padding:18px">
+      <h1 style="font-size:22px;font-weight:600;line-height:1.3">{{ t.title }}</h1>
+      <p style="margin-top:10px;font-size:15px;color:#46524E">{{ t.intro1 }}</p>
+      <p style="margin-top:8px;font-size:15px;color:#46524E">{{ t.intro2 }}</p>
+      <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:8px 16px;font-size:14px">
+        <span style="flex:none">{{ t.requestedBy }} <strong>{{ t.customerName }}</strong></span>
+        <span style="flex:none">{{ t.periodLabel }} <span style="font-variant-numeric:tabular-nums">2025-07 – 2026-06</span></span>
+      </div>
+      <div style="margin-top:14px;display:flex;flex-wrap:wrap;align-items:center;gap:10px">
+        <span style="flex:none;font-size:14px;color:#46524E">{{ t.progressLabel }}</span>
+        <span style="flex:1 1 120px;min-width:100px;height:8px;border-radius:8px;background:#EDF1F0;overflow:hidden;display:block"><span style="display:block;width:{{ progressPct }};height:100%;background:#0E7C5A"></span></span>
+        <span style="flex:none;font-size:14px;font-variant-numeric:tabular-nums;color:#46524E">{{ progressText }}</span>
+      </div>
+    </section>
+
+    <sc-for list="{{ fields }}" as="f" hint-placeholder-count="6">
+      <section style="background:#fff;border:1px solid #E3E8E6;border-radius:6px;padding:16px 18px">
+        <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px">
+          <span style="flex:none;font-size:13px;color:#67736F;font-variant-numeric:tabular-nums">{{ f.num }}</span>
+          <h2 style="font-size:17px;font-weight:600">{{ f.label }}</h2>
+          <span style="flex:none;font-size:12px;padding:1px 8px;border:1px solid {{ f.reqBorder }};border-radius:4px;color:{{ f.reqFg }};white-space:nowrap">{{ f.req }}</span>
+        </div>
+        <div style="margin-top:8px;font-size:14px;color:#46524E">{{ f.why }}</div>
+        <sc-if value="{{ f.isChoice }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ f.options }}" as="o" hint-placeholder-count="3">
+              <button type="button" onClick="{{ o.onClick }}" style="flex:none;white-space:nowrap;min-height:48px;padding:0 16px;border:1px solid {{ o.border }};background:{{ o.bg }};border-radius:6px;font-size:15px;font-weight:{{ o.weight }}" style-focus="outline:2px solid #0E7C5A;outline-offset:2px">{{ o.label }}</button>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ f.isText }}" hint-placeholder-val="{{ true }}">
+          <input type="text" value="{{ f.value }}" onChange="{{ f.onChange }}" placeholder="{{ f.ph }}" inputMode="{{ f.mode }}" style="margin-top:12px;width:100%;min-height:48px;padding:0 14px;border:1px solid #C6D1CD;border-radius:6px;font-size:16px;font-variant-numeric:tabular-nums" style-focus="outline:2px solid #0E7C5A;outline-offset:1px;border-color:#0E7C5A">
+        </sc-if>
+        <sc-if value="{{ f.isArea }}" hint-placeholder-val="{{ false }}">
+          <textarea value="{{ f.value }}" onChange="{{ f.onChange }}" placeholder="{{ f.ph }}" style="margin-top:12px;width:100%;min-height:88px;padding:12px 14px;border:1px solid #C6D1CD;border-radius:6px;font-size:16px;line-height:1.6;resize:vertical" style-focus="outline:2px solid #0E7C5A;outline-offset:1px;border-color:#0E7C5A"></textarea>
+        </sc-if>
+        <div style="margin-top:8px;font-size:13px;color:#67736F">{{ f.who }}</div>
+      </section>
+    </sc-for>
+
+    <section style="background:#fff;border:1px solid #E3E8E6;border-radius:6px;padding:16px 18px">
+      <h2 style="font-size:17px;font-weight:600">{{ t.uploadTitle }}</h2>
+      <p style="margin-top:8px;font-size:14px;color:#46524E">{{ t.uploadWhy }}</p>
+      <label style="margin-top:12px;display:block;border:1px dashed #C6D1CD;border-radius:6px;padding:16px;text-align:center;font-size:15px;color:#46524E;cursor:pointer" style-hover="border-color:#0E7C5A;background:#FBFCFC">
+        <span style="display:block">{{ t.uploadBox }}</span>
+        <input type="file" multiple="{{ true }}" onChange="{{ onFiles }}" style="display:block;margin:10px auto 0;font-size:14px">
+      </label>
+      <sc-if value="{{ hasFiles }}" hint-placeholder-val="{{ false }}">
+        <ul style="margin-top:10px;display:flex;flex-direction:column;gap:6px">
+          <sc-for list="{{ files }}" as="fl" hint-placeholder-count="2">
+            <li style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;padding:8px 10px;background:#EDF6F2;border-radius:6px;font-size:14px">
+              <span style="flex:1 1 160px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ fl.name }}</span>
+              <span style="flex:none;font-size:13px;color:#46524E;font-variant-numeric:tabular-nums">{{ fl.size }}</span>
+            </li>
+          </sc-for>
+        </ul>
+      </sc-if>
+      <p style="margin-top:8px;font-size:13px;color:#67736F">{{ t.uploadAlt }} <a href="mailto:cbam@lumino.example">cbam@lumino.example</a></p>
+    </section>
+
+    <section class="noprint" style="background:#fff;border:1px solid #0B100E;border-radius:6px;padding:16px 18px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px">
+        <button type="button" onClick="{{ doSubmit }}" style="min-height:52px;padding:0 18px;border:1px solid #0E7C5A;background:#0E7C5A;color:#fff;border-radius:6px;font-size:16px;font-weight:600" style-hover="background:#0A4F3A;border-color:#0A4F3A">{{ t.submitBtn }}</button>
+        <button type="button" onClick="{{ doPrint }}" style="min-height:52px;padding:0 18px;border:1px solid #0B100E;background:#fff;border-radius:6px;font-size:16px;font-weight:600" style-hover="background:#F4F7F6">{{ t.printBtn }}</button>
+      </div>
+      <p style="margin-top:10px;font-size:14px;color:#46524E">{{ t.submitNote }}</p>
+      <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:12px;padding:12px 14px;background:#EDF6F2;border-radius:6px;font-size:15px;color:#0A4F3A">{{ t.submittedNote }}</div>
+      </sc-if>
+    </section>
+
+    <section style="background:#fff;border:1px solid #C6D1CD;border-radius:6px;overflow:hidden">
+      <div style="padding:14px 18px;border-bottom:1px solid #E3E8E6;background:#F4F7F6">
+        <h2 style="font-size:17px;font-weight:600">{{ t.checklistTitle }}</h2>
+        <p style="margin-top:4px;font-size:14px;color:#46524E">{{ t.checklistNote }}</p>
+      </div>
+      <div style="overflow-x:auto">
+        <table style="width:100%;min-width:520px;border-collapse:collapse;font-size:14px">
+          <thead>
+            <tr style="background:#FBFCFC">
+              <th style="text-align:left;padding:9px 14px;border-bottom:1px solid #C6D1CD;font-weight:500;font-size:13px;color:#46524E">{{ t.colField }}</th>
+              <th style="text-align:left;padding:9px 14px;border-bottom:1px solid #C6D1CD;font-weight:500;font-size:13px;color:#46524E;white-space:nowrap">{{ t.colUnit }}</th>
+              <th style="text-align:left;padding:9px 14px;border-bottom:1px solid #C6D1CD;font-weight:500;font-size:13px;color:#46524E">{{ t.colWho }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{ checklist }}" as="c" hint-placeholder-count="7">
+              <tr>
+                <td style="padding:9px 14px;border-bottom:1px solid #EDF1F0;vertical-align:top">{{ c.field }}</td>
+                <td style="padding:9px 14px;border-bottom:1px solid #EDF1F0;vertical-align:top;white-space:nowrap;font-variant-numeric:tabular-nums">{{ c.unit }}</td>
+                <td style="padding:9px 14px;border-bottom:1px solid #EDF1F0;vertical-align:top;color:#46524E">{{ c.who }}</td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+      <div style="padding:12px 18px;font-size:13px;color:#67736F">{{ t.checklistFoot }}</div>
+    </section>
+
+    <section style="background:#F4F7F6;border:1px solid #E3E8E6;border-radius:6px;padding:14px 18px">
+      <div style="font-size:15px;font-weight:600">{{ t.glossaryTitle }}</div>
+      <ul style="margin-top:10px;display:flex;flex-direction:column;gap:8px;font-size:14px;color:#46524E">
+        <sc-for list="{{ glossary }}" as="g" hint-placeholder-count="4">
+          <li><span style="color:#0B100E;font-weight:600">{{ g.term }}</span> — {{ g.def }}</li>
+        </sc-for>
+      </ul>
+    </section>
+
+    <p style="font-size:13px;color:#67736F">{{ t.footer }}</p>
+    <p class="noprint" style="font-size:12px;color:#8A6A00;background:rgba(242,183,5,.14);padding:8px 10px;border-radius:6px">{{ t.protoNote }}</p>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:700,&quot;height&quot;:1100},&quot;startLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;zh&quot;],&quot;default&quot;:&quot;en&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;语言&quot;}}">
+const COPY = {
+  en:{
+    lang:'EN', brandNote:'CBAM data request',
+    tokenLabel:'Link', expiryLabel:'Valid until', noAccount:'No account needed',
+    title:'Embedded emissions data — installation questionnaire',
+    intro1:'Your customer exports these goods to the EU and must report the embedded emissions of each shipment under the EU CBAM regulation. Without your figures, the emissions are reported using default values, which are set at the most unfavourable level — your customer pays more, and the number attached to your plant is worse than reality.',
+    intro2:'Six fields. Your existing records are fine as they are — no formatting, no conversion, no account.',
+    requestedBy:'Requested on behalf of', customerName:'Yuhuan Weige Metal Products Co., Ltd.',
+    periodLabel:'Reporting period', progressLabel:'Progress',
+    uploadTitle:'Supporting documents', uploadWhy:'Electricity bills, meter readings, production reports or an existing verification statement. A photo or scan is enough; the verifier needs to see the source, not a formatted report.',
+    uploadBox:'Drop files here, or send them by email', uploadAlt:'Cannot upload? Email them to',
+    submitBtn:'Submit this batch', printBtn:'Print / forward the field list',
+    submitNote:'You can submit partially and come back through the same link. Fields left blank are reported using default values, and we will tell your customer which ones.',
+    submittedNote:'Received, thank you. We will come back only if a figure needs clarification.',
+    checklistTitle:'Field list — printable and forwardable',
+    checklistNote:'In practice this usually gets forwarded to the workshop or to finance. Print this page or forward the list below; the link stays valid either way.',
+    colField:'Field', colUnit:'Unit', colWho:'Usually held by',
+    checklistFoot:'If a figure does not exist at all, write “not available” — that is a usable answer. A guessed number is not.',
+    glossaryTitle:'CBAM terms used above (official wording)',
+    footer:'This link contains only this questionnaire. It does not create an account and does not sign you up for anything. Data is used solely for your customer’s CBAM reporting.',
+    protoNote:'Prototype note: in production this page is server-rendered with system fonts and works without JavaScript.',
+    fields:[
+      { key:'installation', label:'Installation name and address', req:'Required',
+        why:'Why we need this: CBAM reports emissions per installation, not per company. Two plants of the same group have different figures, and the verifier checks the address against the shipment.',
+        ph:'e.g. Weige Fastener Plant No.2, Yuhuan, Zhejiang', who:'Usually held by: plant management', type:'text' },
+      { key:'route', label:'Production route', req:'Required',
+        why:'Why we need this: the route determines which emission basis applies. EAF and BF-BOF differ by a factor, so the wrong route makes every downstream figure wrong.',
+        type:'choice', options:['EAF (electric arc furnace)','BF-BOF (blast furnace / basic oxygen)','Other / mixed'] },
+      { key:'production', label:'Production volume in the reporting period', req:'Required', unit:'t',
+        why:'Why we need this: emissions are reported per tonne of product. Without the denominator, the fuel and electricity figures cannot be converted into an intensity.',
+        ph:'e.g. 1860', who:'Usually held by: production planning', type:'text', mode:'decimal' },
+      { key:'electricity', label:'Purchased electricity in the same period', req:'Required', unit:'MWh',
+        why:'Why we need this: indirect emissions from purchased electricity are part of the embedded emissions. The total from your electricity bills is enough.',
+        ph:'e.g. 2450', who:'Usually held by: finance / energy management', type:'text', mode:'decimal' },
+      { key:'precursor', label:'Precursor materials and their suppliers', req:'Required',
+        why:'Why we need this: emissions embedded in precursors (billet, wire rod, scrap) carry into the finished goods. Naming the supplier lets us request their figures instead of applying defaults to your product.',
+        ph:'e.g. wire rod, 1,200 t, from XX Steel; scrap, 300 t, local', who:'Usually held by: purchasing', type:'area' },
+      { key:'emissions', label:'Embedded emissions, if you already calculate them', req:'Optional', unit:'tCO₂e / t',
+        why:'Why we need this: if you already report emissions to a customer or a scheme, we can reconcile against your figure instead of rebuilding it. Include the verification statement if you have one.',
+        ph:'e.g. 1.82', who:'Usually held by: EHS / sustainability', type:'text', mode:'decimal' }
+    ],
+    glossary:[
+      { term:'Installation', def:'the specific plant where the goods were produced, identified by name and address.' },
+      { term:'Production route', def:'the process type used to make the goods (for steel: EAF or BF-BOF).' },
+      { term:'Embedded emissions', def:'direct and indirect greenhouse-gas emissions attributable to one tonne of the goods.' },
+      { term:'Precursor', def:'an input material whose own embedded emissions carry into the finished goods.' }
+    ]
+  },
+  zh:{
+    lang:'中文', brandNote:'CBAM 数据请求',
+    tokenLabel:'链接', expiryLabel:'有效期至', noAccount:'无需注册账号',
+    title:'隐含排放数据 · 生产设施填报表',
+    intro1:'贵厂客户的这批货出口欧盟，按 EU CBAM 规定必须申报每批货的隐含排放。拿不到贵厂的数，就只能用默认值申报——默认值按最不利口径取，客户多付钱，贵厂名下的数字也比实际更差。',
+    intro2:'共六项。现有台账原样即可，不需要整理格式、不需要换算、不需要注册。',
+    requestedBy:'代表', customerName:'玉环威格金属制品有限公司',
+    periodLabel:'数据期间', progressLabel:'进度',
+    uploadTitle:'支撑材料', uploadWhy:'电费单、电表读数、生产报表，或已有的核查声明。拍照或扫描件即可——核查方要看到原始凭证，而不是整理过的报表。',
+    uploadBox:'把文件拖到这里，或用邮件发送', uploadAlt:'无法上传？发到',
+    submitBtn:'提交这一批', printBtn:'打印 / 转发字段清单',
+    submitNote:'可以先提交一部分，之后用同一链接继续。留空的项按默认值申报，我方会告知客户是哪几项。',
+    submittedNote:'已收到，谢谢。只有数字需要澄清时我方才会再联系。',
+    checklistTitle:'字段清单 · 可打印、可转发',
+    checklistNote:'现实中这张表常常要转给车间或财务。打印本页或转发下面的清单，链接照样有效。',
+    colField:'字段', colUnit:'单位', colWho:'通常在谁手上',
+    checklistFoot:'如果某个数确实没有，就写「没有」——这是可用的答案；猜一个数不是。',
+    glossaryTitle:'上面用到的 CBAM 术语（官方用词）',
+    footer:'本链接只包含这一份填报表，不创建账号、不订阅任何内容。数据仅用于贵厂客户的 CBAM 申报。',
+    protoNote:'原型说明：正式版此页为服务端渲染，使用系统字体，无 JavaScript 也可填写。',
+    fields:[
+      { key:'installation', label:'生产设施名称与地址', req:'必填',
+        why:'为什么要这个：CBAM 按生产设施申报，不按公司。同一集团两个厂的数不同，核查方会拿地址与出货记录核对。',
+        ph:'例如：威格紧固件二厂，浙江玉环', who:'通常在谁手上：厂务', type:'text' },
+      { key:'route', label:'生产路线', req:'必填',
+        why:'为什么要这个：路线决定适用哪一档排放口径。EAF 与 BF-BOF 差着倍数，路线填错，后面每个数都错。',
+        type:'choice', options:['EAF（电炉）','BF-BOF（高炉转炉）','其他 / 混合'] },
+      { key:'production', label:'数据期间的产量', req:'必填', unit:'t',
+        why:'为什么要这个：排放按每吨产品申报。没有分母，燃料与电耗无法折成强度。',
+        ph:'例如：1860', who:'通常在谁手上：生产计划', type:'text', mode:'decimal' },
+      { key:'electricity', label:'同期外购电量', req:'必填', unit:'MWh',
+        why:'为什么要这个：外购电力的间接排放属于隐含排放的一部分。电费单上的总量就够。',
+        ph:'例如：2450', who:'通常在谁手上：财务 / 能源管理', type:'text', mode:'decimal' },
+      { key:'precursor', label:'前驱体材料及其供应商', req:'必填',
+        why:'为什么要这个：前驱体（钢坯、盘条、废钢）自身的隐含排放会带进成品。写清供应商，我方可以直接去要他们的数，而不是给贵厂的产品套默认值。',
+        ph:'例如：盘条 1,200 t，来自 XX 钢厂；废钢 300 t，本地采购', who:'通常在谁手上：采购', type:'area' },
+      { key:'emissions', label:'如已核算过隐含排放，请填写', req:'选填', unit:'tCO₂e / t',
+        why:'为什么要这个：如果贵厂已向其他客户或体系报过排放，我方可以与贵厂的数对齐，而不是重算一遍。有核查声明请一并提供。',
+        ph:'例如：1.82', who:'通常在谁手上：EHS / 可持续发展', type:'text', mode:'decimal' }
+    ],
+    glossary:[
+      { term:'Installation（生产设施）', def:'实际生产该批货的具体厂区，以名称与地址标识。' },
+      { term:'Production route（生产路线）', def:'制造该批货所用的工艺类型（钢铁：EAF 或 BF-BOF）。' },
+      { term:'Embedded emissions（隐含排放）', def:'可归属于每吨该货物的直接与间接温室气体排放。' },
+      { term:'Precursor（前驱体）', def:'其自身隐含排放会带入成品的投入材料。' }
+    ]
+  }
+};
+
+class Component extends DCLogic {
+  state = { lang:null, values:{}, submitted:false, files:[] };
+
+  componentDidUpdate(prev){
+    if (prev.startLang !== this.props.startLang && this.state.lang) this.setState({ lang:null });
+  }
+
+  set(key, val){
+    const values = Object.assign({}, this.state.values, { [key]: val });
+    this.setState({ values });
+  }
+
+  renderVals(){
+    const st = this.state;
+    const lang = st.lang || this.props.startLang || 'en';
+    const t = COPY[lang];
+    const filled = t.fields.filter(f => f.req !== (lang === 'en' ? 'Optional' : '选填') && st.values[f.key]).length;
+    const required = t.fields.filter(f => f.req !== (lang === 'en' ? 'Optional' : '选填')).length;
+
+    return {
+      t,
+      langOpts:['en','zh'].map(k => ({
+        label:COPY[k].lang, onClick:() => this.setState({ lang:k }),
+        bg: lang === k ? '#fff' : 'transparent',
+        fg: lang === k ? '#07110E' : 'rgba(255,255,255,.85)',
+        border: lang === k ? '#fff' : 'rgba(255,255,255,.4)'
+      })),
+      progressPct: Math.round((filled / required) * 100) + '%',
+      progressText: filled + ' / ' + required,
+      fields:t.fields.map((f, i) => {
+        const optional = f.req === 'Optional' || f.req === '选填';
+        const label = f.unit ? f.label + '（' + f.unit + '）' : f.label;
+        return {
+          num:String(i + 1).padStart(2, '0'),
+          label: lang === 'en' && f.unit ? f.label + ' (' + f.unit + ')' : label,
+          req:f.req, why:f.why, who:f.who || '',
+          reqFg: optional ? '#67736F' : '#B3402A',
+          reqBorder: optional ? '#C6D1CD' : '#B3402A',
+          isChoice: f.type === 'choice', isText: f.type === 'text', isArea: f.type === 'area',
+          value: st.values[f.key] || '', ph: f.ph || '', mode: f.mode || 'text',
+          onChange: e => this.set(f.key, e.target.value),
+          options:(f.options || []).map(o => {
+            const on = st.values[f.key] === o;
+            return {
+              label:o, onClick:() => this.set(f.key, o),
+              border: on ? '#0B100E' : '#C6D1CD', bg: on ? '#F4F7F6' : '#fff', weight: on ? '600' : '400'
+            };
+          })
+        };
+      }),
+      checklist:t.fields.map(f => ({ field:f.label, unit:f.unit || '—', who:(f.who || '').replace(/^.*?：/, '').replace(/^Usually held by: /, '') })),
+      glossary:t.glossary,
+      hasFiles: st.files.length > 0,
+      files:st.files,
+      onFiles: e => {
+        const list = [...(e.target.files || [])].map(f => ({
+          name:f.name,
+          size: f.size > 1048576 ? (f.size / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(f.size / 1024)) + ' KB'
+        }));
+        this.setState({ files: st.files.concat(list) });
+      },
+      submitted:st.submitted,
+      doSubmit:() => this.setState({ submitted:true }),
+      doPrint:() => window.print()
+    };
+  }
+}
+</script>
+</body>
+</html>

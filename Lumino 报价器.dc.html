@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico">
+
+<meta charset="utf-8">
+<title>Lumino CBAM 报价器 · 页面组</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#F4F7F6;color:#0B100E;font-family:"Instrument Sans","PingFang SC","Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-wrap:pretty}
+h1,h2,h3,h4,p,ul{margin:0}
+ul{padding:0;list-style:none}
+a{color:#0E7C5A;text-decoration:none}
+a:hover{color:#0A4F3A}
+button{font:inherit;color:inherit;cursor:pointer}
+@media (prefers-reduced-motion: reduce){*{transition:none !important}}
+</style>
+</helmet>
+
+<div style="display:grid;grid-template-columns:216px minmax(0,1fr);min-height:100vh;background:#F4F7F6;font-size:13px;line-height:1.45">
+
+  <nav style="position:sticky;top:0;align-self:start;height:100vh;background:#07110E;color:#fff;display:grid;grid-template-rows:auto minmax(0,1fr) auto auto">
+    <div style="padding:14px 14px 12px;border-bottom:1px solid rgba(255,255,255,.12)">
+      <div style="font-family:'Instrument Sans',sans-serif;font-size:15px;font-weight:700;letter-spacing:-.02em">LUMINO</div>
+      <div style="margin-top:4px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55)">CBAM 报价器</div>
+    </div>
+
+    <div style="padding:10px 0;display:flex;flex-direction:column;overflow-y:auto;min-height:0">
+      <sc-for list="{{ sections }}" as="s" hint-placeholder-count="5">
+        <button type="button" onClick="{{ s.onClick }}" style="text-align:left;border:0;border-left:2px solid {{ s.mark }};background:{{ s.bg }};padding:9px 12px;display:flex;flex-direction:column;gap:3px;cursor:{{ s.cursor }};min-width:0" style-hover="background:rgba(255,255,255,.06)">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;color:{{ s.numFg }};white-space:nowrap">{{ s.num }} · {{ s.round }}</span>
+          <span style="font-size:13px;font-weight:{{ s.weight }};color:{{ s.fg }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ s.label }}</span>
+          <span style="font-size:11px;color:{{ s.subFg }};line-height:1.35">{{ s.sub }}</span>
+        </button>
+      </sc-for>
+    </div>
+
+    <div style="padding:10px 12px 12px;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column;gap:8px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45)">{{ langLabel }}</div>
+      <div style="display:flex;gap:4px">
+        <sc-for list="{{ langOpts }}" as="l" hint-placeholder-count="2">
+          <button type="button" onClick="{{ l.onClick }}" style="flex:1 1 0;min-width:0;white-space:nowrap;height:30px;border:1px solid {{ l.border }};background:{{ l.bg }};color:{{ l.fg }};border-radius:2px;font-size:12px">{{ l.label }}</button>
+        </sc-for>
+      </div>
+      <div style="font-size:11px;line-height:1.45;color:rgba(255,255,255,.45)">{{ langNote }}</div>
+    </div>
+    <div style="padding:12px 14px;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.55)">
+      <span>cbam-rules 2026.08</span>
+      <span>pb-2026-08</span>
+      <span>demo-dataset v1</span>
+      <span style="color:#F2B705">{{ stampWarn }}</span>
+    </div>
+  </nav>
+
+  <main style="min-width:0;overflow-x:auto">
+    <sc-if value="{{ isOverview }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:12px 16px 48px;display:flex;flex-direction:column;gap:12px">
+        <section style="background:#fff;border:1px solid #E3E8E6;border-radius:2px;padding:14px">
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 16px">
+            <div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#0E7C5A">{{ ovEyebrow }}</div>
+              <h1 style="margin-top:6px;font-family:'Archivo',sans-serif;font-size:20px;font-weight:600">{{ ovTitle }}</h1>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#67736F">{{ ovPathLabel }}</span>
+              <sc-for list="{{ paths }}" as="p" hint-placeholder-count="2">
+                <button type="button" onClick="{{ p.onClick }}" style="flex:none;white-space:nowrap;height:30px;padding:0 12px;border:1px solid {{ p.border }};background:{{ p.bg }};color:{{ p.fg }};border-radius:2px;font-size:12px">{{ p.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <p style="margin-top:10px;font-size:13px;color:#46524E;max-width:80ch">{{ pathNote }}</p>
+          <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:6px 20px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-variant-numeric:tabular-nums;color:#46524E">
+            <sc-for list="{{ ovFacts }}" as="fa" hint-placeholder-count="4">
+              <span style="white-space:nowrap">{{ fa.text }}</span>
+            </sc-for>
+          </div>
+        </section>
+
+        <section style="background:#fff;border:1px solid #E3E8E6;border-radius:2px">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+            <sc-for list="{{ stages }}" as="st" hint-placeholder-count="10">
+              <div style="padding:12px 14px;border-right:1px solid #EDF1F0;border-bottom:1px solid #EDF1F0;background:{{ st.bg }};display:flex;flex-direction:column;gap:6px;min-width:0">
+                <div style="display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline">
+                  <span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#0E7C5A">{{ st.num }}</span>
+                  <span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:10px;padding:1px 6px;border:1px solid #C6D1CD;border-radius:2px;color:{{ st.ownerFg }};background:#fff;white-space:nowrap">{{ st.owner }}</span>
+                </div>
+                <div style="font-size:14px;font-weight:600">{{ st.label }}</div>
+                <div style="font-size:12px;color:#46524E;line-height:1.5">{{ st.output }}</div>
+                <div style="margin-top:auto;padding-top:6px">
+                  <button type="button" onClick="{{ st.onClick }}" style="width:100%;min-height:32px;padding:0 10px;border:1px solid {{ st.btnBorder }};background:{{ st.btnBg }};color:{{ st.btnFg }};border-radius:2px;font-size:12px;text-align:left;cursor:{{ st.cursor }}" style-hover="border-color:#0B100E">{{ st.target }}</button>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isTokens }}" hint-placeholder-val="{{ true }}">
+      <dc-import name="Lumino 设计系统" lang="{{ lang }}" hint-size="100%,1200px"></dc-import>
+    </sc-if>
+    <sc-if value="{{ isComponents }}" hint-placeholder-val="{{ false }}">
+      <dc-import name="Lumino 签名组件" lang="{{ lang }}" hint-size="100%,1200px"></dc-import>
+    </sc-if>
+    <sc-if value="{{ isWizard }}" hint-placeholder-val="{{ false }}">
+      <dc-import name="Lumino 四步向导" lang="{{ lang }}" hint-size="100%,1200px"></dc-import>
+    </sc-if>
+    <sc-if value="{{ isProposal }}" hint-placeholder-val="{{ false }}">
+      <dc-import name="Lumino 方案书" lang="{{ lang }}" hint-size="100%,1200px"></dc-import>
+    </sc-if>
+    <sc-if value="{{ isClient }}" hint-placeholder-val="{{ false }}">
+      <dc-import name="Lumino 确认页" start-lang="{{ lang }}" hint-size="100%,1200px"></dc-import>
+    </sc-if>
+    <sc-if value="{{ isFacility }}" hint-placeholder-val="{{ false }}">
+      <dc-import name="Lumino 填报页" start-lang="{{ facilityLang }}" hint-size="100%,1200px"></dc-import>
+    </sc-if>
+    <sc-if value="{{ isPending }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:16px">
+        <div style="max-width:720px;background:#fff;border:1px dashed #C6D1CD;border-radius:2px;padding:20px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8A6A00">{{ pendingRound }}</div>
+          <h1 style="margin-top:8px;font-family:'Archivo',sans-serif;font-size:20px;font-weight:600">{{ pendingTitle }}</h1>
+          <p style="margin-top:10px;font-size:13px;color:#46524E;max-width:64ch">{{ pendingNote }}</p>
+          <ul style="margin-top:12px;display:flex;flex-direction:column;gap:6px;font-size:13px;color:#0B100E">
+            <sc-for list="{{ pendingItems }}" as="p" hint-placeholder-count="3">
+              <li style="display:flex;gap:8px"><span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#67736F;padding-top:2px">—</span><span>{{ p.text }}</span></li>
+            </sc-for>
+          </ul>
+        </div>
+      </div>
+    </sc-if>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1512,&quot;height&quot;:950},&quot;startSection&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;overview&quot;,&quot;tokens&quot;,&quot;components&quot;,&quot;wizard&quot;,&quot;proposal&quot;,&quot;client&quot;],&quot;default&quot;:&quot;wizard&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;页面组&quot;}}">
+const STAGES = [
+  { num:'01', label:{zh:'线索进入',en:'Lead intake'}, A:{zh:'客户',en:'Client'}, B:{zh:'客户',en:'Client'},
+    output:{zh:'官网表单或转介绍带来的询价。记下目的地、商品大类、申报年度。',en:'Enquiry from the website form or a referral. Record destinations, goods category and reporting period.'}, to:'wizard', target:{zh:'→ 03 四步向导 · 步骤 ①',en:'→ 03 Wizard · Step ①'} },
+  { num:'02', label:{zh:'需求诊断问卷',en:'Scoping questionnaire'}, A:{zh:'销售陪问',en:'Sales-led'}, B:{zh:'客户自答',en:'Client self-serve'},
+    output:{zh:'可观察问题：电表读数、生产路线、下单渠道、上期是否申报。「不确定」同权重。',en:'Observable questions: meter readings, production route, ordering channel, prior filing. "Not sure" carries equal visual weight.'}, to:'wizard', target:{zh:'→ 03 四步向导 · 步骤 ①',en:'→ 03 Wizard · Step ①'} },
+  { num:'03', label:{zh:'清单与边界初判',en:'Goods list & boundary'}, A:{zh:'销售',en:'Sales'}, B:{zh:'客户上传',en:'Client upload'},
+    output:{zh:'127 行报关明细整表粘贴，逐格标注来源，剔除非附件 I。',en:'Paste all 127 customs lines; every cell is source-tagged; non-Annex I items are dropped.'}, to:'wizard', target:{zh:'→ 03 四步向导 · 步骤 ②',en:'→ 03 Wizard · Step ②'} },
+  { num:'04', label:{zh:'前体拆解与收缩漏斗',en:'Precursors & narrowing funnel'}, A:{zh:'我方',en:'Lumino'}, B:{zh:'我方',en:'Lumino'},
+    output:{zh:'127 行 → 9 商品项 → 5–6–7 单元 → 3–4–5 需实测，每级配一句可直说的话。',en:'127 lines → 9 goods items → 5–6–7 units → 3–4–5 requiring measured data, each step with a line the rep can say out loud.'}, to:'components', target:{zh:'→ 02 签名组件 · C-03',en:'→ 02 Signature components · C-03'} },
+  { num:'05', label:{zh:'判定 M / R / F',en:'Disposition M / R / F'}, A:{zh:'引擎',en:'Engine'}, B:{zh:'引擎',en:'Engine'},
+    output:{zh:'M 4 · R 1 · F 1。命中与未过同等详细，未过写明缺哪一条。',en:'M 4 · R 1 · F 1. Failed gates are documented as fully as passed ones, naming the missing criterion.'}, to:'components', target:{zh:'→ 02 签名组件 · C-05',en:'→ 02 Signature components · C-05'} },
+  { num:'06', label:{zh:'服务费区间报价',en:'Service fee range'}, A:{zh:'销售',en:'Sales'}, B:{zh:'系统',en:'System'},
+    output:{zh:'服务费 ¥ 8,000　封顶 ¥ 10,400，敞口 ¥ 2,400。核查费另计且高得多。',en:'Service fee ¥ 8,000, capped at ¥ 10,400, exposure ¥ 2,400. Verification is separate and far larger.'}, to:'wizard', target:{zh:'→ 03 四步向导 · 步骤 ③④',en:'→ 03 Wizard · Steps ③④'} },
+  { num:'07', label:{zh:'碳成本敞口对照',en:'Carbon cost exposure'}, A:{zh:'销售现场',en:'Sales, in the room'}, B:{zh:'客户自看',en:'Client reads it'},
+    output:{zh:'默认值 ¥ 605,565 vs 实测 ¥ 427,998，差额 ¥ 177,567 —— 售前高潮。',en:'Default values ¥ 605,565 vs measured ¥ 427,998 — a ¥ 177,567 difference. This is the pre-sales climax.'}, to:'components', target:{zh:'→ 02 签名组件 · C-02',en:'→ 02 Signature components · C-02'} },
+  { num:'08', label:{zh:'方案书出具',en:'Proposal issued'}, A:{zh:'我方',en:'Lumino'}, B:{zh:'我方',en:'Lumino'},
+    output:{zh:'十节方案书，第五节费用结构、第六节碳成本、第十节 caveat 汇总。',en:'Ten-section proposal: §5 fee structure, §6 carbon cost, §10 caveat register.'}, to:'proposal', target:{zh:'→ 04 方案书',en:'→ 04 Proposal'} },
+  { num:'09', label:{zh:'客户确认与签署',en:'Client confirmation'}, A:{zh:'客户',en:'Client'}, B:{zh:'客户',en:'Client'},
+    output:{zh:'免登录令牌确认页。确认后版本锁定，改口径只能新建 v2。',en:'Token confirmation page, no login. Once confirmed the version locks; a changed basis means a new v2.'}, to:'client', target:{zh:'→ 05 客户确认页',en:'→ 05 Confirmation page'} },
+  { num:'10', label:{zh:'交接实施',en:'Handover to delivery'}, A:{zh:'转售后',en:'To delivery team'}, B:{zh:'转售后',en:'To delivery team'},
+    output:{zh:'售前范围之外：方案台账转案卷，进入交付。',en:'Outside pre-sales: the proposal ledger becomes a case file and delivery starts.'}, to:null, target:{zh:'售前范围之外',en:'Outside pre-sales'} }
+];
+
+const SECTIONS = [
+  { key:'overview', num:'00', round:{zh:'全景',en:'Overview'}, label:{zh:'售前流程',en:'Pre-sales flow'}, sub:{zh:'十阶段 · 路径 A / B · 各阶段落在哪一屏',en:'Ten stages · paths A / B · which screen each lands on'}, ready:true },
+  { key:'tokens', num:'01', round:{zh:'第 1 轮',en:'Round 1'}, label:{zh:'设计系统',en:'Design system'}, sub:{zh:'token · §3.3 排版 · 语域 · 四态',en:'Tokens · §3.3 numerals · registers · four states'}, ready:true },
+  { key:'components', num:'02', round:{zh:'第 2 轮',en:'Round 2'}, label:{zh:'签名组件',en:'Signature components'}, sub:{zh:'右栏 · 碳成本敞口 · 漏斗 · caveat · 轨迹 · 问题',en:'Rail · carbon exposure · funnel · caveats · trace · questions'}, ready:true },
+  { key:'wizard', num:'03', round:{zh:'第 3 轮',en:'Round 3'}, label:{zh:'四步向导',en:'Four-step wizard'}, sub:{zh:'四屏 + 常驻右栏 · 变更提示',en:'Four screens + persistent rail · change cues'}, ready:true },
+  { key:'proposal', num:'04', round:{zh:'第 4 轮',en:'Round 4'}, label:{zh:'方案书 · 十节',en:'Proposal · ten sections'}, sub:{zh:'客户语域 · A4 打印版',en:'Client register · A4 print'}, ready:true },
+  { key:'client', num:'05', round:{zh:'第 5 轮',en:'Round 5'}, label:{zh:'客户确认页',en:'Confirmation page'}, sub:{zh:'免登录令牌 · 只读记录 · 中/EN',en:'Token, no login · read-only record · ZH/EN'}, ready:true },
+  { key:'facility', num:'06', round:{zh:'第 5 轮',en:'Round 5'}, label:{zh:'设施填报页',en:'Installation questionnaire'}, sub:{zh:'免登录令牌 · EN 优先 · 系统字体',en:'Token, no login · EN first · system fonts'}, ready:true }
+];
+
+const OV = {
+  eyebrow:{zh:'全景',en:'Overview'},
+  title:{zh:'售前流程 · 十个阶段',en:'Pre-sales flow · ten stages'},
+  pathLabel:{zh:'路径',en:'Path'},
+  pathA:{zh:'A 销售陪跑',en:'A Sales-led'},
+  pathB:{zh:'B 客户自助',en:'B Client self-serve'},
+  noteA:{zh:'路径 A：销售在客户面前边问边填，一屏之内同时看到「我在填什么」和「价格变成了多少」。',en:'Path A: the rep fills the form in front of the client, seeing what is being entered and what the price became on one screen.'},
+  noteB:{zh:'路径 B：客户自助填问卷与清单，销售后台跟进；判定与出价仍在我方，客户只看结果与差额。',en:'Path B: the client completes the questionnaire and goods list; disposition and pricing stay with us, the client sees results and the difference.'},
+  facts:{zh:['玉环威格 · 2026 · DE / IT','127 行 → 9 项 → 5–6–7 单元 → 3–4–5 需实测','服务费 ¥ 8,000　封顶 ¥ 10,400','第三方核查费 ¥ 50,000 – 70,000（转付）','碳成本敞口差额 ¥ 177,567'],
+        en:['Yuhuan Weige · 2026 · DE / IT','127 lines → 9 items → 5–6–7 units → 3–4–5 measured','Service fee ¥ 8,000, capped ¥ 10,400','Third-party verification ¥ 50,000 – 70,000 (passed through)','Carbon exposure difference ¥ 177,567']}
+};
+
+class Component extends DCLogic {
+  state = { active:null, path:'A', lang:'zh' };
+
+  renderVals(){
+    const active = this.state.active || this.props.startSection || 'wizard';
+    const path = this.state.path;
+    const lang = this.state.lang;
+    const cur = SECTIONS.filter(s => s.key === active)[0] || SECTIONS[0];
+    return {
+      lang,
+      facilityLang: lang === 'zh' ? 'zh' : 'en',
+      langLabel: lang === 'zh' ? '界面语言' : 'Interface language',
+      langNote: lang === 'zh'
+        ? '整组页面一起切：导航、00 全景与 04 / 05 / 06 客户页。客户页中英各自导出独立 PDF，不逐段并排。'
+        : 'Switches the whole group: navigation, 00 overview and the 04 / 05 / 06 client pages. ZH and EN export as separate PDFs, never paragraph-by-paragraph.',
+      langOpts:[{ k:'zh', label:'中文' }, { k:'en', label:'English' }].map(l => ({
+        label:l.label, onClick:() => this.setState({ lang:l.k }),
+        bg: lang === l.k ? '#fff' : 'transparent',
+        fg: lang === l.k ? '#07110E' : 'rgba(255,255,255,.8)',
+        border: lang === l.k ? '#fff' : 'rgba(255,255,255,.35)'
+      })),
+      isOverview: active === 'overview',
+      stampWarn: lang === 'zh' ? '示例值 · 不得对外使用' : 'Demo values · not for external use',
+      ovEyebrow:OV.eyebrow[lang], ovTitle:OV.title[lang], ovPathLabel:OV.pathLabel[lang],
+      ovFacts:OV.facts[lang].map(t => ({ text:t })),
+      paths:[{ k:'A', label:OV.pathA[lang] }, { k:'B', label:OV.pathB[lang] }].map(p => ({
+        label:p.label, onClick:() => this.setState({ path:p.k }),
+        bg: path === p.k ? '#EDF6F2' : '#fff',
+        fg: path === p.k ? '#0A4F3A' : '#46524E',
+        border: path === p.k ? '#0E7C5A' : '#C6D1CD'
+      })),
+      pathNote: path === 'A' ? OV.noteA[lang] : OV.noteB[lang],
+      stages:STAGES.map(s => ({
+        num:s.num, label:s.label[lang], output:s.output[lang],
+        owner: (path === 'A' ? s.A : s.B)[lang],
+        ownerFg: (path === 'A' ? s.A : s.B).zh === '客户' ? '#1B57D6' : '#46524E',
+        bg: s.to ? '#fff' : '#FBFCFC',
+        target:s.target[lang],
+        cursor: s.to ? 'pointer' : 'default',
+        btnBg: s.to ? '#fff' : '#F4F7F6',
+        btnFg: s.to ? '#0B100E' : '#A9B4B0',
+        btnBorder: s.to ? '#C6D1CD' : '#E3E8E6',
+        onClick: s.to ? (() => this.setState({ active:s.to })) : (() => {})
+      })),
+      sections:SECTIONS.map(s => {
+        const on = s.key === active;
+        return {
+          num:s.num, round:s.round[lang], label:s.label[lang], sub:s.sub[lang],
+          onClick:() => this.setState({ active:s.key }),
+          cursor:'pointer',
+          bg: on ? 'rgba(255,255,255,.10)' : 'transparent',
+          mark: on ? '#0E7C5A' : 'transparent',
+          fg: on ? '#fff' : s.ready ? 'rgba(255,255,255,.82)' : 'rgba(255,255,255,.5)',
+          numFg: on ? '#F2B705' : 'rgba(255,255,255,.45)',
+          subFg: on ? 'rgba(255,255,255,.6)' : 'rgba(255,255,255,.38)',
+          weight: on ? '600' : '400'
+        };
+      }),
+      isTokens: active === 'tokens',
+      isComponents: active === 'components',
+      isWizard: active === 'wizard',
+      isProposal: active === 'proposal',
+      isClient: active === 'client',
+      isFacility: active === 'facility',
+      isPending: !cur.ready,
+      pendingRound: cur.round[lang] + (lang === 'zh' ? ' · 待产出' : ' · pending'),
+      pendingTitle: cur.label[lang],
+      pendingNote: cur.note || '',
+      pendingItems: (cur.items || []).map(t => ({ text:t }))
+    };
+  }
+}
+</script>
+</body>
+</html>

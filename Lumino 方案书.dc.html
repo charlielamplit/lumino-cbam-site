@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico">
+
+<meta charset="utf-8">
+<title>Lumino · CBAM proposal QT-2026-0814-03</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;color:#0B100E;font-family:"Instrument Sans","PingFang SC","Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-wrap:pretty}
+h1,h2,h3,h4,p,ul,ol{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:#0E7C5A;text-decoration:none}
+a:hover{color:#0A4F3A}
+button{font:inherit;color:inherit;cursor:pointer}
+doc-page:not(:defined){visibility:hidden}
+.print-only{display:none}
+@media print{
+  .noprint{display:none !important}
+  .print-only{display:block !important}
+  .sec{break-inside:avoid}
+  .keep{break-inside:avoid}
+  .keep-page{break-inside:avoid;break-before:page}
+  .unit-table thead{break-after:avoid}
+  .unit-table tr{break-inside:avoid}
+  .sec h2,.sec h3{break-after:avoid}
+  li,p{orphans:3;widows:3}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none !important}}
+</style>
+<script src="./doc-page.js"></script>
+</helmet>
+
+<div style="background:#F4F7F6">
+  <div class="noprint" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:10px 16px;background:#07110E;color:#fff">
+    <span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6)">{{ t.toolbarTag }}</span>
+    <span style="flex:1 1 320px;min-width:260px;font-size:12px">{{ t.toolbarNote }}</span>
+    <div style="display:flex;gap:4px">
+      <sc-for list="{{ langOpts }}" as="l" hint-placeholder-count="2">
+        <button type="button" onClick="{{ l.onClick }}" style="flex:none;white-space:nowrap;height:30px;padding:0 12px;border:1px solid {{ l.border }};background:{{ l.bg }};color:{{ l.fg }};border-radius:2px;font-size:12px">{{ l.label }}</button>
+      </sc-for>
+    </div>
+    <button type="button" onClick="{{ doPrint }}" style="flex:none;white-space:nowrap;height:30px;padding:0 14px;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;border-radius:2px;font-size:12px">{{ t.printBtn }}</button>
+  </div>
+
+  <doc-page size="a4" margin="16mm">
+
+    <div slot="header" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 16px;padding-bottom:8px;border-bottom:1px solid #C6D1CD;font-size:11px;color:#46524E">
+      <span style="flex:none;font-family:'Instrument Sans',sans-serif;font-size:13px;font-weight:700;letter-spacing:-.02em;color:#0B100E">LUMINO</span>
+      <span style="flex:none;font-family:'IBM Plex Mono',monospace">{{ t.runningHead }}</span>
+    </div>
+
+    <div slot="footer" style="padding-top:8px;border-top:1px solid #C6D1CD;display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 16px;font-size:10px;color:#67736F">
+      <span style="flex:none">{{ t.disclaimer }}</span>
+      <span style="flex:none;font-family:'IBM Plex Mono',monospace">{{ t.runningFoot }}</span>
+    </div>
+
+    <header class="sec" style="padding-bottom:20px;border-bottom:2px solid #0B100E">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#0E7C5A">{{ t.eyebrow }}</div>
+      <h1 style="margin-top:12px;font-family:'Archivo',sans-serif;font-size:28px;font-weight:600;line-height:1.25">{{ t.title }}</h1>
+      <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px 24px;font-size:15px">
+        <sc-for list="{{ meta }}" as="m" hint-placeholder-count="6">
+          <div>
+            <div style="font-size:13px;color:#67736F">{{ m.label }}</div>
+            <div style="margin-top:3px;font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums">{{ m.value }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </header>
+
+    <section class="sec" style="padding-top:26px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#0E7C5A">{{ t.s1no }}</div>
+      <h2 style="margin-top:8px;font-family:'Archivo',sans-serif;font-size:22px;font-weight:600">{{ t.s1title }}</h2>
+      <p style="margin-top:12px;font-size:16px;line-height:1.75;color:#0B100E">{{ t.s1body }}</p>
+      <div class="keep" style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+        <sc-for list="{{ moneyBlocks }}" as="b" hint-placeholder-count="3">
+          <div style="background:{{ b.bg }};border-radius:6px;padding:16px 18px">
+            <div style="font-size:13px;color:{{ b.fg }}">{{ b.label }}</div>
+            <div style="margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:{{ b.size }};font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap;color:{{ b.fg }}">{{ b.value }}</div>
+            <sc-if value="{{ b.hasCap }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top:4px;display:flex;align-items:baseline;gap:8px">
+                <span style="flex:none;font-size:12px;color:#46524E">{{ b.capLabel }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap;color:{{ b.fg }}">{{ b.cap }}</span>
+              </div>
+            </sc-if>
+            <div style="margin-top:4px;font-size:12px;color:#46524E">{{ b.note }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <p style="margin-top:14px;font-size:15px;line-height:1.75;color:#46524E">{{ t.s1foot }}</p>
+    </section>
+
+    <section class="sec" style="padding-top:26px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#0E7C5A">{{ t.s2no }}</div>
+      <h2 style="margin-top:8px;font-family:'Archivo',sans-serif;font-size:22px;font-weight:600">{{ t.s2title }}</h2>
+      <table style="width:100%;border-collapse:collapse;margin-top:14px;font-size:15px">
+        <thead>
+          <tr>
+            <th style="text-align:left;padding:8px 0;border-bottom:1px solid #C6D1CD;font-weight:500;color:#46524E;font-size:13px">{{ t.s2colK }}</th>
+            <th style="text-align:left;padding:8px 0;border-bottom:1px solid #C6D1CD;font-weight:500;color:#46524E;font-size:13px">{{ t.s2colV }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <sc-for list="{{ scopeRows }}" as="r" hint-placeholder-count="6">
+            <tr>
+              <td style="padding:10px 16px 10px 0;border-bottom:1px solid #EDF1F0;vertical-align:top;width:34%">{{ r.k }}</td>
+              <td style="padding:10px 0;border-bottom:1px solid #EDF1F0;vertical-align:top;color:#46524E">{{ r.v }}</td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+      <div class="keep" style="margin-top:16px;background:#F4F7F6;border-radius:6px;padding:16px 18px">
+        <div style="font-size:13px;color:#67736F">{{ t.closureTitle }}</div>
+        <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums">
+          <span style="white-space:nowrap">{{ t.closureA }} 1,284.0 t</span>
+          <span style="white-space:nowrap">{{ t.closureB }} 1,189.0 t</span>
+          <span style="white-space:nowrap;font-size:19px;color:#B3402A">{{ t.closureC }} 95.0 t</span>
+        </div>
+        <p style="margin-top:8px;font-size:15px;line-height:1.7;color:#46524E">{{ t.closureNote }}</p>
+      </div>
+    </section>
+
+    <section class="sec" style="padding-top:26px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#0E7C5A">{{ t.s3no }}</div>
+      <h2 style="margin-top:8px;font-family:'Archivo',sans-serif;font-size:22px;font-weight:600">{{ t.s3title }}</h2>
+      <p style="margin-top:12px;font-size:16px;line-height:1.75">{{ t.s3body }}</p>
+      <div class="keep" style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px">
+        <sc-for list="{{ funnel }}" as="f" hint-placeholder-count="4">
+          <div style="border:1px solid #E3E8E6;border-radius:6px;padding:14px 16px">
+            <div style="font-size:13px;color:#67736F">{{ f.label }}</div>
+            <div style="margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap;color:{{ f.fg }}">{{ f.value }}</div>
+            <div style="margin-top:6px;font-size:13px;color:#46524E;line-height:1.6">{{ f.reason }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <table class="unit-table" style="width:100%;border-collapse:collapse;margin-top:18px;font-size:14px">
+        <thead>
+          <tr>
+            <th style="text-align:left;padding:8px 0;border-bottom:1px solid #C6D1CD;font-weight:500;color:#46524E;font-size:13px;white-space:nowrap">{{ t.uColUnit }}</th>
+            <th style="text-align:left;padding:8px 12px;border-bottom:1px solid #C6D1CD;font-weight:500;color:#46524E;font-size:13px">{{ t.uColWhat }}</th>
+            <th style="text-align:right;padding:8px 12px;border-bottom:1px solid #C6D1CD;font-weight:500;color:#46524E;font-size:13px;white-space:nowrap">{{ t.uColQty }}</th>
+            <th style="text-align:left;padding:8px 0;border-bottom:1px solid #C6D1CD;font-weight:500;color:#46524E;font-size:13px;white-space:nowrap">{{ t.uColVerdict }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <sc-for list="{{ unitRows }}" as="u" hint-placeholder-count="7">
+            <tr>
+              <td style="padding:10px 0;border-bottom:1px solid #EDF1F0;font-family:'IBM Plex Mono',monospace;white-space:nowrap;vertical-align:top">{{ u.id }}</td>
+              <td style="padding:10px 12px;border-bottom:1px solid #EDF1F0;vertical-align:top"><span style="font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums">{{ u.cn }}</span> · {{ u.fac }}</td>
+              <td style="padding:10px 12px;border-bottom:1px solid #EDF1F0;text-align:right;font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;white-space:nowrap;vertical-align:top">{{ u.qty }}</td>
+              <td style="padding:10px 0;border-bottom:1px solid #EDF1F0;vertical-align:top;color:{{ u.color }}">{{ u.verdict }}</td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+      <p style="margin-top:12px;font-size:14px;color:#46524E;line-height:1.7">{{ t.s3foot }}</p>
+    </section>
+
+    <section class="sec" style="padding-top:26px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#0E7C5A">{{ t.s4no }}</div>
+      <h2 style="margin-top:8px;font-family:'Archivo',sans-serif;font-size:22px;font-weight:600">{{ t.s4title }}</h2>
+      <div style="margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+        <sc-for list="{{ dispCards }}" as="d" hint-placeholder-count="3">
+          <div class="keep" style="border:1px solid #E3E8E6;border-left:3px solid {{ d.color }};border-radius:6px;padding:14px 16px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px">
+              <span style="font-size:15px;font-weight:600;color:{{ d.color }}">{{ d.title }}</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:19px;font-variant-numeric:tabular-nums">{{ d.count }}</span>
+            </div>
+            <p style="margin-top:8px;font-size:14px;line-height:1.7;color:#46524E">{{ d.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <div class="keep" style="margin-top:16px;border:1px solid #8A6A00;border-radius:6px;overflow:hidden">
+        <div style="padding:12px 16px;background:#FBF4DF">
+          <div style="font-size:15px;font-weight:600;color:#8A6A00">{{ t.riskTitle }}</div>
+        </div>
+        <div style="padding:14px 16px">
+          <p style="font-size:15px;line-height:1.75;color:#0B100E">{{ t.riskBody }}<span style="font-family:'IBM Plex Mono',monospace;color:#8A6A00;background:rgba(242,183,5,.14);padding:1px 6px;border-radius:3px">{{ t.todo }}</span>{{ t.riskBody2 }}</p>
+          <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:12px 32px;align-items:flex-end">
+            <div style="flex:1 1 200px;min-width:180px">
+              <div style="height:32px;border-bottom:1px solid #0B100E"></div>
+              <div style="margin-top:6px;font-size:13px;color:#67736F">{{ t.riskSign }}</div>
+            </div>
+            <div style="flex:0 1 160px;min-width:140px">
+              <div style="height:32px;border-bottom:1px solid #0B100E"></div>
+              <div style="margin-top:6px;font-size:13px;color:#67736F">{{ t.dateLabel }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" style="padding-top:26px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#0E7C5A">{{ t.s5no }}</div>
+      <h2 style="margin-top:8px;font-family:'Archivo',sans-serif;font-size:22px;font-weight:600">{{ t.s5title }}</h2>
+      <table class="keep" style="width:100%;border-collapse:collapse;margin-top:14px;font-size:15px">
+        <tbody>
+          <sc-for list="{{ feeRows }}" as="f" hint-placeholder-count="3">
+            <tr>
+              <td style="padding:12px 0;border-bottom:1px solid #EDF1F0;vertical-align:top">{{ f.label }}<div style="margin-top:3px;font-size:13px;color:#67736F">{{ f.basis }}</div></td>
+              <td style="padding:12px 0;border-bottom:1px solid #EDF1F0;text-align:right;font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;white-space:nowrap;vertical-align:top">{{ f.amount }}</td>
+            </tr>
+          </sc-for>
+          <tr>
+            <td style="padding:16px 0;border-top:2px solid #0A4F3A;font-weight:600">{{ t.feeTotal }}</td>
+            <td style="padding:16px 0;border-top:2px solid #0A4F3A;text-align:right;white-space:nowrap">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:500;font-variant-numeric:tabular-nums;color:#0A4F3A">¥ 8,000</span>
+              <span style="margin-left:14px;font-size:13px;color:#67736F">{{ t.capLabel }}</span>
+              <span style="margin-left:8px;font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:500;font-variant-numeric:tabular-nums;color:#0A4F3A">¥ 10,400</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px;font-size:14px;color:#46524E;line-height:1.7">{{ t.s5foot }}</p>
+      <div class="keep" style="margin-top:18px;background:#F4F7F6;border-radius:6px;padding:16px 18px">
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 16px">
+          <h3 style="font-size:17px;font-weight:600;color:#46524E">{{ t.passTitle }}</h3>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:19px;font-variant-numeric:tabular-nums;white-space:nowrap;color:#0B100E">¥ 50,000 – 70,000</span>
+        </div>
+        <p style="margin-top:8px;font-size:15px;line-height:1.75;color:#46524E">{{ t.passNote }}</p>
+      </div>
+    </section>
+
+    <section class="sec keep-page" style="padding-top:26px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#1B57D6">{{ t.s6no }}</div>
+      <h2 style="margin-top:8px;font-family:'Archivo',sans-serif;font-size:22px;font-weight:600">{{ t.s6title }}</h2>
+      <p style="margin-top:12px;font-size:16px;line-height:1.75;color:#46524E">{{ t.s6body }}</p>
+      <div style="margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px">
+        <div style="background:#fff;border:1px solid #E3E8E6;border-radius:6px;padding:18px">
+          <div style="font-size:13px;color:#67736F">{{ t.basisDefault }}</div>
+          <div style="margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap;color:#B3402A">¥ 605,565</div>
+          <div style="margin-top:8px;font-size:13px;color:#46524E">{{ t.basisDefaultNote }}</div>
+        </div>
+        <div style="background:#fff;border:1px solid #E3E8E6;border-radius:6px;padding:18px">
+          <div style="font-size:13px;color:#67736F">{{ t.basisMeasured }}</div>
+          <div style="margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap;color:#0A4F3A">¥ 427,998</div>
+          <div style="margin-top:8px;font-size:13px;color:#46524E">{{ t.basisMeasuredNote }}</div>
+        </div>
+        <div style="background:#07110E;color:#fff;border-radius:6px;padding:18px">
+          <div style="font-size:13px;color:rgba(255,255,255,.66)">{{ t.deltaLabel }}</div>
+          <div style="margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:38px;line-height:1.05;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap">¥ 177,567</div>
+          <div style="margin-top:8px;font-size:13px;color:rgba(255,255,255,.66)">{{ t.deltaNote }}</div>
+        </div>
+      </div>
+      <p style="margin-top:18px;padding-left:16px;border-left:3px solid #0E7C5A;font-size:18px;line-height:1.6;color:#07110E">{{ t.saleLine }}</p>
+      <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px 24px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#67736F">
+        <span style="white-space:nowrap">{{ t.certPrice }} <span style="color:#8A6A00;background:rgba(242,183,5,.14);padding:1px 6px;border-radius:3px">{{ t.todo }}</span></span>
+        <span style="white-space:nowrap">{{ t.fx }} <span style="color:#8A6A00;background:rgba(242,183,5,.14);padding:1px 6px;border-radius:3px">{{ t.todo }}</span></span>
+        <span style="white-space:nowrap">{{ t.valuationDate }} 2026-08-21</span>
+        <span style="white-space:nowrap;color:#46524E">{{ t.estimateOnly }}</span>
+      </div>
+    </section>
+
+    <section class="sec" style="padding-top:26px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#0E7C5A">{{ t.s7no }}</div>
+      <h2 style="margin-top:8px;font-family:'Archivo',sans-serif;font-size:22px;font-weight:600">{{ t.s7title }}</h2>
+      <div style="margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px">
+        <div class="keep" style="border:1px solid #0E7C5A;border-radius:6px;overflow:hidden">
+          <div style="padding:12px 16px;background:#EDF6F2;font-size:16px;font-weight:600;color:#0A4F3A">{{ t.doTitle }}</div>
+          <ul style="padding:14px 16px;display:flex;flex-direction:column;gap:10px;font-size:15px;line-height:1.7">
+            <sc-for list="{{ doList }}" as="d" hint-placeholder-count="5">
+              <li style="display:flex;gap:10px"><span style="flex:none;color:#0E7C5A">·</span><span>{{ d.text }}</span></li>
+            </sc-for>
+          </ul>
+        </div>
+        <div class="keep" style="border:1px solid #0B100E;border-radius:6px;overflow:hidden">
+          <div style="padding:12px 16px;background:#F4F7F6;font-size:16px;font-weight:600;color:#0B100E">{{ t.dontTitle }}</div>
+          <ul style="padding:14px 16px;display:flex;flex-direction:column;gap:10px;font-size:15px;line-height:1.7">
+            <sc-for list="{{ dontList }}" as="d" hint-placeholder-count="5">
+              <li style="display:flex;gap:10px"><span style="flex:none;color:#B3402A">×</span><span>{{ d.text }}</span></li>
+            </sc-for>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" style="padding-top:26px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#0E7C5A">{{ t.s8no }}</div>
+      <h2 style="margin-top:8px;font-family:'Archivo',sans-serif;font-size:22px;font-weight:600">{{ t.s8title }}</h2>
+      <table style="width:100%;border-collapse:collapse;margin-top:14px;font-size:15px">
+        <thead>
+          <tr>
+            <th style="text-align:left;padding:8px 0;border-bottom:1px solid #C6D1CD;font-weight:500;color:#46524E;font-size:13px">{{ t.tlColStage }}</th>
+            <th style="text-align:left;padding:8px 12px;border-bottom:1px solid #C6D1CD;font-weight:500;color:#46524E;font-size:13px">{{ t.tlColOut }}</th>
+            <th style="text-align:left;padding:8px 0;border-bottom:1px solid #C6D1CD;font-weight:500;color:#46524E;font-size:13px;white-space:nowrap">{{ t.tlColDur }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <sc-for list="{{ timeline }}" as="tl" hint-placeholder-count="5">
+            <tr>
+              <td style="padding:10px 0;border-bottom:1px solid #EDF1F0;vertical-align:top;width:26%">{{ tl.stage }}</td>
+              <td style="padding:10px 12px;border-bottom:1px solid #EDF1F0;vertical-align:top;color:#46524E">{{ tl.output }}</td>
+              <td style="padding:10px 0;border-bottom:1px solid #EDF1F0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;white-space:nowrap">{{ tl.dur }}</td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+      <p style="margin-top:12px;font-size:14px;color:#46524E;line-height:1.7">{{ t.s8foot }}</p>
+    </section>
+
+    <section class="sec" style="padding-top:26px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#0E7C5A">{{ t.s9no }}</div>
+      <h2 style="margin-top:8px;font-family:'Archivo',sans-serif;font-size:22px;font-weight:600">{{ t.s9title }}</h2>
+      <ul style="margin-top:14px;display:flex;flex-direction:column;gap:10px;font-size:15px;line-height:1.75">
+        <sc-for list="{{ terms }}" as="tm" hint-placeholder-count="6">
+          <li class="keep" style="display:grid;grid-template-columns:minmax(0,170px) minmax(0,1fr);gap:14px;padding-bottom:10px;border-bottom:1px solid #EDF1F0">
+            <span style="font-weight:600">{{ tm.k }}</span>
+            <span style="color:#46524E">{{ tm.v }}</span>
+          </li>
+        </sc-for>
+      </ul>
+    </section>
+
+    <section class="sec" style="padding-top:26px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#8A6A00">{{ t.s10no }}</div>
+      <h2 style="margin-top:8px;font-family:'Archivo',sans-serif;font-size:22px;font-weight:600">{{ t.s10title }}</h2>
+      <p style="margin-top:12px;font-size:16px;line-height:1.75;color:#46524E">{{ t.s10body }}</p>
+      <div style="margin-top:16px;display:flex;flex-direction:column;gap:12px">
+        <sc-for list="{{ caveats }}" as="c" hint-placeholder-count="6">
+          <div class="keep" style="border:1px solid #E3E8E6;border-left:3px solid {{ c.mark }};border-radius:6px;padding:14px 16px;background:{{ c.bg }}">
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px">
+              <span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:12px;padding:1px 7px;border:1px solid #C6D1CD;border-radius:3px;color:#46524E;background:#fff;white-space:nowrap">{{ c.tag }}</span>
+              <span style="font-size:16px;font-weight:600;color:{{ c.fg }}">{{ c.title }}</span>
+            </div>
+            <p style="margin-top:8px;font-size:15px;line-height:1.75;color:#46524E">{{ c.consequence }}</p>
+            <p style="margin-top:8px;font-size:14px;color:#0B100E">{{ c.askLabel }}{{ c.ask }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <div class="keep" style="margin-top:20px;border:1px solid #8A6A00;border-radius:6px;overflow:hidden">
+        <div style="padding:12px 16px;background:#FBF4DF">
+          <div style="font-size:16px;font-weight:600;color:#8A6A00">{{ t.unverifiedTitle }}</div>
+          <div style="margin-top:4px;font-size:13px;color:#46524E">{{ t.unverifiedNote }}</div>
+        </div>
+        <ol style="padding:14px 16px 16px 16px;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:8px 20px;list-style:none">
+          <sc-for list="{{ unverified }}" as="u" hint-placeholder-count="12">
+            <li style="display:flex;gap:8px;font-size:14px;line-height:1.6">
+              <span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A6A00;font-variant-numeric:tabular-nums">{{ u.n }}</span>
+              <span>{{ u.text }} <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A6A00;background:rgba(242,183,5,.14);padding:1px 5px;border-radius:3px;white-space:nowrap">{{ t.todo }}</span></span>
+            </li>
+          </sc-for>
+        </ol>
+      </div>
+      <div class="keep" style="margin-top:20px;padding-top:16px;border-top:2px solid #0B100E;display:flex;flex-wrap:wrap;gap:16px 32px;align-items:flex-end">
+        <div style="flex:1 1 220px;min-width:200px">
+          <div style="height:36px;border-bottom:1px solid #0B100E"></div>
+          <div style="margin-top:6px;font-size:13px;color:#67736F">{{ t.signLabel }}</div>
+        </div>
+        <div style="flex:0 1 160px;min-width:140px">
+          <div style="height:36px;border-bottom:1px solid #0B100E"></div>
+          <div style="margin-top:6px;font-size:13px;color:#67736F">{{ t.dateLabel }}</div>
+        </div>
+      </div>
+      <div style="margin-top:18px;display:flex;flex-wrap:wrap;gap:6px 20px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#67736F">
+        <span style="white-space:nowrap">{{ t.snapshot }} fp-a3f9…c21e</span>
+        <span style="white-space:nowrap">cbam-rules 2026.08</span>
+        <span style="white-space:nowrap">pb-2026-08</span>
+        <span style="white-space:nowrap">demo-dataset v1 · {{ t.demoOnly }}</span>
+      </div>
+    </section>
+  </doc-page>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1024,&quot;height&quot;:1200},&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;zh&quot;,&quot;en&quot;],&quot;default&quot;:&quot;zh&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;语言&quot;}}">
+const DISP_FG = { M:'#B3402A', R:'#0A4F3A', F:'#8A6A00', X:'#67736F' };
+
+const UNITS = [
+  { id:'U-01', cn:'钢铁制品', zh:'INST-01 台州华冶特钢 · EAF · 占 48.8%', en:'INST-01 Taizhou Huaye Special Steel · EAF · 48.8% share', qty:'580.5', disp:'M' },
+  { id:'U-02', cn:'钢铁基材', zh:'INST-01 台州华冶特钢 · EAF · 上期已核验', en:'INST-01 Taizhou Huaye Special Steel · EAF · verified last period', qty:'158.0', disp:'R' },
+  { id:'U-03', cn:'钢铁制品', zh:'INST-02 江阴恒晟 · BF-BOF · 前驱体来源变更', en:'INST-02 Jiangyin Hengsheng · BF-BOF · precursor source changed', qty:'284.0', disp:'M' },
+  { id:'U-04', cn:'钢铁基材', zh:'INST-02 江阴恒晟 · BF-BOF · 占 2.0%', en:'INST-02 Jiangyin Hengsheng · BF-BOF · 2.0% share', qty:'24.0', disp:'F' },
+  { id:'U-05', cn:'钢铁制品', zh:'设施未确定 · 路线 unknown · 经贸易商采购', en:'installation not determined · route unknown · sourced via trader', qty:'104.0', disp:'M' },
+  { id:'U-06', cn:'钢铁制品', zh:'设施未确定 · 货量为口述估算', en:'installation not determined · quantity is a verbal estimate', qty:'38.5', disp:'M' },
+  { id:'U-07?', cn:'钢铁制品', zh:'INST-03 拆分后可能出现的第 7 单元', en:'possible 7th unit if INST-03 splits', qty:'—', disp:'X' }
+];
+
+const COPY = {
+  zh:{
+    label:'中文', toolbarTag:'方案书 · 屏幕版',
+    toolbarNote:'客户语域 .reg-client；打印 A4，页眉页脚与免责句每页出现。中文版与英文版各自导出为独立 PDF，不做逐段并排。',
+    printBtn:'打印 / 导出 PDF',
+    runningHead:'CBAM 合规服务方案 · QT-2026-0814-03 · v1',
+    runningFoot:'玉环威格金属制品有限公司 · 2026 申报年度',
+    disclaimer:'本方案为初步估算，不构成法律意见，有效期 30 天。',
+    eyebrow:'CBAM 合规服务方案与报价',
+    title:'把这批货的 CBAM 义务算清楚，并给出一个您敢签字的价格区间',
+    metaLabels:['客户','行业','申报年度','目的地','方案编号','出具日 / 有效期'],
+    metaValues:['玉环威格金属制品有限公司','钢铁 · 紧固件','2026（确定期）','DE / IT','QT-2026-0814-03 · v1','2026-08-21 · 30 天'],
+    s1no:'第一节', s1title:'方案概要',
+    s1body:'您本年度出口至 DE / IT 的 127 条报关行项，合并为 9 个 Annex I 商品项、5–6–7 个核算单元。其中 3–4–5 个单元需要向生产设施取实测数据，其余可沿用既有已核验结果或按默认值申报。',
+    s1foot:'三类钱性质不同，全篇分列，任何合计只是服务费的合计。',
+    moneyBlocks:[
+      { label:'服务费（我方收取）', value:'¥ 8,000', capLabel:'封顶', cap:'¥ 10,400', note:'' },
+      { label:'转付项（代付不加价）', value:'¥ 50,000 – 70,000', note:'第三方核查费，按实际发生额转付' },
+      { label:'客户直接成本（不经我方）', value:'¥ 427,998 – 605,565', note:'CBAM 证书，贵司直接支付' }
+    ],
+    s2no:'第二节', s2title:'我们理解的范围', s2colK:'项目', s2colV:'口径',
+    scopeRows:[
+      { k:'覆盖范围', v:'贵司 2026 申报年度出口至 DE / IT 的钢铁类紧固件与管件，共 9 个 Annex I 商品项。' },
+      { k:'不在范围内', v:'塑料件与线束等 2 类共 11 条报关行项不在 Annex I 覆盖清单内，不进入核算与计价；铝制紧固件 1 项在免征阈值以下【TODO-核实】。' },
+      { k:'申报义务人', v:'欧盟进口商。我方交付可供其直接申报的数据包与支撑材料，不代为提交。' },
+      { k:'生产设施', v:'3 家（玉环本厂 · 代工厂 A · 代工厂 B）。其中 2 家已书面确认，1 家为备选状态。' },
+      { k:'生产路线', v:'EAF（电炉）2 家、BF-BOF（高炉转炉）1 家。路线进入归并键，影响排放强度取值。' },
+      { k:'数据基期', v:'2025-07 至 2026-06 的报关明细与同期产量、能耗台账。' }
+    ],
+    closureTitle:'闭合度校验', closureA:'报关总量', closureB:'行项之和', closureC:'差',
+    closureNote:'差额部分口径未闭合，本方案按最不利口径计入，并在第十节列为待补项。补齐后可下调，但不会反过来上调。',
+    s3no:'第三节', s3title:'核算单元是怎么算出来的',
+    s3body:'报关报了 127 行，不代表要算 127 次。同一个 CN 码、同一家生产设施、同一条生产路线出的货，排放强度是同一个数。',
+    funnel:[
+      { label:'报关行项', value:'127', reason:'原始报关明细' },
+      { label:'Annex I 商品项', value:'9', reason:'同 CN 码多次报关合并，非附件 I 剔除' },
+      { label:'核算单元', value:'5–6–7', reason:'同设施 + 同商品类别 + 同生产路线算一次' },
+      { label:'需实测收资', value:'3–4–5', reason:'其余沿用已核验结果或走默认值' }
+    ],
+    uColUnit:'单元', uColWhat:'CN 码 · 生产设施 · 路线', uColQty:'数量 t', uColVerdict:'结论',
+    verdicts:{ M:'需实测收资', R:'沿用上期已核验', F:'按默认值申报', X:'仅计入上限' },
+    s3foot:'带 ? 的单元来自尚未书面确认的生产设施，只计入上限。上限是真实可能发生的，不是修饰。',
+    s4no:'第四节', s4title:'每个单元走哪条路，为什么',
+    dispCards:[
+      { title:'需实测收资', count:'4', code:'M', desc:'必须向生产设施取实测能耗与产量。这是最贵的一条路，也是唯一能把证书成本降下来的一条。' },
+      { title:'沿用已核验', count:'1', code:'R', desc:'同设施同路线、上期已核验且规则包无实质变更，本期不重复收资、不重复收费。' },
+      { title:'按默认值申报', count:'1', code:'F', desc:'设施已锁定且有书面确认，量小，用默认值更划算 —— 但风险自留，见下方。' }
+    ],
+    riskTitle:'用默认值申报不等于豁免 —— 这是风险自留',
+    riskBody:'按默认值申报的单元（U-06 · 7307 19 10 · F-03 · BF-BOF），残余风险由贵司承担：默认值按最不利口径取值，且逐年加价',
+    riskBody2:'；欧盟进口商或核查机构追问时，我方可提供口径说明，但不改变该单元的取值性质。',
+    riskSign:'客户签字确认（接受该单元按默认值申报）', dateLabel:'日期', todo:'【TODO-核实】',
+    s5no:'第五节', s5title:'费用结构', feeTotal:'服务费合计', capLabel:'封顶',
+    feeRows:[
+      { label:'固定项 · 申报期归档 + CN 归类 + 核查协调', basis:'一次性，含归并、边界初判、口径快照', amount:'¥ 3,200' },
+      { label:'设施收资', basis:'¥ 600 / 家 · 下限 3 家', amount:'¥ 1,800' },
+      { label:'核算单元', basis:'¥ 600 / 单元 · 下限 5 单元', amount:'¥ 3,000' },
+      { label:'超出下限的部分（敞口）', basis:'每多 1 单元或 1 家设施各 ¥ 600，至封顶 ¥ 10,400 为止', amount:'按实际发生' }
+    ],
+    s5foot:'敞口 ¥ 2,400：下限按 5 单元 + 3 设施计，每多 1 单元或 1 家设施各 ¥ 600，至封顶为止。超出封顶的部分由我方承担。我方不会按下限报完、按上限交付 —— 每一次上调都会先告知再执行。',
+    passTitle:'转付项 · 第三方核查费',
+    passNote:'核查机构按人天直接报价，与我方服务费无关：下端对应 1 家设施、无现场核查；上端对应 3 家设施 + 现场核查。由核查机构直接开票，按实际发生额转付，我方不加价、不返点，不并入上方服务费合计。这一项是本方案里比服务费大得多的一笔钱。',
+    s6no:'第六节 · 客户直接成本', s6title:'碳成本测算',
+    s6body:'此项贵司直接支付，不经我方收取，我方不代购 CBAM 证书。以下为两种口径下的量级估算。',
+    basisDefault:'默认值口径', basisDefaultNote:'按最不利口径取值，且逐年加价',
+    basisMeasured:'实测口径', basisMeasuredNote:'需 3 家生产设施的能耗与产量台账',
+    deltaLabel:'差额', deltaNote:'把数据要回来的价值',
+    saleLine:'把这 3 家生产设施的能耗数据要回来，这件事值 ¥ 177,567。这不是我们的服务费，是您直接少交的钱。',
+    certPrice:'证书 989 张 / 699 张 · 单价 € 78.50 = ¥ 612.30 · 取值机制', fx:'汇率 EUR/CNY 7.80 · 机制', valuationDate:'取值日', estimateOnly:'仅为量级估算，不构成承诺',
+    s7no:'第七节', s7title:'服务范围，以及我们不做什么', doTitle:'我们做', dontTitle:'我们不做',
+    doList:['梳理报关明细，确定 Annex I 覆盖范围与核算单元','向生产设施收资，包括代为设计取数模板与逐轮催办','核算隐含排放并出具可供欧盟进口商申报的数据包','对接第三方核查机构，配合其提问与补充材料','规则包更新时主动复核本方案取值，并告知影响'],
+    dontList:['不代客户签署或提交 CBAM 申报表','不出具核查意见（核查须由认可机构独立出具）','不出具法律意见','不承诺保证通过审核或不被追问','不代购、不代持、不代缴 CBAM 证书'],
+    s8no:'第八节', s8title:'交付物与时间表', tlColStage:'阶段', tlColOut:'交付物', tlColDur:'周期',
+    timeline:[
+      { stage:'确认与启动', output:'签署本方案，冻结口径快照，出具收资清单', dur:'3 个工作日' },
+      { stage:'收资', output:'向 3 家生产设施取能耗与产量台账，逐周报进度', dur:'2–5 周' },
+      { stage:'核算与内部复核', output:'隐含排放核算、交叉校验、专家复核', dur:'2 周' },
+      { stage:'第三方核查配合', output:'配合核查机构提问与补充（如客户需要核查）', dur:'2–4 周' },
+      { stage:'交付', output:'数据包、支撑材料、口径说明与判定依据', dur:'3 个工作日' }
+    ],
+    s8foot:'首次申报截止 2027-05-31。上表周期自资料齐备起算；取数环节的等待时间取决于生产设施配合速度，我方会逐周报进度。',
+    s9no:'第九节', s9title:'商务条款',
+    terms:[
+      { k:'报价性质', v:'区间报价。下限为按现有资料可确认的范围，上限为封顶价。我方不会按下限报完、按上限交付；任何上调都会先告知再执行，超出封顶的部分由我方承担。' },
+      { k:'付款', v:'签署后 40% 启动，交付数据包后 60%。转付项按第三方发票实际金额另计。' },
+      { k:'有效期', v:'自出具日起 30 天。逾期需按最新规则包与价格表重新出具。' },
+      { k:'版本与改价', v:'改价不改原件。本方案一经发出即锁定；调整口径或价格一律新建版本，旧版本标记为已失效并保留可查。' },
+      { k:'口径快照', v:'本方案的每一个数字都绑定一份快照（规则包版本、价格表版本、指纹）。交付时可逐个数字追溯到构成它的单元与命中的规则号。' },
+      { k:'双语版本', v:'中文版与英文版为两个独立 PDF，来自同一份快照，数字、日期、金额逐字一致；不做逐段并排。' }
+    ],
+    s10no:'第十节', s10title:'缺口清单与未核实事项',
+    s10body:'以下 6 项缺口影响本方案的取值口径，与我方内部界面所列完全一致，不做删减。带着缺口报出去的价，后面确认清楚了只会往下走，不会反过来上调。',
+    askLabel:'需要贵司做的：',
+    unverifiedTitle:'未核实事项清单 · 12 条',
+    unverifiedNote:'以下条目的法规取值截至本方案出具日尚未逐条核实，仅供规划参考，不作为承诺。',
+    signLabel:'客户签字（确认接受本方案的取值口径与缺口清单）',
+    snapshot:'快照', demoOnly:'示例值，不得对外使用'
+  },
+  en:{
+    label:'English', toolbarTag:'Proposal · screen version',
+    toolbarNote:'Client register (.reg-client). Prints on A4 with a running header, footer and the disclaimer on every page. The Chinese and English versions export as two separate PDFs — never paragraph-by-paragraph side by side.',
+    printBtn:'Print / export PDF',
+    runningHead:'CBAM compliance service proposal · QT-2026-0814-03 · v1',
+    runningFoot:'Yuhuan Weige Metal Products Co., Ltd. · reporting year 2026',
+    disclaimer:'Preliminary estimate. Not legal advice. Valid for 30 days.',
+    eyebrow:'CBAM compliance service proposal and quotation',
+    title:'Establish the CBAM obligation for these goods, and put a price range on it you can sign',
+    metaLabels:['Client','Sector','Reporting year','Destination','Quote no.','Issued / valid for'],
+    metaValues:['Yuhuan Weige Metal Products Co., Ltd.','Steel · fasteners','2026 (definitive period)','DE / IT','QT-2026-0814-03 · v1','2026-08-21 · 30 days'],
+    s1no:'Section 1', s1title:'Summary',
+    s1body:'Your 127 customs line items exported to DE / IT this reporting year consolidate into 9 Annex I goods and 5–6–7 calculation units. Of those, 3–4–5 units need measured data from the installation; the rest either reuse verified results or are declared with default values.',
+    s1foot:'The three kinds of money differ in nature and stay separate throughout. Any total shown is the service-fee total only.',
+    moneyBlocks:[
+      { label:'Service fee (charged by us)', value:'¥ 8,000', capLabel:'capped at', cap:'¥ 10,400', note:'' },
+      { label:'Pass-through (at cost, no mark-up)', value:'¥ 50,000 – 70,000', note:'Third-party verification, passed through at actual cost' },
+      { label:'Your direct cost (not through us)', value:'¥ 427,998 – 605,565', note:'CBAM certificates, paid by you directly' }
+    ],
+    s2no:'Section 2', s2title:'Scope as we understand it', s2colK:'Item', s2colV:'Basis',
+    scopeRows:[
+      { k:'In scope', v:'Steel fasteners and pipe fittings exported to DE / IT in reporting year 2026 — 9 Annex I goods in total.' },
+      { k:'Out of scope', v:'11 customs line items across 2 categories (plastic parts, wire harnesses) are not on the Annex I list and enter neither the calculation nor the price; 1 aluminium fastener item falls below the de minimis threshold [TO BE VERIFIED].' },
+      { k:'Reporting declarant', v:'The EU importer. We deliver a declaration-ready data package and supporting evidence; we do not submit on their behalf.' },
+      { k:'Installations', v:'3 (Yuhuan main plant · Subcontractor A · Subcontractor B). 2 confirmed in writing, 1 still an alternative.' },
+      { k:'Production routes', v:'EAF at 2 installations, BF-BOF at 1. The route is part of the aggregation key and drives the emission intensity basis.' },
+      { k:'Data period', v:'Customs records from 2025-07 to 2026-06 with production and energy records for the same period.' }
+    ],
+    closureTitle:'Reconciliation check', closureA:'Customs total', closureB:'Sum of line items', closureC:'Difference',
+    closureNote:'The difference is not reconciled. This proposal takes it on the most conservative basis and lists it in Section 10 as an open item. Closing it can lower the figure; it will never raise it.',
+    s3no:'Section 3', s3title:'How the calculation units were derived',
+    s3body:'127 customs lines do not mean 127 calculations. Goods with the same CN code, from the same installation, on the same production route share one emission intensity.',
+    funnel:[
+      { label:'Customs line items', value:'127', reason:'raw customs records' },
+      { label:'Annex I goods', value:'9', reason:'repeat entries merged, non-Annex I removed' },
+      { label:'Calculation units', value:'5–6–7', reason:'same installation + goods category + route counts once' },
+      { label:'Units needing measured data', value:'3–4–5', reason:'the rest reuse verified results or use defaults' }
+    ],
+    uColUnit:'Unit', uColWhat:'CN code · installation · route', uColQty:'Quantity t', uColVerdict:'Conclusion',
+    verdicts:{ M:'Measured data required', R:'Verified data reused', F:'Default values applied', X:'Upper bound only' },
+    s3foot:'Units marked ? come from an installation not yet confirmed in writing and count towards the upper bound only. The upper bound is genuinely possible, not decoration.',
+    s4no:'Section 4', s4title:'Which route each unit takes, and why',
+    dispCards:[
+      { title:'Measured data required', count:'4', code:'M', desc:'Measured energy and production data must be obtained from the installation. It is the most expensive route and the only one that brings the certificate cost down.' },
+      { title:'Verified data reused', count:'1', code:'R', desc:'Same installation, same route, verified last period, no material change in the rule pack — no repeat data collection and no repeat fee.' },
+      { title:'Default values applied', count:'1', code:'F', desc:'The installation is confirmed and the volume is small, so default values cost less overall — but the risk is retained; see below.' }
+    ],
+    riskTitle:'Using default values is not an exemption — it is retained risk',
+    riskBody:'For the unit declared with default values (U-06 · 7307 19 10 · F-03 · BF-BOF) the residual risk sits with you: default values are set on the most unfavourable basis and are marked up year on year',
+    riskBody2:'. If the EU importer or the verifier raises questions we can explain the basis, but that does not change the nature of the figure.',
+    riskSign:'Client signature (accepting default values for this unit)', dateLabel:'Date', todo:'[TO BE VERIFIED]',
+    s5no:'Section 5', s5title:'Fee structure', feeTotal:'Service fee total', capLabel:'capped at',
+    feeRows:[
+      { label:'Fixed · period filing + CN classification + verifier coordination', basis:'one-off; includes aggregation, boundary screening and the basis snapshot', amount:'¥ 3,200' },
+      { label:'Installation data collection', basis:'¥ 600 per installation · 3 at the lower bound', amount:'¥ 1,800' },
+      { label:'Calculation units', basis:'¥ 600 per unit · 5 at the lower bound', amount:'¥ 3,000' },
+      { label:'Above the lower bound (exposure)', basis:'¥ 600 per additional unit or installation, up to the ¥ 10,400 cap', amount:'as incurred' }
+    ],
+    s5foot:'Exposure ¥ 2,400: the lower bound covers 5 units and 3 installations; each additional unit or installation adds ¥ 600 up to the cap, and anything beyond the cap is on us. We do not quote at the lower bound and deliver at the upper one — every increase is disclosed before it is incurred.',
+    passTitle:'Pass-through · third-party verification',
+    passNote:'The verification body prices this by person-day, independently of our service fee: the lower end assumes one installation and no site visit, the upper end three installations with a site visit. Invoiced directly by the verification body and passed through at actual cost, with no mark-up and no commission. Not included in the service-fee total above — and materially larger than our own fee.',
+    s6no:'Section 6 · your direct cost', s6title:'Carbon cost estimate',
+    s6body:'You pay this directly. We do not collect it and we do not purchase CBAM certificates. Below is an order-of-magnitude estimate on two bases.',
+    basisDefault:'Default-value basis', basisDefaultNote:'most unfavourable basis, marked up year on year',
+    basisMeasured:'Measured basis', basisMeasuredNote:'requires energy and production records from 3 installations',
+    deltaLabel:'Difference', deltaNote:'what getting the data is worth',
+    saleLine:'Getting the energy data back from these 3 installations is worth ¥ 177,567. That is not our fee — it is money you simply do not pay.',
+    certPrice:'989 / 699 certificates · € 78.50 = ¥ 612.30 each · price mechanism', fx:'EUR/CNY 7.80 · mechanism', valuationDate:'Valuation date', estimateOnly:'order-of-magnitude estimate only, not a commitment',
+    s7no:'Section 7', s7title:'What is in scope of our service, and what we do not do', doTitle:'What we do', dontTitle:'What we do not do',
+    doList:['Consolidate customs records and define the Annex I scope and the calculation units','Collect data from installations, including templates and repeated follow-up','Calculate embedded emissions and issue a declaration-ready data package for the EU importer','Liaise with the third-party verifier and handle their queries and additional evidence','Re-check this proposal when the rule pack changes and tell you the impact'],
+    dontList:['We do not sign or submit the CBAM declaration on your behalf','We do not issue verification opinions (verification must come from an accredited body)','We do not issue legal opinions','We do not guarantee approval or freedom from queries','We do not purchase, hold or surrender CBAM certificates'],
+    s8no:'Section 8', s8title:'Deliverables and schedule', tlColStage:'Stage', tlColOut:'Deliverable', tlColDur:'Duration',
+    timeline:[
+      { stage:'Confirmation and kick-off', output:'proposal signed, basis snapshot frozen, data-request checklist issued', dur:'3 business days' },
+      { stage:'Data collection', output:'energy and production records obtained from 3 installations, weekly progress reports', dur:'2–5 weeks' },
+      { stage:'Calculation and internal review', output:'embedded-emissions calculation, cross-checks, expert review', dur:'2 weeks' },
+      { stage:'Verification support', output:'handling verifier queries and additional evidence (if verification is required)', dur:'2–4 weeks' },
+      { stage:'Delivery', output:'data package, supporting evidence, basis notes and determination trail', dur:'3 business days' }
+    ],
+    s8foot:'First annual submission is due 2027-05-31. Durations start once the inputs are complete; waiting time in data collection depends on how quickly the installations respond, and we report progress weekly.',
+    s9no:'Section 9', s9title:'Commercial terms',
+    terms:[
+      { k:'Nature of the quote', v:'A range. The lower bound is what the current information supports; the upper bound is a cap. We do not quote at the lower bound and deliver at the upper one; every increase is disclosed before it is incurred and anything beyond the cap is on us.' },
+      { k:'Payment', v:'40% on signature to start, 60% on delivery of the data package. Pass-through items are invoiced separately at actual cost.' },
+      { k:'Validity', v:'30 days from the issue date. After that a new proposal is issued against the current rule pack and price book.' },
+      { k:'Versions and repricing', v:'Repricing never edits the original. Once sent, this proposal is locked; any change of basis or price is issued as a new version, with the old one marked superseded and kept on record.' },
+      { k:'Basis snapshot', v:'Every figure here is bound to a snapshot (rule-pack version, price-book version, fingerprint). On delivery each figure can be traced to the units behind it and the rule numbers hit.' },
+      { k:'Bilingual versions', v:'The Chinese and English versions are two separate PDFs from the same snapshot, identical figure for figure, date for date, amount for amount. They are never presented paragraph by paragraph side by side.' }
+    ],
+    s10no:'Section 10', s10title:'Open items and matters not yet verified',
+    s10body:'The 6 open items below affect how values are taken in this proposal. The list is identical to the one in our internal view — nothing removed. A price quoted with open items can only move down once they are closed, never up.',
+    askLabel:'What we need from you: ',
+    unverifiedTitle:'Matters not yet verified · 12',
+    unverifiedNote:'The regulatory values below had not been verified item by item as of the issue date. For planning only; not a commitment.',
+    signLabel:'Client signature (accepting the bases and the open-item list in this proposal)',
+    snapshot:'Snapshot', demoOnly:'demonstration values, not for external use'
+  }
+};
+
+const CAVEATS = [
+  { tag:{zh:'未锁定',en:'Unconfirmed'}, title:{zh:'1 家生产设施未锁定',en:'One installation not confirmed in writing'},
+    consequence:{zh:'该设施下的单元既不能沿用上期结果，也不能按默认值申报，只能落到必须实测。核算单元数与服务费上限因此各留一档余量。',en:'Units at that installation can neither reuse verified data nor use default values, so they fall into the measured-data branch. Both the unit count and the fee cap keep one step of headroom.'},
+    ask:{zh:'书面确认这批货的实际生产设施（一封邮件即可，不产生费用）。',en:'Confirm in writing which installation produced these goods (an email is enough; no cost).'} },
+  { tag:{zh:'未闭合',en:'Unreconciled'}, title:{zh:'报关总量与行项之和相差 95.0 t',en:'Customs total and line-item sum differ by 95.0 t'},
+    consequence:{zh:'差额归属不明，本方案按最不利口径计入。差额非零时，核查机构通常会要求解释来源。',en:'The difference is unattributed and taken on the most conservative basis. Verifiers normally ask where it comes from.'},
+    ask:{zh:'补齐差额对应的报关单或说明差异原因（如退运、样品、拼柜）。',en:'Provide the missing customs entries or explain the difference (returns, samples, consolidated shipments).'} },
+  { tag:{zh:'估算',en:'Estimated'}, title:{zh:'3 个单元的产量为估算值',en:'Production volume is estimated for 3 units'},
+    consequence:{zh:'估算值不作为沿用判据的输入，也不作为真判定依据，只能走默认值分支，证书成本因此偏高。',en:'Estimates cannot feed the reuse test or the actual determination, so those units use default values and the certificate cost runs higher.'},
+    ask:{zh:'提供该产线同期的产量台账（现有 Excel 即可，不需要整理格式）。',en:'Send the production records for the same period (your existing spreadsheet is fine; no formatting needed).'} },
+  { tag:{zh:'待确认',en:'To confirm'}, title:{zh:'2 项商品的 CN 码由品名推断',en:'CN codes for 2 goods were inferred from descriptions'},
+    consequence:{zh:'CN 码决定是否落入覆盖清单以及适用哪一档取值；推断值一旦有误，整条判定链失效。',en:'The CN code decides whether goods are in scope and which basis applies. If an inferred code is wrong, the whole determination chain fails.'},
+    ask:{zh:'书面确认这 2 项的 8 位 CN 码（我方已给出推断依据）。',en:'Confirm the 8-digit CN codes for these 2 goods (our reasoning is attached).'} },
+  { tag:{zh:'数据路径',en:'Data path'}, title:{zh:'部分批次经贸易商下单，设施信息由第三方转递',en:'Some batches were ordered through a trader; installation data comes via a third party'},
+    consequence:{zh:'数据链多一环，取数周期与失败概率同时上升；第三方核查费取上限的概率更高。',en:'One more link in the chain raises both lead time and failure risk, and makes the upper end of the verification fee more likely.'},
+    ask:{zh:'授权我方直接对接生产设施，或指定贸易商侧的对接人。',en:'Authorise us to contact the installation directly, or name a contact at the trader.'} },
+  { tag:{zh:'复购沿用',en:'Reused'}, good:true, title:{zh:'1 个单元沿用上期已核验结果（好消息）',en:'One unit reuses last period’s verified result (good news)'},
+    consequence:{zh:'该单元本期不重复收资、不重复核算，直接省下一个单元的费用。',en:'No new data collection and no repeat calculation for that unit — one unit’s cost saved outright.'},
+    ask:{zh:'无需动作。后续每一期做过的单元都会形成沿用基线，第二次比第一次便宜。',en:'Nothing needed. Each period’s completed units become a baseline, so the second time costs less than the first.'} }
+];
+
+const UNVERIFIED = [
+  { zh:'CBAM 证书价格的官方取值来源与发布频率', en:'Official source and release frequency of CBAM certificate prices' },
+  { zh:'EUR/CNY 汇率的适用取值日规则', en:'Rule for the applicable EUR/CNY exchange-rate date' },
+  { zh:'使用默认值的逐年加价比例', en:'Year-on-year mark-up applied to default values' },
+  { zh:'小额免征阈值的适用口径与计算单位', en:'Basis and unit of the de minimis threshold' },
+  { zh:'Annex I 覆盖清单的本年度更新内容', en:'This year’s updates to the Annex I scope list' },
+  { zh:'认可核查机构清单与其资质有效期', en:'List of accredited verifiers and validity of accreditation' },
+  { zh:'间接排放（外购电力）纳入申报的时点与范围', en:'Timing and scope for including indirect emissions from purchased electricity' },
+  { zh:'原产国已付碳价的抵扣条件与证明材料要求', en:'Conditions and evidence for deducting carbon price already paid' },
+  { zh:'年度申报的提交截止日与补正窗口', en:'Annual submission deadline and correction window' },
+  { zh:'申报不实或迟报的罚则口径', en:'Penalty basis for incorrect or late declarations' },
+  { zh:'电力排放因子的可选取值口径（电网因子 / 供电协议）', en:'Permitted bases for the electricity emission factor (grid factor / supply contract)' },
+  { zh:'生产路线（EAF / BF-BOF）的判定依据与分界', en:'Criteria distinguishing production routes (EAF / BF-BOF)' }
+];
+
+class Component extends DCLogic {
+  state = { lang:null };
+
+  // doc-page 量页眉/页脚高度时，DC 的子节点可能还没进 DOM；量到 0 会让页眉压住正文。
+  // 用 ResizeObserver 盯住两个 slot 元素，任何高度变化都重量一次；再加一组重试兜住冷挂载。
+  componentDidMount(){ this._watchDocPage(); }
+
+  componentDidUpdate(prev){
+    if (prev.lang !== this.props.lang && this.state.lang) this.setState({ lang:null });
+    this._remeasure();
+  }
+
+  componentWillUnmount(){
+    (this._timers || []).forEach(clearTimeout);
+    if (this._ro) this._ro.disconnect();
+  }
+
+  _remeasure(){
+    const dp = document.querySelector('doc-page');
+    if (!dp) return false;
+    const hdr = dp.querySelector(':scope > [slot="header"]');
+    const ftr = dp.querySelector(':scope > [slot="footer"]');
+    if (typeof dp._measure === 'function') dp._measure();
+    const sheet = dp.shadowRoot && dp.shadowRoot.querySelector('.sheet');
+    const got = sheet ? parseFloat(getComputedStyle(sheet).getPropertyValue('--doc-hdr-h')) : 0;
+    return !!(hdr && ftr && got > 0);
+  }
+
+  _watchDocPage(){
+    this._timers = [];
+    const tick = () => { if (!this._remeasure()) schedule(); };
+    let delays = [0, 120, 300, 700, 1400];
+    const schedule = () => {
+      const d = delays.shift();
+      if (d === undefined) return;
+      this._timers.push(setTimeout(tick, d));
+    };
+    requestAnimationFrame(tick);
+    schedule();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this._remeasure());
+
+    const dp = document.querySelector('doc-page');
+    if (dp && typeof ResizeObserver === 'function') {
+      this._ro = new ResizeObserver(() => this._remeasure());
+      ['header', 'footer'].forEach(s => {
+        const el = dp.querySelector(':scope > [slot="' + s + '"]');
+        if (el) this._ro.observe(el);
+      });
+    }
+  }
+
+  renderVals(){
+    const lang = this.state.lang || this.props.lang || this.props.startLang || 'zh';
+    const t = COPY[lang];
+
+    return {
+      t,
+      langOpts:['zh','en'].map(k => ({
+        label:COPY[k].label, onClick:() => this.setState({ lang:k }),
+        bg: lang === k ? '#fff' : 'transparent',
+        fg: lang === k ? '#07110E' : 'rgba(255,255,255,.85)',
+        border: lang === k ? '#fff' : 'rgba(255,255,255,.4)'
+      })),
+      doPrint:() => window.print(),
+      meta:t.metaLabels.map((label, i) => ({ label, value:t.metaValues[i] })),
+      moneyBlocks:t.moneyBlocks.map((b, i) => ({
+        label:b.label, value:b.value, note:b.note, hasCap: !!b.cap, capLabel:b.capLabel || '', cap:b.cap || '',
+        size: i === 0 ? '22px' : '19px',
+        bg: i === 0 ? '#EDF6F2' : i === 1 ? '#F4F7F6' : '#EFF3FE',
+        fg: i === 0 ? '#0A4F3A' : i === 1 ? '#46524E' : '#1B57D6'
+      })),
+      scopeRows:t.scopeRows,
+      funnel:t.funnel.map((f, i) => ({ label:f.label, value:f.value, reason:f.reason, fg: i === 3 ? '#B3402A' : '#0B100E' })),
+      unitRows:UNITS.map(u => ({
+        id:u.id, cn:u.cn, fac:u[lang], qty:u.qty,
+        verdict:t.verdicts[u.disp], color:DISP_FG[u.disp]
+      })),
+      dispCards:t.dispCards.map(d => ({ title:d.title, count:d.count, desc:d.desc, color:DISP_FG[d.code] })),
+      feeRows:t.feeRows,
+      doList:t.doList.map(text => ({ text })),
+      dontList:t.dontList.map(text => ({ text })),
+      timeline:t.timeline,
+      terms:t.terms,
+      caveats:CAVEATS.map(c => ({
+        tag:c.tag[lang], title:c.title[lang], consequence:c.consequence[lang], ask:c.ask[lang], askLabel:t.askLabel,
+        mark: c.good ? '#0E7C5A' : '#8A6A00',
+        bg: c.good ? '#EDF6F2' : '#fff',
+        fg: c.good ? '#0A4F3A' : '#0B100E'
+      })),
+      unverified:UNVERIFIED.map((u, i) => ({ n:String(i + 1).padStart(2, '0'), text:u[lang] }))
+    };
+  }
+}
+</script>
+</body>
+</html>

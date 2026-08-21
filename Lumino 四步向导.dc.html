@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico">
+
+<meta charset="utf-8">
+<title>Lumino CBAM 报价器 · 第 3 轮 四步向导</title>
+<script src="./i18n-internal.js"></script>
+<script src="./i18n-wizard.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#F4F7F6;color:#0B100E;font-family:"Instrument Sans","PingFang SC","Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-wrap:pretty}
+h1,h2,h3,h4,p,ul{margin:0}
+ul{padding:0;list-style:none}
+a{color:#0E7C5A;text-decoration:none}
+a:hover{color:#0A4F3A}
+button{font:inherit;color:inherit;cursor:pointer}
+textarea{font:inherit}
+@media (prefers-reduced-motion: reduce){*{transition:none !important}}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#F4F7F6;font-size:13px;line-height:1.45">
+
+  <header style="position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid #C6D1CD">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:9px 16px">
+      <span style="flex:none;font-family:'Instrument Sans',sans-serif;font-size:15px;font-weight:700;letter-spacing:-.02em">LUMINO</span>
+      <span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#46524E">报价器 · 四步向导</span>
+      <span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:11px;padding:2px 8px;border:1px solid {{ statusBorder }};background:{{ statusBg }};color:{{ statusFg }};border-radius:2px;white-space:nowrap">{{ statusLabel }}</span>
+      <span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#67736F;white-space:nowrap">{{ versionLabel }}</span>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 14px;margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#67736F">
+        <span style="white-space:nowrap">cbam-rules 2026.08</span>
+        <span style="white-space:nowrap">pb-2026-08</span>
+        <span style="white-space:nowrap">demo-dataset v1</span>
+        <span style="white-space:nowrap;color:#8A6A00">示例值 · 不得对外使用</span>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid #EDF1F0">
+      <sc-for list="{{ stepTabs }}" as="s" hint-placeholder-count="4">
+        <button type="button" onClick="{{ s.onClick }}" title="{{ s.title }}" style="text-align:left;padding:8px 12px 9px;background:{{ s.bg }};border:0;border-top:2px solid {{ s.mark }};border-right:1px solid #EDF1F0;display:flex;flex-direction:column;gap:3px;min-width:0;cursor:{{ s.cursor }}" style-hover="background:#EDF6F2">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;color:{{ s.numFg }};line-height:1.35">步骤 {{ s.n }} · {{ s.state }}</span>
+          <span style="font-size:13px;font-weight:{{ s.weight }};color:{{ s.fg }};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ s.label }}</span>
+        </button>
+      </sc-for>
+    </div>
+  </header>
+
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) 380px;align-items:start;gap:12px;padding:12px 16px 56px;max-width:1720px;margin:0 auto">
+
+    <main style="min-width:0;display:flex;flex-direction:column;gap:12px">
+
+      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#07110E;color:#fff;border-radius:2px;padding:10px 14px;display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.7)">已发客户 · 待确认</span>
+          <span style="font-size:12px">本版本已发出，输入控件已转为只读文本。要改口径请新建 v2，旧版本转为「已失效 · 被新版本取代」。</span>
+          <button type="button" onClick="{{ newVersion }}" style="margin-left:auto;flex:none;height:28px;padding:0 12px;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;border-radius:2px;font-size:12px">新建 v2</button>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ true }}">
+      <section style="display:flex;flex-direction:column;gap:12px">
+        <div style="background:#fff;border:1px solid #E3E8E6;border-radius:2px">
+          <div style="padding:10px 14px;border-bottom:1px solid #E3E8E6;background:#F4F7F6">
+            <h2 style="font-family:'Archivo',sans-serif;font-size:14px;font-weight:600">客户与贸易身份</h2>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+            <sc-for list="{{ identity }}" as="f" hint-placeholder-count="6">
+              <label style="display:flex;flex-direction:column;gap:4px;padding:10px 14px;border-right:1px solid #EDF1F0;border-bottom:1px solid #EDF1F0;min-width:0">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#67736F">{{ f.label }}</span>
+                <sc-if value="{{ f.editable }}" hint-placeholder-val="{{ true }}">
+                  <input type="text" value="{{ f.value }}" onChange="{{ f.onChange }}" placeholder="{{ f.ph }}" style="width:100%;height:30px;padding:0 8px;border:1px solid #C6D1CD;border-radius:2px;background:#fff;font-family:'IBM Plex Mono',monospace;font-size:13px;font-variant-numeric:tabular-nums" style-hover="border-color:#0B100E" style-focus="outline:2px solid #1B57D6;outline-offset:-1px;border-color:#1B57D6">
+                </sc-if>
+                <sc-if value="{{ f.locked }}" hint-placeholder-val="{{ false }}">
+                  <span style="display:block;height:30px;line-height:30px;font-family:'IBM Plex Mono',monospace;font-size:13px;font-variant-numeric:tabular-nums">{{ f.value }}</span>
+                </sc-if>
+              </label>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="border:1px solid #0B100E;border-radius:2px;background:#fff">
+          <div style="padding:10px 14px;border-bottom:1px solid #0B100E;background:#07110E;color:#fff">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.65)">第 A 组</div>
+            <h2 style="margin-top:3px;font-family:'Archivo',sans-serif;font-size:14px;font-weight:600">范围题 · 这批货算不算标的</h2>
+          </div>
+
+          <div style="padding:11px 14px;border-bottom:1px solid #EDF1F0">
+            <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px;align-items:baseline">
+              <div style="font-size:15px;font-weight:500">目的地里的欧盟成员国（可多选）</div>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-variant-numeric:tabular-nums;color:#46524E;white-space:nowrap">已选 {{ destCount }} · {{ destList }}</span>
+            </div>
+            <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px">
+              <sc-for list="{{ euChips }}" as="m" hint-placeholder-count="27">
+                <button type="button" onClick="{{ m.onClick }}" style="flex:none;white-space:nowrap;min-height:32px;padding:0 10px;border:1px solid {{ m.border }};background:{{ m.bg }};color:{{ m.fg }};border-radius:2px;font-size:13px;font-weight:{{ m.weight }};cursor:{{ m.cursor }}" style-hover="border-color:#0B100E" style-focus="outline:2px solid #1B57D6;outline-offset:1px"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px">{{ m.code }}</span> {{ m.zh }}</button>
+              </sc-for>
+            </div>
+            <div style="margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ destEffectFg }}">{{ destEffect }}</div>
+            <label style="margin-top:9px;display:flex;flex-wrap:wrap;align-items:center;gap:8px">
+              <span style="flex:none;font-size:12px;color:#46524E">非欧盟目的地（不产生 CBAM 义务，仅登记）</span>
+              <input type="text" value="{{ nonEuValue }}" onChange="{{ onNonEu }}" placeholder="如 US / KR / TR" style="flex:1;min-width:160px;height:30px;padding:0 8px;border:1px solid #C6D1CD;border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:13px" style-hover="border-color:#0B100E" style-focus="outline:2px solid #1B57D6;outline-offset:-1px;border-color:#1B57D6">
+            </label>
+          </div>
+
+          <div style="padding:11px 14px;border-bottom:1px solid #EDF1F0;background:#FBFCFC">
+            <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px;align-items:baseline">
+              <div style="font-size:15px;font-weight:500">附件 I 覆盖判定 · 按 CN / HS 码核对</div>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#46524E;white-space:nowrap">{{ coverSummary }}</span>
+            </div>
+            <div style="margin-top:5px;font-size:12px;color:#46524E">这一项不问客户 —— 客户无法自主确认是否落入附件 I。销售把客户给的码贴进来，由我方按码核对。</div>
+            <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px">
+              <sc-for list="{{ codeKinds }}" as="k" hint-placeholder-count="2">
+                <button type="button" onClick="{{ k.onClick }}" style="flex:none;white-space:nowrap;min-height:32px;padding:0 12px;border:1px solid {{ k.border }};background:{{ k.bg }};border-radius:2px;font-size:13px;font-weight:{{ k.weight }}" style-hover="border-color:#0B100E">{{ k.label }}</button>
+              </sc-for>
+            </div>
+            <textarea value="{{ codeText }}" onChange="{{ onCodeText }}" placeholder="{{ codePh }}" rows="4" style="margin-top:8px;width:100%;padding:8px;border:1px solid #C6D1CD;border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:13px;font-variant-numeric:tabular-nums;line-height:1.6;resize:vertical" style-hover="border-color:#0B100E" style-focus="outline:2px solid #1B57D6;outline-offset:-1px;border-color:#1B57D6"></textarea>
+            <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px">
+              <sc-for list="{{ coverRows }}" as="r" hint-placeholder-count="4">
+                <span style="flex:none;display:inline-flex;align-items:baseline;gap:8px;padding:4px 9px;border:1px solid {{ r.border }};background:{{ r.bg }};border-radius:2px;white-space:nowrap">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-variant-numeric:tabular-nums">{{ r.code }}</span>
+                  <span style="font-size:12px;color:#46524E">{{ r.name }}</span>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;color:{{ r.fg }}">{{ r.verdict }}</span>
+                </span>
+              </sc-for>
+            </div>
+            <div style="margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ needCheckFg }}">{{ needCheckNote }}</div>
+          </div>
+
+          <div style="padding:11px 14px;border-bottom:1px solid #EDF1F0">
+            <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px;align-items:baseline">
+              <div style="font-size:15px;font-weight:500">申报期</div>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-variant-numeric:tabular-nums;color:#46524E;white-space:nowrap">{{ periodStamp }}</span>
+            </div>
+            <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px">
+              <sc-for list="{{ yearChips }}" as="y" hint-placeholder-count="4">
+                <button type="button" onClick="{{ y.onClick }}" style="flex:none;white-space:nowrap;min-height:36px;padding:0 14px;border:1px solid {{ y.border }};background:{{ y.bg }};color:{{ y.fg }};border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:14px;font-variant-numeric:tabular-nums;font-weight:{{ y.weight }}" style-hover="border-color:#0B100E">{{ y.label }}</button>
+              </sc-for>
+              <span style="flex:none;width:1px;background:#E3E8E6;margin:0 4px"></span>
+              <sc-for list="{{ periodKinds }}" as="p" hint-placeholder-count="2">
+                <button type="button" onClick="{{ p.onClick }}" style="flex:none;white-space:nowrap;min-height:36px;padding:0 14px;border:1px solid {{ p.border }};background:{{ p.bg }};border-radius:2px;font-size:13px;font-weight:{{ p.weight }}" style-hover="border-color:#0B100E">{{ p.label }}</button>
+              </sc-for>
+            </div>
+            <div style="margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#46524E">{{ periodEffect }}</div>
+          </div>
+          <sc-for list="{{ scopeQs }}" as="q" hint-placeholder-count="3">
+            <div style="padding:11px 14px;border-bottom:1px solid #EDF1F0">
+              <div style="font-size:15px;font-weight:500">{{ q.title }}</div>
+              <sc-if value="{{ q.editable }}" hint-placeholder-val="{{ true }}">
+                <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:8px">
+                  <sc-for list="{{ q.options }}" as="o" hint-placeholder-count="3">
+                    <button type="button" onClick="{{ o.onClick }}" style="flex:none;white-space:nowrap;min-height:44px;padding:0 16px;border:1px solid {{ o.border }};background:{{ o.bg }};border-radius:2px;font-size:14px;font-weight:{{ o.weight }}" style-hover="border-color:#0B100E" style-focus="outline:2px solid #1B57D6;outline-offset:1px">{{ o.label }}</button>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ q.readonly }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top:6px;font-family:'IBM Plex Mono',monospace;font-size:14px">{{ q.answer }}</div>
+              </sc-if>
+              <div style="margin-top:7px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ q.effectFg }}">{{ q.effect }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#46524E">以上决定是否有义务　│　以下决定适用哪一条</span>
+          <span style="flex:1;height:1px;background:#C6D1CD"></span>
+        </div>
+
+        <div style="border:1px solid #C6D1CD;border-radius:2px;background:#FBFCFC">
+          <div style="padding:10px 14px;border-bottom:1px solid #C6D1CD;background:#F4F7F6">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#67736F">第 B 组</div>
+            <h2 style="margin-top:3px;font-family:'Archivo',sans-serif;font-size:14px;font-weight:600">适用性题 · 哪条义务适用</h2>
+          </div>
+          <sc-for list="{{ applicQs }}" as="q" hint-placeholder-count="3">
+            <div style="padding:11px 14px;border-bottom:1px solid #EDF1F0">
+              <div style="font-size:15px;font-weight:500">{{ q.title }}</div>
+              <sc-if value="{{ q.editable }}" hint-placeholder-val="{{ true }}">
+                <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:8px">
+                  <sc-for list="{{ q.options }}" as="o" hint-placeholder-count="3">
+                    <button type="button" onClick="{{ o.onClick }}" style="flex:none;white-space:nowrap;min-height:44px;padding:0 16px;border:1px solid {{ o.border }};background:{{ o.bg }};border-radius:2px;font-size:14px;font-weight:{{ o.weight }}" style-hover="border-color:#0B100E" style-focus="outline:2px solid #1B57D6;outline-offset:1px">{{ o.label }}</button>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ q.readonly }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top:6px;font-family:'IBM Plex Mono',monospace;font-size:14px">{{ q.answer }}</div>
+              </sc-if>
+              <div style="margin-top:7px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ q.effectFg }}">{{ q.effect }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+      </sc-if>
+
+      <sc-if value="{{ isStep2 }}" hint-placeholder-val="{{ false }}">
+      <section style="display:flex;flex-direction:column;gap:12px">
+        <div style="background:#fff;border:1px solid #E3E8E6;border-radius:2px">
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;padding:10px 14px;border-bottom:1px solid #E3E8E6;background:#F4F7F6">
+            <h2 style="font-family:'Archivo',sans-serif;font-size:14px;font-weight:600">粘贴解析</h2>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#67736F">Excel 往返 · 不需要整理格式</span>
+          </div>
+          <div style="padding:12px 14px">
+            <textarea value="{{ pasteText }}" onChange="{{ onPaste }}" placeholder="从报关单 / 发票 / 装箱单整表复制，直接粘贴到这里。列顺序不重要，缺列也没关系。" style="width:100%;min-height:96px;padding:10px 12px;border:1px dashed #C6D1CD;border-radius:2px;background:#FBFCFC;font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:1.6;resize:vertical" style-focus="outline:2px solid #1B57D6;outline-offset:-1px;border-color:#1B57D6"></textarea>
+            <div style="margin-top:14px;padding-top:12px;border-top:1px solid #EDF1F0">
+              <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 12px">
+                <span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#67736F">或者直接勾选</span>
+                <span style="flex:none;font-size:12px;color:#46524E">{{ pickHint }}</span>
+              </div>
+              <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px">
+                <sc-for list="{{ pickable }}" as="p" hint-placeholder-count="9">
+                  <button type="button" onClick="{{ p.onClick }}" disabled="{{ p.locked }}" style="flex:none;white-space:nowrap;min-height:36px;padding:0 10px;display:inline-flex;align-items:center;gap:8px;border:1px solid {{ p.border }};background:{{ p.bg }};border-radius:2px;font-size:12px" style-hover="border-color:#0B100E">
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ p.numFg }}">{{ p.mark }}</span>
+                    <span style="font-weight:{{ p.weight }}">{{ p.name }}</span>
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-variant-numeric:tabular-nums;color:#67736F">{{ p.cn }}</span>
+                  </button>
+                </sc-for>
+              </div>
+              <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:8px">
+                <button type="button" onClick="{{ pickAll }}" style="flex:none;white-space:nowrap;min-height:32px;padding:0 12px;border:1px solid #C6D1CD;background:#fff;border-radius:2px;font-size:12px" style-hover="border-color:#0B100E">全选 9 项</button>
+                <button type="button" onClick="{{ pickNone }}" style="flex:none;white-space:nowrap;min-height:32px;padding:0 12px;border:1px solid #C6D1CD;background:#fff;border-radius:2px;font-size:12px" style-hover="border-color:#0B100E">清空勾选</button>
+              </div>
+            </div>
+            <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+              <button type="button" onClick="{{ doParse }}" style="flex:none;height:34px;padding:0 14px;border:1px solid #0E7C5A;background:#0E7C5A;color:#fff;border-radius:2px;font-size:13px;font-weight:500" style-hover="background:#0A4F3A;border-color:#0A4F3A">解析这段内容</button>
+              <button type="button" onClick="{{ resetParse }}" style="flex:none;height:34px;padding:0 14px;border:1px solid #C6D1CD;background:#fff;border-radius:2px;font-size:13px" style-hover="border-color:#0B100E">清空重来</button>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#67736F">{{ parseHint }}</span>
+            </div>
+          </div>
+        </div>
+
+        <sc-if value="{{ parsed }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#fff;border:1px solid #E3E8E6;border-radius:2px">
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;padding:10px 14px;border-bottom:1px solid #E3E8E6;background:#F4F7F6">
+            <h2 style="font-family:'Archivo',sans-serif;font-size:14px;font-weight:600">解析结果 · 逐格标注数据来源</h2>
+            <div style="display:flex;flex-wrap:wrap;gap:6px 12px;font-family:'IBM Plex Mono',monospace;font-size:10px">
+              <span style="white-space:nowrap;color:#46524E">■ 客户填写</span>
+              <span style="white-space:nowrap;color:#8A6A00">■ 系统推断</span>
+              <span style="white-space:nowrap;color:#B3402A">■ 缺失</span>
+            </div>
+          </div>
+          <div style="overflow-x:auto">
+            <table style="width:100%;border-collapse:collapse;font-size:12px">
+              <thead>
+                <tr style="background:#F4F7F6">
+                  <th style="text-align:left;padding:7px 12px;border-bottom:1px solid #C6D1CD;font-weight:500;color:#46524E;white-space:nowrap">行</th>
+                  <th style="text-align:left;padding:7px 12px;border-bottom:1px solid #C6D1CD;font-weight:500;color:#46524E">品名</th>
+                  <th style="text-align:left;padding:7px 12px;border-bottom:1px solid #C6D1CD;font-weight:500;color:#46524E;white-space:nowrap">CN 码</th>
+                  <th style="text-align:left;padding:7px 12px;border-bottom:2px solid #0B100E;font-weight:600;color:#0B100E">前体产品（原材料）</th>
+                  <th style="text-align:right;padding:7px 12px;border-bottom:1px solid #C6D1CD;font-weight:500;color:#46524E;white-space:nowrap">数量 t</th>
+                  <th style="text-align:left;padding:7px 12px;border-bottom:1px solid #C6D1CD;font-weight:500;color:#46524E">生产设施</th>
+                </tr>
+              </thead>
+              <tbody>
+                <sc-for list="{{ parseRows }}" as="r" hint-placeholder-count="6">
+                  <tr style="background:#fff" style-hover="background:#F4F7F6">
+                    <td style="padding:8px 12px;border-bottom:1px solid #EDF1F0;font-family:'IBM Plex Mono',monospace;color:#67736F;white-space:nowrap;vertical-align:top">{{ r.line }}</td>
+                    <td style="padding:8px 12px;border-bottom:1px solid #EDF1F0;vertical-align:top">{{ r.name }}</td>
+                    <td style="padding:6px 12px;border-bottom:1px solid #EDF1F0;vertical-align:top">
+                      <input type="text" value="{{ r.cn }}" onChange="{{ r.onCn }}" disabled="{{ r.locked }}" style="width:100%;min-width:96px;height:28px;padding:0 6px;border:1px solid {{ r.cnBorder }};border-radius:2px;background:{{ r.cnBg }};font-family:'IBM Plex Mono',monospace;font-size:12px;font-variant-numeric:tabular-nums;color:{{ r.cnFg }}" style-hover="border-color:#0B100E" style-focus="outline:2px solid #1B57D6;outline-offset:-1px">
+                      <div style="margin-top:3px;display:flex;flex-wrap:wrap;gap:3px 6px;align-items:baseline">
+                        <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:{{ r.cnFg }}">{{ r.cnSource }}</span>
+                        <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;padding:0 4px;border:1px solid {{ r.originBorder }};border-radius:2px;color:{{ r.originFg }};background:{{ r.originBg }};white-space:nowrap">{{ r.origin }}</span>
+                      </div>
+                    </td>
+                    <td style="padding:6px 12px;border-bottom:1px solid #EDF1F0;vertical-align:top;background:{{ r.preCellBg }}">
+                      <input type="text" value="{{ r.pre }}" onChange="{{ r.onPre }}" disabled="{{ r.locked }}" style="width:100%;min-width:150px;height:28px;padding:0 6px;border:1px solid {{ r.preBorder }};border-radius:2px;background:{{ r.preBg }};font-size:12px;color:{{ r.preFg }}" style-hover="border-color:#0B100E" style-focus="outline:2px solid #1B57D6;outline-offset:-1px">
+                      <div style="margin-top:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:{{ r.preFg }}">{{ r.preSource }}</div>
+                    </td>
+                    <td style="padding:6px 12px;border-bottom:1px solid #EDF1F0;vertical-align:top">
+                      <input type="text" value="{{ r.qty }}" onChange="{{ r.onQty }}" disabled="{{ r.locked }}" style="width:100%;min-width:64px;height:28px;padding:0 6px;border:1px solid {{ r.qtyBorder }};border-radius:2px;background:{{ r.qtyBg }};font-family:'IBM Plex Mono',monospace;font-size:12px;font-variant-numeric:tabular-nums;text-align:right;color:{{ r.qtyFg }}" style-hover="border-color:#0B100E" style-focus="outline:2px solid #1B57D6;outline-offset:-1px">
+                      <div style="margin-top:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;text-align:right;color:{{ r.qtyFg }}">{{ r.qtySource }}</div>
+                    </td>
+                    <td style="padding:6px 12px;border-bottom:1px solid #EDF1F0;vertical-align:top">
+                      <input type="text" value="{{ r.facility }}" onChange="{{ r.onFac }}" disabled="{{ r.locked }}" style="width:100%;min-width:120px;height:28px;padding:0 6px;border:1px solid {{ r.facBorder }};border-radius:2px;background:{{ r.facBg }};font-family:'IBM Plex Mono',monospace;font-size:12px;color:{{ r.facFg }}" style-hover="border-color:#0B100E" style-focus="outline:2px solid #1B57D6;outline-offset:-1px">
+                      <div style="margin-top:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:{{ r.facFg }}">{{ r.facSource }}</div>
+                    </td>
+                  </tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </div>
+          <div style="padding:11px 14px;border-top:1px solid #C6D1CD;background:{{ closureBg }}">
+            <div style="display:flex;flex-wrap:wrap;gap:8px 20px;align-items:baseline">
+              <span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#67736F">闭合度校验</span>
+              <span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap">报关总量 1,284.0 t</span>
+              <span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap">各行项之和 {{ closureSum }}</span>
+              <span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:17px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap;color:{{ closureFg }}">差 {{ closureDiff }}</span>
+            </div>
+            <p style="margin-top:6px;font-size:12px;color:#46524E">{{ closureNote }}</p>
+          </div>
+        </div>
+
+        <div style="border:1px solid #0B100E;border-radius:2px;background:#fff">
+          <div style="padding:10px 14px;border-bottom:1px solid #0B100E;background:#07110E;color:#fff">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.65)">拆分判据</div>
+            <h2 style="margin-top:3px;font-family:'Archivo',sans-serif;font-size:14px;font-weight:600">同一 CN 码、不同前体 → 必须拆成两个单元分别申报</h2>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+            <sc-for list="{{ splitPair }}" as="s" hint-placeholder-count="2">
+              <div style="padding:12px 14px;border-right:1px solid #EDF1F0;display:flex;flex-direction:column;gap:5px;min-width:0">
+                <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:baseline">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500">{{ s.id }}</span>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;padding:1px 6px;border-radius:2px;background:{{ s.chipBg }};color:{{ s.color }};font-weight:500;white-space:nowrap">{{ s.disp }}</span>
+                </div>
+                <div style="font-size:14px;font-weight:600">{{ s.pre }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-variant-numeric:tabular-nums;color:#46524E">{{ s.same }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap">{{ s.qty }}</div>
+                <div style="font-size:12px;color:#46524E;line-height:1.5">{{ s.note }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="padding:11px 14px;border-top:1px solid #EDF1F0;background:#FBFCFC">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-variant-numeric:tabular-nums;color:#46524E">CN 7318 1590 · INST-01 · 同设施同路线 —— 只有前体不同，就是两个申报对象</div>
+            <sc-if value="{{ showSaleLines }}" hint-placeholder-val="{{ true }}">
+              <p style="margin-top:6px;padding-left:12px;border-left:2px solid #0E7C5A;font-size:15px;line-height:1.55;color:#07110E">同一个 CN 码不代表同一个数。料从哪来变了，隐含排放就变了，申报时必须分开报 —— 混在一起报，核查一问就散。</p>
+            </sc-if>
+          </div>
+        </div>
+
+        <div style="background:#fff;border:1px solid #E3E8E6;border-radius:2px">
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;padding:10px 14px;border-bottom:1px solid #E3E8E6;background:#F4F7F6">
+            <h2 style="font-family:'Archivo',sans-serif;font-size:14px;font-weight:600">前体拆解与核算单元</h2>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#67736F">归并键 = 申报期 × CN 组 × 前体 × 生产设施 × 生产路线</span>
+          </div>
+          <table style="width:100%;border-collapse:collapse;font-size:12px">
+            <thead>
+              <tr style="background:#FBFCFC">
+                <th style="text-align:left;padding:6px 12px;border-bottom:1px solid #C6D1CD;font-weight:500;color:#46524E;white-space:nowrap">单元</th>
+                <th style="text-align:left;padding:6px 12px;border-bottom:2px solid #0B100E;font-weight:600;color:#0B100E">前体产品</th>
+                <th style="text-align:left;padding:6px 12px;border-bottom:1px solid #C6D1CD;font-weight:500;color:#46524E">CN 组 · 设施 · 路线 · 数量</th>
+                <th style="text-align:right;padding:6px 12px;border-bottom:1px solid #C6D1CD;font-weight:500;color:#46524E;white-space:nowrap">判定</th>
+              </tr>
+            </thead>
+            <tbody>
+              <sc-for list="{{ unitRows }}" as="u" hint-placeholder-count="6">
+                <tr style="background:{{ u.bg }}" style-hover="background:#F4F7F6">
+                  <td style="padding:8px 12px;border-bottom:1px solid #EDF1F0;font-family:'IBM Plex Mono',monospace;white-space:nowrap;vertical-align:top">{{ u.id }}</td>
+                  <td style="padding:8px 12px;border-bottom:1px solid #EDF1F0;vertical-align:top">
+                    <div style="font-weight:600">{{ u.pre }}</div>
+                    <sc-if value="{{ u.split }}" hint-placeholder-val="{{ false }}">
+                      <div style="margin-top:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#B3402A">{{ u.splitNote }}</div>
+                    </sc-if>
+                  </td>
+                  <td style="padding:8px 12px;border-bottom:1px solid #EDF1F0;color:#46524E;vertical-align:top">{{ u.desc }}</td>
+                  <td style="padding:8px 12px;border-bottom:1px solid #EDF1F0;text-align:right;white-space:nowrap;vertical-align:top"><span style="display:inline-block;padding:1px 7px;border-radius:2px;background:{{ u.chipBg }};color:{{ u.color }};font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500">{{ u.disp }} · {{ u.rule }}</span></td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+          <div style="padding:9px 14px;border-top:1px solid #EDF1F0;background:#FBFCFC;font-size:12px;color:#46524E">带 <span style="font-family:'IBM Plex Mono',monospace">?</span> 的单元来自尚未锁定的设施，只计入上限。上限是真实可能，不做视觉降级。</div>
+        </div>
+        </sc-if>
+      </section>
+      </sc-if>
+
+      <sc-if value="{{ isStep3 }}" hint-placeholder-val="{{ false }}">
+      <section style="display:flex;flex-direction:column;gap:12px">
+        <div style="background:#fff;border:1px solid #E3E8E6;border-radius:2px">
+          <div style="padding:10px 14px;border-bottom:1px solid #E3E8E6;background:#F4F7F6">
+            <h2 style="font-family:'Archivo',sans-serif;font-size:14px;font-weight:600">已有基础 · 决定哪些单元能走便宜的路</h2>
+          </div>
+          <sc-for list="{{ basisQs }}" as="q" hint-placeholder-count="4">
+            <div style="padding:11px 14px;border-bottom:1px solid #EDF1F0">
+              <div style="font-size:15px;font-weight:500">{{ q.title }}</div>
+              <sc-if value="{{ q.editable }}" hint-placeholder-val="{{ true }}">
+                <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:8px">
+                  <sc-for list="{{ q.options }}" as="o" hint-placeholder-count="3">
+                    <button type="button" onClick="{{ o.onClick }}" style="flex:none;white-space:nowrap;min-height:44px;padding:0 16px;border:1px solid {{ o.border }};background:{{ o.bg }};border-radius:2px;font-size:14px;font-weight:{{ o.weight }}" style-hover="border-color:#0B100E" style-focus="outline:2px solid #1B57D6;outline-offset:1px">{{ o.label }}</button>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ q.readonly }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top:6px;font-family:'IBM Plex Mono',monospace;font-size:14px">{{ q.answer }}</div>
+              </sc-if>
+              <div style="margin-top:7px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ q.effectFg }}">{{ q.effect }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="border:1px solid #B3402A;border-radius:2px;background:#fff">
+          <div style="padding:9px 14px;background:#B3402A;color:#fff;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline">
+            <span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase">仅内部</span>
+            <span style="font-size:12px">内部单价区。不进方案书、不进客户可见界面、不参与任何客户可见合计。</span>
+          </div>
+          <table style="width:100%;border-collapse:collapse;font-size:12px">
+            <tbody>
+              <sc-for list="{{ priceRows }}" as="p" hint-placeholder-count="4">
+                <tr>
+                  <td style="padding:9px 14px;border-bottom:1px solid #EDF1F0">{{ p.label }}<span style="margin-left:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#67736F">{{ p.basis }}</span></td>
+                  <td style="padding:9px 14px;border-bottom:1px solid #EDF1F0;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap">{{ p.amount }}</td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+          <div style="padding:11px 14px;border-top:1px solid #EDF1F0">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#67736F">折扣申请</div>
+            <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+              <sc-for list="{{ discountOpts }}" as="d" hint-placeholder-count="3">
+                <button type="button" onClick="{{ d.onClick }}" style="flex:none;white-space:nowrap;min-height:36px;padding:0 14px;border:1px solid {{ d.border }};background:{{ d.bg }};border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:{{ d.weight }}">{{ d.label }}</button>
+              </sc-for>
+              <sc-if value="{{ needsApproval }}" hint-placeholder-val="{{ false }}">
+                <button type="button" onClick="{{ toggleApproval }}" style="flex:none;white-space:nowrap;min-height:36px;padding:0 14px;border:1px solid {{ approvalBorder }};background:{{ approvalBg }};color:{{ approvalFg }};border-radius:2px;font-size:13px">{{ approvalLabel }}</button>
+              </sc-if>
+            </div>
+            <p style="margin-top:8px;font-size:12px;color:#46524E">{{ discountNote }}</p>
+          </div>
+        </div>
+      </section>
+      </sc-if>
+
+      <sc-if value="{{ isStep4 }}" hint-placeholder-val="{{ false }}">
+      <section style="display:flex;flex-direction:column;gap:12px">
+        <div style="background:#fff;border:1px solid #E3E8E6;border-radius:2px">
+          <div style="padding:10px 14px;border-bottom:1px solid #E3E8E6;background:#F4F7F6">
+            <h2 style="font-family:'Archivo',sans-serif;font-size:14px;font-weight:600">方案预览 · 三类钱分列，合计只含服务费</h2>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+            <div style="padding:14px;border-right:1px solid #EDF1F0;background:#EDF6F2">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#0A4F3A">服务费 · 我方收取</div>
+              <div style="margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap;color:#0A4F3A">{{ serviceLow }}</div>
+              <div style="margin-top:5px;display:flex;align-items:baseline;gap:8px">
+                <span style="font-size:11px;color:#46524E">封顶</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap;color:#0A4F3A">{{ serviceCap }}</span>
+              </div>
+              <div style="margin-top:6px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#46524E">敞口 {{ serviceGap }}</div>
+              <sc-if value="{{ showSaleLines }}" hint-placeholder-val="{{ true }}">
+                <p style="margin-top:8px;padding-left:10px;border-left:2px solid #0E7C5A;font-size:13px;line-height:1.5;color:#07110E">这三块里我方收的是最小的一块 —— 核查费和证书钱都不经我方加价。</p>
+              </sc-if>
+            </div>
+            <div style="padding:14px;border-right:1px solid #EDF1F0;background:#F4F7F6">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#67736F">转付项 · 代付不加价</div>
+              <div style="margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:19px;font-variant-numeric:tabular-nums;white-space:nowrap;color:#0B100E">¥ 50,000 – 70,000</div>
+              <p style="margin-top:6px;font-size:12px;color:#46524E">第三方核查费，核查机构按人天直接报价，与我方服务费无关。按实际发生额转付，不加价、不返点，不并入服务费合计。</p>
+            </div>
+            <div style="padding:14px;background:#EFF3FE">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#1B57D6">客户直接成本 · 不经我方</div>
+              <div style="margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:19px;font-variant-numeric:tabular-nums;white-space:nowrap;color:#1B57D6">¥ 427,998 – 605,565</div>
+              <p style="margin-top:6px;font-size:12px;color:#46524E">CBAM 证书。贵司直接支付，我方不代购、不代收。</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:#fff;border:1px solid #E3E8E6;border-radius:2px">
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;padding:10px 14px;border-bottom:1px solid #E3E8E6;background:#F4F7F6">
+            <h2 style="font-family:'Archivo',sans-serif;font-size:14px;font-weight:600">发出前检查</h2>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ checkSummaryFg }};white-space:nowrap">{{ checkSummary }}</span>
+          </div>
+          <sc-for list="{{ checks }}" as="c" hint-placeholder-count="5">
+            <div style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;padding:10px 14px;border-bottom:1px solid #EDF1F0;background:{{ c.bg }}">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ c.fg }};white-space:nowrap">{{ c.state }}</span>
+              <div>
+                <div style="font-size:13px;font-weight:500">{{ c.title }}</div>
+                <div style="margin-top:3px;font-size:12px;color:#46524E">{{ c.detail }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+          <button type="button" onClick="{{ send }}" disabled="{{ blocked }}" style="flex:none;height:38px;padding:0 18px;border:1px solid {{ sendBorder }};background:{{ sendBg }};color:{{ sendFg }};border-radius:2px;font-size:13px;font-weight:500;cursor:{{ sendCursor }}">{{ sendLabel }}</button>
+          <button type="button" onClick="{{ toggleAnomaly }}" style="flex:none;height:38px;padding:0 14px;border:1px dashed #B3402A;background:#fff;color:#B3402A;border-radius:2px;font-size:12px">{{ anomalyBtnLabel }}</button>
+          <span style="font-size:12px;color:{{ blockedFg }}">{{ blockedNote }}</span>
+        </div>
+      </section>
+      </sc-if>
+    </main>
+
+    <aside style="position:sticky;top:96px;background:#fff;border:1px solid #C6D1CD;border-radius:2px;overflow:hidden;min-width:0">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:9px 12px;background:#07110E;color:#fff">
+        <span style="font-family:'Archivo',sans-serif;font-size:13px;font-weight:600">当前口径下的结果</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.6)">你刚才那一下</span>
+      </div>
+
+      <sc-if value="{{ anomaly }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:10px 12px;background:#B3402A;color:#fff">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase">口径异常 · 不可能的数</div>
+          <p style="margin-top:5px;font-size:13px;line-height:1.5">需实测数算出 <span style="font-family:'IBM Plex Mono',monospace">0</span>，与清单中存在 M 判定矛盾。方案发出已被阻止，请检查 Rule Pack 与归并键。</p>
+        </div>
+      </sc-if>
+
+      <div style="padding:10px 12px;border-bottom:1px solid #C6D1CD;background:{{ feeFlashBg }};transition:background 220ms ease-out">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px">
+          <span style="font-size:12px;color:#46524E">服务费</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:19px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap">{{ serviceLow }}</span>
+        </div>
+        <div style="margin-top:4px;display:flex;justify-content:space-between;align-items:baseline;gap:8px">
+          <span style="font-size:11px;color:#67736F">封顶</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:19px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap">{{ serviceCap }}</span>
+        </div>
+        <div style="margin-top:4px;display:flex;justify-content:space-between;align-items:baseline;gap:8px">
+          <span style="font-size:11px;color:#67736F">敞口</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap;color:#46524E">{{ serviceGap }}</span>
+        </div>
+        <sc-if value="{{ hasFeeDelta }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:6px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-variant-numeric:tabular-nums;color:{{ feeDeltaFg }}">{{ feeDelta }}</div>
+        </sc-if>
+      </div>
+
+      <div style="padding:9px 12px;border-bottom:1px solid #EDF1F0;display:flex;justify-content:space-between;align-items:baseline;gap:8px;background:#F4F7F6">
+        <span style="font-size:12px;color:#46524E">转付项 · 核查费</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap;color:#0B100E">¥ 50,000 – 70,000</span>
+      </div>
+      <div style="padding:9px 12px;border-bottom:1px solid #C6D1CD;display:flex;justify-content:space-between;align-items:baseline;gap:8px;background:#EFF3FE">
+        <span style="font-size:12px;color:#46524E">客户直接成本 · 证书</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap;color:#1B57D6">¥ 427,998 – 605,565</span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr))">
+        <sc-for list="{{ badges }}" as="b" hint-placeholder-count="5">
+          <button type="button" onClick="{{ b.onClick }}" style="text-align:left;border:0;border-right:1px solid #EDF1F0;border-bottom:1px solid #EDF1F0;border-left:2px solid {{ b.mark }};background:{{ b.bg }};padding:9px 10px;transition:background 220ms ease-out;min-width:0" style-hover="background:#F4F7F6">
+            <div style="font-size:11px;color:#67736F;line-height:1.35">{{ b.label }}</div>
+            <div style="margin-top:4px;font-family:'IBM Plex Mono',monospace;font-size:17px;font-variant-numeric:tabular-nums;white-space:nowrap;color:{{ b.fg }}">{{ b.value }}</div>
+            <sc-if value="{{ b.hasDelta }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-variant-numeric:tabular-nums;color:#0E7C5A">{{ b.delta }}</div>
+            </sc-if>
+          </button>
+        </sc-for>
+      </div>
+
+      <div style="padding:9px 12px;border-bottom:1px solid #EDF1F0">
+        <div style="display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#67736F">推导链</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#8A6A00;background:rgba(242,183,5,.14);padding:1px 5px;border-radius:2px;white-space:nowrap">计数按 demo-dataset v1 冻结</span>
+        </div>
+        <div style="margin-top:5px;display:flex;flex-wrap:wrap;gap:4px;align-items:baseline">
+          <sc-for list="{{ chain }}" as="c" hint-placeholder-count="4">
+            <button type="button" onClick="{{ c.onClick }}" style="border:0;background:transparent;padding:0;border-bottom:1px dotted #C6D1CD;font-family:'IBM Plex Mono',monospace;font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap;color:#0B100E" style-hover="color:#0E7C5A;border-color:#0E7C5A">{{ c.text }}</button>
+            <span style="color:#C6D1CD;font-family:'IBM Plex Mono',monospace;font-size:12px">{{ c.sep }}</span>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="padding:9px 12px;border-bottom:1px solid #EDF1F0">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#67736F">归并键</div>
+        <div style="margin-top:5px;font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:1.6">申报期 × CN 组 × <span style="border-bottom:2px solid #F2B705">前体</span> × 生产设施 × 生产路线</div>
+        <div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:4px 12px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-variant-numeric:tabular-nums;color:#46524E">
+          <span style="white-space:nowrap">已锁定 {{ facLocked }}</span>
+          <span style="white-space:nowrap;color:{{ facAltFg }}">备选 {{ facAlt }}</span>
+          <span style="white-space:nowrap">未填 {{ facUnfilled }}</span>
+        </div>
+      </div>
+
+      <div style="padding:9px 12px;border-bottom:1px solid #EDF1F0">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#67736F">判定分布</div>
+        <div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:6px">
+          <sc-for list="{{ dist }}" as="d" hint-placeholder-count="3">
+            <button type="button" onClick="{{ d.onClick }}" style="flex:none;white-space:nowrap;display:inline-flex;align-items:baseline;gap:6px;min-height:30px;padding:0 10px;border:1px solid #C6D1CD;background:{{ d.bg }};border-radius:2px;transition:background 220ms ease-out" style-hover="border-color:#0B100E">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;color:{{ d.color }}">{{ d.code }}</span>
+              <span style="font-size:11px;color:#46524E">{{ d.label }}</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-variant-numeric:tabular-nums">{{ d.count }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="padding:9px 12px;border-bottom:1px solid #EDF1F0">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#67736F">caveats</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#67736F">{{ caveatCount }}</span>
+        </div>
+        <sc-if value="{{ noCaveats }}" hint-placeholder-val="{{ false }}">
+          <p style="margin-top:6px;font-size:12px;color:#46524E">{{ noCaveatsNote }}</p>
+        </sc-if>
+        <div style="margin-top:7px;display:flex;flex-direction:column;gap:6px">
+          <sc-for list="{{ caveats }}" as="cv" hint-placeholder-count="3">
+            <div style="border:1px solid #E3E8E6;border-left:2px solid {{ cv.mark }};border-radius:2px;padding:8px 9px;background:{{ cv.bg }}">
+              <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:6px">
+                <span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:10px;padding:0 5px;border:1px solid #C6D1CD;border-radius:2px;color:#46524E;background:#fff">{{ cv.tag }}</span>
+                <span style="font-size:12px;font-weight:500;color:{{ cv.fg }}">{{ cv.title }}</span>
+              </div>
+              <sc-if value="{{ showSaleLines }}" hint-placeholder-val="{{ true }}">
+                <p style="margin-top:6px;padding-left:9px;border-left:2px solid #0E7C5A;font-size:13px;line-height:1.5;color:#07110E">{{ cv.saleLine }}</p>
+              </sc-if>
+              <sc-if value="{{ cv.toggleable }}" hint-placeholder-val="{{ false }}">
+                <button type="button" onClick="{{ cv.onToggle }}" style="margin-top:7px;width:100%;min-height:32px;padding:0 10px;border:1px solid #C6D1CD;background:#fff;border-radius:2px;font-size:12px" style-hover="border-color:#0B100E">{{ cv.assume }}</button>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="padding:9px 12px">
+        <button type="button" onClick="{{ toggleCarbon }}" style="width:100%;text-align:left;border:1px solid #0B100E;background:#fff;border-radius:2px;padding:9px 10px" style-hover="background:#F4F7F6">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px">
+            <span style="font-size:12px;color:#46524E">碳成本敞口差额</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap">¥ 177,567</span>
+          </div>
+          <div style="margin-top:4px;display:flex;justify-content:space-between;align-items:baseline;gap:8px">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#67736F">默认值 ¥ 605,565 → 实测 ¥ 427,998</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#0E7C5A;white-space:nowrap">{{ carbonToggleLabel }}</span>
+          </div>
+        </button>
+        <sc-if value="{{ carbonOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:7px;border:1px solid #E3E8E6;border-radius:2px">
+            <sc-for list="{{ carbonRows }}" as="cr" hint-placeholder-count="4">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:7px 9px;border-bottom:1px solid #EDF1F0">
+                <span style="font-size:12px;color:#46524E">{{ cr.label }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap;color:{{ cr.fg }}">{{ cr.value }}</span>
+              </div>
+            </sc-for>
+            <div style="padding:7px 9px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#67736F">取值日 2026-08-21 · 仅为量级估算，不构成承诺</div>
+          </div>
+        </sc-if>
+      </div>
+    </aside>
+  </div>
+
+  <sc-if value="{{ drawerOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:60;background:rgba(7,17,14,.28);display:flex;justify-content:flex-end">
+      <div style="width:min(560px,94vw);height:100%;background:#fff;border-left:1px solid #0B100E;overflow-y:auto">
+        <div style="position:sticky;top:0;display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:11px 14px;background:#07110E;color:#fff">
+          <div>
+            <div style="font-family:'Archivo',sans-serif;font-size:14px;font-weight:600">{{ drawerTitle }}</div>
+            <div style="margin-top:3px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:rgba(255,255,255,.6)">cbam-rules 2026.08 · pb-2026-08 · fp-a3f9…c21e</div>
+          </div>
+          <button type="button" onClick="{{ closeDrawer }}" style="flex:none;height:26px;padding:0 10px;border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;border-radius:2px;font-size:12px">关闭</button>
+        </div>
+        <p style="padding:12px 14px;border-bottom:1px solid #E3E8E6;font-size:13px;color:#46524E;line-height:1.55">{{ drawerNote }}</p>
+        <table style="width:100%;border-collapse:collapse;font-size:12px">
+          <tbody>
+            <sc-for list="{{ drawerRows }}" as="dr" hint-placeholder-count="6">
+              <tr>
+                <td style="padding:9px 14px;border-bottom:1px solid #EDF1F0;font-family:'IBM Plex Mono',monospace;white-space:nowrap;vertical-align:top">{{ dr.id }}</td>
+                <td style="padding:9px 14px;border-bottom:1px solid #EDF1F0">{{ dr.desc }}</td>
+                <td style="padding:9px 14px;border-bottom:1px solid #EDF1F0;text-align:right;font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;white-space:nowrap;color:{{ dr.fg }};vertical-align:top">{{ dr.value }}</td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:960},&quot;showSaleLines&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;销售现场&quot;}}">
+const DISP = { M:{color:'#B3402A',chipBg:'#F7EBE8',label:'必须实测'}, R:{color:'#0E7C5A',chipBg:'#EDF6F2',label:'可沿用'}, F:{color:'#8A6A00',chipBg:'#FBF4DF',label:'用默认值'} };
+
+// demo-dataset v1 · 所有数字写死。假设与折扣只在写死的取值之间切换。
+// demo-dataset v1 (CBAM-2026-0821-v2) · pb-2026-08
+// 下限 = 5 单元 + 3 设施（单元 ¥ 600 / 设施 ¥ 600 + 固定项 ¥ 3,200）；每多 1 单元或 1 家设施各 ¥ 600，至封顶为止。
+// 服务费刻意做薄：本方案的大钱在第三方核查费与证书成本上，不在我方服务费上。
+const LOW = ['¥ 8,000','¥ 7,600','¥ 7,200'];
+const LOW_N = [8000,7600,7200];
+const CAP = [['¥ 10,400','¥ 9,880','¥ 9,360'],['¥ 9,200','¥ 8,740','¥ 8,280'],['¥ 8,000','¥ 7,600','¥ 7,200']];
+const CAP_N = [[10400,9880,9360],[9200,8740,8280],[8000,7600,7200]];
+const GAP = [['¥ 2,400','¥ 2,280','¥ 2,160'],['¥ 1,200','¥ 1,140','¥ 1,080'],['¥ 0','¥ 0','¥ 0']];
+const MEASURE = ['3–4–5','3–4','3'];
+
+const EU27 = [
+  { c:'DE', zh:'德国' },{ c:'FR', zh:'法国' },{ c:'IT', zh:'意大利' },{ c:'ES', zh:'西班牙' },{ c:'NL', zh:'荷兰' },
+  { c:'BE', zh:'比利时' },{ c:'PL', zh:'波兰' },{ c:'SE', zh:'瑞典' },{ c:'AT', zh:'奥地利' },{ c:'DK', zh:'丹麦' },
+  { c:'FI', zh:'芬兰' },{ c:'IE', zh:'爱尔兰' },{ c:'PT', zh:'葡萄牙' },{ c:'CZ', zh:'捷克' },{ c:'HU', zh:'匈牙利' },
+  { c:'RO', zh:'罗马尼亚' },{ c:'GR', zh:'希腊' },{ c:'SK', zh:'斯洛伐克' },{ c:'BG', zh:'保加利亚' },{ c:'HR', zh:'克罗地亚' },
+  { c:'SI', zh:'斯洛文尼亚' },{ c:'LT', zh:'立陶宛' },{ c:'LV', zh:'拉脱维亚' },{ c:'EE', zh:'爱沙尼亚' },{ c:'LU', zh:'卢森堡' },
+  { c:'CY', zh:'塞浦路斯' },{ c:'MT', zh:'马耳他' }
+];
+
+// 覆盖判定查表：只按码查，表外的码一律「需人工核对」，不猜、不由品名推。
+const COVER = {
+  '73181590':{ n:'钢铁紧固件 · 螺栓', v:'覆盖' }, '73181699':{ n:'钢铁紧固件 · 螺母', v:'覆盖' },
+  '73182100':{ n:'弹簧垫圈', v:'覆盖' }, '73181491':{ n:'自攻螺钉', v:'覆盖' },
+  '73269098':{ n:'其他钢铁制品', v:'覆盖' }, '72283069':{ n:'合金钢棒材', v:'覆盖' },
+  '73079980':{ n:'钢铁管接头', v:'覆盖' }, '73121098':{ n:'钢丝绳', v:'覆盖' },
+  '72169180':{ n:'冷弯型钢', v:'覆盖' }, '76169910':{ n:'铝制紧固件', v:'覆盖' },
+  '39269097':{ n:'塑料制品', v:'不覆盖' }, '85443000':{ n:'线束', v:'不覆盖' },
+  '82055990':{ n:'手工工具', v:'不覆盖' }
+};
+
+const SCOPE_QS = [
+  { key:'declarant', title:'欧盟侧的申报义务人是谁？', options:[
+    { label:'欧盟进口商（贵司为出口商）', effect:'→ 我方交付的是可供进口商申报的数据包' },
+    { label:'贵司在欧盟的关联公司', effect:'→ 需一并确认该实体的 CBAM 登记状态' },
+    { label:'不确定', effect:'→ 按最不利口径：数据包与申报支持同时准备' } ] }
+];
+
+const APPLIC_QS = [
+  { key:'registry', title:'欧盟侧是否已在 CBAM 登记处注册？', options:[
+    { label:'已注册', effect:'→ 可直接对接申报账号' },
+    { label:'未注册', effect:'→ 交付前需先完成注册，影响时间表不影响计价' },
+    { label:'不确定', effect:'→ 按未注册排期，避免临期返工' } ] },
+  { key:'defaults', title:'能接受用默认值兜底吗？', options:[
+    { label:'尽量走实测', effect:'→ 实测路径优先，取数投入更高但证书成本更低' },
+    { label:'接受默认值', effect:'→ 服务费更低，证书成本走 ¥ 605,565 口径' },
+    { label:'不确定', effect:'→ 两个口径并排出具，由客户看差额再定' } ] }
+];
+
+const BASIS_QS = [
+  { key:'prior', title:'上一批做过 CBAM 申报、且有已核验结果吗？', options:[
+    { label:'做过，有已核验结果', effect:'→ 命中沿用判据的单元本期不重复收费' },
+    { label:'没做过', effect:'→ 无沿用基线，全部单元走首次核算' },
+    { label:'不确定', effect:'→ 按无沿用基线报价，确认后多半会降' } ] },
+  { key:'lock', title:'这 3 家生产设施都有客户书面确认吗？', options:[
+    { label:'三家都已书面确认', effect:'→ 设施全部锁定，单元区间收敛为单值' },
+    { label:'有 1 家还没确认', effect:'→ 该设施的单元只计入上限，构成服务费敞口' },
+    { label:'不确定', effect:'→ 按 1 家未锁定处理' } ] },
+  { key:'est', title:'产量与电耗台账是完整的，还是估算的？', options:[
+    { label:'完整台账', effect:'→ 估算值 caveat 消除，沿用判据可启用' },
+    { label:'部分为估算值', effect:'→ 估算值不启用判据，只能走默认值分支' },
+    { label:'不确定', effect:'→ 按部分估算处理' } ] },
+  { key:'urgency', title:'交付时间要求？', options:[
+    { label:'常规排期', effect:'→ 单价按 pb-2026-08 标准档' },
+    { label:'加急（4 周内）', effect:'→ 加急系数适用，需上级确认' },
+    { label:'不确定', effect:'→ 按常规排期报价' } ] }
+];
+
+const IDENTITY = [
+  { key:'name', label:'客户名称', ph:'公司全称' },
+  { key:'code', label:'统一社会信用代码', ph:'18 位' },
+  { key:'industry', label:'行业', ph:'如 钢铁 · 紧固件' },
+  { key:'role', label:'贸易身份', ph:'如 中国出口商' },
+];
+
+// 粘贴解析：只做取词与识别（8 位 CN 码、数量、设施），不做任何计价或判定。
+// 识别不出的格子标「缺失」，由品名推出的 CN 码标「系统推断」，销售就地改过的标「已确认」。
+function parsePaste(text){
+  const lines = text.split(/\r?\n/).map(s => s.trim()).filter(s => s.length > 2);
+  if (!lines.length) return null;
+  return lines.slice(0, 20).map((line, i) => {
+    const cells = line.split(/\t|,|;|，|；|\s{2,}/).map(s => s.trim()).filter(Boolean);
+    const cnHit = line.match(/\b(\d{4})\s?(\d{2})\s?(\d{2})\b/);
+    const qtyHit = line.match(/(\d+(?:[.,]\d+)?)\s*(?:t|吨|T)\b/) || line.match(/\b(\d+\.\d+)\b/);
+    const facHit = cells.filter(c => /F-\d|厂|plant|Plant/.test(c))[0];
+    const nameHit = cells.filter(c => /[\u4e00-\u9fa5A-Za-z]{2,}/.test(c) && !/F-\d|厂/.test(c))[0];
+    return {
+      line:'#' + String(i + 1).padStart(3, '0'),
+      name: nameHit || '（未识别品名）',
+      cn: cnHit ? cnHit[1] + ' ' + cnHit[2] + ' ' + cnHit[3] : '缺失',
+      cnSource: cnHit ? '客户填写' : '缺失',
+      qty: qtyHit ? qtyHit[1].replace(',', '.') : '缺失',
+      qtySource: qtyHit ? '客户填写' : '缺失',
+      facility: facHit || '缺失',
+      facSource: facHit ? '客户填写' : '缺失',
+      pre: '缺失', preSource: '缺失'
+    };
+  });
+}
+
+// demo-dataset v1 · goods G-01…G-09（127 条报关行项合并后的 9 个商品项）
+const PARSE_ROWS = [
+  { line:'#001', name:'冷镦紧固件 M10×40', cn:'7318 1590', cnSource:'客户填写', pre:'自产 EAF 钢坯 → 热轧盘条', preSource:'客户填写', qty:'340.0', qtySource:'客户填写', facility:'INST-01 台州华冶特钢', facSource:'客户填写' },
+  { line:'#007', name:'冷镦紧固件 M10×40', cn:'7318 1590', cnSource:'客户填写', pre:'外购盘条 S-02（BF-BOF）', preSource:'客户填写', qty:'72.0', qtySource:'客户填写', facility:'INST-01 台州华冶特钢', facSource:'客户填写' },
+  { line:'#014', name:'六角螺母 M10', cn:'7318 1699', cnSource:'客户填写', pre:'自产 EAF 钢坯 → 热轧盘条', preSource:'客户填写', qty:'168.5', qtySource:'客户填写', facility:'INST-01 台州华冶特钢', facSource:'客户填写' },
+  { line:'#027', name:'弹簧垫圈', cn:'7318 2100', cnSource:'客户填写', pre:'自产 BF-BOF 钢坯 → 冷轧带', preSource:'客户填写', qty:'47.2', qtySource:'客户填写', facility:'INST-02 江阴恒晟', facSource:'客户填写' },
+  { line:'#039', name:'钢制支架', cn:'7326 9098', cnSource:'系统推断（由品名）', pre:'外购热轧板 S-01', preSource:'客户填写', qty:'236.8', qtySource:'客户填写', facility:'INST-02 江阴恒晟', facSource:'客户填写' },
+  { line:'#052', name:'合金钢圆棒', cn:'7228 3069', cnSource:'客户填写', pre:'外购钢坯 S-02（BF-BOF）', preSource:'客户填写', qty:'158.0', qtySource:'客户填写', facility:'INST-01 台州华冶特钢', facSource:'客户填写' },
+  { line:'#068', name:'自攻螺钉', cn:'7318 1491', cnSource:'客户填写', pre:'缺失', preSource:'缺失', qty:'62.4', qtySource:'客户填写', facility:'缺失', facSource:'缺失' },
+  { line:'#081', name:'管接头', cn:'7307 9980', cnSource:'客户填写', pre:'外购无缝管坯 S-04', preSource:'系统推断（由品名）', qty:'41.6', qtySource:'客户填写', facility:'缺失', facSource:'缺失' },
+  { line:'#094', name:'钢丝绳', cn:'7312 1098', cnSource:'客户填写', pre:'缺失', preSource:'缺失', qty:'38.5', qtySource:'客户口述估算', facility:'缺失', facSource:'缺失' },
+  { line:'#103', name:'冷弯型钢', cn:'7216 9180', cnSource:'客户填写', pre:'外购热轧卷 S-01', preSource:'客户填写', qty:'24.0', qtySource:'客户填写', facility:'INST-02 江阴恒晟', facSource:'客户填写' }
+];
+
+// 单元状态是唯一事实源；假设开关只在写死的取值之间切换，不做任何判定计算。
+function unitStates(f){
+  return [
+    { id:'U-01', pre:'自产 EAF 钢坯 → 热轧盘条', desc:'CN 组 7318（紧固件）· INST-01 台州华冶特钢 · EAF · 508.5 t（占 42.7%）', disp:'M', rule:'命中 R2 占比 ≥30%',
+      split:true, splitNote:'与 U-02 同 CN 同设施 · 仅前体不同' },
+    { id:'U-02', pre:'外购盘条 S-02（BF-BOF）', desc: f.prior ? 'CN 组 7318（紧固件）· INST-01 · BF-BOF 前体 · 72.0 t · 上期已核验' : 'CN 组 7318（紧固件）· INST-01 · BF-BOF 前体 · 72.0 t（无沿用基线）', disp: f.prior ? 'R' : 'M', rule: f.prior ? '门2 通过' : '门2 未过 ①',
+      split:true, splitNote:'与 U-01 同 CN 同设施 · 仅前体不同 → 拆分申报' },
+    { id:'U-03', pre:'外购热轧板 / 热轧卷 S-01', desc:'CN 组 7326 / 7216 · INST-02 江阴恒晟 · BF-BOF · 260.8 t（占 21.9%）', disp:'M', rule:'命中 R4 前体来源变更' },
+    { id:'U-04', pre:'自产 BF-BOF 钢坯 → 冷轧带', desc:'CN 组 7318 2100 · INST-02 · BF-BOF · 47.2 t（占 4.0%）', disp:'F', rule:'门3 通过 · 门2 未过（前体变更）' },
+    { id:'U-05', pre: f.lock ? '外购钢坯 S-02（已确认）' : '前体未确认', desc: f.lock ? 'CN 组 7228 / 7318 · INST-03（已锁定）· 220.4 t' : 'CN 组 7228 / 7318 · 设施未确定 · 路线 unknown · 220.4 t', disp: f.lock ? 'F' : 'M', rule: f.lock ? '门3 通过' : '命中 R3 设施未确定' },
+    { id:'U-06', pre: f.lock ? '外购无缝管坯 S-04（已确认）' : '前体未确认', desc: f.lock ? 'CN 组 7307 / 7312 · INST-03（已锁定）· 80.1 t' : (f.est ? 'CN 组 7307 / 7312 · 设施未确定 · 80.1 t（台账已提供）' : 'CN 组 7307 / 7312 · 设施未确定 · 80.1 t（货量为口述估算）'), disp: f.lock ? 'F' : 'M', rule: f.lock ? '门3 通过' : (f.est ? '命中 R3 设施未确定' : '命中 R3 · R2 因估算停用') }
+  ];
+}
+
+class Component extends DCLogic {
+  state = {
+    step:1,
+    scope:{},
+    applic:{},
+    basis:{ prior:'做过，有已核验结果', urgency:'常规排期' },
+    identity:{ name:'玉环威格金属制品有限公司', code:'91331021MA2***', industry:'钢铁 · 紧固件', role:'中国出口商' },
+    dest:['DE','IT'], nonEu:'',
+    codeKind:'CN', codeText:'7318 1590\n7326 9098\n7228 3069\n3926 9097',
+    declYear:2026, periodKind:'确定期',
+    rows:[], picked:[],
+    pasteText:'', parsed:false, closed:false, discount:0, approved:false,
+    anomaly:false, sent:false, version:1,
+    drawer:null, carbonOpen:false, flash:{}, deltas:{}
+  };
+
+  componentDidMount(){ this.i18n(); }
+  componentDidUpdate(){ this.i18n(); }
+  i18n(){
+    const l = this.props.lang === 'en' ? 'en' : 'zh';
+    if (window.LuminoI18N) window.LuminoI18N.sync(l);
+    else if (l === 'en') setTimeout(() => this.i18n(), 200);
+  }
+
+  get flags(){
+    const b = this.state.basis;
+    return {
+      lock: b.lock === '三家都已书面确认',
+      est: b.est === '完整台账',
+      prior: b.prior === '做过，有已核验结果',
+      close: !!this.state.closed,
+      parsed: !!this.state.parsed,
+      disc: this.state.discount
+    };
+  }
+
+  get scen(){
+    const f = this.flags;
+    const key = [f.lock, f.est, f.prior, f.close, f.parsed, f.disc].join('|');
+    if (this._key === key) return this._scen;
+    const gi = (f.lock ? 1 : 0) + (f.close ? 1 : 0);
+    const units = unitStates(f);
+    const n = c => String(units.filter(u => u.disp === c).length);
+    // 需实测区间与判定分布同源：中值 = 当前 M 数；上限来自未锁定设施，下限来自尚未闭合的差额
+    const mid = units.filter(u => u.disp === 'M').length;
+    const hi = mid + (f.lock ? 0 : 1);
+    const lo = mid - (f.close ? 0 : 1);
+    const measure = lo === hi ? String(mid) : lo === mid ? mid + '–' + hi : mid === hi ? lo + '–' + mid : lo + '–' + mid + '–' + hi;
+    this._key = key;
+    this._scen = f.parsed ? {
+      annex:'9', units: f.lock ? '6' : '5–6–7', unitsShort: f.lock ? '6' : '5–7',
+      measure, measureMid:String(mid), facilities:'3',
+      low:LOW[f.disc], lowN:LOW_N[f.disc], cap:CAP[gi][f.disc], capN:CAP_N[gi][f.disc], gap:GAP[gi][f.disc],
+      facLocked: f.lock ? '3' : '2', facAlt: f.lock ? '0' : '1', facUnfilled:'0', facUnlocked: f.lock ? '0' : '1',
+      dist:{ M:n('M'), R:n('R'), F:n('F') }, unitRows:units
+    } : {
+      annex:'—', units:'—', unitsShort:'—', measure:'—', measureMid:'—', facilities:'—',
+      low:'—', lowN:0, cap:'—', capN:0, gap:'—',
+      facLocked:'—', facAlt:'—', facUnfilled:'—', facUnlocked:'—',
+      dist:{ M:'—', R:'—', F:'—' }, unitRows:[]
+    };
+    return this._scen;
+  }
+
+  fmt(n){ return '¥ ' + n.toLocaleString('en-US'); }
+
+  change(mutate){
+    const prev = this.scen;
+    mutate();
+    this.setState({}, () => {
+      const cur = this.scen;
+      const deltas = {};
+      if (cur.annex !== prev.annex) deltas.annex = prev.annex + ' → ' + cur.annex;
+      if (cur.units !== prev.units) deltas.units = prev.unitsShort + ' → ' + cur.unitsShort;
+      if (cur.measure !== prev.measure) deltas.measure = prev.measure + ' → ' + cur.measure;
+      if (cur.facUnlocked !== prev.facUnlocked) deltas.unlocked = prev.facUnlocked + ' → ' + cur.facUnlocked;
+      if (cur.facilities !== prev.facilities) deltas.facilities = prev.facilities + ' → ' + cur.facilities;
+      if (cur.dist.M !== prev.dist.M) deltas.dist = 'M ' + prev.dist.M + ' → ' + cur.dist.M;
+      if (cur.cap !== prev.cap || cur.low !== prev.low) {
+        if (!prev.capN || !cur.capN) deltas.fee = prev.low + ' → ' + cur.low + ' · 封顶 ' + cur.cap;
+        else {
+          const dc = cur.capN - prev.capN, dl = cur.lowN - prev.lowN;
+          const parts = [];
+          if (dl) parts.push('下限 ' + (dl > 0 ? '+' : '−') + this.fmt(Math.abs(dl)));
+          if (dc) parts.push('封顶 ' + (dc > 0 ? '+' : '−') + this.fmt(Math.abs(dc)));
+          deltas.fee = parts.join(' · ');
+        }
+      }
+      if (!Object.keys(deltas).length) return;
+      const flash = {}; Object.keys(deltas).forEach(k => flash[k] = true);
+      this.setState({ deltas, flash });
+      clearTimeout(this._t);
+      this._t = setTimeout(() => this.setState({ flash:{} }), 240);
+    });
+  }
+
+  answer(group, key, label){
+    if (this.state.sent) return;
+    this.change(() => {
+      const g = Object.assign({}, this.state[group], { [key]: label });
+      this.state[group] = g;
+      this.setState({ [group]: g });
+    });
+  }
+
+  renderVals(){
+    const st = this.state, f = this.flags, sc = this.scen;
+    const showSaleLines = this.props.showSaleLines ?? true;
+    const editable = !st.sent;
+
+    const dest = st.dest || [];
+    const codes = (st.codeText || '').split(/[\n,;，；]+/).map(s => s.replace(/\D/g, '')).filter(s => s.length >= 8)
+      .map(s => s.slice(0, 8)).filter((s, i, a) => a.indexOf(s) === i);
+    const coverRows = codes.map(code => {
+      const hit = COVER[code];
+      return { code:code.slice(0,4) + ' ' + code.slice(4), name: hit ? hit.n : '表外码', verdict: hit ? hit.v : '需人工核对' };
+    });
+    const covered = coverRows.filter(r => r.verdict === '覆盖').length;
+    const notCovered = coverRows.filter(r => r.verdict === '不覆盖').length;
+    const needCheck = coverRows.filter(r => r.verdict === '需人工核对').length;
+    const year = st.declYear;
+    const scopeDone = dest.length > 0 && !!st.scope.declarant;
+    const applicDone = !!(st.applic.registry && st.applic.defaults);
+    const step1Done = scopeDone && applicDone;
+    const step1Missing = [dest.length > 0, st.scope.declarant, st.applic.registry, st.applic.defaults].filter(v => !v).length;
+    const basisDone = !!(st.basis.prior && st.basis.lock && st.basis.est && st.basis.urgency);
+    const step3Missing = [st.basis.lock, st.basis.est].filter(v => !v).length;
+
+    const needsApproval = st.discount > 0;
+    const selfCheckOk = !st.anomaly && sc.measureMid === sc.dist.M;
+    const sendBlocked = st.sent || !st.parsed || !selfCheckOk || (needsApproval && !st.approved);
+    const gates = [true, step1Done, st.parsed, st.parsed && basisDone];
+    const stateLabels = [
+      step1Done ? '已完成' : '必填 ' + step1Missing + ' 项未答',
+      st.parsed ? '已解析' : step1Done ? '待解析' : '前置未完成',
+      basisDone ? '已完成' : st.parsed ? '必填 ' + step3Missing + ' 项未答' : '前置未完成',
+      st.sent ? '已发出' : !gates[3] ? '前置未完成' : sendBlocked ? '有阻止项' : '可发出'
+    ];
+    const stepTabs = ['客户与贸易身份','货物清点与前体拆解','已有基础与内部单价','方案预览与发出'].map((label, i) => {
+      const n = i + 1, on = st.step === n, open = gates[i];
+      return {
+        n, label, state:stateLabels[i],
+        title: open ? label : '前置步骤的必填项未完成，不能跳过',
+        onClick: open ? (() => this.setState({ step:n })) : (() => {}),
+        cursor: open ? 'pointer' : 'not-allowed',
+        bg: on ? '#EDF6F2' : open ? '#fff' : '#FBFCFC',
+        mark: on ? '#0E7C5A' : 'transparent',
+        fg: on ? '#0B100E' : open ? '#46524E' : '#A9B4B0',
+        numFg: on ? '#0A4F3A' : open ? '#67736F' : '#A9B4B0',
+        weight: on ? '600' : '400'
+      };
+    });
+
+    const mkQs = (defs, group) => defs.map(q => {
+      const picked = q.options.filter(o => o.label === st[group][q.key])[0];
+      return {
+        title:q.title, editable, readonly: !editable, answer: picked ? picked.label : '未答',
+        effect: picked ? picked.effect : '未答 —— 这一项是必填，不答不能进下一步',
+        effectFg: picked ? '#46524E' : '#B3402A',
+        options:q.options.map(o => {
+          const on = st[group][q.key] === o.label;
+          return {
+            label:o.label, onClick:() => this.answer(group, q.key, o.label),
+            border: on ? '#0B100E' : '#C6D1CD', bg: on ? '#F4F7F6' : '#fff', weight: on ? '600' : '400'
+          };
+        })
+      };
+    });
+
+    const rows = st.rows.length ? st.rows : PARSE_ROWS;
+    const srcFg = s => s.indexOf('缺失') >= 0 ? '#B3402A' : s.indexOf('推断') >= 0 ? '#8A6A00' : s.indexOf('已确认') >= 0 ? '#0A4F3A' : '#0B100E';
+    const srcBg = s => s.indexOf('缺失') >= 0 ? '#F9EDEA' : s.indexOf('推断') >= 0 ? '#FBF7EE' : '#fff';
+    const editCell = (i, field, srcField) => e => {
+      const next = rows.map((r, k) => k === i ? Object.assign({}, r, { [field]: e.target.value, [srcField]:'客户填写 · 已确认' }) : r);
+      this.state.rows = next;
+      this.setState({ rows:next });
+    };
+    const norm = s => (s || '').replace(/\D/g, '').slice(0, 8);
+    const step1Set = codes.slice();
+    const originOf = cn => {
+      const k = norm(cn);
+      if (!k) return { origin:'① 缺码', fg:'#B3402A', bg:'#F9EDEA', border:'#B3402A' };
+      const hit = COVER[k];
+      if (hit && hit.v === '不覆盖') return { origin:'不覆盖 · 不计入', fg:'#67736F', bg:'#F4F7F6', border:'#C6D1CD' };
+      if (step1Set.indexOf(k) >= 0) return { origin:'① 已登记', fg:'#0A4F3A', bg:'#EDF6F2', border:'#0E7C5A' };
+      return { origin:'① 未登记 · 待核对', fg:'#8A6A00', bg:'#FBF7EE', border:'#8A6A00' };
+    };
+    const parseRows = rows.map((r, i) => ({
+      line:r.line, name:r.name, locked: !editable,
+      pre:r.pre || '缺失', preSource:r.preSource || '缺失',
+      preFg:srcFg(r.preSource || '缺失'), preBg:srcBg(r.preSource || '缺失'),
+      preBorder: (r.preSource || '').indexOf('缺失') >= 0 ? '#B3402A' : (r.preSource || '').indexOf('推断') >= 0 ? '#8A6A00' : '#C6D1CD',
+      preCellBg:'#FBFCFC',
+      onPre:editCell(i, 'pre', 'preSource'),
+      origin:originOf(r.cn).origin, originFg:originOf(r.cn).fg, originBg:originOf(r.cn).bg, originBorder:originOf(r.cn).border,
+      cn:r.cn, cnSource:r.cnSource, cnFg:srcFg(r.cnSource), cnBg:srcBg(r.cnSource), cnBorder: r.cnSource.indexOf('推断') >= 0 ? '#8A6A00' : '#E3E8E6',
+      qty:r.qty, qtySource:r.qtySource, qtyFg:srcFg(r.qtySource), qtyBg:srcBg(r.qtySource), qtyBorder: r.qtySource.indexOf('缺失') >= 0 ? '#B3402A' : '#E3E8E6',
+      facility:r.facility, facSource:r.facSource, facFg:srcFg(r.facSource), facBg:srcBg(r.facSource), facBorder: r.facSource.indexOf('缺失') >= 0 ? '#B3402A' : '#E3E8E6',
+      onCn:editCell(i, 'cn', 'cnSource'), onQty:editCell(i, 'qty', 'qtySource'), onFac:editCell(i, 'facility', 'facSource')
+    }));
+    const splitPair = sc.unitRows.filter(u => u.split).map(u => ({
+      id:u.id, pre:u.pre, disp:u.disp + ' · ' + u.rule, color:DISP[u.disp].color, chipBg:DISP[u.disp].chipBg,
+      same:'CN 7318 1590 · INST-01 · 同一路线',
+      qty: u.id === 'U-01' ? '508.5 t' : '72.0 t',
+      note: u.id === 'U-01' ? '自产钢坯，隐含排放走本厂 EAF 数据。' : '外购盘条，隐含排放跟着供应商的高炉走 —— 与 U-01 不是同一个数。'
+    }));
+    const inferredLeft = rows.filter(r => r.cnSource.indexOf('推断') >= 0).length;
+    const missingLeft = rows.filter(r => r.cnSource.indexOf('缺失') >= 0 || r.qtySource.indexOf('缺失') >= 0 || r.facSource.indexOf('缺失') >= 0).length;
+
+    const flashBg = k => st.flash[k] ? 'rgba(242,183,5,.16)' : '#fff';
+    const badges = [
+      { key:'annex', label:'Annex I 商品项', value:sc.annex, drawer:'annex' },
+      { key:'units', label:'核算单元数', value:sc.units, drawer:'units' },
+      { key:'facilities', label:'生产设施数', value:sc.facilities, drawer:'facilities' },
+      { key:'unlocked', label:'设施未锁定数', value:sc.facUnlocked, drawer:'facilities' },
+      { key:'periods', label:'申报期数', value: f.parsed ? '1' : '—', drawer:'periods' }
+    ].map(b => ({
+      label:b.label, value:b.value,
+      fg: b.key === 'unlocked' && b.value !== '0' && b.value !== '—' ? '#B3402A' : '#0B100E',
+      bg: flashBg(b.key), mark: st.deltas[b.key] ? '#F2B705' : 'transparent',
+      hasDelta: !!st.deltas[b.key], delta: st.deltas[b.key] || '',
+      onClick:() => this.setState({ drawer:b.drawer })
+    }));
+
+    const chain = [
+      { text: f.parsed ? '127 行' : '待解析', d:'lines' },
+      { text: sc.annex + ' 项', d:'annex' },
+      { text: sc.units + ' 单元', d:'units' },
+      { text: (st.anomaly ? '0' : sc.measure) + ' 需实测', d:'measure' }
+    ].map((c, i, arr) => ({ text:c.text, sep: i < arr.length - 1 ? '→' : '', onClick:() => this.setState({ drawer:c.d }) }));
+
+    const dist = ['M','R','F'].map(k => ({
+      code:k, label:DISP[k].label, count: st.anomaly && k === 'M' ? '0' : sc.dist[k], color:DISP[k].color,
+      bg: st.flash.dist ? 'rgba(242,183,5,.16)' : '#fff',
+      onClick:() => this.setState({ drawer:'dist-' + k })
+    }));
+
+    const caveats = [];
+    if (f.parsed && !f.lock) caveats.push({ tag:'未锁定', title:'3 项商品的生产设施尚未锁定', saleLine:'这段敞口的大小，就是把生产厂确认清楚值多少钱。', toggleable:true, assume:'假设已锁定', onToggle:() => this.change(() => { const b = Object.assign({}, st.basis, { lock:'三家都已书面确认' }); this.state.basis = b; this.setState({ basis:b }); }) });
+    if (f.parsed && !f.close) caveats.push({ tag:'未闭合', title:'报关总量与行项之和相差 95.0 t', saleLine:'这 95 吨现在是按最贵的口径算的。把这几张报关单补齐，它就不用按最贵算。', toggleable:true, assume:'假设已闭合', onToggle:() => this.change(() => { this.state.closed = true; this.setState({ closed:true }); }) });
+    if (f.parsed && !f.est) caveats.push({ tag:'估算', title:'G-08 货量为客户口述估算值', saleLine:'口述的数不能当判定输入。台账拿出来多半会降 —— 但绝不能反过来先按低的报。', toggleable:true, assume:'假设已提供台账', onToggle:() => this.change(() => { const b = Object.assign({}, st.basis, { est:'完整台账' }); this.state.basis = b; this.setState({ basis:b }); }) });
+    if (f.parsed) caveats.push({ tag:'待确认', title:'G-04 的 CN 码待确认', saleLine:'确认后多半会降 —— 但绝不能反过来先按低的报。' });
+    if (f.parsed && !f.lock) caveats.push({ tag:'数据路径', title:'3 个单元暂按默认值测算，证书成本上浮约 ¥ 177,567', saleLine:'默认值不是省钱，是按最不利口径付钱。' });
+    if (f.parsed) caveats.push({ tag:'复购沿用', good:true, title: f.prior ? '1 个单元沿用上期已核验数据' : '无沿用基线，本期全部首次核算', saleLine: f.prior ? '上一期核验过、工艺没变的，这一期可以沿用 —— 这是最便宜的证据。' : '这次做完，下一批就有沿用基线了 —— 第二次会比第一次便宜。' });
+    const caveatCards = caveats.map(c => ({
+      tag:c.tag, title:c.title, saleLine:c.saleLine, toggleable: !!c.toggleable && editable, assume:c.assume || '', onToggle:c.onToggle || (() => {}),
+      bg: c.good ? '#EDF6F2' : '#fff', mark: c.good ? '#0E7C5A' : '#8A6A00', fg: c.good ? '#0A4F3A' : '#0B100E'
+    }));
+
+    const priceRows = [
+      { label:'申报期归档 periodFiling', basis:'pb-2026-08 · 1 期', amount:'¥ 1,600' },
+      { label:'CN 归类 cnClassify', basis:'9 个商品项，含 1 项待确认', amount:'¥ 900' },
+      { label:'核查机构协调 verifierCoord', basis:'固定档 · 不含核查机构本身的收费', amount:'¥ 700' },
+      { label:'设施收资 instDataCollect', basis:'¥ 600 / 家 · 下限 3 家（上限 5 家）', amount:'¥ 1,800' },
+      { label:'单元核算 unitCalc', basis:'¥ 600 / 单元 · 下限 5 单元（上限 7 单元）', amount:'¥ 3,000' },
+      { label:'授权申报人代办 declarantApply', basis:'不适用：客户为中国出口商，义务在欧盟进口方', amount:'—' },
+      { label:'加急系数', basis: st.basis.urgency === '加急（4 周内）' ? '1.2× 适用，需上级确认' : '不适用（常规排期）', amount: st.basis.urgency === '加急（4 周内）' ? '1.2×' : '—' },
+      { label:'报价下限（客户可见）', basis:'折扣 ' + [0,5,10][st.discount] + '%', amount:sc.low }
+    ];
+
+    const discountOpts = [0,5,10].map((d, i) => ({
+      label: d === 0 ? '无折扣' : '−' + d + '%',
+      onClick:() => { if (!editable) return; this.change(() => { this.state.discount = i; this.setState({ discount:i, approved: i === 0 ? false : st.approved }); }); },
+      border: st.discount === i ? '#0B100E' : '#C6D1CD', bg: st.discount === i ? '#F4F7F6' : '#fff', weight: st.discount === i ? '600' : '400'
+    }));
+
+    const checks = [
+      { ok: f.parsed, warn:false, title:'货物清单已解析', detail: f.parsed ? '127 行 → 9 项 → ' + sc.units + ' 单元（按 demo-dataset v1 冻结，原型不计算）' : '步骤 ② 尚未解析粘贴内容' },
+      { ok: selfCheckOk, warn:false, title:'口径自检：需实测区间的中值 = M 判定数', detail: st.anomaly ? '需实测算出 0 而清单中存在 M 判定 —— 不可能的数，必须先解决' : selfCheckOk ? '当前 M ' + sc.dist.M + ' · 需实测 ' + sc.measure + '（中值 ' + sc.measureMid + '）' : '需实测 ' + sc.measure + ' 的中值 ' + sc.measureMid + ' 与 M ' + sc.dist.M + ' 不一致 —— 口径异常' },
+      { ok: f.close, warn:true, title:'闭合度校验', detail: f.close ? '已闭合，差 0.0 t' : '差 95.0 t，可带缺口发出，但方案书必须披露' },
+      { ok: inferredLeft === 0 && missingLeft === 0, warn:true,
+        title: inferredLeft === 0 && missingLeft === 0 ? '解析结果已逐格确认' : '解析结果仍有推断值或缺失格',
+        detail: inferredLeft === 0 && missingLeft === 0
+          ? '所有格子均为客户填写或已就地确认，可作为判定输入'
+          : '推断值 ' + inferredLeft + ' 处 · 缺失 ' + missingLeft + ' 行。推断值不作为最终判定依据；在步骤 ② 就地改正即视为已确认，未改的会列入方案书第十节 caveat' },
+      { ok: !needsApproval || st.approved, warn:false, title:'折扣审批', detail: needsApproval ? (st.approved ? '已获上级审批，下限 ' + sc.low : '申请了 −' + [0,5,10][st.discount] + '%，未获审批不能发出') : '未申请折扣' }
+    ].map(c => ({
+      title:c.title, detail:c.detail,
+      state: c.ok ? '通过' : c.warn ? '需披露' : '阻止发出',
+      fg: c.ok ? '#0A4F3A' : c.warn ? '#8A6A00' : '#B3402A',
+      bg: c.ok ? '#fff' : c.warn ? '#FBF7EE' : '#F9EDEA'
+    }));
+    const blocked = sendBlocked;
+
+    const dispRows = code => sc.unitRows.filter(u => u.disp === code).map(u => ({ id:u.id, desc:u.desc, value:u.rule, fg:DISP[code].color }));
+    const D = {
+      lines:{ title:'报关行项 · 127 条', note:'原始报关明细。粘贴解析后逐格标注来源：客户填写 / 系统推断 / 缺失。', rows:[
+        { id:'DE', desc:'目的地德国', value:'78 行', fg:'#0B100E' },
+        { id:'IT', desc:'目的地意大利', value:'49 行', fg:'#0B100E' },
+        { id:'商品项', desc:'合并后 9 个 Annex I 商品项 · 年出口量档 1k–10k t', value:'9 项', fg:'#0B100E' },
+        { id:'闭合度', desc: f.close ? '已按假设闭合' : '报关总量 1,284.0 t vs 行项之和 1,189.0 t', value: f.close ? '差 0.0 t' : '差 95.0 t', fg: f.close ? '#0A4F3A' : '#B3402A' }
+      ] },
+      annex:{ title:'Annex I 商品项 · ' + sc.annex, note:'同一 CN 码的多次报关已合并（G-01…G-09）。G-04 的 CN 码由品名推断，标注为「待确认」，不作为最终判定依据。', rows:PARSE_ROWS.map(r => ({ id:r.cn, desc:r.name + ' · ' + r.facility, value: r.cnSource.indexOf('推断') >= 0 ? '待确认' : '覆盖', fg: r.cnSource.indexOf('推断') >= 0 ? '#8A6A00' : '#0A4F3A' })) },
+      units:{ title:'核算单元 · ' + sc.units, note: f.lock ? '归并键 = 申报期 × CN 组 × 前体 × 生产设施 × 生产路线。设施已按假设全部锁定，区间收敛为单值 6。' : '归并键 = 申报期 × CN 组 × 前体 × 生产设施 × 生产路线。同一 CN 码不同前体必须拆分（U-01 / U-02）。区间来自 INST-03 未锁定：下限 5 单元 / 3 设施，上限 7 单元 / 5 设施。上限是真实可能，不做视觉降级。', rows: sc.unitRows.map(u => ({ id:u.id, desc:u.desc, value:u.disp + ' · ' + u.rule, fg:DISP[u.disp].color })).concat(f.lock ? [] : [{ id:'U-07?', desc:'INST-03 拆分后可能出现的第 7 单元', value:'仅计入上限', fg:'#67736F' }]) },
+      measure:{ title:'需实测收资 · ' + sc.measure, note:'区间最可能值 = 当前 M 判定数（' + sc.dist.M + '）。已按假设排除的单元保留在列表里并标明。', rows: dispRows('M').concat(f.lock ? [{ id:'U-05 / U-06', desc:'INST-03 已按假设锁定，转入默认值分支', value:'已排除', fg:'#67736F' }] : []) },
+      facilities:{ title:'生产设施 · 3 家（已锁定 ' + sc.facLocked + ' · 备选 ' + sc.facAlt + ' · 未填 ' + sc.facUnfilled + '）', note:'设施锁定 = 客户书面确认某批货的生产设施。备选状态同时封锁沿用与默认值两条路径。', rows:[
+        { id:'INST-01', desc:'台州华冶特钢有限公司 · EAF · 已锁定 · 上期已核验', value:'2 单元', fg:'#0A4F3A' },
+        { id:'INST-02', desc:'江阴恒晟金属制品有限公司 · BF-BOF · 已锁定 · 近 12 个月前驱体来源变更', value:'2 单元', fg:'#0A4F3A' },
+        { id:'INST-03', desc:'名称未提供 · 路线 unknown · ' + (f.lock ? '已按假设锁定' : '经贸易商采购，未锁定'), value:'2 单元', fg: f.lock ? '#0A4F3A' : '#B3402A' }
+      ] },
+      periods:{ title:'申报期 · 1 期', note:'申报年度 ' + year + '，单一申报期。跨期货物按申报期分列，不合并。', rows:[
+        { id:String(year), desc: st.periodKind + ' · ' + (st.periodKind === '确定期' ? '申报截止 ' + (year + 1) + '-05-31' : '只报告不缴费'), value:'当前', fg:'#0B100E' },
+        { id:'目的地', desc: dest.length ? '欧盟成员国 ' + dest.join(' / ') : '未选成员国', value: dest.length + ' 国', fg: dest.length ? '#0A4F3A' : '#B3402A' }
+      ] },
+      'dist-M':{ title:'判定 M · 必须实测 ' + sc.dist.M + ' 个', note:'最不利路径。M 的数量直接决定服务费敞口上限。', rows:dispRows('M') },
+      'dist-R':{ title:'判定 R · 可沿用 ' + sc.dist.R + ' 个', note:'沿用上期已核验结果，本期不重复收资、不重复收费。', rows:dispRows('R') },
+      'dist-F':{ title:'判定 F · 用默认值 ' + sc.dist.F + ' 个', note:'风险自留路径。默认值逐年加价【TODO-核实】。', rows:dispRows('F') }
+    };
+    const dd = st.drawer ? D[st.drawer] : null;
+
+    return {
+      showSaleLines,
+      stepTabs, isStep1: st.step === 1, isStep2: st.step === 2, isStep3: st.step === 3, isStep4: st.step === 4,
+      sent:st.sent, anomaly:st.anomaly,
+      statusLabel: st.sent ? '已发客户 · 待确认' : '草稿',
+      statusBg: st.sent ? '#F4F7F6' : '#fff', statusFg: st.sent ? '#0B100E' : '#46524E', statusBorder:'#C6D1CD',
+      versionLabel: 'v' + st.version + (st.sent ? ' · 当前' : ' · 编辑中'),
+      newVersion:() => this.setState({ sent:false, version: st.version + 1, deltas:{}, step:1 }),
+      identity:IDENTITY.map(f => ({
+        label:f.label, ph:f.ph, value: st.identity[f.key] || '',
+        editable, locked: !editable,
+        onChange: e => { const v = Object.assign({}, this.state.identity, { [f.key]: e.target.value }); this.state.identity = v; this.setState({ identity:v }); }
+      })),
+      scopeQs: mkQs(SCOPE_QS, 'scope'), applicQs: mkQs(APPLIC_QS, 'applic'), basisQs: mkQs(BASIS_QS, 'basis'),
+
+      euChips:EU27.map(m => {
+        const on = dest.indexOf(m.c) >= 0;
+        return {
+          code:m.c, zh:m.zh,
+          onClick: editable ? (() => {
+            const cur = (this.state.dest || []).slice();
+            const i = cur.indexOf(m.c);
+            if (i >= 0) cur.splice(i, 1); else cur.push(m.c);
+            this.setState({ dest:cur });
+          }) : (() => {}),
+          border: on ? '#0E7C5A' : '#C6D1CD', bg: on ? '#EDF6F2' : '#fff',
+          fg: on ? '#0A4F3A' : '#46524E', weight: on ? '600' : '400',
+          cursor: editable ? 'pointer' : 'default'
+        };
+      }),
+      destCount: dest.length + ' / 27',
+      destList: dest.length ? dest.join(' · ') : '未选',
+      destEffect: dest.length ? '→ 落入 CBAM 标的范围（' + dest.join(' / ') + '），继续往下判' : '→ 未选成员国：不构成 CBAM 义务，本方案不成立。这一项必选。',
+      destEffectFg: dest.length ? '#46524E' : '#B3402A',
+      nonEuValue:st.nonEu,
+      onNonEu: e => this.setState({ nonEu:e.target.value }),
+
+      codeKinds:[{ k:'CN', label:'CN 码 · 欧盟 8 位' }, { k:'HS', label:'中国 HS · 10 位' }].map(o => ({
+        label:o.label,
+        onClick: editable ? (() => this.setState({ codeKind:o.k })) : (() => {}),
+        border: st.codeKind === o.k ? '#0B100E' : '#C6D1CD',
+        bg: st.codeKind === o.k ? '#F4F7F6' : '#fff',
+        weight: st.codeKind === o.k ? '600' : '400'
+      })),
+      codeText:st.codeText,
+      onCodeText: e => this.setState({ codeText:e.target.value }),
+      codePh: st.codeKind === 'CN' ? '每行一个 CN 码，如 7318 1590' : '每行一个中国 HS 码，如 7318159000（取前 8 位对应 CN）',
+      coverRows:coverRows.map(r => ({
+        code:r.code, name:r.name, verdict:r.verdict,
+        fg: r.verdict === '覆盖' ? '#0A4F3A' : r.verdict === '不覆盖' ? '#46524E' : '#8A6A00',
+        bg: r.verdict === '覆盖' ? '#EDF6F2' : r.verdict === '不覆盖' ? '#F4F7F6' : 'rgba(242,183,5,.14)',
+        border: r.verdict === '覆盖' ? '#0E7C5A' : r.verdict === '不覆盖' ? '#C6D1CD' : '#8A6A00'
+      })),
+      coverSummary: coverRows.length ? '覆盖 ' + covered + ' · 不覆盖 ' + notCovered + ' · 需人工核对 ' + needCheck : '未输入码',
+      coverEmpty: coverRows.length === 0,
+      needCheckNote: coverRows.length === 0 ? '贴入客户给的码后按码核对。' : needCheck > 0 ? '有 ' + needCheck + ' 个码不在本地覆盖表内，按「待确认」处理，由我方逐项核对后回填，不猜。' : '全部码已在覆盖表内命中，不覆盖的行项不进入核算与计价。',
+      needCheckFg: needCheck > 0 ? '#8A6A00' : '#0A4F3A',
+
+      yearChips:[year - 1, year, year + 1, year + 2].filter((v, i, a) => a.indexOf(v) === i).map(y => ({
+        label:String(y),
+        onClick: editable ? (() => this.setState({ declYear:y })) : (() => {}),
+        border: y === year ? '#0B100E' : '#C6D1CD', bg: y === year ? '#07110E' : '#fff',
+        fg: y === year ? '#fff' : '#46524E', weight: y === year ? '600' : '400'
+      })),
+      periodKinds:['确定期','过渡期补报'].map(k => ({
+        label:k,
+        onClick: editable ? (() => this.setState({ periodKind:k })) : (() => {}),
+        border: st.periodKind === k ? '#0B100E' : '#C6D1CD',
+        bg: st.periodKind === k ? '#F4F7F6' : '#fff',
+        weight: st.periodKind === k ? '600' : '400'
+      })),
+      yearLabel: String(year),
+      periodEffect: st.periodKind === '确定期'
+        ? '→ ' + year + ' 确定期：产生实际缴费义务，缺省值加价条款适用【TODO-核实】。首次申报截止 ' + (year + 1) + '-05-31。'
+        : '→ ' + year + ' 过渡期补报：只报告不缴费，口径要求较宽。',
+      periodStamp: year + ' · ' + st.periodKind,
+      pasteText:st.pasteText,
+      onPaste:e => this.setState({ pasteText:e.target.value }),
+      pickable:PARSE_ROWS.map((r, i) => {
+        const on = st.picked.indexOf(i) >= 0;
+        return {
+          name:r.name, cn:r.cn, mark: on ? '✓' : '＋',
+          locked: st.parsed || !editable,
+          onClick:() => {
+            if (this.state.parsed || this.state.sent) return;
+            const cur = this.state.picked;
+            const next = cur.indexOf(i) >= 0 ? cur.filter(k => k !== i) : cur.concat([i]);
+            this.state.picked = next;
+            this.setState({ picked:next });
+          },
+          border: on ? '#0E7C5A' : '#C6D1CD', bg: on ? '#EDF6F2' : '#fff',
+          numFg: on ? '#0A4F3A' : '#67736F', weight: on ? '600' : '400'
+        };
+      }),
+      pickHint: st.parsed ? '已解析，如需改选请先「清空重来」' : (st.picked.length ? '已勾选 ' + st.picked.length + ' 项 —— 点「解析这段内容」即按勾选生成' : '销售或客户可以直接点商品项，不必粘贴表格'),
+      pickAll:() => { if (st.parsed || !editable) return; const all = PARSE_ROWS.map((r, i) => i); this.state.picked = all; this.setState({ picked:all }); },
+      pickNone:() => { if (st.parsed || !editable) return; this.state.picked = []; this.setState({ picked:[] }); },
+      doParse:() => {
+        if (st.parsed || st.sent) return;
+        const rows = st.picked.length
+          ? st.picked.slice().sort((a, b) => a - b).map(i => PARSE_ROWS[i])
+          : parsePaste(st.pasteText || '');
+        this.change(() => {
+          this.state.parsed = true;
+          this.state.rows = rows || [];
+          this.setState({ parsed:true, rows: rows || [] });
+        });
+      },
+      resetParse:() => this.change(() => { this.state.parsed = false; this.state.closed = false; this.state.rows = []; this.state.picked = []; this.setState({ parsed:false, closed:false, pasteText:'', rows:[], picked:[] }); }),
+      parsed:st.parsed,
+      parseHint: st.parsed
+        ? (st.rows.length ? '已解析 ' + st.rows.length + ' 行（示例行）· 识别不出的格子标「缺失」，可就地改 · 计数与价格按 demo-dataset v1 冻结为 127 行 / 9 项 / 5–6–7 单元' : '已载入演示数据集 9 个商品项 · 127 行合并为 9 项')
+        : '三种入口都行：勾选商品项 / 粘贴表格（制表符或逗号分隔）/ 两者都留空则载入演示数据集',
+      parseRows, splitPair,
+      closureSum: f.close ? '1,284.0 t' : '1,189.0 t',
+      closureDiff: f.close ? '0.0 t' : '95.0 t',
+      closureFg: f.close ? '#0A4F3A' : '#B3402A',
+      closureBg: f.close ? '#EDF6F2' : '#F9EDEA',
+      closureNote: f.close ? '已按假设闭合。真实闭合需客户补齐报关单，界面不代替客户确认。' : '差额非零：已生成「未闭合」caveat，差额部分按最不利口径计入。可带缺口发出，但方案书必须披露。',
+      unitRows: sc.unitRows.map(u => Object.assign({ split:false, splitNote:'' }, u, { color:DISP[u.disp].color, chipBg:DISP[u.disp].chipBg, bg: u.split ? '#FBFCFC' : '#fff' })).concat(f.lock ? [] : [{ id:'U-07?', pre:'前体未确认', desc:'未锁定设施带来的潜在第 7 单元 · 只计入上限', disp:'M', rule:'仅上限', split:false, splitNote:'', color:'#67736F', chipBg:'#F4F7F6', bg:'#FBF7EE' }]),
+      priceRows, discountOpts, needsApproval,
+      approvalLabel: st.approved ? '✓ 已获上级审批' : '待上级审批',
+      approvalBg: st.approved ? '#EDF6F2' : '#fff', approvalFg: st.approved ? '#0A4F3A' : '#B3402A', approvalBorder: st.approved ? '#0E7C5A' : '#B3402A',
+      toggleApproval:() => { if (editable) this.setState({ approved: !st.approved }); },
+      discountNote:'折扣只改客户可见的报价下限，不改敞口逻辑，也不进方案书。内部成本与毛利在独立页面，不在本页折叠区。',
+      serviceLow:sc.low, serviceCap:sc.cap, serviceGap:sc.gap,
+      feeFlashBg: st.flash.fee ? 'rgba(242,183,5,.16)' : '#fff',
+      hasFeeDelta: !!st.deltas.fee, feeDelta: st.deltas.fee || '',
+      feeDeltaFg: (st.deltas.fee || '').indexOf('−') >= 0 ? '#0E7C5A' : '#B3402A',
+      badges, chain, dist,
+      facLocked:sc.facLocked, facAlt:sc.facAlt, facUnfilled:sc.facUnfilled,
+      facAltFg: sc.facAlt === '0' ? '#0A4F3A' : '#B3402A',
+      caveats:caveatCards, caveatCount: caveatCards.length + ' 张',
+      noCaveats: caveatCards.length === 0, noCaveatsNote: f.parsed ? '当前无缺口：可按下限报价。' : '解析货物清单后自动生成。',
+      checks, blocked,
+      checkSummary: blocked ? (st.sent ? '本版本已发出' : '有阻止项') : '可发出',
+      checkSummaryFg: blocked && !st.sent ? '#B3402A' : '#0A4F3A',
+      sendLabel: st.sent ? '已发出 · 等待客户确认' : '发出方案给客户',
+      sendBg: blocked ? '#F4F7F6' : '#0E7C5A', sendFg: blocked ? '#67736F' : '#fff',
+      sendBorder: blocked ? '#C6D1CD' : '#0E7C5A', sendCursor: blocked ? 'not-allowed' : 'pointer',
+      send:() => { if (!blocked) this.setState({ sent:true, step:4 }); },
+      blockedNote: st.sent ? '发出后本版本转为只读。新建 v2 才能继续改口径。' : blocked ? '先解决上面标「阻止发出」的项。「需披露」的可以带着发。' : '带缺口发出时，缺口会写进方案书第十节。',
+      blockedFg: blocked && !st.sent ? '#B3402A' : '#46524E',
+      toggleAnomaly:() => this.setState({ anomaly: !st.anomaly }),
+      anomalyBtnLabel: st.anomaly ? '关闭「口径异常」演示' : '演示：口径异常（不可能的数）',
+      carbonOpen:st.carbonOpen, carbonToggleLabel: st.carbonOpen ? '收起测算' : '展开测算',
+      toggleCarbon:() => this.setState({ carbonOpen: !st.carbonOpen }),
+      carbonRows:[
+        { label:'默认值口径 · 989 张', value:'¥ 605,565', fg:'#B3402A' },
+        { label:'实测口径 · 699 张', value:'¥ 427,998', fg:'#0A4F3A' },
+        { label:'差额 · 290 张', value:'¥ 177,567', fg:'#07110E' },
+        { label:'排放量 默认 2,996 / 实测 2,118 tCO₂e', value:'差 878', fg:'#46524E' },
+        { label:'证书价 € 78.50 = ¥ 612.30 · fx 7.80', value:'机制【TODO-核实】', fg:'#8A6A00' }
+      ],
+      drawerOpen: !!dd, drawerTitle: dd ? dd.title : '', drawerNote: dd ? dd.note : '', drawerRows: dd ? dd.rows : [],
+      closeDrawer:() => this.setState({ drawer:null })
+    };
+  }
+}
+</script>
+</body>
+</html>
