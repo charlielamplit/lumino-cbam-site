@@ -41,6 +41,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #0E7C5A;outline-offset:2p
     </a>
     <nav style="display:{{ deskNav }};gap:26px;flex:1;align-items:center">
       <a href="Lumino 平台.dc.html" style="font-size:15px;color:#47534F;text-decoration:none;white-space:nowrap" style-hover="color:#0B100E">平台</a>
+      <a href="calculator/" style="font-size:15px;color:#0E7C5A;font-weight:500;text-decoration:none;white-space:nowrap">免费试算</a>
       <a href="Lumino CBAM 指南.dc.html" style="font-size:15px;color:#0B100E;font-weight:500;text-decoration:none;white-space:nowrap">CBAM 指南</a>
       <a href="Lumino 关于.dc.html" style="font-size:15px;color:#47534F;text-decoration:none;white-space:nowrap" style-hover="color:#0B100E">关于</a>
       <a href="Lumino 联系.dc.html" style="font-size:15px;color:#47534F;text-decoration:none;white-space:nowrap" style-hover="color:#0B100E">联系</a>
@@ -57,6 +58,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #0E7C5A;outline-offset:2p
     <div style="border-top:1px solid #E2E8E5;background:#fff">
       <nav style="max-width:1200px;margin:0 auto;padding:8px 24px 16px;display:grid">
         <a href="Lumino 平台.dc.html" style="font-size:16px;color:#0B100E;text-decoration:none;padding:13px 0;border-bottom:1px solid #E2E8E5">平台</a>
+        <a href="calculator/" style="font-size:16px;color:#0E7C5A;font-weight:500;text-decoration:none;padding:13px 0;border-bottom:1px solid #E2E8E5">免费试算</a>
         <a href="Lumino CBAM 指南.dc.html" style="font-size:16px;color:#0B100E;text-decoration:none;padding:13px 0;border-bottom:1px solid #E2E8E5">CBAM 指南</a>
         <a href="Lumino 关于.dc.html" style="font-size:16px;color:#0B100E;text-decoration:none;padding:13px 0;border-bottom:1px solid #E2E8E5">关于</a>
         <a href="Lumino 联系.dc.html" style="font-size:16px;color:#0B100E;text-decoration:none;padding:13px 0;border-bottom:1px solid #E2E8E5">联系</a>
@@ -154,7 +156,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #0E7C5A;outline-offset:2p
 </footer>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;appUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;#&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;平台入口&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;appUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;/portal/&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;平台入口&quot;}}">
 const ALL = [
   { no: '01', tag: '入门', cat: 'basic', title: 'CBAM 是什么，谁会被影响', desc: '一份面向出口企业的最小必要说明：覆盖品类、义务主体、时间点，以及欧盟客户为什么会向你要数据。' },
   { no: '02', tag: '规则', cat: 'rule', title: '过渡期与确定期，规则变了哪些', desc: '从"只报告"到"产生实际义务"，报告口径、缺省值使用条件与核查要求的变化对照。' },
@@ -179,7 +181,7 @@ class Component extends DCLogic {
     const fg = k => (c === k ? '#FFFFFF' : '#47534F');
     return {
       navHeight: this.state.scrolled ? '60px' : '76px',
-      appUrl: this.props.appUrl ?? '#',
+      appUrl: this.props.appUrl ?? '/portal/',
       deskNav: m ? 'none' : 'flex',
       mobBtn: m ? 'inline-flex' : 'none',
       langDisplay: m ? 'none' : 'flex',

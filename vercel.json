@@ -3,6 +3,8 @@
   "cleanUrls": false,
   "trailingSlash": false,
   "rewrites": [
+    { "source": "/calculator", "destination": "/calculator/index.html" },
+    { "source": "/portal", "destination": "/portal/index.html" },
     { "source": "/quote", "destination": "/Lumino 报价器.dc.html" },
     { "source": "/site",  "destination": "/Lumino 官网.dc.html" }
   ],

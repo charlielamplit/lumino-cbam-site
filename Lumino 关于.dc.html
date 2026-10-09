@@ -41,6 +41,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #0E7C5A;outline-offset:2p
     </a>
     <nav style="display:{{ deskNav }};gap:26px;flex:1;align-items:center">
       <a href="Lumino 平台.dc.html" style="font-size:15px;color:#47534F;text-decoration:none;white-space:nowrap" style-hover="color:#0B100E">平台</a>
+      <a href="calculator/" style="font-size:15px;color:#0E7C5A;font-weight:500;text-decoration:none;white-space:nowrap">免费试算</a>
       <a href="Lumino CBAM 指南.dc.html" style="font-size:15px;color:#47534F;text-decoration:none;white-space:nowrap" style-hover="color:#0B100E">CBAM 指南</a>
       <a href="Lumino 关于.dc.html" style="font-size:15px;color:#0B100E;font-weight:500;text-decoration:none;white-space:nowrap">关于</a>
       <a href="Lumino 联系.dc.html" style="font-size:15px;color:#47534F;text-decoration:none;white-space:nowrap" style-hover="color:#0B100E">联系</a>
@@ -57,6 +58,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #0E7C5A;outline-offset:2p
     <div style="border-top:1px solid #E2E8E5;background:#fff">
       <nav style="max-width:1200px;margin:0 auto;padding:8px 24px 16px;display:grid">
         <a href="Lumino 平台.dc.html" style="font-size:16px;color:#0B100E;text-decoration:none;padding:13px 0;border-bottom:1px solid #E2E8E5">平台</a>
+        <a href="calculator/" style="font-size:16px;color:#0E7C5A;font-weight:500;text-decoration:none;padding:13px 0;border-bottom:1px solid #E2E8E5">免费试算</a>
         <a href="Lumino CBAM 指南.dc.html" style="font-size:16px;color:#0B100E;text-decoration:none;padding:13px 0;border-bottom:1px solid #E2E8E5">CBAM 指南</a>
         <a href="Lumino 关于.dc.html" style="font-size:16px;color:#0B100E;text-decoration:none;padding:13px 0;border-bottom:1px solid #E2E8E5">关于</a>
         <a href="Lumino 联系.dc.html" style="font-size:16px;color:#0B100E;text-decoration:none;padding:13px 0;border-bottom:1px solid #E2E8E5">联系</a>
@@ -199,7 +201,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #0E7C5A;outline-offset:2p
 </footer>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;appUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;#&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;平台入口&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;appUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;/portal/&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;平台入口&quot;}}">
 class Component extends DCLogic {
   state = { scrolled: false, mobile: false, menuOpen: false };
   componentDidMount() {
@@ -214,7 +216,7 @@ class Component extends DCLogic {
     const m = this.state.mobile;
     return {
       navHeight: this.state.scrolled ? '60px' : '76px',
-      appUrl: this.props.appUrl ?? '#',
+      appUrl: this.props.appUrl ?? '/portal/',
       deskNav: m ? 'none' : 'flex',
       mobBtn: m ? 'inline-flex' : 'none',
       langDisplay: m ? 'none' : 'flex',

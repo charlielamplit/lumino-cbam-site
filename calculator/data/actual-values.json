@@ -1,0 +1,3291 @@
+{
+  "_note": "中国产品『仅成品自身工序』排放强度估算(tCO₂e/t,不含上游前体);引擎再 +Σ(前体×消耗量) 得完整实测。仅供成本对比、非法定申报、须专家复核。",
+  "_method": "口径=该产品最后一道转化工序自身排放,不含上游半成品/原料嵌入碳(由 SEFA 前体递归累加)。判断:有上游 CBAM 半成品的下游产品(线材/型材/冷轧/镀层/钢管/钢丝/紧固件/结构件/铝材/尿素/硝酸/复合肥)只算本道成型/加工工序;原料/上游级成品(烧结矿/生铁/DRI/铁合金/原铝电解/熟料/合成氨/煤制氢)自身工序即主要排放。direct=Scope1(工艺+厂内燃料);indirect=该工序耗电×中国电网因子 0.58 tCO₂/MWh(2023 官方≈0.577)。钢以长流程为基准、铝以火电电解为主、氨/氢以煤头为主。同类型多个 CN code 共用一组值。",
+  "_confidence": "中-高:上游/原料级工序(生铁~1.55、烧结~0.20、熟料~0.85、原铝电解 direct~1.8+电力~11、煤制氢~20、合成氨~2.8、转炉炼钢~0.3、热轧~0.10-0.12)有较好文献支撑;低:大量下游 Ch.73 钢制品与铝深加工『仅自身工序』数据稀缺,多为过程级(再加热/冷加工/焊接/电力)保守估算,已标 lowConfidence=true。",
+  "_sources": [
+    "[S1] 烧结:LCA 文献,常规烧结~241-270 kgCO₂/t sinter(焦粉燃烧主导)。ScienceDirect S0959652620309367。",
+    "[S2] 高炉炼铁:~1.45-1.8 tCO₂/t 铁水(还原剂~450kg/t),高炉本体占 BF-BOF 路线~70%。IPCC 2006 Vol3 Ch4;energy-innovation-austria。",
+    "[S3] DRI:煤基~1.5-1.97、气基~0.8-1.16 tCO₂e/t(LCA)。ScienceDirect S0959652622008277。",
+    "[S4] 铁合金矿热炉:FeMn~2-2.5、FeCr~3-4、SiMn~3.8-4.2 MWh/t + 碳还原剂直接 CO₂。Pyrometallurgy/Springer s11663-023-02838-w。",
+    "[S5] 转炉炼钢:BF-BOF~1.77 tCO₂/tCS,其中 80-90% 来自高炉,转炉段自身~0.2-0.35。worldsteel;MDPI Metals 12/5/797。",
+    "[S6] 热轧:再加热炉~4.22 GJ/t,轧制步骤~70 kgCO₂/t。Researchgate 354122349;steelonthenet hot-charging。",
+    "[S7] 冷轧/退火/镀锌/钢结构:冷轧+退火、热镀锌~0.3-0.4 GJ/t,以电力为主。DOE steel_profile;SMS group。",
+    "[S8] 拉丝/冷拔:冷加工,电力为主,EU EF(Climatiq wire drawing - steel)。MDPI Materials 16/5/1940。",
+    "[S9] 无缝钢管:穿孔+轧制再加热,能耗约为焊管 2-3 倍。steelonthenet steel-pipe。",
+    "[S10] 紧固件:冷镦能耗低、排放极小(电力)。TFG/Fastenerdata cold forming。",
+    "[S11] 原铝电解:阳极+PFC direct~1.4-1.6 tCO₂/t;电解电力~13-15.4 MWh/t→中国火电~11 tCO₂/t indirect。carbonchain;EU bm_study-aluminium。",
+    "[S12] 铝挤压:Scope1~0.3-0.9 tCO₂/t(燃气均热/时效),取低端代表先进产线。alcircle CBAM;aluminium-journal。",
+    "[S13] 铝轧制/箔:整套轧制~1200 kWh/t(电力为主)+退火燃气。ALFED Fact sheet 18;DOE Aluminum bandwidth 2017。",
+    "[S14] 熟料:中国~0.523-0.556(分解)+燃料,合计~0.866 tCO₂/t clinker。Nature Sci Data s41597-022-01270-0。",
+    "[S15] 合成氨(煤头):中国煤基~3.5-4.5 tCO₂/t(Scope1),工艺主体(气化+合成)取~2.8 代表自身过程。ScienceDirect S0301421510001527/S0959652621038361。",
+    "[S16] 尿素:NH₃+CO₂ 合成,净消耗 CO₂,自身工序(合成回路+造粒)以蒸汽/电力为主~0.2-0.5。ScienceDirect S0360544222013925;IEA Ammonia Roadmap。",
+    "[S17] 硝酸:氨氧化副产 N₂O,三级减排后残余~0.3 tCO₂e/t。Stamicarbon;tandfonline EnviNOx。",
+    "[S18] 煤制氢:中国无 CCS~18-21.6 kgCO₂/kg H₂(整体即此工序)。ScienceDirect S0959652622021151;ICCT 2022。",
+    "[GRID] 中国电网平均碳因子 2023≈0.577 tCO₂/MWh(生态环境部/统计局/能源局 2025.01 发布)。MDPI Energies 18/3/654。",
+    "[UB] 上界参考:data/default-values.json China 段完整嵌入默认 direct(本表仅自身均 ≤ 之)。"
+  ],
+  "_caveat": "下游(钢制品/铝深加工/复合肥/硝酸/尿素)『仅自身工序』公开数据稀缺,标 lowConfidence=true 的项为过程级保守估算(再加热/冷加工/焊接/电力口径),误差可达 ±50%,须以企业实测台账替代后方可用于正式核算。",
+  "byCnCode": {
+    "25070080": {
+      "direct": 0.18,
+      "indirect": 0.05,
+      "type": "黏土煅烧(仅自身,无矿物分解CO2)",
+      "lowConfidence": true
+    },
+    "25231000": {
+      "direct": 0.85,
+      "indirect": 0.04,
+      "type": "熟料煅烧(分解+燃料,仅自身)"
+    },
+    "25232100": {
+      "direct": 0.03,
+      "indirect": 0.06,
+      "type": "水泥粉磨(仅自身,电力为主)",
+      "lowConfidence": true
+    },
+    "25232900": {
+      "direct": 0.03,
+      "indirect": 0.06,
+      "type": "水泥粉磨(仅自身,电力为主)",
+      "lowConfidence": true
+    },
+    "25233000": {
+      "direct": 1.1,
+      "indirect": 0.08,
+      "type": "铝酸盐水泥熟料煅烧(仅自身)",
+      "lowConfidence": true
+    },
+    "25239000": {
+      "direct": 0.03,
+      "indirect": 0.06,
+      "type": "水泥粉磨(仅自身,电力为主)",
+      "lowConfidence": true
+    },
+    "26011200": {
+      "direct": 0.2,
+      "indirect": 0.03,
+      "type": "烧结工序(仅自身,焦粉燃烧)"
+    },
+    "28041000": {
+      "direct": 20.0,
+      "indirect": 0.2,
+      "type": "煤气化制氢(整体即此工序,原料级)"
+    },
+    "28080000": {
+      "direct": 0.3,
+      "indirect": 0.04,
+      "type": "硝酸氨氧化(残余N2O,仅自身;氨为前体)",
+      "lowConfidence": true
+    },
+    "28141000": {
+      "direct": 2.8,
+      "indirect": 0.1,
+      "type": "合成氨工序(煤头气化+合成,原料级即大头)"
+    },
+    "28142000": {
+      "direct": 0.8,
+      "indirect": 0.05,
+      "type": "氨水(稀氨溶液,折NH3含量,仅自身)"
+    },
+    "28342100": {
+      "direct": 0.15,
+      "indirect": 0.08,
+      "type": "硝酸钾复分解/造粒(仅自身)",
+      "lowConfidence": true
+    },
+    "31021010": {
+      "direct": 0.35,
+      "indirect": 0.05,
+      "type": "尿素合成(氨+CO2,仅自身;氨为前体)",
+      "lowConfidence": true
+    },
+    "31021090": {
+      "direct": 0.35,
+      "indirect": 0.05,
+      "type": "尿素合成(氨+CO2,仅自身;氨为前体)",
+      "lowConfidence": true
+    },
+    "31022100": {
+      "direct": 0.2,
+      "indirect": 0.06,
+      "type": "复合肥/硝铵盐混配造粒(仅自身;氮磷钾为前体)",
+      "lowConfidence": true
+    },
+    "31022900": {
+      "direct": 0.2,
+      "indirect": 0.06,
+      "type": "复合肥/硝铵盐混配造粒(仅自身;氮磷钾为前体)",
+      "lowConfidence": true
+    },
+    "31023010": {
+      "direct": 0.2,
+      "indirect": 0.06,
+      "type": "复合肥/硝铵盐混配造粒(仅自身;氮磷钾为前体)",
+      "lowConfidence": true
+    },
+    "31023090": {
+      "direct": 0.2,
+      "indirect": 0.06,
+      "type": "复合肥/硝铵盐混配造粒(仅自身;氮磷钾为前体)",
+      "lowConfidence": true
+    },
+    "31024010": {
+      "direct": 0.2,
+      "indirect": 0.06,
+      "type": "复合肥/硝铵盐混配造粒(仅自身;氮磷钾为前体)",
+      "lowConfidence": true
+    },
+    "31024090": {
+      "direct": 0.2,
+      "indirect": 0.06,
+      "type": "复合肥/硝铵盐混配造粒(仅自身;氮磷钾为前体)",
+      "lowConfidence": true
+    },
+    "31025000": {
+      "direct": 0.2,
+      "indirect": 0.06,
+      "type": "复合肥/硝铵盐混配造粒(仅自身;氮磷钾为前体)",
+      "lowConfidence": true
+    },
+    "31026000": {
+      "direct": 0.2,
+      "indirect": 0.06,
+      "type": "复合肥/硝铵盐混配造粒(仅自身;氮磷钾为前体)",
+      "lowConfidence": true
+    },
+    "31028000": {
+      "direct": 0.2,
+      "indirect": 0.06,
+      "type": "复合肥/硝铵盐混配造粒(仅自身;氮磷钾为前体)",
+      "lowConfidence": true
+    },
+    "31029000": {
+      "direct": 0.2,
+      "indirect": 0.06,
+      "type": "复合肥/硝铵盐混配造粒(仅自身;氮磷钾为前体)",
+      "lowConfidence": true
+    },
+    "31051000": {
+      "direct": 0.2,
+      "indirect": 0.06,
+      "type": "复合肥/硝铵盐混配造粒(仅自身;氮磷钾为前体)",
+      "lowConfidence": true
+    },
+    "31052010": {
+      "direct": 0.2,
+      "indirect": 0.06,
+      "type": "复合肥/硝铵盐混配造粒(仅自身;氮磷钾为前体)",
+      "lowConfidence": true
+    },
+    "31052090": {
+      "direct": 0.2,
+      "indirect": 0.06,
+      "type": "复合肥/硝铵盐混配造粒(仅自身;氮磷钾为前体)",
+      "lowConfidence": true
+    },
+    "31053000": {
+      "direct": 0.2,
+      "indirect": 0.06,
+      "type": "复合肥/硝铵盐混配造粒(仅自身;氮磷钾为前体)",
+      "lowConfidence": true
+    },
+    "31054000": {
+      "direct": 0.2,
+      "indirect": 0.06,
+      "type": "复合肥/硝铵盐混配造粒(仅自身;氮磷钾为前体)",
+      "lowConfidence": true
+    },
+    "31055100": {
+      "direct": 0.2,
+      "indirect": 0.06,
+      "type": "复合肥/硝铵盐混配造粒(仅自身;氮磷钾为前体)",
+      "lowConfidence": true
+    },
+    "31055900": {
+      "direct": 0.2,
+      "indirect": 0.06,
+      "type": "复合肥/硝铵盐混配造粒(仅自身;氮磷钾为前体)",
+      "lowConfidence": true
+    },
+    "31059020": {
+      "direct": 0.2,
+      "indirect": 0.06,
+      "type": "复合肥/硝铵盐混配造粒(仅自身;氮磷钾为前体)",
+      "lowConfidence": true
+    },
+    "31059080": {
+      "direct": 0.2,
+      "indirect": 0.06,
+      "type": "复合肥/硝铵盐混配造粒(仅自身;氮磷钾为前体)",
+      "lowConfidence": true
+    },
+    "72011011": {
+      "direct": 1.55,
+      "indirect": 0.04,
+      "type": "高炉炼铁工序(仅自身,焦炭/喷煤还原)"
+    },
+    "72011019": {
+      "direct": 1.55,
+      "indirect": 0.04,
+      "type": "高炉炼铁工序(仅自身,焦炭/喷煤还原)"
+    },
+    "72011030": {
+      "direct": 1.55,
+      "indirect": 0.04,
+      "type": "高炉炼铁工序(仅自身,焦炭/喷煤还原)"
+    },
+    "72011090": {
+      "direct": 1.55,
+      "indirect": 0.04,
+      "type": "高炉炼铁工序(仅自身,焦炭/喷煤还原)"
+    },
+    "72012000": {
+      "direct": 1.55,
+      "indirect": 0.04,
+      "type": "高炉炼铁工序(仅自身,焦炭/喷煤还原)"
+    },
+    "72015010": {
+      "direct": 1.55,
+      "indirect": 0.04,
+      "type": "高炉炼铁工序(仅自身,焦炭/喷煤还原)"
+    },
+    "72015090": {
+      "direct": 1.55,
+      "indirect": 0.04,
+      "type": "高炉炼铁工序(仅自身,焦炭/喷煤还原)"
+    },
+    "72021120": {
+      "direct": 1.3,
+      "indirect": 1.3,
+      "type": "锰铁矿热炉冶炼(仅自身,还原剂+电)"
+    },
+    "72021180": {
+      "direct": 1.3,
+      "indirect": 1.3,
+      "type": "锰铁矿热炉冶炼(仅自身,还原剂+电)"
+    },
+    "72021900": {
+      "direct": 1.3,
+      "indirect": 1.3,
+      "type": "锰铁矿热炉冶炼(仅自身,还原剂+电)"
+    },
+    "72024110": {
+      "direct": 1.4,
+      "indirect": 1.95,
+      "type": "铬铁矿热炉冶炼(仅自身,还原剂+电)"
+    },
+    "72024190": {
+      "direct": 1.4,
+      "indirect": 1.95,
+      "type": "铬铁矿热炉冶炼(仅自身,还原剂+电)"
+    },
+    "72024910": {
+      "direct": 1.4,
+      "indirect": 1.95,
+      "type": "铬铁矿热炉冶炼(仅自身,还原剂+电)"
+    },
+    "72024950": {
+      "direct": 1.4,
+      "indirect": 1.95,
+      "type": "铬铁矿热炉冶炼(仅自身,还原剂+电)"
+    },
+    "72024990": {
+      "direct": 1.4,
+      "indirect": 1.95,
+      "type": "铬铁矿热炉冶炼(仅自身,还原剂+电)"
+    },
+    "72026000": {
+      "direct": 2.2,
+      "indirect": 2.9,
+      "type": "镍铁/RKEF冶炼(仅自身,煤+电)"
+    },
+    "72031000": {
+      "direct": 1.5,
+      "indirect": 0.06,
+      "type": "直接还原铁工序(煤基为主,仅自身)"
+    },
+    "72039000": {
+      "direct": 1.5,
+      "indirect": 0.06,
+      "type": "直接还原铁工序(煤基为主,仅自身)"
+    },
+    "72051000": {
+      "direct": 1.6,
+      "indirect": 0.1,
+      "type": "铁粉/粒(高炉铁+雾化,仅自身)"
+    },
+    "72052100": {
+      "direct": 1.6,
+      "indirect": 0.1,
+      "type": "铁粉/粒(高炉铁+雾化,仅自身)"
+    },
+    "72052900": {
+      "direct": 1.6,
+      "indirect": 0.1,
+      "type": "铁粉/粒(高炉铁+雾化,仅自身)"
+    },
+    "72061000": {
+      "direct": 0.3,
+      "indirect": 0.06,
+      "type": "转炉炼钢工序(仅自身,不含铁水)"
+    },
+    "72069000": {
+      "direct": 0.3,
+      "indirect": 0.06,
+      "type": "转炉炼钢工序(仅自身,不含铁水)"
+    },
+    "72071111": {
+      "direct": 0.3,
+      "indirect": 0.06,
+      "type": "转炉炼钢工序(仅自身,不含铁水)"
+    },
+    "72071114": {
+      "direct": 0.3,
+      "indirect": 0.06,
+      "type": "转炉炼钢工序(仅自身,不含铁水)"
+    },
+    "72071116": {
+      "direct": 0.3,
+      "indirect": 0.06,
+      "type": "转炉炼钢工序(仅自身,不含铁水)"
+    },
+    "72071190": {
+      "direct": 0.3,
+      "indirect": 0.06,
+      "type": "转炉炼钢工序(仅自身,不含铁水)"
+    },
+    "72071210": {
+      "direct": 0.3,
+      "indirect": 0.06,
+      "type": "转炉炼钢工序(仅自身,不含铁水)"
+    },
+    "72071290": {
+      "direct": 0.3,
+      "indirect": 0.06,
+      "type": "转炉炼钢工序(仅自身,不含铁水)"
+    },
+    "72071912": {
+      "direct": 0.3,
+      "indirect": 0.06,
+      "type": "转炉炼钢工序(仅自身,不含铁水)"
+    },
+    "72071919": {
+      "direct": 0.3,
+      "indirect": 0.06,
+      "type": "转炉炼钢工序(仅自身,不含铁水)"
+    },
+    "72071980": {
+      "direct": 0.3,
+      "indirect": 0.06,
+      "type": "转炉炼钢工序(仅自身,不含铁水)"
+    },
+    "72072011": {
+      "direct": 0.3,
+      "indirect": 0.06,
+      "type": "转炉炼钢工序(仅自身,不含铁水)"
+    },
+    "72072015": {
+      "direct": 0.3,
+      "indirect": 0.06,
+      "type": "转炉炼钢工序(仅自身,不含铁水)"
+    },
+    "72072017": {
+      "direct": 0.3,
+      "indirect": 0.06,
+      "type": "转炉炼钢工序(仅自身,不含铁水)"
+    },
+    "72072019": {
+      "direct": 0.3,
+      "indirect": 0.06,
+      "type": "转炉炼钢工序(仅自身,不含铁水)"
+    },
+    "72072032": {
+      "direct": 0.3,
+      "indirect": 0.06,
+      "type": "转炉炼钢工序(仅自身,不含铁水)"
+    },
+    "72072039": {
+      "direct": 0.3,
+      "indirect": 0.06,
+      "type": "转炉炼钢工序(仅自身,不含铁水)"
+    },
+    "72072052": {
+      "direct": 0.3,
+      "indirect": 0.06,
+      "type": "转炉炼钢工序(仅自身,不含铁水)"
+    },
+    "72072059": {
+      "direct": 0.3,
+      "indirect": 0.06,
+      "type": "转炉炼钢工序(仅自身,不含铁水)"
+    },
+    "72072080": {
+      "direct": 0.3,
+      "indirect": 0.06,
+      "type": "转炉炼钢工序(仅自身,不含铁水)"
+    },
+    "72081000": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72082500": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72082600": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72082700": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72083600": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72083700": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72083800": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72083900": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72084000": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72085120": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72085191": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72085198": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72085210": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72085291": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72085299": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72085310": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72085390": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72085400": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72089020": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72089080": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72091500": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72091610": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72091690": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72091710": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72091790": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72091810": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72091891": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72091899": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72092500": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72092610": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72092690": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72092710": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72092790": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72092810": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72092890": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72099020": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72099080": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72101100": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72101220": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72101280": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72102000": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72103000": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72104100": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72104900": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72105000": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72106100": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72106900": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72107010": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72107080": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72109030": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72109040": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72109080": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72111300": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72111400": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72111900": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72112320": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72112330": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72112380": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72112900": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72119020": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72119080": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72121010": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72121090": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72122000": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72123000": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72124020": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72124080": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72125020": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72125030": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72125040": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72125061": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72125069": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72125090": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72126000": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72131000": {
+      "direct": 0.1,
+      "indirect": 0.04,
+      "type": "盘条/线材热轧(仅轧制)"
+    },
+    "72132000": {
+      "direct": 0.1,
+      "indirect": 0.04,
+      "type": "盘条/线材热轧(仅轧制)"
+    },
+    "72139110": {
+      "direct": 0.1,
+      "indirect": 0.04,
+      "type": "盘条/线材热轧(仅轧制)"
+    },
+    "72139120": {
+      "direct": 0.1,
+      "indirect": 0.04,
+      "type": "盘条/线材热轧(仅轧制)"
+    },
+    "72139141": {
+      "direct": 0.1,
+      "indirect": 0.04,
+      "type": "盘条/线材热轧(仅轧制)"
+    },
+    "72139149": {
+      "direct": 0.1,
+      "indirect": 0.04,
+      "type": "盘条/线材热轧(仅轧制)"
+    },
+    "72139170": {
+      "direct": 0.1,
+      "indirect": 0.04,
+      "type": "盘条/线材热轧(仅轧制)"
+    },
+    "72139190": {
+      "direct": 0.1,
+      "indirect": 0.04,
+      "type": "盘条/线材热轧(仅轧制)"
+    },
+    "72139910": {
+      "direct": 0.1,
+      "indirect": 0.04,
+      "type": "盘条/线材热轧(仅轧制)"
+    },
+    "72139990": {
+      "direct": 0.1,
+      "indirect": 0.04,
+      "type": "盘条/线材热轧(仅轧制)"
+    },
+    "72141000": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72142000": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72143000": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72149110": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72149190": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72149910": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72149931": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72149939": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72149950": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72149971": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72149979": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72149995": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72151000": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72155011": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72155019": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72155080": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72159000": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72161000": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "型钢/角钢热轧成型(仅自身)"
+    },
+    "72162100": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "型钢/角钢热轧成型(仅自身)"
+    },
+    "72162200": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "型钢/角钢热轧成型(仅自身)"
+    },
+    "72163110": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "型钢/角钢热轧成型(仅自身)"
+    },
+    "72163190": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "型钢/角钢热轧成型(仅自身)"
+    },
+    "72163211": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "型钢/角钢热轧成型(仅自身)"
+    },
+    "72163219": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "型钢/角钢热轧成型(仅自身)"
+    },
+    "72163291": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "型钢/角钢热轧成型(仅自身)"
+    },
+    "72163299": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "型钢/角钢热轧成型(仅自身)"
+    },
+    "72163310": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "型钢/角钢热轧成型(仅自身)"
+    },
+    "72163390": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "型钢/角钢热轧成型(仅自身)"
+    },
+    "72164010": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "型钢/角钢热轧成型(仅自身)"
+    },
+    "72164090": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "型钢/角钢热轧成型(仅自身)"
+    },
+    "72165010": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "型钢/角钢热轧成型(仅自身)"
+    },
+    "72165091": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "型钢/角钢热轧成型(仅自身)"
+    },
+    "72165099": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "型钢/角钢热轧成型(仅自身)"
+    },
+    "72166110": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "型钢/角钢热轧成型(仅自身)"
+    },
+    "72166190": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "型钢/角钢热轧成型(仅自身)"
+    },
+    "72166900": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "型钢/角钢热轧成型(仅自身)"
+    },
+    "72169110": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "型钢/角钢热轧成型(仅自身)"
+    },
+    "72169180": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "型钢/角钢热轧成型(仅自身)"
+    },
+    "72169900": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "型钢/角钢热轧成型(仅自身)"
+    },
+    "72171010": {
+      "direct": 0.02,
+      "indirect": 0.06,
+      "type": "拉丝/冷拔(仅自身,电力)",
+      "lowConfidence": true
+    },
+    "72171031": {
+      "direct": 0.02,
+      "indirect": 0.06,
+      "type": "拉丝/冷拔(仅自身,电力)",
+      "lowConfidence": true
+    },
+    "72171039": {
+      "direct": 0.02,
+      "indirect": 0.06,
+      "type": "拉丝/冷拔(仅自身,电力)",
+      "lowConfidence": true
+    },
+    "72171050": {
+      "direct": 0.02,
+      "indirect": 0.06,
+      "type": "拉丝/冷拔(仅自身,电力)",
+      "lowConfidence": true
+    },
+    "72171090": {
+      "direct": 0.02,
+      "indirect": 0.06,
+      "type": "拉丝/冷拔(仅自身,电力)",
+      "lowConfidence": true
+    },
+    "72172010": {
+      "direct": 0.06,
+      "indirect": 0.07,
+      "type": "镀层钢丝(拉丝+镀锌,仅自身)",
+      "lowConfidence": true
+    },
+    "72172030": {
+      "direct": 0.06,
+      "indirect": 0.07,
+      "type": "镀层钢丝(拉丝+镀锌,仅自身)",
+      "lowConfidence": true
+    },
+    "72172050": {
+      "direct": 0.06,
+      "indirect": 0.07,
+      "type": "镀层钢丝(拉丝+镀锌,仅自身)",
+      "lowConfidence": true
+    },
+    "72172090": {
+      "direct": 0.06,
+      "indirect": 0.07,
+      "type": "镀层钢丝(拉丝+镀锌,仅自身)",
+      "lowConfidence": true
+    },
+    "72173041": {
+      "direct": 0.06,
+      "indirect": 0.07,
+      "type": "镀层钢丝(拉丝+镀锌,仅自身)",
+      "lowConfidence": true
+    },
+    "72173049": {
+      "direct": 0.06,
+      "indirect": 0.07,
+      "type": "镀层钢丝(拉丝+镀锌,仅自身)",
+      "lowConfidence": true
+    },
+    "72173050": {
+      "direct": 0.06,
+      "indirect": 0.07,
+      "type": "镀层钢丝(拉丝+镀锌,仅自身)",
+      "lowConfidence": true
+    },
+    "72173090": {
+      "direct": 0.06,
+      "indirect": 0.07,
+      "type": "镀层钢丝(拉丝+镀锌,仅自身)",
+      "lowConfidence": true
+    },
+    "72179020": {
+      "direct": 0.06,
+      "indirect": 0.07,
+      "type": "镀层钢丝(拉丝+镀锌,仅自身)",
+      "lowConfidence": true
+    },
+    "72179050": {
+      "direct": 0.06,
+      "indirect": 0.07,
+      "type": "镀层钢丝(拉丝+镀锌,仅自身)",
+      "lowConfidence": true
+    },
+    "72179090": {
+      "direct": 0.06,
+      "indirect": 0.07,
+      "type": "镀层钢丝(拉丝+镀锌,仅自身)",
+      "lowConfidence": true
+    },
+    "72181000": {
+      "direct": 0.45,
+      "indirect": 0.3,
+      "type": "合金钢锭/连铸(电炉+精炼,仅自身)",
+      "lowConfidence": true
+    },
+    "72189110": {
+      "direct": 0.45,
+      "indirect": 0.3,
+      "type": "合金钢锭/连铸(电炉+精炼,仅自身)",
+      "lowConfidence": true
+    },
+    "72189180": {
+      "direct": 0.45,
+      "indirect": 0.3,
+      "type": "合金钢锭/连铸(电炉+精炼,仅自身)",
+      "lowConfidence": true
+    },
+    "72189911": {
+      "direct": 0.45,
+      "indirect": 0.3,
+      "type": "合金钢锭/连铸(电炉+精炼,仅自身)",
+      "lowConfidence": true
+    },
+    "72189919": {
+      "direct": 0.45,
+      "indirect": 0.3,
+      "type": "合金钢锭/连铸(电炉+精炼,仅自身)",
+      "lowConfidence": true
+    },
+    "72189920": {
+      "direct": 0.45,
+      "indirect": 0.3,
+      "type": "合金钢锭/连铸(电炉+精炼,仅自身)",
+      "lowConfidence": true
+    },
+    "72189980": {
+      "direct": 0.45,
+      "indirect": 0.3,
+      "type": "合金钢锭/连铸(电炉+精炼,仅自身)",
+      "lowConfidence": true
+    },
+    "72191100": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72191210": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72191290": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72191310": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72191390": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72191410": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72191490": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72192110": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72192190": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72192210": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72192290": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72192300": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72192400": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72193100": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72193210": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72193290": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72193310": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72193390": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72193410": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72193490": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72193510": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72193590": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72199020": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72199080": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72201100": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72201200": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72202021": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72202029": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72202041": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72202049": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72202081": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72202089": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72209020": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72209080": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72210010": {
+      "direct": 0.1,
+      "indirect": 0.04,
+      "type": "盘条/线材热轧(仅轧制)"
+    },
+    "72210090": {
+      "direct": 0.1,
+      "indirect": 0.04,
+      "type": "盘条/线材热轧(仅轧制)"
+    },
+    "72221111": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72221119": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72221181": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72221189": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72221910": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72221990": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72222011": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72222019": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72222021": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72222029": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72222031": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72222039": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72222081": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72222089": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72223051": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72223091": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72223097": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72224010": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72224050": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72224090": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72230011": {
+      "direct": 0.02,
+      "indirect": 0.06,
+      "type": "拉丝/冷拔(仅自身,电力)",
+      "lowConfidence": true
+    },
+    "72230019": {
+      "direct": 0.02,
+      "indirect": 0.06,
+      "type": "拉丝/冷拔(仅自身,电力)",
+      "lowConfidence": true
+    },
+    "72230091": {
+      "direct": 0.02,
+      "indirect": 0.06,
+      "type": "拉丝/冷拔(仅自身,电力)",
+      "lowConfidence": true
+    },
+    "72230099": {
+      "direct": 0.02,
+      "indirect": 0.06,
+      "type": "拉丝/冷拔(仅自身,电力)",
+      "lowConfidence": true
+    },
+    "72241010": {
+      "direct": 0.45,
+      "indirect": 0.3,
+      "type": "合金钢锭/连铸(电炉+精炼,仅自身)",
+      "lowConfidence": true
+    },
+    "72241090": {
+      "direct": 0.45,
+      "indirect": 0.3,
+      "type": "合金钢锭/连铸(电炉+精炼,仅自身)",
+      "lowConfidence": true
+    },
+    "72249002": {
+      "direct": 0.45,
+      "indirect": 0.3,
+      "type": "合金钢锭/连铸(电炉+精炼,仅自身)",
+      "lowConfidence": true
+    },
+    "72249003": {
+      "direct": 0.45,
+      "indirect": 0.3,
+      "type": "合金钢锭/连铸(电炉+精炼,仅自身)",
+      "lowConfidence": true
+    },
+    "72249005": {
+      "direct": 0.45,
+      "indirect": 0.3,
+      "type": "合金钢锭/连铸(电炉+精炼,仅自身)",
+      "lowConfidence": true
+    },
+    "72249007": {
+      "direct": 0.45,
+      "indirect": 0.3,
+      "type": "合金钢锭/连铸(电炉+精炼,仅自身)",
+      "lowConfidence": true
+    },
+    "72249014": {
+      "direct": 0.45,
+      "indirect": 0.3,
+      "type": "合金钢锭/连铸(电炉+精炼,仅自身)",
+      "lowConfidence": true
+    },
+    "72249018": {
+      "direct": 0.45,
+      "indirect": 0.3,
+      "type": "合金钢锭/连铸(电炉+精炼,仅自身)",
+      "lowConfidence": true
+    },
+    "72249031": {
+      "direct": 0.45,
+      "indirect": 0.3,
+      "type": "合金钢锭/连铸(电炉+精炼,仅自身)",
+      "lowConfidence": true
+    },
+    "72249038": {
+      "direct": 0.45,
+      "indirect": 0.3,
+      "type": "合金钢锭/连铸(电炉+精炼,仅自身)",
+      "lowConfidence": true
+    },
+    "72249090": {
+      "direct": 0.45,
+      "indirect": 0.3,
+      "type": "合金钢锭/连铸(电炉+精炼,仅自身)",
+      "lowConfidence": true
+    },
+    "72251100": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72251910": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72251990": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72253010": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72253030": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72253090": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72254012": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72254015": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72254040": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72254060": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72254090": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72255020": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72255080": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72259100": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72259200": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72259900": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72261100": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72261910": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72261980": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72262000": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72269120": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72269191": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72269199": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板带热轧(仅轧制再加热)"
+    },
+    "72269200": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "冷轧+退火(仅自身,电力为主)"
+    },
+    "72269910": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72269930": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72269970": {
+      "direct": 0.14,
+      "indirect": 0.1,
+      "type": "冷轧+镀层/退火(仅自身)"
+    },
+    "72271000": {
+      "direct": 0.1,
+      "indirect": 0.04,
+      "type": "盘条/线材热轧(仅轧制)"
+    },
+    "72272000": {
+      "direct": 0.1,
+      "indirect": 0.04,
+      "type": "盘条/线材热轧(仅轧制)"
+    },
+    "72279010": {
+      "direct": 0.1,
+      "indirect": 0.04,
+      "type": "盘条/线材热轧(仅轧制)"
+    },
+    "72279050": {
+      "direct": 0.1,
+      "indirect": 0.04,
+      "type": "盘条/线材热轧(仅轧制)"
+    },
+    "72279095": {
+      "direct": 0.1,
+      "indirect": 0.04,
+      "type": "盘条/线材热轧(仅轧制)"
+    },
+    "72281020": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72281050": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72281090": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72282010": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72282091": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72282099": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72283020": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72283041": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72283049": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72283061": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72283069": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72283070": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72283089": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72284010": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72284090": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72285020": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72285040": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72285061": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72285069": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72285080": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72286020": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72286080": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72287010": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72287090": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72288000": {
+      "direct": 0.11,
+      "indirect": 0.04,
+      "type": "棒材/长材热轧(仅轧制)",
+      "lowConfidence": true
+    },
+    "72292000": {
+      "direct": 0.02,
+      "indirect": 0.06,
+      "type": "拉丝/冷拔(仅自身,电力)",
+      "lowConfidence": true
+    },
+    "72299020": {
+      "direct": 0.02,
+      "indirect": 0.06,
+      "type": "拉丝/冷拔(仅自身,电力)",
+      "lowConfidence": true
+    },
+    "72299050": {
+      "direct": 0.02,
+      "indirect": 0.06,
+      "type": "拉丝/冷拔(仅自身,电力)",
+      "lowConfidence": true
+    },
+    "72299090": {
+      "direct": 0.02,
+      "indirect": 0.06,
+      "type": "拉丝/冷拔(仅自身,电力)",
+      "lowConfidence": true
+    },
+    "73011000": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板桩热轧成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73012000": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "板桩热轧成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73021010": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "钢轨/轨道件热轧成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73021022": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "钢轨/轨道件热轧成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73021028": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "钢轨/轨道件热轧成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73021040": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "钢轨/轨道件热轧成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73021050": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "钢轨/轨道件热轧成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73021090": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "钢轨/轨道件热轧成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73023000": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "钢轨/轨道件热轧成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73024000": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "钢轨/轨道件热轧成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73029000": {
+      "direct": 0.12,
+      "indirect": 0.05,
+      "type": "钢轨/轨道件热轧成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73030010": {
+      "direct": 0.35,
+      "indirect": 0.08,
+      "type": "铸铁管铸造(仅自身,熔化)",
+      "lowConfidence": true
+    },
+    "73030090": {
+      "direct": 0.35,
+      "indirect": 0.08,
+      "type": "铸铁管铸造(仅自身,熔化)",
+      "lowConfidence": true
+    },
+    "73041100": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73041910": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73041930": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73041990": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73042200": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73042300": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73042400": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73042910": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73042930": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73042990": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73043120": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73043180": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73043950": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73043982": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73043983": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73043988": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73044100": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73044983": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73044985": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73044989": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73045110": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73045181": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73045189": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73045930": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73045982": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73045983": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73045989": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73049000": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73051100": {
+      "direct": 0.08,
+      "indirect": 0.07,
+      "type": "焊管成型(仅自身,成型+焊接)",
+      "lowConfidence": true
+    },
+    "73051200": {
+      "direct": 0.08,
+      "indirect": 0.07,
+      "type": "焊管成型(仅自身,成型+焊接)",
+      "lowConfidence": true
+    },
+    "73051900": {
+      "direct": 0.08,
+      "indirect": 0.07,
+      "type": "焊管成型(仅自身,成型+焊接)",
+      "lowConfidence": true
+    },
+    "73052000": {
+      "direct": 0.08,
+      "indirect": 0.07,
+      "type": "焊管成型(仅自身,成型+焊接)",
+      "lowConfidence": true
+    },
+    "73053100": {
+      "direct": 0.08,
+      "indirect": 0.07,
+      "type": "焊管成型(仅自身,成型+焊接)",
+      "lowConfidence": true
+    },
+    "73053900": {
+      "direct": 0.08,
+      "indirect": 0.07,
+      "type": "焊管成型(仅自身,成型+焊接)",
+      "lowConfidence": true
+    },
+    "73059000": {
+      "direct": 0.08,
+      "indirect": 0.07,
+      "type": "焊管成型(仅自身,成型+焊接)",
+      "lowConfidence": true
+    },
+    "73061100": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73061900": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73062100": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73062900": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73063012": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73063018": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73063041": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73063049": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73063072": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73063077": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73063080": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73064020": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73064080": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73065021": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73065029": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73065080": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73066110": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73066192": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73066199": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73066910": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73066990": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73069000": {
+      "direct": 0.18,
+      "indirect": 0.08,
+      "type": "无缝钢管穿孔轧制(仅自身,再加热)",
+      "lowConfidence": true
+    },
+    "73071110": {
+      "direct": 0.22,
+      "indirect": 0.1,
+      "type": "管件锻造/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73071190": {
+      "direct": 0.22,
+      "indirect": 0.1,
+      "type": "管件锻造/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73071910": {
+      "direct": 0.22,
+      "indirect": 0.1,
+      "type": "管件锻造/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73071990": {
+      "direct": 0.22,
+      "indirect": 0.1,
+      "type": "管件锻造/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73072100": {
+      "direct": 0.22,
+      "indirect": 0.1,
+      "type": "管件锻造/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73072210": {
+      "direct": 0.22,
+      "indirect": 0.1,
+      "type": "管件锻造/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73072290": {
+      "direct": 0.22,
+      "indirect": 0.1,
+      "type": "管件锻造/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73072310": {
+      "direct": 0.22,
+      "indirect": 0.1,
+      "type": "管件锻造/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73072390": {
+      "direct": 0.22,
+      "indirect": 0.1,
+      "type": "管件锻造/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73072910": {
+      "direct": 0.22,
+      "indirect": 0.1,
+      "type": "管件锻造/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73072980": {
+      "direct": 0.22,
+      "indirect": 0.1,
+      "type": "管件锻造/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73079100": {
+      "direct": 0.22,
+      "indirect": 0.1,
+      "type": "管件锻造/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73079210": {
+      "direct": 0.22,
+      "indirect": 0.1,
+      "type": "管件锻造/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73079290": {
+      "direct": 0.22,
+      "indirect": 0.1,
+      "type": "管件锻造/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73079311": {
+      "direct": 0.22,
+      "indirect": 0.1,
+      "type": "管件锻造/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73079319": {
+      "direct": 0.22,
+      "indirect": 0.1,
+      "type": "管件锻造/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73079391": {
+      "direct": 0.22,
+      "indirect": 0.1,
+      "type": "管件锻造/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73079399": {
+      "direct": 0.22,
+      "indirect": 0.1,
+      "type": "管件锻造/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73079910": {
+      "direct": 0.22,
+      "indirect": 0.1,
+      "type": "管件锻造/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73079980": {
+      "direct": 0.22,
+      "indirect": 0.1,
+      "type": "管件锻造/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73081000": {
+      "direct": 0.12,
+      "indirect": 0.12,
+      "type": "钢结构件下料/焊接/喷涂(仅自身)",
+      "lowConfidence": true
+    },
+    "73082000": {
+      "direct": 0.12,
+      "indirect": 0.12,
+      "type": "钢结构件下料/焊接/喷涂(仅自身)",
+      "lowConfidence": true
+    },
+    "73083000": {
+      "direct": 0.12,
+      "indirect": 0.12,
+      "type": "钢结构件下料/焊接/喷涂(仅自身)",
+      "lowConfidence": true
+    },
+    "73084000": {
+      "direct": 0.12,
+      "indirect": 0.12,
+      "type": "钢结构件下料/焊接/喷涂(仅自身)",
+      "lowConfidence": true
+    },
+    "73089051": {
+      "direct": 0.12,
+      "indirect": 0.12,
+      "type": "钢结构件下料/焊接/喷涂(仅自身)",
+      "lowConfidence": true
+    },
+    "73089059": {
+      "direct": 0.12,
+      "indirect": 0.12,
+      "type": "钢结构件下料/焊接/喷涂(仅自身)",
+      "lowConfidence": true
+    },
+    "73089098": {
+      "direct": 0.12,
+      "indirect": 0.12,
+      "type": "钢结构件下料/焊接/喷涂(仅自身)",
+      "lowConfidence": true
+    },
+    "73090010": {
+      "direct": 0.12,
+      "indirect": 0.12,
+      "type": "储罐/容器制作(仅自身,焊接)",
+      "lowConfidence": true
+    },
+    "73090030": {
+      "direct": 0.12,
+      "indirect": 0.12,
+      "type": "储罐/容器制作(仅自身,焊接)",
+      "lowConfidence": true
+    },
+    "73090051": {
+      "direct": 0.12,
+      "indirect": 0.12,
+      "type": "储罐/容器制作(仅自身,焊接)",
+      "lowConfidence": true
+    },
+    "73090059": {
+      "direct": 0.12,
+      "indirect": 0.12,
+      "type": "储罐/容器制作(仅自身,焊接)",
+      "lowConfidence": true
+    },
+    "73090090": {
+      "direct": 0.12,
+      "indirect": 0.12,
+      "type": "储罐/容器制作(仅自身,焊接)",
+      "lowConfidence": true
+    },
+    "73101000": {
+      "direct": 0.12,
+      "indirect": 0.12,
+      "type": "储罐/容器制作(仅自身,焊接)",
+      "lowConfidence": true
+    },
+    "73102111": {
+      "direct": 0.12,
+      "indirect": 0.12,
+      "type": "储罐/容器制作(仅自身,焊接)",
+      "lowConfidence": true
+    },
+    "73102119": {
+      "direct": 0.12,
+      "indirect": 0.12,
+      "type": "储罐/容器制作(仅自身,焊接)",
+      "lowConfidence": true
+    },
+    "73102191": {
+      "direct": 0.12,
+      "indirect": 0.12,
+      "type": "储罐/容器制作(仅自身,焊接)",
+      "lowConfidence": true
+    },
+    "73102199": {
+      "direct": 0.12,
+      "indirect": 0.12,
+      "type": "储罐/容器制作(仅自身,焊接)",
+      "lowConfidence": true
+    },
+    "73102910": {
+      "direct": 0.12,
+      "indirect": 0.12,
+      "type": "储罐/容器制作(仅自身,焊接)",
+      "lowConfidence": true
+    },
+    "73102990": {
+      "direct": 0.12,
+      "indirect": 0.12,
+      "type": "储罐/容器制作(仅自身,焊接)",
+      "lowConfidence": true
+    },
+    "73110011": {
+      "direct": 0.18,
+      "indirect": 0.14,
+      "type": "气瓶成型/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73110013": {
+      "direct": 0.18,
+      "indirect": 0.14,
+      "type": "气瓶成型/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73110019": {
+      "direct": 0.18,
+      "indirect": 0.14,
+      "type": "气瓶成型/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73110030": {
+      "direct": 0.18,
+      "indirect": 0.14,
+      "type": "气瓶成型/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73110091": {
+      "direct": 0.18,
+      "indirect": 0.14,
+      "type": "气瓶成型/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73110099": {
+      "direct": 0.18,
+      "indirect": 0.14,
+      "type": "气瓶成型/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181100": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181210": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181290": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181300": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181410": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181491": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181499": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181520": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181535": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181542": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181548": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181552": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181558": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181562": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181568": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181575": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181582": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181588": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181595": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181631": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181639": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181640": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181660": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181692": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181699": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73181900": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73182100": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73182200": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73182300": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73182400": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73182900": {
+      "direct": 0.1,
+      "indirect": 0.1,
+      "type": "紧固件冷镦/热处理(仅自身)",
+      "lowConfidence": true
+    },
+    "73261100": {
+      "direct": 0.14,
+      "indirect": 0.12,
+      "type": "钢制品锻压/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73261910": {
+      "direct": 0.14,
+      "indirect": 0.12,
+      "type": "钢制品锻压/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73261990": {
+      "direct": 0.14,
+      "indirect": 0.12,
+      "type": "钢制品锻压/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73262000": {
+      "direct": 0.14,
+      "indirect": 0.12,
+      "type": "钢制品锻压/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73269030": {
+      "direct": 0.14,
+      "indirect": 0.12,
+      "type": "钢制品锻压/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73269040": {
+      "direct": 0.14,
+      "indirect": 0.12,
+      "type": "钢制品锻压/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73269050": {
+      "direct": 0.14,
+      "indirect": 0.12,
+      "type": "钢制品锻压/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73269060": {
+      "direct": 0.14,
+      "indirect": 0.12,
+      "type": "钢制品锻压/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73269092": {
+      "direct": 0.14,
+      "indirect": 0.12,
+      "type": "钢制品锻压/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73269094": {
+      "direct": 0.14,
+      "indirect": 0.12,
+      "type": "钢制品锻压/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73269096": {
+      "direct": 0.14,
+      "indirect": 0.12,
+      "type": "钢制品锻压/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "73269098": {
+      "direct": 0.14,
+      "indirect": 0.12,
+      "type": "钢制品锻压/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "76011010": {
+      "direct": 1.8,
+      "indirect": 11.0,
+      "type": "原铝电解(仅电解,阳极+PFC;电力11t)"
+    },
+    "76011090": {
+      "direct": 1.8,
+      "indirect": 11.0,
+      "type": "原铝电解(仅电解,阳极+PFC;电力11t)"
+    },
+    "76012030": {
+      "direct": 1.8,
+      "indirect": 11.0,
+      "type": "原铝电解(仅电解,阳极+PFC;电力11t)"
+    },
+    "76012040": {
+      "direct": 1.8,
+      "indirect": 11.0,
+      "type": "原铝电解(仅电解,阳极+PFC;电力11t)"
+    },
+    "76012080": {
+      "direct": 1.8,
+      "indirect": 11.0,
+      "type": "原铝电解(仅电解,阳极+PFC;电力11t)"
+    },
+    "76031000": {
+      "direct": 0.2,
+      "indirect": 0.3,
+      "type": "铝粉/铝片雾化磨制(仅自身)",
+      "lowConfidence": true
+    },
+    "76032000": {
+      "direct": 0.2,
+      "indirect": 0.3,
+      "type": "铝粉/铝片雾化磨制(仅自身)",
+      "lowConfidence": true
+    },
+    "76041010": {
+      "direct": 0.2,
+      "indirect": 0.25,
+      "type": "铝挤压(棒/型/管,仅挤压+均热)",
+      "lowConfidence": true
+    },
+    "76041090": {
+      "direct": 0.2,
+      "indirect": 0.25,
+      "type": "铝挤压(棒/型/管,仅挤压+均热)",
+      "lowConfidence": true
+    },
+    "76042100": {
+      "direct": 0.2,
+      "indirect": 0.25,
+      "type": "铝挤压(棒/型/管,仅挤压+均热)",
+      "lowConfidence": true
+    },
+    "76042910": {
+      "direct": 0.2,
+      "indirect": 0.25,
+      "type": "铝挤压(棒/型/管,仅挤压+均热)",
+      "lowConfidence": true
+    },
+    "76042990": {
+      "direct": 0.2,
+      "indirect": 0.25,
+      "type": "铝挤压(棒/型/管,仅挤压+均热)",
+      "lowConfidence": true
+    },
+    "76051100": {
+      "direct": 0.06,
+      "indirect": 0.2,
+      "type": "铝杆/线拉拔(仅自身,电力)",
+      "lowConfidence": true
+    },
+    "76051900": {
+      "direct": 0.06,
+      "indirect": 0.2,
+      "type": "铝杆/线拉拔(仅自身,电力)",
+      "lowConfidence": true
+    },
+    "76052100": {
+      "direct": 0.06,
+      "indirect": 0.2,
+      "type": "铝杆/线拉拔(仅自身,电力)",
+      "lowConfidence": true
+    },
+    "76052900": {
+      "direct": 0.06,
+      "indirect": 0.2,
+      "type": "铝杆/线拉拔(仅自身,电力)",
+      "lowConfidence": true
+    },
+    "76061130": {
+      "direct": 0.12,
+      "indirect": 0.45,
+      "type": "铝板带冷热轧(仅自身,~1200kWh/t)",
+      "lowConfidence": true
+    },
+    "76061150": {
+      "direct": 0.12,
+      "indirect": 0.45,
+      "type": "铝板带冷热轧(仅自身,~1200kWh/t)",
+      "lowConfidence": true
+    },
+    "76061191": {
+      "direct": 0.12,
+      "indirect": 0.45,
+      "type": "铝板带冷热轧(仅自身,~1200kWh/t)",
+      "lowConfidence": true
+    },
+    "76061193": {
+      "direct": 0.12,
+      "indirect": 0.45,
+      "type": "铝板带冷热轧(仅自身,~1200kWh/t)",
+      "lowConfidence": true
+    },
+    "76061199": {
+      "direct": 0.12,
+      "indirect": 0.45,
+      "type": "铝板带冷热轧(仅自身,~1200kWh/t)",
+      "lowConfidence": true
+    },
+    "76061211": {
+      "direct": 0.12,
+      "indirect": 0.45,
+      "type": "铝板带冷热轧(仅自身,~1200kWh/t)",
+      "lowConfidence": true
+    },
+    "76061219": {
+      "direct": 0.12,
+      "indirect": 0.45,
+      "type": "铝板带冷热轧(仅自身,~1200kWh/t)",
+      "lowConfidence": true
+    },
+    "76061230": {
+      "direct": 0.12,
+      "indirect": 0.45,
+      "type": "铝板带冷热轧(仅自身,~1200kWh/t)",
+      "lowConfidence": true
+    },
+    "76061250": {
+      "direct": 0.12,
+      "indirect": 0.45,
+      "type": "铝板带冷热轧(仅自身,~1200kWh/t)",
+      "lowConfidence": true
+    },
+    "76061292": {
+      "direct": 0.12,
+      "indirect": 0.45,
+      "type": "铝板带冷热轧(仅自身,~1200kWh/t)",
+      "lowConfidence": true
+    },
+    "76061293": {
+      "direct": 0.12,
+      "indirect": 0.45,
+      "type": "铝板带冷热轧(仅自身,~1200kWh/t)",
+      "lowConfidence": true
+    },
+    "76061299": {
+      "direct": 0.12,
+      "indirect": 0.45,
+      "type": "铝板带冷热轧(仅自身,~1200kWh/t)",
+      "lowConfidence": true
+    },
+    "76069100": {
+      "direct": 0.12,
+      "indirect": 0.45,
+      "type": "铝板带冷热轧(仅自身,~1200kWh/t)",
+      "lowConfidence": true
+    },
+    "76069200": {
+      "direct": 0.12,
+      "indirect": 0.45,
+      "type": "铝板带冷热轧(仅自身,~1200kWh/t)",
+      "lowConfidence": true
+    },
+    "76071111": {
+      "direct": 0.14,
+      "indirect": 0.6,
+      "type": "铝箔轧制(仅自身,多道次+退火)",
+      "lowConfidence": true
+    },
+    "76071119": {
+      "direct": 0.14,
+      "indirect": 0.6,
+      "type": "铝箔轧制(仅自身,多道次+退火)",
+      "lowConfidence": true
+    },
+    "76071190": {
+      "direct": 0.14,
+      "indirect": 0.6,
+      "type": "铝箔轧制(仅自身,多道次+退火)",
+      "lowConfidence": true
+    },
+    "76071910": {
+      "direct": 0.14,
+      "indirect": 0.6,
+      "type": "铝箔轧制(仅自身,多道次+退火)",
+      "lowConfidence": true
+    },
+    "76071990": {
+      "direct": 0.14,
+      "indirect": 0.6,
+      "type": "铝箔轧制(仅自身,多道次+退火)",
+      "lowConfidence": true
+    },
+    "76072010": {
+      "direct": 0.14,
+      "indirect": 0.6,
+      "type": "铝箔轧制(仅自身,多道次+退火)",
+      "lowConfidence": true
+    },
+    "76072091": {
+      "direct": 0.14,
+      "indirect": 0.6,
+      "type": "铝箔轧制(仅自身,多道次+退火)",
+      "lowConfidence": true
+    },
+    "76072099": {
+      "direct": 0.14,
+      "indirect": 0.6,
+      "type": "铝箔轧制(仅自身,多道次+退火)",
+      "lowConfidence": true
+    },
+    "76081000": {
+      "direct": 0.2,
+      "indirect": 0.25,
+      "type": "铝管挤压/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "76082020": {
+      "direct": 0.2,
+      "indirect": 0.25,
+      "type": "铝管挤压/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "76082081": {
+      "direct": 0.2,
+      "indirect": 0.25,
+      "type": "铝管挤压/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "76082089": {
+      "direct": 0.2,
+      "indirect": 0.25,
+      "type": "铝管挤压/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "76090000": {
+      "direct": 0.2,
+      "indirect": 0.25,
+      "type": "铝管挤压/成型(仅自身)",
+      "lowConfidence": true
+    },
+    "76101000": {
+      "direct": 0.15,
+      "indirect": 0.2,
+      "type": "铝结构件/门窗加工(仅自身)",
+      "lowConfidence": true
+    },
+    "76109010": {
+      "direct": 0.15,
+      "indirect": 0.2,
+      "type": "铝结构件/门窗加工(仅自身)",
+      "lowConfidence": true
+    },
+    "76109090": {
+      "direct": 0.15,
+      "indirect": 0.2,
+      "type": "铝结构件/门窗加工(仅自身)",
+      "lowConfidence": true
+    },
+    "76110000": {
+      "direct": 0.15,
+      "indirect": 0.2,
+      "type": "铝储罐/容器制作(仅自身,焊接)",
+      "lowConfidence": true
+    },
+    "76121000": {
+      "direct": 0.15,
+      "indirect": 0.2,
+      "type": "铝储罐/容器制作(仅自身,焊接)",
+      "lowConfidence": true
+    },
+    "76129020": {
+      "direct": 0.15,
+      "indirect": 0.2,
+      "type": "铝储罐/容器制作(仅自身,焊接)",
+      "lowConfidence": true
+    },
+    "76129030": {
+      "direct": 0.15,
+      "indirect": 0.2,
+      "type": "铝储罐/容器制作(仅自身,焊接)",
+      "lowConfidence": true
+    },
+    "76129080": {
+      "direct": 0.15,
+      "indirect": 0.2,
+      "type": "铝储罐/容器制作(仅自身,焊接)",
+      "lowConfidence": true
+    },
+    "76130000": {
+      "direct": 0.15,
+      "indirect": 0.2,
+      "type": "铝储罐/容器制作(仅自身,焊接)",
+      "lowConfidence": true
+    },
+    "76141000": {
+      "direct": 0.06,
+      "indirect": 0.2,
+      "type": "铝杆/线拉拔(仅自身,电力)",
+      "lowConfidence": true
+    },
+    "76149000": {
+      "direct": 0.06,
+      "indirect": 0.2,
+      "type": "铝杆/线拉拔(仅自身,电力)",
+      "lowConfidence": true
+    },
+    "76161000": {
+      "direct": 0.18,
+      "indirect": 0.22,
+      "type": "铝制品成型/铸造(仅自身)",
+      "lowConfidence": true
+    },
+    "76169100": {
+      "direct": 0.18,
+      "indirect": 0.22,
+      "type": "铝制品成型/铸造(仅自身)",
+      "lowConfidence": true
+    },
+    "76169910": {
+      "direct": 0.18,
+      "indirect": 0.22,
+      "type": "铝制品成型/铸造(仅自身)",
+      "lowConfidence": true
+    },
+    "76169990": {
+      "direct": 0.18,
+      "indirect": 0.22,
+      "type": "铝制品成型/铸造(仅自身)",
+      "lowConfidence": true
+    }
+  },
+  "_fallbackByCategory": {
+    "Calcined clay": {
+      "direct": 0.18,
+      "indirect": 0.05
+    },
+    "Cement clinker": {
+      "direct": 0.85,
+      "indirect": 0.04
+    },
+    "Cement": {
+      "direct": 0.03,
+      "indirect": 0.06
+    },
+    "Aluminous cement": {
+      "direct": 1.1,
+      "indirect": 0.08
+    },
+    "Sintered Ore": {
+      "direct": 0.2,
+      "indirect": 0.03
+    },
+    "Hydrogen": {
+      "direct": 20.0,
+      "indirect": 0.2
+    },
+    "Nitric acid": {
+      "direct": 0.3,
+      "indirect": 0.04
+    },
+    "Ammonia": {
+      "direct": 2.8,
+      "indirect": 0.1
+    },
+    "Urea": {
+      "direct": 0.35,
+      "indirect": 0.05
+    },
+    "Mixed Fertilisers": {
+      "direct": 0.2,
+      "indirect": 0.06
+    },
+    "Pig iron": {
+      "direct": 1.55,
+      "indirect": 0.04
+    },
+    "FeMn": {
+      "direct": 1.3,
+      "indirect": 1.3
+    },
+    "FeCr": {
+      "direct": 1.4,
+      "indirect": 1.95
+    },
+    "FeNi": {
+      "direct": 2.2,
+      "indirect": 2.9
+    },
+    "DRI": {
+      "direct": 1.5,
+      "indirect": 0.06
+    },
+    "Crude steel": {
+      "direct": 0.3,
+      "indirect": 0.06
+    },
+    "Iron or steel products": {
+      "direct": 0.12,
+      "indirect": 0.06
+    },
+    "Unwrought aluminium": {
+      "direct": 1.8,
+      "indirect": 11.0
+    },
+    "Aluminium products": {
+      "direct": 0.2,
+      "indirect": 0.3
+    }
+  }
+}

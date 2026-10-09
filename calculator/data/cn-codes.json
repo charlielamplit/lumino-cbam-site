@@ -1,0 +1,3978 @@
+[
+  {
+    "cnCode": "25070080",
+    "description": "Calcined clay",
+    "hasIndirectEmissions": true,
+    "sector": "Cement",
+    "aggregatedCategory": "Calcined clay"
+  },
+  {
+    "cnCode": "25231000",
+    "description": "White clinker",
+    "hasIndirectEmissions": true,
+    "sector": "Cement",
+    "aggregatedCategory": "Cement clinker"
+  },
+  {
+    "cnCode": "25232100",
+    "description": "CEM I white",
+    "hasIndirectEmissions": true,
+    "sector": "Cement",
+    "aggregatedCategory": "Cement"
+  },
+  {
+    "cnCode": "25232900",
+    "description": "CEM I grey",
+    "hasIndirectEmissions": true,
+    "sector": "Cement",
+    "aggregatedCategory": "Cement"
+  },
+  {
+    "cnCode": "25233000",
+    "description": "Aluminous cement",
+    "hasIndirectEmissions": true,
+    "sector": "Cement",
+    "aggregatedCategory": "Aluminous cement"
+  },
+  {
+    "cnCode": "25239000",
+    "description": "Other white cements",
+    "hasIndirectEmissions": true,
+    "sector": "Cement",
+    "aggregatedCategory": "Cement"
+  },
+  {
+    "cnCode": "26011200",
+    "description": "Agglomerated iron ores and\nconcentrates, other than roasted iron pyrites",
+    "hasIndirectEmissions": true,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Sintered Ore"
+  },
+  {
+    "cnCode": "28041000",
+    "description": "Hydrogen",
+    "hasIndirectEmissions": false,
+    "sector": "Hydrogen",
+    "aggregatedCategory": "Hydrogen"
+  },
+  {
+    "cnCode": "28080000",
+    "description": "Nitric acid; sulphonitric acids",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Nitric acid"
+  },
+  {
+    "cnCode": "28141000",
+    "description": "Ammonia, anhydrous or in aqueous solution",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Ammonia"
+  },
+  {
+    "cnCode": "28142000",
+    "description": "Ammonia, anhydrous or in aqueous solution",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Ammonia"
+  },
+  {
+    "cnCode": "28342100",
+    "description": "Nitrates of potassium",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Mixed Fertilisers"
+  },
+  {
+    "cnCode": "31021010",
+    "description": "Urea, whether or not in aqueous solution",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Urea"
+  },
+  {
+    "cnCode": "31021090",
+    "description": "Urea, whether or not in aqueous solution",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Urea"
+  },
+  {
+    "cnCode": "31022100",
+    "description": "Ammonium sulphate",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Mixed Fertilisers"
+  },
+  {
+    "cnCode": "31022900",
+    "description": "Double salts and mixtures of ammonium sulphate and ammonium nitrate",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Mixed Fertilisers"
+  },
+  {
+    "cnCode": "31023010",
+    "description": "Ammonium nitrate, whether or not in aqueous solution",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Mixed Fertilisers"
+  },
+  {
+    "cnCode": "31023090",
+    "description": "Ammonium nitrate, whether or not in aqueous solution",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Mixed Fertilisers"
+  },
+  {
+    "cnCode": "31024010",
+    "description": "Mixtures of ammonium nitrate with calcium carbonate or other inorganic non-fertilising substances",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Mixed Fertilisers"
+  },
+  {
+    "cnCode": "31024090",
+    "description": "Mixtures of ammonium nitrate with calcium carbonate or other inorganic non-fertilising substances",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Mixed Fertilisers"
+  },
+  {
+    "cnCode": "31025000",
+    "description": "Sodium nitrate",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Mixed Fertilisers"
+  },
+  {
+    "cnCode": "31026000",
+    "description": "Double salts and mixtures of calcium nitrate and ammonium nitrate",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Mixed Fertilisers"
+  },
+  {
+    "cnCode": "31028000",
+    "description": "Mixtures of urea and ammonium nitrate in aqueous or Fertiliseral solution",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Mixed Fertilisers"
+  },
+  {
+    "cnCode": "31029000",
+    "description": "Mineral or chemical Fertilisers, nitrogenous",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Mixed Fertilisers"
+  },
+  {
+    "cnCode": "31051000",
+    "description": "Mineral or chemical fertilisers containing two or three of the fertilising elements nitrogen, phosphorus and potassium",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Mixed Fertilisers"
+  },
+  {
+    "cnCode": "31052010",
+    "description": "Mineral or chemical fertilisers containing the three fertilising elements nitrogen, phosphorus and potassium",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Mixed Fertilisers"
+  },
+  {
+    "cnCode": "31052090",
+    "description": "Mineral or chemical fertilisers containing the three fertilising elements nitrogen, phosphorus and potassium",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Mixed Fertilisers"
+  },
+  {
+    "cnCode": "31053000",
+    "description": "Diammonium hydrogenorthophosphate (diammonium phosphate)",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Mixed Fertilisers"
+  },
+  {
+    "cnCode": "31054000",
+    "description": "Ammonium dihydrogenorthophosphate (monoammonium phosphate) and mixtures thereof with diammonium hydrogenorthophosphate (diammonium phosphate)",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Mixed Fertilisers"
+  },
+  {
+    "cnCode": "31055100",
+    "description": "Other mineral or chemical fertilisers containing the two fertilising elements nitrogen and phosphorus (nitrates and phosphates)",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Mixed Fertilisers"
+  },
+  {
+    "cnCode": "31055900",
+    "description": "Other mineral or chemical fertilisers containing the two fertilising elements nitrogen and phosphorus (excl. nitrates and phosphates)",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Mixed Fertilisers"
+  },
+  {
+    "cnCode": "31059020",
+    "description": "Mineral or chemical fertilisers containing two or three of the fertilising elements nitrogen, phosphorus and potassium",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Mixed Fertilisers"
+  },
+  {
+    "cnCode": "31059080",
+    "description": "Mineral or chemical fertilisers containing two or three of the fertilising elements nitrogen, phosphorus and potassium",
+    "hasIndirectEmissions": true,
+    "sector": "Fertiliser",
+    "aggregatedCategory": "Mixed Fertilisers"
+  },
+  {
+    "cnCode": "72011011",
+    "description": "Pig iron and spiegeleisen in pigs, blocks or other primary forms",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Pig iron"
+  },
+  {
+    "cnCode": "72011019",
+    "description": "Pig iron and spiegeleisen in pigs, blocks or other primary forms",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Pig iron"
+  },
+  {
+    "cnCode": "72011030",
+    "description": "Pig iron and spiegeleisen in pigs, blocks or other primary forms",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Pig iron"
+  },
+  {
+    "cnCode": "72011090",
+    "description": "Pig iron and spiegeleisen in pigs, blocks or other primary forms",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Pig iron"
+  },
+  {
+    "cnCode": "72012000",
+    "description": "Pig iron and spiegeleisen in pigs, blocks or other primary forms",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Pig iron"
+  },
+  {
+    "cnCode": "72015010",
+    "description": "Pig iron and spiegeleisen in pigs, blocks or other primary forms",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Pig iron"
+  },
+  {
+    "cnCode": "72015090",
+    "description": "Pig iron and spiegeleisen in pigs, blocks or other primary forms",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Pig iron"
+  },
+  {
+    "cnCode": "72021120",
+    "description": "Ferro-manganese",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "FeMn"
+  },
+  {
+    "cnCode": "72021180",
+    "description": "Ferro-manganese",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "FeMn"
+  },
+  {
+    "cnCode": "72021900",
+    "description": "Ferro-manganese",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "FeMn"
+  },
+  {
+    "cnCode": "72024110",
+    "description": "Ferro-chromium",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "FeCr"
+  },
+  {
+    "cnCode": "72024190",
+    "description": "Ferro-chromium",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "FeCr"
+  },
+  {
+    "cnCode": "72024910",
+    "description": "Ferro-chromium",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "FeCr"
+  },
+  {
+    "cnCode": "72024950",
+    "description": "Ferro-chromium",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "FeCr"
+  },
+  {
+    "cnCode": "72024990",
+    "description": "Ferro-chromium",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "FeCr"
+  },
+  {
+    "cnCode": "72026000",
+    "description": "Ferro-nickel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "FeNi"
+  },
+  {
+    "cnCode": "72031000",
+    "description": "Ferrous products obtained by direct reduction of iron ore and other spongy ferrous products, in lumps, pellets or the like; iron having a minimum purity of 99.94%, in lumps, pellets or similar forms",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "DRI"
+  },
+  {
+    "cnCode": "72039000",
+    "description": "Ferrous products obtained by direct reduction of iron ore and other spongy ferrous products, in lumps, pellets or the like; iron having a minimum purity of 99.94%, in lumps, pellets or similar forms",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "DRI"
+  },
+  {
+    "cnCode": "72051000",
+    "description": "Granules and powders, of pig iron, spiegeleisen, iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Pig iron"
+  },
+  {
+    "cnCode": "72052100",
+    "description": "Granules and powders, of pig iron, spiegeleisen, iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Pig iron"
+  },
+  {
+    "cnCode": "72052900",
+    "description": "Granules and powders, of pig iron, spiegeleisen, iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Pig iron"
+  },
+  {
+    "cnCode": "72061000",
+    "description": "Ingots",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72069000",
+    "description": "Continuous casting (slab, billet, bloom)",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72071111",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72071114",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72071116",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72071190",
+    "description": "Forgings",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72071210",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72071290",
+    "description": "Forgings",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72071912",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72071919",
+    "description": "Forgings",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72071980",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72072011",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72072015",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72072017",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72072019",
+    "description": "Forgings",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72072032",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72072039",
+    "description": "Forgings",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72072052",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72072059",
+    "description": "Forgings",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72072080",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72081000",
+    "description": "Iron or non-alloy steel; flat-rolled products of a width of 600mm or more, hot-rolled, not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72082500",
+    "description": "Iron or non-alloy steel; flat-rolled products of a width of 600mm or more, hot-rolled, not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72082600",
+    "description": "Iron or non-alloy steel; flat-rolled products of a width of 600mm or more, hot-rolled, not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72082700",
+    "description": "Iron or non-alloy steel; flat-rolled products of a width of 600mm or more, hot-rolled, not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72083600",
+    "description": "Iron or non-alloy steel; flat-rolled products of a width of 600mm or more, hot-rolled, not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72083700",
+    "description": "Iron or non-alloy steel; flat-rolled products of a width of 600mm or more, hot-rolled, not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72083800",
+    "description": "Iron or non-alloy steel; flat-rolled products of a width of 600mm or more, hot-rolled, not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72083900",
+    "description": "Iron or non-alloy steel; flat-rolled products of a width of 600mm or more, hot-rolled, not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72084000",
+    "description": "Iron or non-alloy steel; flat-rolled products of a width of 600mm or more, hot-rolled, not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72085120",
+    "description": "Iron or non-alloy steel; flat-rolled products of a width of 600mm or more, hot-rolled, not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72085191",
+    "description": "Iron or non-alloy steel; flat-rolled products of a width of 600mm or more, hot-rolled, not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72085198",
+    "description": "Iron or non-alloy steel; flat-rolled products of a width of 600mm or more, hot-rolled, not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72085210",
+    "description": "Iron or non-alloy steel; flat-rolled products of a width of 600mm or more, hot-rolled, not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72085291",
+    "description": "Iron or non-alloy steel; flat-rolled products of a width of 600mm or more, hot-rolled, not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72085299",
+    "description": "Iron or non-alloy steel; flat-rolled products of a width of 600mm or more, hot-rolled, not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72085310",
+    "description": "Iron or non-alloy steel; flat-rolled products of a width of 600mm or more, hot-rolled, not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72085390",
+    "description": "Iron or non-alloy steel; flat-rolled products of a width of 600mm or more, hot-rolled, not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72085400",
+    "description": "Iron or non-alloy steel; flat-rolled products of a width of 600mm or more, hot-rolled, not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72089020",
+    "description": "Iron or non-alloy steel; flat-rolled products of a width of 600mm or more, hot-rolled, not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72089080",
+    "description": "Iron or non-alloy steel; flat-rolled products of a width of 600mm or more, hot-rolled, not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72091500",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, cold-rolled (cold-reduced), not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72091610",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, cold-rolled (cold-reduced), not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72091690",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, cold-rolled (cold-reduced), not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72091710",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, cold-rolled (cold-reduced), not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72091790",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, cold-rolled (cold-reduced), not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72091810",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, cold-rolled (cold-reduced), not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72091891",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, cold-rolled (cold-reduced), not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72091899",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, cold-rolled (cold-reduced), not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72092500",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, cold-rolled (cold-reduced), not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72092610",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, cold-rolled (cold-reduced), not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72092690",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, cold-rolled (cold-reduced), not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72092710",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, cold-rolled (cold-reduced), not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72092790",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, cold-rolled (cold-reduced), not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72092810",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, cold-rolled (cold-reduced), not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72092890",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, cold-rolled (cold-reduced), not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72099020",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, cold-rolled (cold-reduced), not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72099080",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, cold-rolled (cold-reduced), not clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72101100",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72101220",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72101280",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72102000",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72103000",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72104100",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72104900",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72105000",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72106100",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72106900",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72107010",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72107080",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72109030",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72109040",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72109080",
+    "description": "Iron or non-alloy steel; flat-rolled products, width 600mm or more, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72111300",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72111400",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72111900",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72112320",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72112330",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72112380",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72112900",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72119020",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72119080",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72121010",
+    "description": "Iron or non-alloy steel; flat-rolled products, width less than 600mm, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72121090",
+    "description": "Iron or non-alloy steel; flat-rolled products, width less than 600mm, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72122000",
+    "description": "Iron or non-alloy steel; flat-rolled products, width less than 600mm, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72123000",
+    "description": "Iron or non-alloy steel; flat-rolled products, width less than 600mm, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72124020",
+    "description": "Iron or non-alloy steel; flat-rolled products, width less than 600mm, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72124080",
+    "description": "Iron or non-alloy steel; flat-rolled products, width less than 600mm, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72125020",
+    "description": "Iron or non-alloy steel; flat-rolled products, width less than 600mm, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72125030",
+    "description": "Iron or non-alloy steel; flat-rolled products, width less than 600mm, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72125040",
+    "description": "Iron or non-alloy steel; flat-rolled products, width less than 600mm, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72125061",
+    "description": "Iron or non-alloy steel; flat-rolled products, width less than 600mm, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72125069",
+    "description": "Iron or non-alloy steel; flat-rolled products, width less than 600mm, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72125090",
+    "description": "Iron or non-alloy steel; flat-rolled products, width less than 600mm, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72126000",
+    "description": "Iron or non-alloy steel; flat-rolled products, width less than 600mm, clad, plated or coated",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72131000",
+    "description": "Iron or non-alloy steel; bars and rods, hot-rolled, in irregularly wound coils",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72132000",
+    "description": "Iron or non-alloy steel; bars and rods, hot-rolled, in irregularly wound coils",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72139110",
+    "description": "Iron or non-alloy steel; bars and rods, hot-rolled, in irregularly wound coils",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72139120",
+    "description": "Iron or non-alloy steel; bars and rods, hot-rolled, in irregularly wound coils",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72139141",
+    "description": "Iron or non-alloy steel; bars and rods, hot-rolled, in irregularly wound coils",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72139149",
+    "description": "Iron or non-alloy steel; bars and rods, hot-rolled, in irregularly wound coils",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72139170",
+    "description": "Iron or non-alloy steel; bars and rods, hot-rolled, in irregularly wound coils",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72139190",
+    "description": "Iron or non-alloy steel; bars and rods, hot-rolled, in irregularly wound coils",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72139910",
+    "description": "Iron or non-alloy steel; bars and rods, hot-rolled, in irregularly wound coils",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72139990",
+    "description": "Iron or non-alloy steel; bars and rods, hot-rolled, in irregularly wound coils",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72141000",
+    "description": "Forgings",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72142000",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72143000",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72149110",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72149190",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72149910",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72149931",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72149939",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72149950",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72149971",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72149979",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72149995",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72151000",
+    "description": "Iron or non-alloy steel; bars and rods, n.e.c. in chapter 72",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72155011",
+    "description": "Iron or non-alloy steel; bars and rods, n.e.c. in chapter 72",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72155019",
+    "description": "Iron or non-alloy steel; bars and rods, n.e.c. in chapter 72",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72155080",
+    "description": "Iron or non-alloy steel; bars and rods, n.e.c. in chapter 72",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72159000",
+    "description": "Iron or non-alloy steel; bars and rods, n.e.c. in chapter 72",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72161000",
+    "description": "Iron or non-alloy steel, angles, shapes and sections",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72162100",
+    "description": "Iron or non-alloy steel, angles, shapes and sections",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72162200",
+    "description": "Iron or non-alloy steel, angles, shapes and sections",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72163110",
+    "description": "Iron or non-alloy steel, angles, shapes and sections",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72163190",
+    "description": "Iron or non-alloy steel, angles, shapes and sections",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72163211",
+    "description": "Iron or non-alloy steel, angles, shapes and sections",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72163219",
+    "description": "Iron or non-alloy steel, angles, shapes and sections",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72163291",
+    "description": "Iron or non-alloy steel, angles, shapes and sections",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72163299",
+    "description": "Iron or non-alloy steel, angles, shapes and sections",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72163310",
+    "description": "Iron or non-alloy steel, angles, shapes and sections",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72163390",
+    "description": "Iron or non-alloy steel, angles, shapes and sections",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72164010",
+    "description": "Iron or non-alloy steel, angles, shapes and sections",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72164090",
+    "description": "Iron or non-alloy steel, angles, shapes and sections",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72165010",
+    "description": "Iron or non-alloy steel, angles, shapes and sections",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72165091",
+    "description": "Iron or non-alloy steel, angles, shapes and sections",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72165099",
+    "description": "Iron or non-alloy steel, angles, shapes and sections",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72166110",
+    "description": "Iron or non-alloy steel, angles, shapes and sections",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72166190",
+    "description": "Iron or non-alloy steel, angles, shapes and sections",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72166900",
+    "description": "Iron or non-alloy steel, angles, shapes and sections",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72169110",
+    "description": "Iron or non-alloy steel, angles, shapes and sections",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72169180",
+    "description": "Iron or non-alloy steel, angles, shapes and sections",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72169900",
+    "description": "Iron or non-alloy steel, angles, shapes and sections",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72171010",
+    "description": "Wires",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72171031",
+    "description": "Wires",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72171039",
+    "description": "Wires",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72171050",
+    "description": "Wires",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72171090",
+    "description": "Wires",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72172010",
+    "description": "Plated or coated wires",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72172030",
+    "description": "Plated or coated wires",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72172050",
+    "description": "Plated or coated wires",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72172090",
+    "description": "Plated or coated wires",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72173041",
+    "description": "Plated or coated wires",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72173049",
+    "description": "Plated or coated wires",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72173050",
+    "description": "Plated or coated wires",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72173090",
+    "description": "Plated or coated wires",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72179020",
+    "description": "Plated or coated wires",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72179050",
+    "description": "Plated or coated wires",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72179090",
+    "description": "Plated or coated wires",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72181000",
+    "description": "Ingots and forgings",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72189110",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72189180",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72189911",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72189919",
+    "description": "Ingots and forgings",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72189920",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72189980",
+    "description": "Ingots and forgings",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72191100",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72191210",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72191290",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72191310",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72191390",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72191410",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72191490",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72192110",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72192190",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72192210",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72192290",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72192300",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72192400",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72193100",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72193210",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72193290",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72193310",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72193390",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72193410",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72193490",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72193510",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72193590",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72199020",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72199080",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72201100",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72201200",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72202021",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72202029",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72202041",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72202049",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72202081",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72202089",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72209020",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72209080",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72210010",
+    "description": "Stainless steel bars and rods, hot-rolled, in irregularly wound coils",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72210090",
+    "description": "Stainless steel bars and rods, hot-rolled, in irregularly wound coils",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72221111",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72221119",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72221181",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72221189",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72221910",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72221990",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72222011",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72222019",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72222021",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72222029",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72222031",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72222039",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72222081",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72222089",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72223051",
+    "description": "Forgings",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72223091",
+    "description": "Forgings",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72223097",
+    "description": "Forgings",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72224010",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72224050",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72224090",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72230011",
+    "description": "Wires",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72230019",
+    "description": "Wires",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72230091",
+    "description": "Wires",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72230099",
+    "description": "Wires",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72241010",
+    "description": "Ingots and forgings",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72241090",
+    "description": "Ingots and forgings",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72249002",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72249003",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72249005",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72249007",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72249014",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72249018",
+    "description": "Ingots and forgings",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72249031",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72249038",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72249090",
+    "description": "Ingots and forgings",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Crude steel"
+  },
+  {
+    "cnCode": "72251100",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72251910",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72251990",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72253010",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72253030",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72253090",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72254012",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72254015",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72254040",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72254060",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72254090",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72255020",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72255080",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72259100",
+    "description": "Plated or coated flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72259200",
+    "description": "Plated or coated flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72259900",
+    "description": "Plated or coated flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72261100",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72261910",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72261980",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72262000",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72269120",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72269191",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72269199",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72269200",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72269910",
+    "description": "Plated or coated flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72269930",
+    "description": "Plated or coated flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72269970",
+    "description": "Plated or coated flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72271000",
+    "description": "Steel, alloy; bars and rods, hot-rolled, in irregularly wound coils",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72272000",
+    "description": "Steel, alloy; bars and rods, hot-rolled, in irregularly wound coils",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72279010",
+    "description": "Steel, alloy; bars and rods, hot-rolled, in irregularly wound coils",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72279050",
+    "description": "Steel, alloy; bars and rods, hot-rolled, in irregularly wound coils",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72279095",
+    "description": "Steel, alloy; bars and rods, hot-rolled, in irregularly wound coils",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72281020",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72281050",
+    "description": "Forgings",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72281090",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72282010",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72282091",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72282099",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72283020",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72283041",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72283049",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72283061",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72283069",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72283070",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72283089",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72284010",
+    "description": "Forgings",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72284090",
+    "description": "Forgings",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72285020",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72285040",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72285061",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72285069",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72285080",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72286020",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72286080",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72287010",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72287090",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72288000",
+    "description": "Bars, rods, and other long products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72292000",
+    "description": "Wire of other alloy steel.",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72299020",
+    "description": "Wire of other alloy steel.",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72299050",
+    "description": "Wire of other alloy steel.",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "72299090",
+    "description": "Wire of other alloy steel.",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73011000",
+    "description": "Sheet piling of iron or steel, whether or not drilled, punched or made from assembled elements; welded angles, shapes and sections, of iron or steel.",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73012000",
+    "description": "Sheet piling of iron or steel, whether or not drilled, punched or made from assembled elements; welded angles, shapes and sections, of iron or steel.",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73021010",
+    "description": "Railway or tramway track construction material of iron or steel, the following : rails, check-rails and rack rails, switch blades, crossing frogs, point rods and other crossing pieces, sleepers (cross-ties), fish-plates, chairs, chair wedges, sole plates",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73021022",
+    "description": "Railway or tramway track construction material of iron or steel, the following : rails, check-rails and rack rails, switch blades, crossing frogs, point rods and other crossing pieces, sleepers (cross-ties), fish-plates, chairs, chair wedges, sole plates",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73021028",
+    "description": "Railway or tramway track construction material of iron or steel, the following : rails, check-rails and rack rails, switch blades, crossing frogs, point rods and other crossing pieces, sleepers (cross-ties), fish-plates, chairs, chair wedges, sole plates",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73021040",
+    "description": "Railway or tramway track construction material of iron or steel, the following : rails, check-rails and rack rails, switch blades, crossing frogs, point rods and other crossing pieces, sleepers (cross-ties), fish-plates, chairs, chair wedges, sole plates",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73021050",
+    "description": "Railway or tramway track construction material of iron or steel, the following : rails, check-rails and rack rails, switch blades, crossing frogs, point rods and other crossing pieces, sleepers (cross-ties), fish-plates, chairs, chair wedges, sole plates",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73021090",
+    "description": "Railway or tramway track construction material of iron or steel, the following : rails, check-rails and rack rails, switch blades, crossing frogs, point rods and other crossing pieces, sleepers (cross-ties), fish-plates, chairs, chair wedges, sole plates",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73023000",
+    "description": "Railway or tramway track construction material of iron or steel, the following : rails, check-rails and rack rails, switch blades, crossing frogs, point rods and other crossing pieces, sleepers (cross-ties), fish-plates, chairs, chair wedges, sole plates",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73024000",
+    "description": "Railway or tramway track construction material of iron or steel, the following : rails, check-rails and rack rails, switch blades, crossing frogs, point rods and other crossing pieces, sleepers (cross-ties), fish-plates, chairs, chair wedges, sole plates",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73029000",
+    "description": "Railway or tramway track construction material of iron or steel, the following : rails, check-rails and rack rails, switch blades, crossing frogs, point rods and other crossing pieces, sleepers (cross-ties), fish-plates, chairs, chair wedges, sole plates",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73030010",
+    "description": "Tubes, pipes & hollow profiles of cast iron",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73030090",
+    "description": "Tubes, pipes & hollow profiles of cast iron",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73041100",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 5",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73041910",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 3",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73041930",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 3",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73041990",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 3",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73042200",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 4",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73042300",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 2",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73042400",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 3",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73042910",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 1",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73042930",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 1",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73042990",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 1",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73043120",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 0",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73043180",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 0",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73043950",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 1",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73043982",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 1",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73043983",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 1",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73043988",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 1",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73044100",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 2",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73044983",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 1",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73044985",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 1",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73044989",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 1",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73045110",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 0",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73045181",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 0",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73045189",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 0",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73045930",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 1",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73045982",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 1",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73045983",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 1",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73045989",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 1",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73049000",
+    "description": "Beams, billets, rails and tubes -- alloying elements group 2",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73051100",
+    "description": "Other tubes and pipes (for example, welded, riveted or similarly closed), having circular cross-sections, the external diameter of which exceeds 406.4 mm, of iron or steel.",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73051200",
+    "description": "Other tubes and pipes (for example, welded, riveted or similarly closed), having circular cross-sections, the external diameter of which exceeds 406.4 mm, of iron or steel.",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73051900",
+    "description": "Other tubes and pipes (for example, welded, riveted or similarly closed), having circular cross-sections, the external diameter of which exceeds 406.4 mm, of iron or steel.",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73052000",
+    "description": "Other tubes and pipes (for example, welded, riveted or similarly closed), having circular cross-sections, the external diameter of which exceeds 406.4 mm, of iron or steel.",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73053100",
+    "description": "Other tubes and pipes (for example, welded, riveted or similarly closed), having circular cross-sections, the external diameter of which exceeds 406.4 mm, of iron or steel.",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73053900",
+    "description": "Other tubes and pipes (for example, welded, riveted or similarly closed), having circular cross-sections, the external diameter of which exceeds 406.4 mm, of iron or steel.",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73059000",
+    "description": "Other tubes and pipes (for example, welded, riveted or similarly closed), having circular cross-sections, the external diameter of which exceeds 406.4 mm, of iron or steel.",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73061100",
+    "description": "Cold-rolled and annealed flat products -- alloying elements group 3",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73061900",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73062100",
+    "description": "Cold-rolled and annealed flat products -- alloying elements group 2",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73062900",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73063012",
+    "description": "Cold-rolled and annealed flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73063018",
+    "description": "Hot-rolled flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73063041",
+    "description": "Plated or coated flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73063049",
+    "description": "Plated or coated flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73063072",
+    "description": "Plated or coated flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73063077",
+    "description": "Plated or coated flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73063080",
+    "description": "Plated or coated flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73064020",
+    "description": "Cold-rolled and annealed flat products -- alloying elements group 1",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73064080",
+    "description": "Hot-rolled flat products -- alloyed",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73065021",
+    "description": "Cold-rolled and annealed flat products -- alloying elements group 1",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73065029",
+    "description": "Hot-rolled flat products -- alloyed",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73065080",
+    "description": "Cold-rolled and annealed flat products -- alloying elements group 2",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73066110",
+    "description": "Cold-rolled and annealed flat products -- alloying elements group 0",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73066192",
+    "description": "Plated or coated flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73066199",
+    "description": "Plated or coated flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73066910",
+    "description": "Cold-rolled and annealed flat products -- alloying elements group 1",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73066990",
+    "description": "Plated or coated flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73069000",
+    "description": "Plated or coated flat products",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73071110",
+    "description": "Forgings of cast iron",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73071190",
+    "description": "Forgings of cast iron",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73071910",
+    "description": "Forgings of cast iron",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73071990",
+    "description": "Forgings of cast steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73072100",
+    "description": "Beams, billets, rails and tubes -- of stainless steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73072210",
+    "description": "Beams, billets, rails and tubes -- of stainless steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73072290",
+    "description": "Beams, billets, rails and tubes -- of stainless steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73072310",
+    "description": "Beams, billets, rails and tubes -- of stainless steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73072390",
+    "description": "Beams, billets, rails and tubes -- of stainless steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73072910",
+    "description": "Beams, billets, rails and tubes -- of stainless steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73072980",
+    "description": "Beams, billets, rails and tubes -- of stainless steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73079100",
+    "description": "Beams, billets, rails and tubes",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73079210",
+    "description": "Beams, billets, rails and tubes",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73079290",
+    "description": "Beams, billets, rails and tubes",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73079311",
+    "description": "Beams, billets, rails and tubes",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73079319",
+    "description": "Beams, billets, rails and tubes",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73079391",
+    "description": "Beams, billets, rails and tubes",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73079399",
+    "description": "Beams, billets, rails and tubes",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73079910",
+    "description": "Beams, billets, rails and tubes",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73079980",
+    "description": "Beams, billets, rails and tubes",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73081000",
+    "description": "Structures (excluding prefabricated buildings of heading 9406) and parts of structures (for example, bridges and bridge-sections, lock- gates, towers, lattice masts, roofs, roofing frameworks, doors and windows and their frames and thresholds for doors, shutters, balusTrades, pillars and columns), of iron or steel; plates, rods, angles, shapes, sections, tubes and the like, prepared for use in structures, of iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73082000",
+    "description": "Structures (excluding prefabricated buildings of heading 9406) and parts of structures (for example, bridges and bridge-sections, lock- gates, towers, lattice masts, roofs, roofing frameworks, doors and windows and their frames and thresholds for doors, shutters, balusTrades, pillars and columns), of iron or steel; plates, rods, angles, shapes, sections, tubes and the like, prepared for use in structures, of iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73083000",
+    "description": "Structures (excluding prefabricated buildings of heading 9406) and parts of structures (for example, bridges and bridge-sections, lock- gates, towers, lattice masts, roofs, roofing frameworks, doors and windows and their frames and thresholds for doors, shutters, balusTrades, pillars and columns), of iron or steel; plates, rods, angles, shapes, sections, tubes and the like, prepared for use in structures, of iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73084000",
+    "description": "Structures (excluding prefabricated buildings of heading 9406) and parts of structures (for example, bridges and bridge-sections, lock- gates, towers, lattice masts, roofs, roofing frameworks, doors and windows and their frames and thresholds for doors, shutters, balusTrades, pillars and columns), of iron or steel; plates, rods, angles, shapes, sections, tubes and the like, prepared for use in structures, of iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73089051",
+    "description": "Structures (excluding prefabricated buildings of heading 9406) and parts of structures (for example, bridges and bridge-sections, lock- gates, towers, lattice masts, roofs, roofing frameworks, doors and windows and their frames and thresholds for doors, shutters, balusTrades, pillars and columns), of iron or steel; plates, rods, angles, shapes, sections, tubes and the like, prepared for use in structures, of iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73089059",
+    "description": "Structures (excluding prefabricated buildings of heading 9406) and parts of structures (for example, bridges and bridge-sections, lock- gates, towers, lattice masts, roofs, roofing frameworks, doors and windows and their frames and thresholds for doors, shutters, balusTrades, pillars and columns), of iron or steel; plates, rods, angles, shapes, sections, tubes and the like, prepared for use in structures, of iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73089098",
+    "description": "Structures (excluding prefabricated buildings of heading 9406) and parts of structures (for example, bridges and bridge-sections, lock- gates, towers, lattice masts, roofs, roofing frameworks, doors and windows and their frames and thresholds for doors, shutters, balusTrades, pillars and columns), of iron or steel; plates, rods, angles, shapes, sections, tubes and the like, prepared for use in structures, of iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73090010",
+    "description": "Reservoirs, tanks, vats and similar containers for any material (other than compressed or liquefied gas), of iron or steel, of a capacity exceeding 300 l, whether or not lined or heat-insulated, but not fitted with mechanical or thermal equipment",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73090030",
+    "description": "Reservoirs, tanks, vats and similar containers for any material (other than compressed or liquefied gas), of iron or steel, of a capacity exceeding 300 l, whether or not lined or heat-insulated, but not fitted with mechanical or thermal equipment",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73090051",
+    "description": "Reservoirs, tanks, vats and similar containers for any material (other than compressed or liquefied gas), of iron or steel, of a capacity exceeding 300 l, whether or not lined or heat-insulated, but not fitted with mechanical or thermal equipment",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73090059",
+    "description": "Reservoirs, tanks, vats and similar containers for any material (other than compressed or liquefied gas), of iron or steel, of a capacity exceeding 300 l, whether or not lined or heat-insulated, but not fitted with mechanical or thermal equipment",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73090090",
+    "description": "Reservoirs, tanks, vats and similar containers for any material (other than compressed or liquefied gas), of iron or steel, of a capacity exceeding 300 l, whether or not lined or heat-insulated, but not fitted with mechanical or thermal equipment",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73101000",
+    "description": "Tanks, casks, drums, cans, boxes and similar containers, for any material (other than compressed or liquefied gas), of iron or steel, of a capacity not exceeding 300 l, whether or not lined or heat-insulated, but not fitted with mechanical or thermal equipment",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73102111",
+    "description": "Tanks, casks, drums, cans, boxes and similar containers, for any material (other than compressed or liquefied gas), of iron or steel, of a capacity not exceeding 300 l, whether or not lined or heat-insulated, but not fitted with mechanical or thermal equipment",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73102119",
+    "description": "Tanks, casks, drums, cans, boxes and similar containers, for any material (other than compressed or liquefied gas), of iron or steel, of a capacity not exceeding 300 l, whether or not lined or heat-insulated, but not fitted with mechanical or thermal equipment",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73102191",
+    "description": "Tanks, casks, drums, cans, boxes and similar containers, for any material (other than compressed or liquefied gas), of iron or steel, of a capacity not exceeding 300 l, whether or not lined or heat-insulated, but not fitted with mechanical or thermal equipment",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73102199",
+    "description": "Tanks, casks, drums, cans, boxes and similar containers, for any material (other than compressed or liquefied gas), of iron or steel, of a capacity not exceeding 300 l, whether or not lined or heat-insulated, but not fitted with mechanical or thermal equipment",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73102910",
+    "description": "Tanks, casks, drums, cans, boxes and similar containers, for any material (other than compressed or liquefied gas), of iron or steel, of a capacity not exceeding 300 l, whether or not lined or heat-insulated, but not fitted with mechanical or thermal equipment",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73102990",
+    "description": "Tanks, casks, drums, cans, boxes and similar containers, for any material (other than compressed or liquefied gas), of iron or steel, of a capacity not exceeding 300 l, whether or not lined or heat-insulated, but not fitted with mechanical or thermal equipment",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73110011",
+    "description": "Containers for compressed or liquefied gas, of iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73110013",
+    "description": "Containers for compressed or liquefied gas, of iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73110019",
+    "description": "Containers for compressed or liquefied gas, of iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73110030",
+    "description": "Containers for compressed or liquefied gas, of iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73110091",
+    "description": "Containers for compressed or liquefied gas, of iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73110099",
+    "description": "Containers for compressed or liquefied gas, of iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181100",
+    "description": "Coach screws; other wood screws; screw hooks and screw rings; self-tapping screws; other threaded articles; spring washers and other lock washers; cotters and cotter pins; other non-threaded articles - of iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181210",
+    "description": "Other wood screws; self-tapping screws - of stainless steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181290",
+    "description": "Coach screws; other wood screws; screw hooks and screw rings; self-tapping screws; other threaded articles; spring washers and other lock washers; cotters and cotter pins; other non-threaded articles - of iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181300",
+    "description": "Coach screws; other wood screws; screw hooks and screw rings; self-tapping screws; other threaded articles; spring washers and other lock washers; cotters and cotter pins; other non-threaded articles - of iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181410",
+    "description": "Other wood screws; self-tapping screws - of stainless steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181491",
+    "description": "Coach screws; other wood screws; screw hooks and screw rings; self-tapping screws; other threaded articles; spring washers and other lock washers; cotters and cotter pins; other non-threaded articles - of iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181499",
+    "description": "Coach screws; other wood screws; screw hooks and screw rings; self-tapping screws; other threaded articles; spring washers and other lock washers; cotters and cotter pins; other non-threaded articles - of iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181520",
+    "description": "Other screws and bolts, whether or not with their nuts or washers",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181535",
+    "description": "Other screws and bolts, whether or not with their nuts or washers",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181542",
+    "description": "Other screws and bolts, whether or not with their nuts or washers",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181548",
+    "description": "Other screws and bolts, whether or not with their nuts or washers",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181552",
+    "description": "Other screws and bolts, whether or not with their nuts or washers",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181558",
+    "description": "Other screws and bolts, whether or not with their nuts or washers",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181562",
+    "description": "Other screws and bolts, whether or not with their nuts or washers",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181568",
+    "description": "Other screws and bolts, whether or not with their nuts or washers",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181575",
+    "description": "Other screws and bolts, whether or not with their nuts or washers",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181582",
+    "description": "Other screws and bolts, whether or not with their nuts or washers",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181588",
+    "description": "Other screws and bolts, whether or not with their nuts or washers",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181595",
+    "description": "Other screws and bolts, whether or not with their nuts or washers",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181631",
+    "description": "Nuts",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181639",
+    "description": "Nuts",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181640",
+    "description": "Nuts",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181660",
+    "description": "Nuts",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181692",
+    "description": "Nuts",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181699",
+    "description": "Nuts",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73181900",
+    "description": "Coach screws; other wood screws; screw hooks and screw rings; self-tapping screws; other threaded articles; spring washers and other lock washers; cotters and cotter pins; other non-threaded articles - of iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73182100",
+    "description": "Coach screws; other wood screws; screw hooks and screw rings; self-tapping screws; other threaded articles; spring washers and other lock washers; cotters and cotter pins; other non-threaded articles - of iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73182200",
+    "description": "Other washers",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73182300",
+    "description": "Rivets",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73182400",
+    "description": "Coach screws; other wood screws; screw hooks and screw rings; self-tapping screws; other threaded articles; spring washers and other lock washers; cotters and cotter pins; other non-threaded articles - of iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73182900",
+    "description": "Coach screws; other wood screws; screw hooks and screw rings; self-tapping screws; other threaded articles; spring washers and other lock washers; cotters and cotter pins; other non-threaded articles - of iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73261100",
+    "description": "Forged, stamped, or sintered",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73261910",
+    "description": "Forged, stamped, or sintered",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73261990",
+    "description": "Forged, stamped, or sintered",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73262000",
+    "description": "Articles of iron or steel wire",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73269030",
+    "description": "Ladders and steps; Pallets and similar platforms for handling goods; Reels for cables, piping and the like; Non-mechanical ventilators, guttering, hooks and like articles used in the building\nindustry",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73269040",
+    "description": "Ladders and steps; Pallets and similar platforms for handling goods; Reels for cables, piping and the like; Non-mechanical ventilators, guttering, hooks and like articles used in the building\nindustry",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73269050",
+    "description": "Ladders and steps; Pallets and similar platforms for handling goods; Reels for cables, piping and the like; Non-mechanical ventilators, guttering, hooks and like articles used in the building\nindustry",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73269060",
+    "description": "Ladders and steps; Pallets and similar platforms for handling goods; Reels for cables, piping and the like; Non-mechanical ventilators, guttering, hooks and like articles used in the building\nindustry",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73269092",
+    "description": "Forged, stamped, or sintered",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73269094",
+    "description": "Forged, stamped, or sintered",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73269096",
+    "description": "Forged, stamped, or sintered",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "73269098",
+    "description": "Other articles of iron or steel",
+    "hasIndirectEmissions": false,
+    "sector": "Iron and Steel",
+    "aggregatedCategory": "Iron or steel products"
+  },
+  {
+    "cnCode": "76011010",
+    "description": "Unwrought aluminium",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Unwrought aluminium"
+  },
+  {
+    "cnCode": "76011090",
+    "description": "Unwrought aluminium",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Unwrought aluminium"
+  },
+  {
+    "cnCode": "76012030",
+    "description": "Unwrought aluminium",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Unwrought aluminium"
+  },
+  {
+    "cnCode": "76012040",
+    "description": "Unwrought aluminium",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Unwrought aluminium"
+  },
+  {
+    "cnCode": "76012080",
+    "description": "Unwrought aluminium",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Unwrought aluminium"
+  },
+  {
+    "cnCode": "76031000",
+    "description": "Aluminium powders and flakes",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76032000",
+    "description": "Aluminium powders and flakes",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76041010",
+    "description": "Bars and rods",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76041090",
+    "description": "Profiles",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76042100",
+    "description": "Hollow profiles",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76042910",
+    "description": "Bars and rods",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76042990",
+    "description": "Profiles",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76051100",
+    "description": "Aluminium wire",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76051900",
+    "description": "Aluminium wire",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76052100",
+    "description": "Aluminium wire",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76052900",
+    "description": "Aluminium wire",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76061130",
+    "description": "Aluminium plates, sheets and strip, of a thickness exceeding 0,2 mm",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76061150",
+    "description": "Aluminium plates, sheets and strip, of a thickness exceeding 0,2 mm",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76061191",
+    "description": "Aluminium plates, sheets and strip, of a thickness exceeding 0,2 mm",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76061193",
+    "description": "Aluminium plates, sheets and strip, of a thickness exceeding 0,2 mm",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76061199",
+    "description": "Aluminium plates, sheets and strip, of a thickness exceeding 0,2 mm",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76061211",
+    "description": "Aluminium plates, sheets and strip, of a thickness exceeding 0,2 mm",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76061219",
+    "description": "Aluminium plates, sheets and strip, of a thickness exceeding 0,2 mm",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76061230",
+    "description": "Aluminium plates, sheets and strip, of a thickness exceeding 0,2 mm",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76061250",
+    "description": "Aluminium plates, sheets and strip, of a thickness exceeding 0,2 mm",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76061292",
+    "description": "Aluminium plates, sheets and strip, of a thickness exceeding 0,2 mm",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76061293",
+    "description": "Aluminium plates, sheets and strip, of a thickness exceeding 0,2 mm",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76061299",
+    "description": "Aluminium plates, sheets and strip, of a thickness exceeding 0,2 mm",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76069100",
+    "description": "Aluminium plates, sheets and strip, of a thickness exceeding 0,2 mm",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76069200",
+    "description": "Aluminium plates, sheets and strip, of a thickness exceeding 0,2 mm",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76071111",
+    "description": "Aluminium foil (whether or not printed or backed with paper, paperboard, plastics or similar backing materials) of a thickness (excluding any backing) not exceeding 0,2 mm",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76071119",
+    "description": "Aluminium foil (whether or not printed or backed with paper, paperboard, plastics or similar backing materials) of a thickness (excluding any backing) not exceeding 0,2 mm",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76071190",
+    "description": "Aluminium foil (whether or not printed or backed with paper, paperboard, plastics or similar backing materials) of a thickness (excluding any backing) not exceeding 0,2 mm",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76071910",
+    "description": "Aluminium foil (whether or not printed or backed with paper, paperboard, plastics or similar backing materials) of a thickness (excluding any backing) not exceeding 0,2 mm",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76071990",
+    "description": "Aluminium foil (whether or not printed or backed with paper, paperboard, plastics or similar backing materials) of a thickness (excluding any backing) not exceeding 0,2 mm",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76072010",
+    "description": "Aluminium foil (whether or not printed or backed with paper, paperboard, plastics or similar backing materials) of a thickness (excluding any backing) not exceeding 0,2 mm",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76072091",
+    "description": "Aluminium foil (whether or not printed or backed with paper, paperboard, plastics or similar backing materials) of a thickness (excluding any backing) not exceeding 0,2 mm",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76072099",
+    "description": "Aluminium foil (whether or not printed or backed with paper, paperboard, plastics or similar backing materials) of a thickness (excluding any backing) not exceeding 0,2 mm",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76081000",
+    "description": "Aluminium tubes and pipes",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76082020",
+    "description": "Aluminium tubes and pipes",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76082081",
+    "description": "Aluminium tubes and pipes",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76082089",
+    "description": "Aluminium tubes and pipes",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76090000",
+    "description": "Aluminium tube or pipe fittings (for example, couplings, elbows, sleeves)",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76101000",
+    "description": "Doors, windows and their frames and thresholds for doors",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76109010",
+    "description": "Bridges and bridge-sections, towers and lattice masts",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76109090",
+    "description": "Other",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76110000",
+    "description": "Aluminium reservoirs, tanks, vats and similar containers, for any material (other than compressed or liquefied gas), of a capacity exceeding 300 litres, whether or not lined or heat-insulated, but not fitted with mechanical or thermal equipment",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76121000",
+    "description": "Aluminium casks, drums, cans, boxes and similar containers (including rigid or collapsible tubular containers), for any material (other than compressed or liquefied gas), of a capacity not exceeding 300 litres, whether or not lined or heat-insulated, but not fitted with mechanical or thermal equipment",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76129020",
+    "description": "Aluminium casks, drums, cans, boxes and similar containers (including rigid or collapsible tubular containers), for any material (other than compressed or liquefied gas), of a capacity not exceeding 300 litres, whether or not lined or heat-insulated, but not fitted with mechanical or thermal equipment",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76129030",
+    "description": "Aluminium casks, drums, cans, boxes and similar containers (including rigid or collapsible tubular containers), for any material (other than compressed or liquefied gas), of a capacity not exceeding 300 litres, whether or not lined or heat-insulated, but not fitted with mechanical or thermal equipment",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76129080",
+    "description": "Aluminium casks, drums, cans, boxes and similar containers (including rigid or collapsible tubular containers), for any material (other than compressed or liquefied gas), of a capacity not exceeding 300 litres, whether or not lined or heat-insulated, but not fitted with mechanical or thermal equipment",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76130000",
+    "description": "Aluminium containers for compressed or liquefied gas",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76141000",
+    "description": "Stranded wire, cables, plaited bands and the like, of aluminium, not electrically insulated",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76149000",
+    "description": "Stranded wire, cables, plaited bands and the like, of aluminium, not electrically insulated",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76161000",
+    "description": "Nails, tacks, staples (other than those of heading 8305), screws, bolts, nuts, screw hooks, rivets, cotters, cotter pins, washers and similar articles",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76169100",
+    "description": "Cloth, grill, netting and fencing, of aluminium wire",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76169910",
+    "description": "Cast",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  },
+  {
+    "cnCode": "76169990",
+    "description": "Other",
+    "hasIndirectEmissions": false,
+    "sector": "Aluminium",
+    "aggregatedCategory": "Aluminium products"
+  }
+]

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#123b32">
+  <title>Lumino · CBAM 工作门户</title>
+  <meta name="description" content="Lumino CBAM 登录后客户与服务团队工作门户交互原型。">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&family=Azeret+Mono:wght@500;600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <main class="login-screen" id="loginScreen">
+    <section class="login-story" aria-labelledby="loginTitle">
+      <a class="brand brand-light" href="../Lumino%20官网.dc.html" aria-label="返回 Lumino 官网">
+        <span>LUMINO</span><i aria-hidden="true"></i>
+      </a>
+      <div class="story-copy">
+        <p class="eyebrow">CBAM COMPLIANCE WORKSPACE</p>
+        <h1 id="loginTitle">把复杂申报，<br>变成今天能回答的问题。</h1>
+        <p>你提供业务事实和现有材料。Lumino Agent 负责理解法规字段、整理证据，并把需要判断的地方交给专家。</p>
+      </div>
+      <div class="trust-note">
+        <span aria-hidden="true">✓</span>
+        <p><strong>正式项目区</strong><br>企业数据、证据和交付文件仅对获授权成员开放。</p>
+      </div>
+    </section>
+
+    <section class="login-panel" aria-label="登录">
+      <div class="login-box">
+        <p class="eyebrow green">SECURE PORTAL</p>
+        <h2>登录工作门户</h2>
+        <p class="muted">继续处理你的年度 CBAM 项目。</p>
+        <div class="import-notice" id="importNotice" hidden></div>
+        <form id="loginForm">
+          <label>工作邮箱<input type="email" value="demo@huaxing-steel.cn" autocomplete="email" required></label>
+          <label>密码<input type="password" value="lumino-demo" autocomplete="current-password" required></label>
+          <div class="login-options"><label class="check"><input type="checkbox" checked> 保持登录</label><button class="link-button" type="button">忘记密码？</button></div>
+          <button class="button button--primary button--large" type="submit">登录进入 <span aria-hidden="true">→</span></button>
+        </form>
+        <div class="demo-divider"><span>原型快速入口</span></div>
+        <div class="demo-roles" aria-label="选择演示角色">
+          <button type="button" data-demo-role="customer"><b>客户</b><small>年度任务与 Agent</small></button>
+          <button type="button" data-demo-role="expert"><b>专家</b><small>判断与复核</small></button>
+          <button type="button" data-demo-role="ops"><b>运营</b><small>项目与 SLA</small></button>
+          <button type="button" data-demo-role="sales"><b>商务</b><small>线索与客户</small></button>
+        </div>
+        <p class="prototype-note">这是交互原型。演示登录不会连接真实账号或提交企业数据。</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="portal" id="portal" hidden>
+    <header class="topbar">
+      <button class="mobile-menu" id="mobileMenu" type="button" aria-label="打开导航" aria-expanded="false">☰</button>
+      <a class="brand" href="../Lumino%20官网.dc.html" aria-label="返回 Lumino 官网"><span>LUMINO</span><i aria-hidden="true"></i></a>
+      <span class="product-name">CBAM 工作门户</span>
+      <div class="topbar-context">
+        <button class="company-switch" type="button"><small>当前企业</small><strong id="companyName">华星钢铁有限公司</strong><span>⌄</span></button>
+        <label class="year-switch"><span class="sr-only">申报年度</span><select id="yearSelect"></select></label>
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-button" type="button" aria-label="通知">●<span class="notification-dot"></span></button>
+        <button class="profile-button" id="profileButton" type="button"><span id="profileInitial">周</span><span><small id="profileRole">项目协调人</small><strong id="profileName">周岚</strong></span><b>⌄</b></button>
+        <button class="logout-button" id="logoutButton" type="button">退出</button>
+      </div>
+    </header>
+
+    <div class="portal-layout">
+      <aside class="sidebar" id="sidebar">
+        <nav id="roleNav" aria-label="门户导航"></nav>
+        <div class="sidebar-foot">
+          <button class="settings-entry" id="settingsButton" type="button"><span aria-hidden="true">⚙</span><span><strong>企业设置</strong><small>企业、设施与长期主档</small></span></button>
+          <p>原型角色</p>
+          <label><span class="sr-only">切换演示角色</span><select id="roleSelect">
+            <option value="customer">客户 · 项目协调人</option>
+            <option value="expert">Lumino · CBAM 专家</option>
+            <option value="ops">Lumino · 运营</option>
+            <option value="sales">Lumino · 商务</option>
+          </select></label>
+          <small>正式产品中由账号权限决定</small>
+        </div>
+      </aside>
+      <main class="workspace" id="main" tabindex="-1"></main>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+  <script src="./app.js" defer></script>
+</body>
+</html>
