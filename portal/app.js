@@ -2,22 +2,38 @@
   "use strict";
 
   const roleConfig = {
-    customer: {
+    customer_owner: {
       name: "周岚", initial: "周", title: "项目协调人", company: "华星钢铁有限公司",
       nav: [
-        ["work", "◉", "我的工作", "3"], ["roadmap", "→", "年度路线图"],
+        ["work", "◉", "我的工作", "3"], ["services", "▣", "我的服务"], ["roadmap", "→", "年度路线图"],
         ["products", "◇", "产品与供应链"], ["data", "▦", "数据与证据", "2"],
         ["results", "∿", "成本与结果", "2"], ["deliverables", "□", "合规交付"],
         ["team", "◎", "团队与权限"]
       ]
     },
+    customer_admin: {
+      name: "周岚", initial: "周", title: "企业管理员", company: "华星钢铁有限公司",
+      nav: [["services", "▣", "服务与订单", "1"], ["programs", "→", "年度项目"], ["team", "◎", "成员与授权", "2"], ["org-settings", "◇", "企业主档"]]
+    },
+    customer_contrib: {
+      name: "陈浩", initial: "陈", title: "数据贡献者", company: "华星钢铁有限公司",
+      nav: [["contributor-work", "◉", "分配给我", "2"], ["data", "▦", "我的材料"]]
+    },
+    customer_approver: {
+      name: "赵海峰", initial: "赵", title: "内部审批人", company: "华星钢铁有限公司",
+      nav: [["approvals", "✓", "待我审批", "2"], ["deliverables", "□", "合规交付"], ["results", "∿", "结果摘要"]]
+    },
     expert: {
-      name: "王晨", initial: "王", title: "CBAM 咨询专家", company: "Lumino 服务团队",
-      nav: [["queue", "◉", "判断队列", "12"], ["findings", "!", "Findings", "7"], ["review", "✓", "复核与锁定"]]
+      name: "王晨", initial: "王", title: "CBAM 制备专家", company: "Lumino 服务团队",
+      nav: [["queue", "◉", "判断队列", "12"], ["case-workspace", "▣", "案件工作台"], ["findings", "!", "Findings", "7"]]
+    },
+    reviewer: {
+      name: "李娜", initial: "李", title: "独立复核专家", company: "Lumino 复核中心",
+      nav: [["review", "✓", "复核与锁定", "3"]]
     },
     ops: {
       name: "林晓", initial: "林", title: "客户运营", company: "Lumino 项目中心",
-      nav: [["portfolio", "◉", "项目组合", "8"], ["sla", "◷", "SLA 与阻塞", "5"], ["resources", "◎", "资源与异常"]]
+      nav: [["engagements", "▣", "订单履约", "3"], ["portfolio", "◉", "项目组合", "8"], ["handoffs", "→", "交接中心", "2"], ["sla", "◷", "SLA 与阻塞", "5"], ["resources", "◎", "资源与异常"]]
     },
     sales: {
       name: "陈宇", initial: "陈", title: "商务顾问", company: "Lumino 商务中心",
@@ -31,7 +47,7 @@
     "2025": { label: "2025 · 已锁定", short: "已锁定 · Rev 1", progress: 100, chip: "locked" }
   };
 
-  const defaultPages = { customer: "work", expert: "queue", ops: "portfolio", sales: "leads" };
+  const defaultPages = { customer_admin: "services", customer_owner: "work", customer_contrib: "contributor-work", customer_approver: "approvals", expert: "queue", reviewer: "review", ops: "engagements", sales: "leads" };
   const incoming = new URLSearchParams(window.location.search);
   const importedTrial = incoming.get("source") === "calculator" ? {
     year: incoming.get("year") || "2027",
@@ -41,15 +57,22 @@
     estimatedCostCny: Number(incoming.get("estimatedCostCny")) || 3822222,
   } : null;
   const state = {
-    role: "customer", page: "work", year: "2027", loggedIn: false, answer: null,
+    role: "customer_owner", page: "work", year: "2027", loggedIn: false, answer: null,
     importedTrial, uploadAdded: false, factConfirmed: false, findingResolved: false,
     yearCreated: false, deliveryExpanded: null, productAdded: false,
     configurationAdded: false, productFormOpen: false, orgEditing: false, selectedProduct: "hrc",
   };
   const $ = (selector) => document.querySelector(selector);
 
+  const customerRoles = new Set(["customer_admin", "customer_owner", "customer_contrib", "customer_approver"]);
+  const isCustomer = () => customerRoles.has(state.role);
+  const isLockedYear = () => years[state.year]?.chip === "locked";
+  const canManageOrganization = () => state.role === "customer_admin";
+  const canCreateYear = () => state.role === "customer_admin";
+
   function iconLabel(role) {
-    return { customer: "客户视图", expert: "专家视图", ops: "运营视图", sales: "商务视图" }[role];
+    if (customerRoles.has(role)) return "客户企业";
+    return { expert: "制备专家", reviewer: "独立复核", ops: "运营视图", sales: "商务视图" }[role];
   }
 
   function pageHeader(eyebrow, title, aside = "") {
@@ -65,14 +88,15 @@
   }
 
   function login(role) {
-    state.role = role || "customer";
-    if (state.role === "customer" && state.importedTrial && years[state.importedTrial.year]) state.year = state.importedTrial.year;
+    state.role = role || "customer_owner";
+    if (state.role === "customer_admin") state.year = "2027";
+    if (state.role === "customer_owner" && state.importedTrial && years[state.importedTrial.year]) state.year = state.importedTrial.year;
     state.page = defaultPages[state.role];
     state.loggedIn = true;
     $("#loginScreen").hidden = true;
     $("#portal").hidden = false;
     $("#roleSelect").value = state.role;
-    $("#settingsButton").hidden = state.role !== "customer";
+    $("#settingsButton").hidden = !canManageOrganization();
     syncShell();
     render();
     window.scrollTo(0, 0);
@@ -88,12 +112,13 @@
 
   function syncShell() {
     const config = roleConfig[state.role];
-    $("#settingsButton").hidden = state.role !== "customer";
+    $("#settingsButton").hidden = !canManageOrganization();
     $("#companyName").textContent = config.company;
     $("#profileName").textContent = config.name;
     $("#profileInitial").textContent = config.initial;
     $("#profileRole").textContent = config.title;
-    $("#yearSelect").innerHTML = Object.entries(years).map(([value, data]) => `<option value="${value}">${data.label}</option>`).join("") + (state.role === "customer" ? `<option value="new">＋ 创建新年度</option>` : "");
+    $("#yearSelect").parentElement.hidden = !isCustomer() || state.role === "customer_admin";
+    $("#yearSelect").innerHTML = Object.entries(years).map(([value, data]) => `<option value="${value}">${data.label}</option>`).join("") + (canCreateYear() ? `<option value="new">＋ 创建新年度</option>` : "");
     $("#yearSelect").value = state.year;
     $("#roleNav").innerHTML = `<p class="nav-label">${iconLabel(state.role)}</p>` + config.nav.map(([id, icon, label, badge]) => `
       <button class="nav-item ${state.page === id ? "active" : ""}" type="button" data-page="${id}" ${state.page === id ? 'aria-current="page"' : ""}>
@@ -106,8 +131,9 @@
 
   function render() {
     syncShell();
-    if (state.role === "customer") renderCustomer();
+    if (isCustomer()) renderCustomer();
     if (state.role === "expert") renderExpert();
+    if (state.role === "reviewer") renderStaffSecondary("reviewer");
     if (state.role === "ops") renderOps();
     if (state.role === "sales") renderSales();
     document.title = `${roleConfig[state.role].nav.find(([id]) => id === state.page)?.[2] || "CBAM 工作门户"} · Lumino`;
@@ -178,6 +204,10 @@
   }
 
   function renderCustomerSecondary() {
+    if (state.page === "services") return renderServices();
+    if (state.page === "programs") return renderPrograms();
+    if (state.page === "contributor-work") return renderContributorWork();
+    if (state.page === "approvals") return renderApprovals();
     if (state.page === "roadmap") return renderRoadmap();
     if (state.page === "products") return renderProducts();
     if (state.page === "data") return renderData();
@@ -186,6 +216,38 @@
     if (state.page === "team") return renderTeam();
     if (state.page === "annual-setup") return renderAnnualSetup();
     if (state.page === "org-settings") return renderOrganizationSettings();
+  }
+
+  function renderServices() {
+    const admin = state.role === "customer_admin";
+    $("#main").innerHTML = `
+      ${pageHeader("SERVICE ENTITLEMENTS", admin ? "服务与订单" : "我的服务", statusChip("SO-2027-018 · 履约中"))}
+      <section class="service-hero"><div><small>LUMINO SERVICE ORDER</small><h2>2027 年度 CBAM 全流程服务</h2><p>合同 CT-2026-044 · 华星钢铁有限公司 · 2026-11-01 至 2028-03-31</p></div><div><small>服务负责人</small><strong>林晓 · 客户运营</strong><span>王晨 · 制备专家 / 李娜 · 独立复核</span></div></section>
+      <div class="content-split service-layout">
+        <section class="panel"><div class="panel-head"><div><h2>订单覆盖范围</h2><span>客户确认版本 · Rev 2</span></div>${admin ? '<button class="button button--secondary" type="button" data-staff-action="已创建服务范围变更申请">申请变更</button>' : ""}</div><dl class="scope-grid"><div><dt>申报年度</dt><dd>2027</dd></div><div><dt>设施</dt><dd>2 座</dd></div><div><dt>产品</dt><dd>4 类 / 7 个配置</dd></div><div><dt>欧盟进口商</dt><dd>3 家</dd></div><div><dt>服务模块</dt><dd>建档、核算、监测计划、核查支持、交付</dd></div><div><dt>SLA</dt><dd>专业问题 2 个工作日</dd></div></dl></section>
+        <aside class="panel"><div class="panel-head"><h2>约定交付物</h2></div><ol class="compact-checklist"><li><span>✓</span><div><strong>监测计划</strong><small>草稿 Rev 3 · 准备复核</small></div></li><li><span>→</span><div><strong>排放报告</strong><small>等待 Q3 数据完整</small></div></li><li><span>→</span><div><strong>Communication Package</strong><small>按 3 家进口商裁剪</small></div></li></ol></aside>
+      </div>
+      <section class="panel wide-panel"><div class="panel-head"><div><h2>出口订单与发运覆盖</h2><span>业务订单不会与 Lumino 服务订单混用</span></div><button class="text-button" type="button" data-staff-action="已进入出口订单导入预览">导入发运台账</button></div><table class="data-table"><thead><tr><th>进口商</th><th>申报期间</th><th>发运批次</th><th>产品覆盖</th><th>数量状态</th><th>数据范围</th></tr></thead><tbody><tr><td><strong>NordWerk GmbH</strong><small>德国</small></td><td>2027 Q1–Q3</td><td>18</td><td>热轧卷、镀层板</td><td><span class="record-state ok">已对账</span></td><td>仅本进口商可见交付包</td></tr><tr><td><strong>EuroFab S.r.l.</strong><small>意大利</small></td><td>2027 Q2–Q3</td><td>7</td><td>型钢</td><td><span class="record-state warn">缺 1 批数量</span></td><td>仅本进口商可见交付包</td></tr></tbody></table></section>`;
+  }
+
+  function renderPrograms() {
+    $("#main").innerHTML = `
+      ${pageHeader("ANNUAL PROGRAMS", "年度项目", actionButton("创建新年度", "primary", 'data-action="open-year-setup"'))}
+      <section class="panel wide-panel"><div class="panel-head"><div><h2>华星钢铁 CBAM Program</h2><span>长期主档与年度数据分离</span></div></div><table class="data-table"><thead><tr><th>年度</th><th>当前阶段</th><th>服务订单</th><th>项目协调人</th><th>数据状态</th><th>可执行动作</th></tr></thead><tbody><tr><td><strong>2027</strong></td><td><span class="status-chip">数据采集中</span></td><td>SO-2027-018</td><td>周岚</td><td>Q3 · 68%</td><td><button class="text-button" type="button" data-page="work">进入项目</button></td></tr><tr><td><strong>2026</strong></td><td><span class="status-chip warn">核查整改</span></td><td>SO-2026-006</td><td>周岚</td><td>Amendment 2</td><td>整改中</td></tr><tr><td><strong>2025</strong></td><td><span class="status-chip locked">已锁定</span></td><td>SO-2025-002</td><td>周岚</td><td>Rev 1</td><td>只读</td></tr></tbody></table></section>`;
+  }
+
+  function renderContributorWork() {
+    $("#main").innerHTML = `
+      ${pageHeader(`${state.year} · ASSIGNED TO ME`, "分配给我的工作", statusChip("仅显示上海一厂范围"))}
+      <div class="privacy-band"><strong>你当前是数据贡献者</strong><span>可以回答和上传自己负责的材料；无法查看其他设施、完整报告或成员权限。</span></div>
+      <section class="panel task-focus"><div><small>今天到期 · 约 3 分钟</small><h2>请上传上海一厂 9 月天然气账单</h2><p>Agent 会提取账期与用量；上传结果先进入待确认区，不会直接进入正式核算。</p></div><button class="button button--primary" type="button" data-action="mock-upload">上传账单</button></section>
+      <section class="panel wide-panel"><div class="panel-head"><h2>我的任务</h2><span>2 项</span></div><div class="record-list"><article class="record"><span class="record-code">GAS</span><div><strong>9 月天然气账单</strong><p>2027 · 上海一厂 · 今天到期</p></div><span class="record-state warn">待上传</span></article><article class="record"><span class="record-code">LINE</span><div><strong>确认热轧线 2 是否检修</strong><p>只需回答实际发生的情况</p></div><span class="record-state">待回答</span></article></div></section>`;
+  }
+
+  function renderApprovals() {
+    $("#main").innerHTML = `
+      ${pageHeader(`${state.year} · INTERNAL APPROVAL`, "待我审批", statusChip("2 项等待决定", "warn"))}
+      <div class="approval-board"><section class="panel"><div class="panel-head"><h2>审批队列</h2><span>按成本与交付影响排序</span></div><div class="stack-list"><button type="button" class="stack-row active"><span>风险路径 · 今天</span><strong>供应商数据未返回，是否暂用默认值？</strong><small>影响 37% 总排放 · 不影响继续采集</small></button><button type="button" class="stack-row"><span>交付范围 · 周五</span><strong>NordWerk Communication Package</strong><small>2 个产品 · 2027 Q1–Q3</small></button></div></section><section class="panel review-sheet"><small>DECISION AP-2027-014</small><h2>默认值并行路径</h2><p>批准后，团队会继续向供应商索取实测数据，同时以保守默认值维持当前进度。批准不会关闭 Finding。</p><ol><li><span>¥</span><div><strong>当前成本影响</strong><small>较目标情景约增加 ¥230k</small></div></li><li><span>✓</span><div><strong>可以撤回</strong><small>供应商数据通过核查后创建新计算版本</small></div></li></ol><div class="action-bar"><button class="button button--primary" type="button" data-staff-action="已批准默认值并行路径">批准并记录理由</button><button class="button button--secondary" type="button" data-staff-action="已退回项目协调人补充说明">退回补充</button></div></section></div>`;
   }
 
   function journeyStage() {
@@ -208,11 +270,20 @@
   }
 
   function renderData() {
+    const locked = isLockedYear();
+    if (state.role === "customer_contrib") {
+      $("#main").innerHTML = `
+        ${pageHeader(`${state.year} · MY EVIDENCE`, "我的材料", statusChip("上海一厂 · 限定范围"))}
+        <div class="privacy-band"><strong>最小可见范围</strong><span>这里仅显示分配给你的设施与材料。其他设施、供应商和完整计算结果保持隐藏。</span></div>
+        <section class="panel wide-panel"><div class="panel-head"><h2>我负责的材料</h2><button class="button button--primary" type="button" data-action="mock-upload">上传材料</button></div><div class="record-list"><article class="record"><span class="record-code">BILL</span><div><strong>上海一厂电力账单 · 7–9 月</strong><p>已解析 3/3 · 等待项目协调人确认</p></div><span class="record-state ok">已上传</span></article><article class="record"><span class="record-code">GAS</span><div><strong>上海一厂天然气账单 · 9 月</strong><p>今天到期</p></div><span class="record-state warn">待上传</span></article></div></section>`;
+      return;
+    }
     const periods = [
       ["Q1", "已冻结", 100, "ok"], ["Q2", "已复核", 96, "ok"], ["Q3", "采集中", state.uploadAdded ? 84 : 68, "warn"], ["Q4", "未开始", 0, ""],
     ];
     $("#main").innerHTML = `
-      ${pageHeader(`${state.year} · COLLECTION WINDOWS`, "数据与证据", actionButton("上传本期材料", "primary", 'data-action="mock-upload"'))}
+      ${pageHeader(`${state.year} · COLLECTION WINDOWS`, "数据与证据", locked ? yearBadge() : actionButton("上传本期材料", "primary", 'data-action="mock-upload"'))}
+      ${locked ? '<div class="privacy-band"><strong>年度快照只读</strong><span>新材料必须通过更正申请进入 Amendment 草稿，不会覆盖 Rev 1。</span><button class="text-button" type="button" data-staff-action="已创建年度更正申请">发起更正</button></div>' : ""}
       <section class="period-grid">${periods.map(([label, status, coverage, tone]) => `<article class="period-card ${tone}"><div><small>${label}</small><span class="record-state ${tone}">${status}</span></div><strong>${coverage}%</strong><p>数据与证据覆盖</p><i><em style="width:${coverage}%"></em></i><ul><li>产品数量 ${coverage ? "✓" : "—"}</li><li>能源数据 ${coverage > 70 ? "✓" : coverage ? "待补" : "—"}</li><li>前体数据 ${coverage > 90 ? "✓" : coverage ? "缺 1 项" : "—"}</li></ul></article>`).join("")}</section>
       <div class="content-split data-layout"><section class="panel flat-panel"><div class="panel-head"><h2>本期材料</h2><button class="text-button" type="button">责任人 ▾</button></div><div class="record-list"><article class="record"><span class="record-code">BILL</span><div><strong>电力账单 · 7–9 月</strong><p>上海一厂 · 财务 · 已解析 3/3</p></div><span class="record-state ok">已关联</span></article><article class="record"><span class="record-code">GAS</span><div><strong>天然气账单 · 7–9 月</strong><p>江苏二厂 · 缺 9 月</p></div><span class="record-state warn">待补</span></article><article class="record"><span class="record-code">PRE</span><div><strong>钢坯供应商数据</strong><p>北方特钢 · 请求已发送</p></div><span class="record-state warn">等待外部</span></article></div></section><aside class="panel trace-panel"><div class="panel-head"><h2>本期进入核算前</h2></div><ol class="trace-list"><li><span>01</span><div><strong>期间完整</strong><small>账期覆盖，无重复或缺月</small></div></li><li><span>02</span><div><strong>对象已关联</strong><small>设施、产品配置和前体明确</small></div></li><li><span>03</span><div><strong>证据可回溯</strong><small>文件版本与位置已记录</small></div></li><li><span>04</span><div><strong>异常已处理</strong><small>冲突有具名裁决</small></div></li></ol></aside></div>`;
   }
@@ -237,7 +308,7 @@
       <div class="product-workspace">
         <section class="panel product-index"><div class="panel-head"><h2>本年度产品</h2><span>${count} 个</span></div><div class="product-list">${productRow("hrc")}${productRow("coated")}${productRow("section")}${productRow("wire")}${state.productAdded ? productRow("cold") : ""}</div><div class="product-index-foot"><button class="text-button" type="button" data-staff-action="已进入批量导入预览">从 Excel 批量导入</button><button class="text-button" type="button">查找重复产品</button></div></section>
         <section class="product-detail">
-          <div class="product-title"><div><small>PRODUCT MASTER · ${state.selectedProduct === "cold" ? "DRAFT" : "ACTIVE"}</small><h2>${selected.name}</h2><p>${selected.code} · ${selected.cn}</p></div><div><button class="action secondary-action" type="button" data-action="edit-product">编辑主档</button><button class="action secondary-action" type="button" data-staff-action="产品将从未来年度候选中停用">停用</button></div></div>
+          <div class="product-title"><div><small>PRODUCT MASTER · ${state.selectedProduct === "cold" ? "DRAFT" : "ACTIVE"}</small><h2>${selected.name}</h2><p>${selected.code} · ${selected.cn}</p></div><div>${locked ? '<span class="status-chip locked">快照只读</span>' : '<button class="action secondary-action" type="button" data-action="edit-product">编辑主档</button><button class="action secondary-action" type="button" data-staff-action="产品将从未来年度候选中停用">停用</button>'}</div></div>
           <section class="configuration-section"><div class="section-heading"><div><h3>生产配置</h3><p>同一销售产品可以有不同工厂、工艺和前体来源；分别核算后再汇总。</p></div>${locked ? "" : `<button class="action primary-action" type="button" data-action="add-configuration">＋ 添加配置</button>`}</div>
             <div class="configuration-list">${configurations}${state.configurationAdded ? `<article class="new-config"><div class="config-top"><span>${state.selectedProduct === "hrc" ? "D" : "A"}</span><div><strong>新增配置待完善</strong><small>请选择工厂、工艺和前体来源</small></div><span class="record-state warn">草稿</span></div><button class="text-button" type="button" data-page="work">让 Agent 帮我整理 →</button></article>` : ""}</div>
           </section>
@@ -280,19 +351,27 @@
   }
 
   function renderTeam() {
+    const admin = state.role === "customer_admin";
     $("#main").innerHTML = `
-      ${pageHeader("ORGANIZATION & ACCESS", "团队与权限", actionButton("邀请成员", "primary", 'data-action="invite-member"'))}
+      ${pageHeader("ORGANIZATION & ACCESS", admin ? "成员与授权" : "团队与权限", admin ? actionButton("邀请成员", "primary", 'data-action="invite-member"') : statusChip("项目范围只读"))}
       <div class="permission-summary"><div><small>企业成员</small><strong>12</strong></div><div><small>Lumino 服务团队</small><strong>3</strong></div><div><small>外部限时授权</small><strong>2</strong></div><p>权限按企业、年度、设施和数据敏感级别共同计算。Agent 不会扩大成员已有权限。</p></div>
-      <section class="panel wide-panel"><div class="panel-head"><h2>项目成员</h2><button class="text-button" type="button">查看权限审计</button></div><table class="data-table"><thead><tr><th>成员</th><th>角色</th><th>数据范围</th><th>最近活动</th><th>状态</th></tr></thead><tbody>
-        <tr><td><strong>周岚</strong><small>zhou.lan@huaxing.cn</small></td><td>项目协调人</td><td>全部年度 · 全部设施</td><td>刚刚确认业务事实</td><td><span class="record-state ok">有效</span></td></tr>
-        <tr><td><strong>陈浩</strong><small>生产部</small></td><td>数据贡献者</td><td>2027 · 上海一厂</td><td>2 个任务待回答</td><td><span class="record-state warn">待办</span></td></tr>
-        <tr><td><strong>王晨</strong><small>Lumino 专家</small></td><td>咨询专家</td><td>2026–2027 · 项目授权</td><td>今天 09:42</td><td><span class="record-state ok">有效</span></td></tr>
-        <tr><td><strong>NordWerk GmbH</strong><small>欧盟进口商</small></td><td>外部接收方</td><td>2025 · 已分享产品范围</td><td>2026-03-18 接收</td><td><span class="record-state">只读</span></td></tr>
+      <section class="panel wide-panel"><div class="panel-head"><h2>项目成员</h2><button class="text-button" type="button" data-staff-action="已打开有效权限与继承来源">查看权限审计</button></div><table class="data-table"><thead><tr><th>成员</th><th>角色</th><th>数据范围</th><th>授权来源</th><th>状态</th></tr></thead><tbody>
+        <tr><td><strong>周岚</strong><small>zhou.lan@huaxing.cn</small></td><td>企业管理员 / 协调人</td><td>全部年度 · 全部设施</td><td>企业级角色</td><td><span class="record-state ok">有效</span></td></tr>
+        <tr><td><strong>陈浩</strong><small>生产部</small></td><td>数据贡献者</td><td>2027 · 上海一厂</td><td>任务 + 设施范围</td><td><span class="record-state warn">2 项待办</span></td></tr>
+        <tr><td><strong>王晨</strong><small>Lumino 制备专家</small></td><td>制备专家</td><td>SO-2027-018 · 2027</td><td>服务订单授权</td><td><span class="record-state ok">2028-03 到期</span></td></tr>
+        <tr><td><strong>李娜</strong><small>Lumino 复核中心</small></td><td>独立复核专家</td><td>待复核快照</td><td>工作包 WP-REV-03</td><td><span class="record-state ok">有效</span></td></tr>
+        <tr><td><strong>NordWerk GmbH</strong><small>欧盟进口商</small></td><td>外部接收方</td><td>2025 · 已分享产品范围</td><td>交付分享授权</td><td><span class="record-state">只读</span></td></tr>
       </tbody></table></section>
       <div class="security-note"><strong>最小权限原则</strong><p>商务和运营默认看不到 BOM、供应商价格与原始凭证；管理员临时访问客户内容必须说明原因并写入审计。</p><button class="text-button" type="button">查看权限矩阵 →</button></div>`;
   }
 
   function renderOrganizationSettings() {
+    if (!canManageOrganization()) {
+      state.page = defaultPages[state.role];
+      render();
+      toast("只有企业管理员可以维护长期主档。");
+      return;
+    }
     $("#main").innerHTML = `
       ${pageHeader("PROGRAM MASTER DATA", "企业设置", actionButton(state.orgEditing ? "保存企业草稿" : "编辑企业资料", state.orgEditing ? "primary" : "secondary", 'data-action="toggle-org-edit"'))}
       <div class="master-data-note"><div><strong>这里维护长期主档</strong><p>年度项目引用当时有效的版本。修改不会覆盖已锁定年度；地址、设施或责任变化会创建新的有效期版本。</p></div><span class="status-chip">主档完整度 91%</span></div>
@@ -306,6 +385,12 @@
   }
 
   function renderAnnualSetup() {
+    if (!canCreateYear()) {
+      state.page = defaultPages[state.role];
+      render();
+      toast("只有企业管理员可以创建新年度。");
+      return;
+    }
     $("#main").innerHTML = `
       ${pageHeader("NEW ANNUAL COMPLIANCE CYCLE", "创建 2028 年度", statusChip("尚未创建", "warn"))}
       <section class="year-setup"><div class="year-step active"><span>01</span><div><small>基线年度</small><strong>使用 2027 的结构，不复制年度数值</strong><p>设施、产品和工艺作为待确认建议带入；产量、能耗、采购量和核算结果不会复制。</p></div></div><div class="year-step"><span>02</span><div><small>变化确认</small><strong>Agent 将询问今年发生了什么变化</strong><p>新增产品、生产线、供应商、外包工序和能源类型会单独确认。</p></div></div><div class="year-step"><span>03</span><div><small>新年度规则</small><strong>重新解析 2028 Rulepack 与报告模板</strong><p>默认值、benchmark、必填字段和交付模板全部按新年度生成。</p></div></div><div class="year-setup-actions"><button class="action secondary-action" type="button" data-page="work">取消</button><button class="action primary-action" type="button" data-action="create-year">创建年度并开始变化确认</button></div></section>`;
@@ -358,6 +443,13 @@
   }
 
   function renderStaffSecondary(role) {
+    if (role === "expert" && state.page === "case-workspace") {
+      $("#main").innerHTML = `${pageHeader("AUTHORIZED CASE WORKSPACE", "华星钢铁 · 2027", statusChip("WP-CALC-027 · 已分派"))}
+        <div class="privacy-band"><strong>授权边界</strong><span>SO-2027-018 · 2 座设施 · 4 个产品 · 有效至 2028-03-31。合同价格、回款与商务备注不可见。</span></div>
+        <section class="case-ledger"><div><small>服务订单</small><strong>SO-2027-018</strong><span>年度全流程服务</span></div><div><small>工作包</small><strong>WP-CALC-027</strong><span>计算与报告制备</span></div><div><small>当前规则</small><strong>EU-CBAM-2027.1</strong><span>Report Schema 3.2</span></div><div><small>专业 SLA</small><strong>余 1 天 6 小时</strong><span>运营：林晓</span></div></section>
+        <div class="content-split case-workspace"><section class="panel"><div class="panel-head"><div><h2>对象与证据关系</h2><span>同一事实，不同视图</span></div><button class="text-button" type="button" data-staff-action="已打开证据定位器">查看原件</button></div><div class="relationship-map"><div><small>产品</small><strong>热轧非合金钢卷</strong><span>CN 7208 · 已确认</span></div><i>→</i><div><small>生产配置</small><strong>上海一厂 · 外购钢坯</strong><span>43% 年度产量</span></div><i>→</i><div><small>前体</small><strong>北方特钢钢坯</strong><span>Communication Form 待补</span></div></div><div class="comparison"><article><small>客户业务回答</small><strong>“集团北方厂和本地供应商都有，需要按采购批次区分。”</strong></article><article><small>Canonical Data</small><strong>63% 外购 / 37% 集团内部供应 · 待复核</strong></article></div></section><aside class="panel"><div class="panel-head"><h2>计算与修订</h2></div><ol class="compact-checklist"><li><span>04</span><div><strong>Calculation Run 04</strong><small>当前认可 · 2027-10-08</small></div></li><li><span>03</span><div><strong>Run 03</strong><small>供应商映射调整后失效</small></div></li><li><span>!</span><div><strong>1 个开放 Finding</strong><small>供应商边界说明不完整</small></div></li></ol><div class="action-bar"><button class="button button--primary" type="button" data-staff-action="已创建带理由的重算请求">发起重算</button><button class="button button--secondary" type="button" data-page="findings">查看 Finding</button></div></aside></div>`;
+      return;
+    }
     if (role === "expert" && state.page === "findings") {
       $("#main").innerHTML = `${pageHeader("EXPERT FINDINGS", "Findings", '<p class="head-note">Finding 只能在证据、规则或具名风险接受满足条件后关闭，Agent 无权自行关闭。</p>')}
         <div class="metric-line"><div><span>开放</span><strong>7</strong></div><div><span>客户响应中</span><strong>4</strong></div><div><span>等待重算</span><strong>2</strong></div><div><span>逾期</span><strong>1</strong></div></div>
@@ -369,14 +461,26 @@
         </tbody></table></section>`;
       return;
     }
-    if (role === "expert" && state.page === "review") {
+    if (role === "reviewer" && state.page === "review") {
       $("#main").innerHTML = `${pageHeader("INDEPENDENT REVIEW", "复核与锁定", statusChip("3 个待复核", "warn"))}
         <div class="callout"><strong>职责分离：</strong> 你不能批准自己制备的最终交付件。下列项目已自动排除制单人与复核人相同的情况。</div>
         <div class="approval-board"><section class="panel"><div class="panel-head"><h2>待复核交付件</h2><button class="text-button" type="button">按风险排序</button></div><div class="stack-list">
-          <button type="button" class="stack-row active"><span>华星钢铁 · 2027</span><strong>监测计划 Rev 3</strong><small>制备：王晨 · 22 分钟前</small></button>
+          <button type="button" class="stack-row active"><span>华星钢铁 · 2027</span><strong>监测计划 Rev 3</strong><small>制备：王晨 · 与当前复核人不同</small></button>
           <button type="button" class="stack-row"><span>远航铝业 · 2026</span><strong>排放报告 Amendment 2</strong><small>制备：李明 · 1 小时前</small></button>
           <button type="button" class="stack-row"><span>北辰化工 · 2027</span><strong>Calculation Run 08</strong><small>制备：周敏 · 昨天</small></button>
         </div></section><section class="panel review-sheet"><small>MONITORING PLAN · REV 3</small><h2>华星钢铁 2027 监测计划</h2><p>22 项要素中 21 项已通过结构校验；1 项采用具名风险接受。</p><ol><li><span>✓</span><div><strong>范围与工艺一致</strong><small>4 个产品、2 个设施均有确认关系</small></div></li><li><span>✓</span><div><strong>证据血缘完整</strong><small>42 条事实可回溯至 28 份材料</small></div></li><li><span>!</span><div><strong>供应商数据仍使用默认值</strong><small>客户已批准保守路径，Finding 保持开放</small></div></li></ol><div class="action-bar"><button class="action primary-action" type="button" data-staff-action="复核通过并进入锁定队列">复核通过</button><button class="action secondary-action" type="button">退回修改</button></div></section></div>`;
+      return;
+    }
+    if (role === "ops" && state.page === "engagements") {
+      $("#main").innerHTML = `${pageHeader("SERVICE ORDER DELIVERY", "订单履约", statusChip("3 个需要运营动作", "warn"))}
+        <div class="privacy-band"><strong>运营可见范围</strong><span>可管理服务范围、SLA、团队与交接；不展示合同价格、客户 BOM、供应商价格或原始凭证正文。</span></div>
+        <section class="panel wide-panel"><div class="panel-head"><div><h2>履约中的服务订单</h2><span>合同签署后由商务正式移交</span></div><button class="text-button" type="button">服务负责人 ▾</button></div><table class="data-table"><thead><tr><th>服务订单</th><th>客户 / 年度</th><th>购买范围</th><th>团队</th><th>SLA / 健康度</th><th>运营动作</th></tr></thead><tbody><tr><td><strong>SO-2027-018</strong><small>年度全流程</small></td><td>华星钢铁 · 2027</td><td>2 设施 · 4 产品 · 3 进口商</td><td>林晓 / 王晨 / 李娜</td><td><span class="record-state ok">正常</span><small>下次交付 10 月 18 日</small></td><td><button class="text-button" type="button" data-staff-action="已打开华星钢铁履约详情">管理履约</button></td></tr><tr><td><strong>SO-2026-011</strong><small>核查支持</small></td><td>远航铝业 · 2026</td><td>1 设施 · 2 产品</td><td>孙宁 / 李明</td><td><span class="record-state warn">Finding 逾期</span></td><td><button class="text-button" type="button" data-staff-action="已创建运营升级单">创建升级单</button></td></tr><tr><td><strong>SO-2027-022</strong><small>首年建档</small></td><td>北辰化工 · 2027</td><td>范围待客户确认</td><td>待分配专家</td><td><span class="record-state warn">待启动</span></td><td><button class="text-button" type="button" data-staff-action="已进入项目启动与人员分派">启动项目</button></td></tr></tbody></table></section>`;
+      return;
+    }
+    if (role === "ops" && state.page === "handoffs") {
+      $("#main").innerHTML = `${pageHeader("CONTROLLED HANDOFFS", "交接中心", statusChip("2 项等待接收", "warn"))}
+        <section class="handoff-flow" aria-label="标准交接链"><span class="done">商务</span><i>→</i><span class="current">运营</span><i>→</i><span>制备专家</span><i>→</i><span>独立复核</span><i>→</i><span>客户审批</span></section>
+        <section class="panel wide-panel"><div class="panel-head"><div><h2>待处理交接</h2><span>每次交接都有范围、资料、完成条件和接收确认</span></div></div><table class="data-table"><thead><tr><th>交接单</th><th>从 / 到</th><th>服务订单</th><th>交接内容</th><th>完成条件</th><th>状态</th></tr></thead><tbody><tr><td><strong>HO-2027-043</strong><small>今天 09:20</small></td><td>商务 → 运营</td><td>SO-2027-022</td><td>已签合同、客户联系人、首年建档范围</td><td>运营确认团队与启动日</td><td><button class="button button--primary" type="button" data-staff-action="已接收交接并启动 SLA">接收</button></td></tr><tr><td><strong>HO-2027-041</strong><small>昨天</small></td><td>专家 → 客户</td><td>SO-2027-018</td><td>供应商默认值风险路径</td><td>客户审批人具名决定</td><td><span class="record-state warn">等待客户</span></td></tr></tbody></table></section>`;
       return;
     }
     if (role === "ops" && state.page === "sla") {
@@ -404,7 +508,7 @@
         <section class="panel wide-panel"><div class="panel-head"><h2>进行中的方案</h2><button class="action primary-action" type="button" data-staff-action="已创建方案草稿">新建方案</button></div><table class="data-table"><thead><tr><th>客户</th><th>服务范围</th><th>方案阶段</th><th>预计启动</th><th>合规数据</th><th>下一动作</th></tr></thead><tbody>
           <tr><td><strong>华星钢铁</strong><small>Q-2027-041</small></td><td>2 设施 · 4 产品 · 年度服务</td><td><span class="record-state warn">客户评审</span></td><td>2026-11-01</td><td class="privacy-cell">仅里程碑摘要</td><td>周五跟进</td></tr>
           <tr><td><strong>新锐紧固件</strong><small>Q-2027-044</small></td><td>适用性诊断 + 首年建档</td><td><span class="record-state">准备中</span></td><td>待确认</td><td class="privacy-cell">尚未授权</td><td>完成产品范围</td></tr>
-          <tr><td><strong>北辰化工</strong><small>Q-2027-038</small></td><td>核算 + 核查支持</td><td><span class="record-state ok">已签署</span></td><td>2026-10-15</td><td class="privacy-cell">项目状态可见</td><td>移交运营</td></tr>
+          <tr><td><strong>北辰化工</strong><small>Q-2027-038</small></td><td>核算 + 核查支持</td><td><span class="record-state ok">已签署</span></td><td>2026-10-15</td><td class="privacy-cell">项目状态可见</td><td><button class="text-button" type="button" data-staff-action="已生成服务订单 SO-2027-022 与交接单 HO-2027-043">合同转订单</button></td></tr>
         </tbody></table></section>`;
       return;
     }
@@ -422,12 +526,18 @@
     toast.timer = window.setTimeout(() => element.classList.remove("show"), 2800);
   }
 
-  $("#loginForm").addEventListener("submit", (event) => { event.preventDefault(); login("customer"); });
+  $("#loginForm").addEventListener("submit", (event) => { event.preventDefault(); login("customer_owner"); });
   document.querySelectorAll("[data-demo-role]").forEach((button) => button.addEventListener("click", () => login(button.dataset.demoRole)));
   $("#logoutButton").addEventListener("click", logout);
-  $("#settingsButton").addEventListener("click", () => { state.page = "org-settings"; render(); });
-  document.querySelector(".company-switch").addEventListener("click", () => { if (state.role === "customer") { state.page = "org-settings"; render(); } });
-  $("#roleSelect").addEventListener("change", (event) => { state.role = event.target.value; state.page = defaultPages[state.role]; render(); toast(`已切换为${iconLabel(state.role)}。正式产品将由账号权限决定。`); });
+  $("#settingsButton").addEventListener("click", () => { if (canManageOrganization()) { state.page = "org-settings"; render(); } });
+  document.querySelector(".company-switch").addEventListener("click", () => { if (canManageOrganization()) { state.page = "org-settings"; render(); } });
+  $("#roleSelect").addEventListener("change", (event) => {
+    state.role = event.target.value;
+    if (state.role === "customer_admin") state.year = "2027";
+    state.page = defaultPages[state.role];
+    render();
+    toast(`已切换为${iconLabel(state.role)}。正式产品将由账号权限决定。`);
+  });
   $("#yearSelect").addEventListener("change", (event) => {
     if (event.target.value === "new") {
       state.page = "annual-setup";
@@ -449,7 +559,10 @@
     const nav = event.target.closest("[data-page]");
     if (nav) { state.page = nav.dataset.page; render(); $("#sidebar").classList.remove("open"); $("#mobileMenu").setAttribute("aria-expanded", "false"); $("#mobileMenu").setAttribute("aria-label", "打开导航"); $("#main").focus({ preventScroll: true }); return; }
     const answer = event.target.closest("[data-answer]");
-    if (answer) { state.answer = answer.dataset.answer; render(); toast(state.answer === "delegate" ? "任务已转交给生产负责人，并保留当前上下文。" : "回答已保存为待确认建议，不会直接覆盖正式数据。"); return; }
+    if (answer) {
+      if (isLockedYear()) { toast("锁定年度不能原位修改；请先创建更正申请。"); return; }
+      state.answer = answer.dataset.answer; render(); toast(state.answer === "delegate" ? "任务已转交给生产负责人，并保留当前上下文。" : "回答已保存为待确认建议，不会直接覆盖正式数据。"); return;
+    }
     const delivery = event.target.closest("[data-delivery]");
     if (delivery) { state.deliveryExpanded = state.deliveryExpanded === delivery.dataset.delivery ? null : delivery.dataset.delivery; render(); return; }
     const product = event.target.closest("[data-product]");
@@ -457,6 +570,8 @@
     const customerAction = event.target.closest("[data-action]");
     if (customerAction) {
       const action = customerAction.dataset.action;
+      if (isLockedYear() && ["mock-upload", "toggle-product-form", "add-configuration", "edit-product", "confirm-fact", "resolve-finding"].includes(action)) { toast("锁定年度为不可变快照；请通过更正申请创建新修订版。"); return; }
+      if (action === "open-year-setup") { state.page = "annual-setup"; render(); }
       if (action === "review-trial") { state.page = "products"; render(); toast("试算信息已作为待核对线索带入，不会直接写入正式数据。"); }
       if (action === "mock-upload") { state.uploadAdded = true; render(); toast("演示文件已加入处理队列；正式版本将调用文件上传与解析服务。"); }
       if (action === "toggle-product-form") { state.productFormOpen = !state.productFormOpen; render(); }
@@ -484,6 +599,7 @@
   document.addEventListener("submit", (event) => {
     if (event.target.id !== "productForm") return;
     event.preventDefault();
+    if (isLockedYear()) { toast("锁定年度不能新增产品；请创建更正申请。"); return; }
     state.productAdded = true;
     state.productFormOpen = false;
     state.selectedProduct = "cold";

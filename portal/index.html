@@ -46,8 +46,10 @@
         </form>
         <div class="demo-divider"><span>原型快速入口</span></div>
         <div class="demo-roles" aria-label="选择演示角色">
-          <button type="button" data-demo-role="customer"><b>客户</b><small>年度任务与 Agent</small></button>
-          <button type="button" data-demo-role="expert"><b>专家</b><small>判断与复核</small></button>
+          <button type="button" data-demo-role="customer_owner"><b>客户</b><small>年度任务与 Agent</small></button>
+          <button type="button" data-demo-role="customer_admin"><b>管理员</b><small>服务、组织与授权</small></button>
+          <button type="button" data-demo-role="expert"><b>专家</b><small>判断与制备</small></button>
+          <button type="button" data-demo-role="reviewer"><b>复核</b><small>独立复核与锁定</small></button>
           <button type="button" data-demo-role="ops"><b>运营</b><small>项目与 SLA</small></button>
           <button type="button" data-demo-role="sales"><b>商务</b><small>线索与客户</small></button>
         </div>
@@ -79,10 +81,18 @@
           <button class="settings-entry" id="settingsButton" type="button"><span aria-hidden="true">⚙</span><span><strong>企业设置</strong><small>企业、设施与长期主档</small></span></button>
           <p>原型角色</p>
           <label><span class="sr-only">切换演示角色</span><select id="roleSelect">
-            <option value="customer">客户 · 项目协调人</option>
-            <option value="expert">Lumino · CBAM 专家</option>
-            <option value="ops">Lumino · 运营</option>
-            <option value="sales">Lumino · 商务</option>
+            <optgroup label="客户企业">
+              <option value="customer_admin">企业管理员</option>
+              <option value="customer_owner">项目协调人</option>
+              <option value="customer_contrib">数据贡献者</option>
+              <option value="customer_approver">内部审批人</option>
+            </optgroup>
+            <optgroup label="Lumino 服务团队">
+              <option value="expert">CBAM 制备专家</option>
+              <option value="reviewer">独立复核专家</option>
+              <option value="ops">运营 / 客户成功</option>
+              <option value="sales">商务 / 销售</option>
+            </optgroup>
           </select></label>
           <small>正式产品中由账号权限决定</small>
         </div>
