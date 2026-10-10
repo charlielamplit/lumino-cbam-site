@@ -4,26 +4,32 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <meta name="theme-color" content="#123b32">
+  <meta name="theme-color" content="#0E7C5A">
   <title>Lumino · CBAM 工作门户</title>
   <meta name="description" content="Lumino CBAM 登录后客户与服务团队工作门户交互原型。">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&family=Azeret+Mono:wght@500;600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
 
   <main class="login-screen" id="loginScreen">
-    <section class="login-story" aria-labelledby="loginTitle">
-      <a class="brand brand-light" href="../Lumino%20官网.dc.html" aria-label="返回 Lumino 官网">
+    <header class="login-header">
+      <a class="brand" href="../Lumino%20官网.dc.html" aria-label="返回 Lumino 官网">
         <span>LUMINO</span><i aria-hidden="true"></i>
       </a>
+      <nav aria-label="登录页导航">
+        <a href="../Lumino%20官网.dc.html">返回官网 <span aria-hidden="true">↗</span></a>
+        <a class="login-header-cta" href="../calculator/">免费试算</a>
+      </nav>
+    </header>
+    <section class="login-story" aria-labelledby="loginTitle">
       <div class="story-copy">
         <p class="eyebrow">CBAM COMPLIANCE WORKSPACE</p>
-        <h1 id="loginTitle">把复杂申报，<br>变成今天能回答的问题。</h1>
+        <h1 id="loginTitle">把复杂申报，<br><span>变成今天能回答的问题。</span></h1>
         <p>你提供业务事实和现有材料。Lumino Agent 负责理解法规字段、整理证据，并把需要判断的地方交给专家。</p>
       </div>
       <div class="trust-note">
@@ -65,7 +71,10 @@
       <span class="product-name">CBAM 工作门户</span>
       <div class="topbar-context">
         <button class="company-switch" type="button"><small>当前企业</small><strong id="companyName">华星钢铁有限公司</strong><span>⌄</span></button>
-        <label class="year-switch"><span class="sr-only">申报年度</span><select id="yearSelect"></select></label>
+        <div class="project-period" aria-label="当前项目期间">
+          <label class="year-switch"><small>年度项目</small><select id="yearSelect"></select></label>
+          <label class="quarter-switch" id="quarterSwitch"><small>季度数据包</small><select id="quarterSelect"><option value="Q1">Q1</option><option value="Q2">Q2</option><option value="Q3">Q3</option><option value="Q4">Q4</option></select></label>
+        </div>
       </div>
       <div class="topbar-actions">
         <button class="icon-button" type="button" aria-label="通知">●<span class="notification-dot"></span></button>
@@ -99,6 +108,14 @@
       </aside>
       <main class="workspace" id="main" tabindex="-1"></main>
     </div>
+  </div>
+
+  <div class="drawer-layer" id="drawerLayer" hidden>
+    <button class="drawer-backdrop" id="drawerBackdrop" type="button" aria-label="关闭侧栏"></button>
+    <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" tabindex="-1">
+      <header class="drawer-head"><div><p id="drawerEyebrow">DETAIL</p><h2 id="drawerTitle">详情</h2></div><button class="drawer-close" id="drawerClose" type="button" aria-label="关闭">×</button></header>
+      <div class="drawer-body" id="drawerBody"></div>
+    </aside>
   </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
