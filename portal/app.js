@@ -61,6 +61,7 @@
     importedTrial, uploadAdded: false, factConfirmed: false, findingResolved: false,
     yearCreated: false, deliveryExpanded: null, productAdded: false,
     configurationAdded: false, productFormOpen: false, orgEditing: false, selectedProduct: "hrc",
+    productYears: ["2027"],
   };
   const $ = (selector) => document.querySelector(selector);
 
@@ -84,7 +85,7 @@
   }
 
   function statusChip(label, tone = "") {
-    return `<span class="status-chip ${tone}" role="status">${label}</span>`;
+    return `<span class="status-chip ${tone}">${label}</span>`;
   }
 
   function login(role) {
@@ -292,23 +293,25 @@
     const locked = state.year === "2025";
     const count = state.productAdded ? 5 : 4;
     const products = {
-      hrc: { code: "HRC-01", name: "热轧非合金钢卷", cn: "CN 7208 候选已由关务确认", summary: "3 个生产配置 · CN 7208" },
-      coated: { code: "CTS-01", name: "镀层钢板", cn: "CN 7210 候选 · 待关务复核", summary: "1 个生产配置 · 缺外包证明" },
-      section: { code: "SEC-01", name: "型钢", cn: "CN 7216 已确认", summary: "1 个生产配置 · CN 7216" },
-      wire: { code: "WRD-01", name: "非合金钢盘条", cn: "CN 7213 已确认", summary: "2 个生产配置 · CN 7213" },
-      cold: { code: "CRS-02", name: "冷轧非合金钢板", cn: "CN 7209 候选 · 待确认", summary: "尚未添加生产配置" },
+      hrc: { code: "HRC-01", name: "热轧非合金钢卷", cn: "CN 7208 候选已由关务确认", summary: "3 个生产配置", scope: ["2026", "2027"] },
+      coated: { code: "CTS-01", name: "镀层钢板", cn: "CN 7210 候选 · 待关务复核", summary: "1 个生产配置 · 缺外包证明", scope: ["2027"] },
+      section: { code: "SEC-01", name: "型钢", cn: "CN 7216 已确认", summary: "1 个生产配置", scope: ["2026", "2027"] },
+      wire: { code: "WRD-01", name: "非合金钢盘条", cn: "CN 7213 已确认", summary: "2 个生产配置", scope: ["2027"] },
+      cold: { code: "CRS-02", name: "冷轧非合金钢板", cn: "CN 7209 候选 · 待确认", summary: "尚未添加生产配置", scope: state.productYears },
     };
     if (!products[state.selectedProduct] || (state.selectedProduct === "cold" && !state.productAdded)) state.selectedProduct = "hrc";
     const selected = products[state.selectedProduct];
-    const productRow = (id) => `<button class="product-row ${state.selectedProduct === id ? "active" : ""}" type="button" data-product="${id}" aria-pressed="${state.selectedProduct === id}"><span>${products[id].code}</span><strong>${products[id].name}</strong><small>${products[id].summary}</small></button>`;
+    const productRow = (id) => `<button class="product-row ${state.selectedProduct === id ? "active" : ""}" type="button" data-product="${id}" aria-pressed="${state.selectedProduct === id}"><span>${products[id].code}</span><strong>${products[id].name}</strong><small>${products[id].summary}</small><em>${products[id].scope.length ? `纳入 ${products[id].scope.join(" / ")}` : "尚未纳入年度项目"}</em></button>`;
+    const availableProductYears = Object.entries(years).filter(([, meta]) => meta.chip !== "locked");
+    const yearScopeChoices = availableProductYears.map(([year]) => `<label><input type="checkbox" name="productYears" value="${year}" ${year === state.year || state.productYears.includes(year) ? "checked" : ""}>${year}</label>`).join("");
     const configurations = state.selectedProduct === "hrc" ? `<article><div class="config-top"><span>A</span><div><strong>上海一厂 · 自产钢坯</strong><small>高炉—转炉长流程 · 有效期 2025–至今</small></div><span class="record-state ok">37% 产量</span></div><dl><div><dt>主要前体</dt><dd>自产钢水、钢坯</dd></div><div><dt>数据路径</dt><dd>自身实测</dd></div><div><dt>单位排放</dt><dd>1.72 tCO₂e/t</dd></div></dl></article><article><div class="config-top"><span>B</span><div><strong>上海一厂 · 外购钢坯</strong><small>供应商甲 / 北方特钢 · 采购批次区分</small></div><span class="record-state warn">43% 产量</span></div><dl><div><dt>主要前体</dt><dd>外购非合金钢坯</dd></div><div><dt>数据路径</dt><dd>前体默认 + 自身实测</dd></div><div><dt>单位排放</dt><dd>1.96 tCO₂e/t</dd></div></dl></article><article><div class="config-top"><span>C</span><div><strong>江苏二厂 · 电弧炉</strong><small>供应商乙钢坯 · 订单号区分</small></div><span class="record-state ok">20% 产量</span></div><dl><div><dt>主要前体</dt><dd>外购低碳钢坯</dd></div><div><dt>数据路径</dt><dd>全链路实测 · 待核查</dd></div><div><dt>单位排放</dt><dd>1.31 tCO₂e/t</dd></div></dl></article>` : state.selectedProduct === "cold" ? `<div class="configuration-empty"><span>✦</span><h3>还没有生产配置</h3><p>告诉 Agent 这个产品在哪里生产、用了什么原料，我们会生成待确认的配置草稿。</p></div>` : `<article><div class="config-top"><span>A</span><div><strong>上海一厂 · 标准生产路径</strong><small>已从上一年度带入结构，待确认本年变化</small></div><span class="record-state warn">待完善</span></div><dl><div><dt>主要前体</dt><dd>待 Agent 确认</dd></div><div><dt>数据路径</dt><dd>暂用默认值</dd></div><div><dt>单位排放</dt><dd>待核算</dd></div></dl></article>`;
     $("#main").innerHTML = `
       ${pageHeader(`${state.year} · PRODUCT & SUPPLY CHAIN`, "产品与供应链", locked ? yearBadge() : actionButton("＋ 新建产品", "primary", 'data-action="toggle-product-form"'))}
-      ${state.productFormOpen ? `<form class="inline-create panel" id="productForm"><div><small>NEW PRODUCT MASTER</small><h2>新增产品</h2><p>先创建客户认识的产品，再为它添加工厂、工艺和前体配置。</p></div><label>产品名称<input name="productName" value="冷轧非合金钢板" required></label><label>内部编码<input name="internalCode" value="CRS-02" required></label><label>申报编码候选<input name="cnCode" value="7209" required></label><div class="action-bar"><button class="action secondary-action" type="button" data-action="toggle-product-form">取消</button><button class="action primary-action" type="submit">创建并加入 ${state.year}</button></div></form>` : ""}
+      ${state.productFormOpen ? `<form class="inline-create panel" id="productForm"><div class="create-intro"><small>ENTERPRISE PRODUCT MASTER</small><h2>新增产品主档</h2><p id="productScopeHelp">主档跨年度复用；年度项目只引用主档，不重复创建产品。</p></div><label>产品名称<input name="productName" value="冷轧非合金钢板" required></label><label>内部编码<input name="internalCode" value="CRS-02" required></label><label>申报编码候选<input name="cnCode" value="7209" required></label><fieldset class="year-scope-field" aria-describedby="productScopeHelp"><legend>初始纳入年度</legend><div>${yearScopeChoices}<span title="锁定年度需通过更正流程">2025 已锁定</span></div></fieldset><div class="action-bar"><button class="action secondary-action" type="button" data-action="toggle-product-form">取消</button><button class="action primary-action" type="submit">创建产品主档</button></div></form>` : ""}
       <div class="product-workspace">
-        <section class="panel product-index"><div class="panel-head"><h2>本年度产品</h2><span>${count} 个</span></div><div class="product-list">${productRow("hrc")}${productRow("coated")}${productRow("section")}${productRow("wire")}${state.productAdded ? productRow("cold") : ""}</div><div class="product-index-foot"><button class="text-button" type="button" data-staff-action="已进入批量导入预览">从 Excel 批量导入</button><button class="text-button" type="button">查找重复产品</button></div></section>
+        <section class="panel product-index"><div class="panel-head"><div><h2>企业产品主档</h2><small>当前查看 ${state.year} 年度范围</small></div><span>${count} 个</span></div><div class="product-list">${productRow("hrc")}${productRow("coated")}${productRow("section")}${productRow("wire")}${state.productAdded ? productRow("cold") : ""}</div><div class="product-index-foot"><button class="text-button" type="button" data-staff-action="已进入批量导入预览">Excel 批量导入</button><button class="text-button" type="button">查找重复</button></div></section>
         <section class="product-detail">
-          <div class="product-title"><div><small>PRODUCT MASTER · ${state.selectedProduct === "cold" ? "DRAFT" : "ACTIVE"}</small><h2>${selected.name}</h2><p>${selected.code} · ${selected.cn}</p></div><div>${locked ? '<span class="status-chip locked">快照只读</span>' : '<button class="action secondary-action" type="button" data-action="edit-product">编辑主档</button><button class="action secondary-action" type="button" data-staff-action="产品将从未来年度候选中停用">停用</button>'}</div></div>
+          <div class="product-title"><div><small>PRODUCT MASTER · ${state.selectedProduct === "cold" ? "DRAFT" : "ACTIVE"}</small><h2>${selected.name}</h2><p>${selected.code} · ${selected.cn}</p><div class="product-year-line">适用年度 ${selected.scope.join(" · ") || "未设置"}</div></div><div>${locked ? '<span class="status-chip locked">快照只读</span>' : '<button class="action secondary-action" type="button" data-staff-action="年度范围管理已打开">管理年度</button><button class="action secondary-action" type="button" data-action="edit-product">编辑主档</button><button class="action secondary-action" type="button" data-staff-action="产品将从未来年度候选中停用">停用</button>'}</div></div>
           <section class="configuration-section"><div class="section-heading"><div><h3>生产配置</h3><p>同一销售产品可以有不同工厂、工艺和前体来源；分别核算后再汇总。</p></div>${locked ? "" : `<button class="action primary-action" type="button" data-action="add-configuration">＋ 添加配置</button>`}</div>
             <div class="configuration-list">${configurations}${state.configurationAdded ? `<article class="new-config"><div class="config-top"><span>${state.selectedProduct === "hrc" ? "D" : "A"}</span><div><strong>新增配置待完善</strong><small>请选择工厂、工艺和前体来源</small></div><span class="record-state warn">草稿</span></div><button class="text-button" type="button" data-page="work">让 Agent 帮我整理 →</button></article>` : ""}</div>
           </section>
@@ -600,11 +603,14 @@
     if (event.target.id !== "productForm") return;
     event.preventDefault();
     if (isLockedYear()) { toast("锁定年度不能新增产品；请创建更正申请。"); return; }
+    const formData = new FormData(event.target);
+    state.productYears = formData.getAll("productYears");
     state.productAdded = true;
     state.productFormOpen = false;
     state.selectedProduct = "cold";
     render();
-    toast("产品主档已创建并加入当前年度；下一步需要添加生产配置。");
+    const scopeMessage = state.productYears.length ? `已纳入 ${state.productYears.join("、")} 年度项目` : "尚未纳入年度项目";
+    toast(`产品主档已创建，${scopeMessage}；下一步可添加生产配置。`);
   });
 
   if (state.importedTrial) {
