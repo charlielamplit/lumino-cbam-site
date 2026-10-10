@@ -61,7 +61,7 @@
     importedTrial, uploadAdded: false, factConfirmed: false, findingResolved: false,
     yearCreated: false, deliveryExpanded: null, productAdded: false,
     configurationAdded: false, productFormOpen: false, orgEditing: false, selectedProduct: "hrc",
-    productYears: ["2027"],
+    productYears: ["2027"], questionHelpOpen: false, findingChoiceOpen: false, dataPathChoice: null,
   };
   const $ = (selector) => document.querySelector(selector);
 
@@ -145,6 +145,10 @@
     return statusChip(data.short, data.chip === "warn" ? "warn" : data.chip === "locked" ? "locked" : "");
   }
 
+  function nextAction(kicker, title, description, label, attributes) {
+    return `<section class="next-action" aria-label="下一步"><div><small>${kicker}</small><strong>${title}</strong><p>${description}</p></div><button class="button button--primary" type="button" ${attributes}>${label}<span aria-hidden="true">→</span></button></section>`;
+  }
+
   function customerQuestion() {
     if (state.year === "2028") return `
       <p class="question-count">年度变化确认 · 第 1 项</p>
@@ -159,11 +163,12 @@
       <p class="why">我们已经整理了电费单和月度产量。你只需要说明当月发生了什么，专家会处理报告修订。</p>
       <div class="answer-row"><button class="answer-button" data-answer="产量增加">是，产量增加</button><button class="answer-button" data-answer="设备检修">不是，设备检修</button><button class="answer-button secondary" data-answer="不确定">我不确定</button><button class="answer-button secondary" data-answer="delegate">交给生产同事</button></div>`;
     if (state.answer) return `
-      <div class="agent-result"><strong>已记录你的回答：${state.answer === "delegate" ? "已交给生产负责人" : state.answer}</strong><br>Agent 已更新理解；正式数据仍会在确认后写入。下一题将在证据解析完成后出现。</div>`;
+      <div class="agent-result"><strong>已记录：${state.answer === "delegate" ? "已交给生产负责人" : state.answer}</strong><p>Agent 已更新待确认理解，正式数据不会被直接覆盖。</p><button class="text-button" type="button" data-action="revise-answer">修改回答</button></div>`;
     return `
       <p class="question-count">今天第 1 个问题 · 预计 1 分钟</p>
       <h2>生产热轧卷时使用的钢坯，是你们自己生产的吗？</h2>
       <p class="why">这会决定钢坯的排放数据从内部生产记录获取，还是向供应商索取。你不需要判断它属于哪类“前体”。</p>
+      ${state.questionHelpOpen ? '<div class="question-explainer"><strong>为什么现在问？</strong><p>产品和生产配置决定后，Agent 才能生成准确的材料清单、监测计划任务和供应商请求。此处只记录业务事实。</p></div>' : ""}
       <div class="answer-row"><button class="answer-button" data-answer="是，钢坯自产">是，自己生产</button><button class="answer-button" data-answer="不是，从供应商采购">不是，向外采购</button><button class="answer-button secondary" data-answer="不确定">我不确定</button><button class="answer-button secondary" data-answer="delegate">交给同事</button></div>`;
   }
 
@@ -173,25 +178,46 @@
     const locked = state.year === "2025";
     const currentStep = journeyStage();
     const stepNames = ["确认申报范围", "确认怎么生产", "准备监测与职责", "收集本期数据", "计算并选择路径", "复核与核查", "生成并交付"];
+    const homeTitle = locked ? "查看已完成的年度档案" : state.year === "2026" ? "还有 2 个核查问题需要处理" : state.findingResolved ? "数据路径已确定，接下来准备复核" : state.factConfirmed ? "数据已确认，接下来选择处理路径" : "早上好，今天只做三件事";
+    const coordinatorNext = locked ? ""
+      : state.findingResolved
+        ? nextAction("当前阶段 · 6/7", "准备专家复核与合规交付", "数据路径已经具名确认，下一步检查监测计划和交付文件缺口。", "检查交付准备度", 'data-page="deliverables"')
+        : state.factConfirmed
+          ? nextAction("当前任务 · 3/5 已完成", "选择成本与数据路径", "比较默认值、混合路径和全链路实测的影响，并处理开放缺口。", "查看成本与结果", 'data-page="results"')
+          : state.uploadAdded
+            ? nextAction("当前任务 · 3/5", "确认 Agent 提取的数据", "核对用量、账期和设施后，新数据才会进入计算版本。", "去确认", 'data-page="data"')
+            : state.answer
+              ? nextAction("当前任务 · 1/5 已完成", "核对产品与生产配置", "确认产品、工厂、工艺和钢坯来源，Agent 才能列出需要收集的材料。", "继续核对", 'data-page="products"')
+              : "";
+    const taskRows = locked ? `
+      <li class="task-row"><span class="task-number">✓</span><div><strong>Communication Package 已交付</strong><small>进口商：NordWerk GmbH · 已接收</small></div><time>2026-03-18</time></li>
+      <li class="task-row"><span class="task-number">✓</span><div><strong>核查报告已归档</strong><small>Verification Report · Rev 1</small></div><time>2026-03-12</time></li>`
+      : state.findingResolved ? `
+      <li class="task-row"><span class="task-number">1</span><div><strong>完成监测计划的 4 个缺口</strong><small>已确认事实会自动复用，无需重新填写</small></div><div class="task-row-action"><time>今天</time><button class="text-button" type="button" data-page="deliverables">去处理</button></div></li>
+      <li class="task-row"><span class="task-number">2</span><div><strong>等待专家复核 Run 05</strong><small>王晨制备 · 李娜独立复核</small></div><div class="task-row-action"><time>处理中</time><button class="text-button" type="button" data-page="results">查看结果</button></div></li>
+      <li class="task-row"><span class="task-number">3</span><div><strong>继续跟进供应商实测数据</strong><small>默认值并行路径不会停止供应商请求</small></div><div class="task-row-action"><time>已等待 6 天</time><button class="text-button" type="button" data-page="products">查看配置</button></div></li>`
+      : state.factConfirmed ? `
+      <li class="task-row"><span class="task-number">1</span><div><strong>处理钢坯数据缺口</strong><small>比较默认值并行、等待供应商和保守默认值</small></div><div class="task-row-action"><time>现在</time><button class="text-button" type="button" data-page="results">选择路径</button></div></li>
+      <li class="task-row"><span class="task-number">2</span><div><strong>复核 Run 05 成本变化</strong><small>确认新增天然气数据带来的影响</small></div><div class="task-row-action"><time>待决定</time><button class="text-button" type="button" data-page="results">查看</button></div></li>`
+      : `
+      <li class="task-row"><span class="task-number">1</span><div><strong>${state.year === "2026" ? "解释 5 月电耗变化" : "上传 9 月天然气账单"}</strong><small>${state.year === "2026" ? "核查 Finding #18" : "Agent 会自动识别用量、账期和设施"}</small></div><div class="task-row-action"><time>${state.year === "2026" ? "今天" : "10 月 10 日"}</time><button class="text-button" type="button" data-page="${state.year === "2026" ? "results" : "data"}">去处理</button></div></li>
+      <li class="task-row"><span class="task-number">2</span><div><strong>${state.year === "2026" ? "确认修订结果" : "确认钢坯供应商"}</strong><small>${state.year === "2026" ? "由王晨顾问准备" : "可直接转发给采购负责人"}</small></div><div class="task-row-action"><time>${state.year === "2026" ? "待专家" : "10 月 12 日"}</time><button class="text-button" type="button" data-page="${state.year === "2026" ? "deliverables" : "products"}">查看</button></div></li>
+      <li class="task-row"><span class="task-number">3</span><div><strong>${state.year === "2026" ? "回复核查员" : "复核产品清单"}</strong><small>${state.year === "2026" ? "锁定新快照后发送" : "3 个产品来自去年，1 个为新增"}</small></div><div class="task-row-action"><time>${state.year === "2026" ? "10 月 14 日" : "10 月 15 日"}</time><button class="text-button" type="button" data-page="${state.year === "2026" ? "deliverables" : "products"}">查看</button></div></li>`;
     $("#main").innerHTML = `
-      ${pageHeader(`${state.year} ANNUAL COMPLIANCE CYCLE`, locked ? "查看已完成的年度档案" : state.year === "2026" ? "还有 2 个核查问题需要处理" : "早上好，今天只做三件事", yearBadge())}
+      ${pageHeader(`${state.year} ANNUAL COMPLIANCE CYCLE`, homeTitle, yearBadge())}
       <div class="customer-layout">
         <section class="customer-main">
           ${state.importedTrial && state.year === String(state.importedTrial.year) ? `<section class="trial-handoff"><div><small>来自免费成本试算</small><strong>${state.importedTrial.cnCode} · ${state.importedTrial.quantity.toLocaleString("zh-CN")} 吨</strong><p>估算成本 ¥${state.importedTrial.estimatedCostCny.toLocaleString("zh-CN")}。这只是线索，确认产品与工厂后才会建立正式事实。</p></div><button class="action secondary-action" type="button" data-action="review-trial">核对并转为项目</button></section>` : ""}
           <section class="control-tower"><div class="tower-step"><small>年度旅程</small><strong>${locked ? "7/7 已完成" : `${currentStep}/7 ${stepNames[currentStep - 1]}`}</strong><button class="text-button" type="button" data-page="roadmap">查看完整路线图 →</button></div><div class="tower-cost"><small>默认基线 → 当前认可成本</small><strong><s>¥4.90m</s> <span>¥3.82m</span></strong><p>已确认减少成本暴露 ¥1.08m</p></div><div class="tower-period"><small>当前数据期间</small><strong>${locked ? "年度已封存" : "Q3 · 68% 齐备"}</strong><button class="text-button" type="button" data-page="data">查看缺少材料 →</button></div></section>
           <div class="journey-mini">${stepNames.map((name, index) => `<span class="${index + 1 < currentStep || locked ? "done" : index + 1 === currentStep ? "current" : ""}" title="${name}"><i></i><small>${index + 1}</small></span>`).join("")}</div>
           <section class="panel agent-task">
-            <div class="agent-task-top"><div class="agent-identity"><span class="agent-mark" aria-hidden="true">✦</span><div><strong>Lumino 协调 Agent</strong><small>把业务事实转换为合规数据</small></div></div><button class="text-button" type="button">为什么问这些？</button></div>
+            <div class="agent-task-top"><div class="agent-identity"><span class="agent-mark" aria-hidden="true">✦</span><div><strong>Lumino 协调 Agent</strong><small>把业务事实转换为合规数据</small></div></div><button class="text-button" type="button" data-action="explain-question" aria-expanded="${state.questionHelpOpen}">为什么问这些？</button></div>
             <div class="agent-task-body">${customerQuestion()}</div>
           </section>
-          <section class="panel"><div class="panel-head"><h2>${locked ? "年度记录" : "接下来"}</h2><button class="text-button" type="button">查看全部</button></div>
+          ${coordinatorNext}
+          <section class="panel"><div class="panel-head"><h2>${locked ? "年度记录" : "接下来"}</h2><button class="text-button" type="button" data-page="roadmap">查看全部</button></div>
             <ol class="task-list">
-              ${locked ? `
-                <li class="task-row"><span class="task-number">✓</span><div><strong>Communication Package 已交付</strong><small>进口商：NordWerk GmbH · 已接收</small></div><time>2026-03-18</time></li>
-                <li class="task-row"><span class="task-number">✓</span><div><strong>核查报告已归档</strong><small>Verification Report · Rev 1</small></div><time>2026-03-12</time></li>` : `
-                <li class="task-row"><span class="task-number">1</span><div><strong>${state.year === "2026" ? "解释 5 月电耗变化" : "上传 6 月电费单"}</strong><small>${state.year === "2026" ? "核查 Finding #18" : "Agent 会自动识别用电量和账期"}</small></div><time>${state.year === "2026" ? "今天" : "10 月 10 日"}</time></li>
-                <li class="task-row"><span class="task-number">2</span><div><strong>${state.year === "2026" ? "确认修订结果" : "确认钢坯供应商"}</strong><small>${state.year === "2026" ? "由王晨顾问准备" : "可直接转发给采购负责人"}</small></div><time>${state.year === "2026" ? "待专家" : "10 月 12 日"}</time></li>
-                <li class="task-row"><span class="task-number">3</span><div><strong>${state.year === "2026" ? "回复核查员" : "复核产品清单"}</strong><small>${state.year === "2026" ? "锁定新快照后发送" : "3 个产品来自去年，1 个为新增"}</small></div><time>${state.year === "2026" ? "10 月 14 日" : "10 月 15 日"}</time></li>`}
+              ${taskRows}
             </ol>
           </section>
         </section>
@@ -199,7 +225,7 @@
           <div class="context-intro"><p>AGENT CURRENT UNDERSTANDING</p><h2>${locked ? "交付时的正式事实快照" : "我目前这样理解这项业务"}</h2></div>
           <section class="context-section"><h3>已知事实</h3><dl class="fact-list"><div><dt>产品</dt><dd>热轧非合金钢卷</dd></div><div><dt>生产设施</dt><dd>上海浦东一厂</dd></div><div><dt>工艺</dt><dd>高炉—转炉长流程</dd></div><div><dt>年度</dt><dd>${state.year}</dd></div><div><dt>状态</dt><dd>${year.short}</dd></div></dl></section>
           <section class="context-section"><h3>证据与影响</h3><p class="source-line"><span>▣</span> ${state.year === "2028" ? "沿用建议来自 2027 锁定/确认数据" : `采购台账_${state.year}.xlsx · 已识别 2 个钢坯供应商`}</p><p class="source-line"><span>→</span> 你的回答将影响前体数据任务、排放核算和监测计划。</p></section>
-          <section class="context-section"><button class="text-button" type="button">查看专业字段与数据来源 →</button></section>
+          <section class="context-section"><button class="text-button" type="button" data-page="products">查看专业字段与数据来源 →</button></section>
         </aside>
       </div>`;
   }
@@ -252,16 +278,22 @@
   }
 
   function journeyStage() {
-    return { "2025": 7, "2026": 6, "2027": 4, "2028": 1 }[state.year] || 1;
+    if (state.year === "2025") return 7;
+    if (state.year === "2026") return 6;
+    if (state.year === "2028") return 1;
+    if (state.findingResolved) return 6;
+    if (state.factConfirmed) return 5;
+    return 4;
   }
 
   function renderRoadmap() {
     const steps = ["确认申报范围", "确认怎么生产", "准备监测与职责", "收集本期数据", "计算并选择路径", "复核与核查", "生成并交付"];
+    const stepPages = ["products", "products", "deliverables", "data", "results", "results", "deliverables"];
     const current = journeyStage();
     const locked = state.year === "2025";
     $("#main").innerHTML = `
       ${pageHeader(`${state.year} · ANNUAL ROADMAP`, locked ? "年度旅程已完成并封存" : `第 ${current}/7 步：${steps[current - 1]}`, yearBadge())}
-      <section class="journey-rail" aria-label="年度合规路线">${steps.map((step, index) => `<button type="button" class="journey-node ${index + 1 < current || locked ? "done" : index + 1 === current ? "current" : ""}" ${index + 1 === current && !locked ? 'aria-current="step"' : ""}><span>${index + 1 < current || locked ? "✓" : index + 1}</span><strong>${step}</strong><small>${index + 1 < current || locked ? "已完成" : index + 1 === current ? "正在进行" : "尚未开始"}</small></button>`).join("")}</section>
+      <section class="journey-rail" aria-label="年度合规路线">${steps.map((step, index) => `<button type="button" class="journey-node ${index + 1 < current || locked ? "done" : index + 1 === current ? "current" : ""}" data-page="${stepPages[index]}" ${index + 1 === current && !locked ? 'aria-current="step"' : ""}><span>${index + 1 < current || locked ? "✓" : index + 1}</span><strong>${step}</strong><small>${index + 1 < current || locked ? "查看记录" : index + 1 === current ? "正在进行" : "查看要求"}</small></button>`).join("")}</section>
       <div class="roadmap-layout">
         <section class="panel step-focus"><div class="panel-head"><h2>${locked ? "年度交付记录" : "完成本步骤还需要什么"}</h2><span>${locked ? "Rev 1" : "2 个阻塞项"}</span></div>
           <div class="step-checks">${locked ? `<div class="complete"><b>✓</b><span><strong>Communication Package 已交付</strong><small>NordWerk GmbH 已接收</small></span></div><div class="complete"><b>✓</b><span><strong>年度数据与版本已封存</strong><small>2026-03-18</small></span></div>` : `<div class="complete"><b>✓</b><span><strong>4 个产品产量已齐备</strong><small>覆盖 Q1–Q2</small></span></div><div class="complete"><b>✓</b><span><strong>1–6 月电力数据已复核</strong><small>来自上海一厂能源台账</small></span></div><div><b>!</b><span><strong>7–9 月天然气账单</strong><small>财务 · 10 月 15 日</small></span><button class="text-button" type="button" data-page="data">去处理</button></div><div><b>!</b><span><strong>供应商甲的前体数据</strong><small>采购 · 已等待 6 天</small></span><button class="text-button" type="button" data-page="products">查看配置</button></div>`}</div>
@@ -282,11 +314,20 @@
     const periods = [
       ["Q1", "已冻结", 100, "ok"], ["Q2", "已复核", 96, "ok"], ["Q3", "采集中", state.uploadAdded ? 84 : 68, "warn"], ["Q4", "未开始", 0, ""],
     ];
+    const gasState = state.uploadAdded ? '<span class="record-state ok">已解析</span>' : '<span class="record-state warn">待补</span>';
+    const reviewStep = state.uploadAdded ? `<section class="panel extraction-review"><div><small>AGENT EXTRACTION · 待协调人确认</small><h2>9 月天然气：18,420 Nm³</h2><p>识别自“江苏二厂天然气账单_2027-09.pdf”，账期与设施已匹配。确认后才进入正式事实建议。</p></div>${state.factConfirmed ? '<span class="status-chip">已确认并进入 Run 05</span>' : '<button class="button button--primary" type="button" data-action="confirm-fact">确认提取结果</button>'}</section>` : "";
+    const dataNext = !state.uploadAdded
+      ? nextAction("当前任务 · 3/5", "先补齐 9 月天然气账单", "上传后 Agent 会提取用量、账期和设施，你只需核对结果。", "演示上传并解析", 'data-action="mock-upload"')
+      : !state.factConfirmed
+        ? nextAction("当前任务 · 3/5", "确认 Agent 提取的数据", "确认前不会进入正式核算，也不会覆盖历史记录。", "确认提取结果", 'data-action="confirm-fact"')
+        : nextAction("当前任务 · 3/5 已完成", "查看成本与数据路径", "新数据已进入待复核计算版本，下一步选择默认值或实测数据路径。", "查看更新结果", 'data-page="results"');
     $("#main").innerHTML = `
       ${pageHeader(`${state.year} · COLLECTION WINDOWS`, "数据与证据", locked ? yearBadge() : actionButton("上传本期材料", "primary", 'data-action="mock-upload"'))}
       ${locked ? '<div class="privacy-band"><strong>年度快照只读</strong><span>新材料必须通过更正申请进入 Amendment 草稿，不会覆盖 Rev 1。</span><button class="text-button" type="button" data-staff-action="已创建年度更正申请">发起更正</button></div>' : ""}
       <section class="period-grid">${periods.map(([label, status, coverage, tone]) => `<article class="period-card ${tone}"><div><small>${label}</small><span class="record-state ${tone}">${status}</span></div><strong>${coverage}%</strong><p>数据与证据覆盖</p><i><em style="width:${coverage}%"></em></i><ul><li>产品数量 ${coverage ? "✓" : "—"}</li><li>能源数据 ${coverage > 70 ? "✓" : coverage ? "待补" : "—"}</li><li>前体数据 ${coverage > 90 ? "✓" : coverage ? "缺 1 项" : "—"}</li></ul></article>`).join("")}</section>
-      <div class="content-split data-layout"><section class="panel flat-panel"><div class="panel-head"><h2>本期材料</h2><button class="text-button" type="button">责任人 ▾</button></div><div class="record-list"><article class="record"><span class="record-code">BILL</span><div><strong>电力账单 · 7–9 月</strong><p>上海一厂 · 财务 · 已解析 3/3</p></div><span class="record-state ok">已关联</span></article><article class="record"><span class="record-code">GAS</span><div><strong>天然气账单 · 7–9 月</strong><p>江苏二厂 · 缺 9 月</p></div><span class="record-state warn">待补</span></article><article class="record"><span class="record-code">PRE</span><div><strong>钢坯供应商数据</strong><p>北方特钢 · 请求已发送</p></div><span class="record-state warn">等待外部</span></article></div></section><aside class="panel trace-panel"><div class="panel-head"><h2>本期进入核算前</h2></div><ol class="trace-list"><li><span>01</span><div><strong>期间完整</strong><small>账期覆盖，无重复或缺月</small></div></li><li><span>02</span><div><strong>对象已关联</strong><small>设施、产品配置和前体明确</small></div></li><li><span>03</span><div><strong>证据可回溯</strong><small>文件版本与位置已记录</small></div></li><li><span>04</span><div><strong>异常已处理</strong><small>冲突有具名裁决</small></div></li></ol></aside></div>`;
+      ${reviewStep}
+      <div class="content-split data-layout"><section class="panel flat-panel"><div class="panel-head"><h2>本期材料</h2><button class="text-button" type="button">责任人 ▾</button></div><div class="record-list"><article class="record"><span class="record-code">BILL</span><div><strong>电力账单 · 7–9 月</strong><p>上海一厂 · 财务 · 已解析 3/3</p></div><span class="record-state ok">已关联</span></article><article class="record"><span class="record-code">GAS</span><div><strong>天然气账单 · 7–9 月</strong><p>江苏二厂 · ${state.uploadAdded ? "已解析 3/3" : "缺 9 月"}</p></div>${gasState}</article><article class="record"><span class="record-code">PRE</span><div><strong>钢坯供应商数据</strong><p>北方特钢 · 请求已发送</p></div><span class="record-state warn">等待外部</span></article></div></section><aside class="panel trace-panel"><div class="panel-head"><h2>本期进入核算前</h2></div><ol class="trace-list"><li><span>01</span><div><strong>期间完整</strong><small>${state.uploadAdded ? "账期已覆盖，无重复或缺月" : "仍缺 9 月天然气"}</small></div></li><li><span>02</span><div><strong>对象已关联</strong><small>设施、产品配置和前体明确</small></div></li><li><span>03</span><div><strong>证据可回溯</strong><small>文件版本与位置已记录</small></div></li><li><span>04</span><div><strong>异常已处理</strong><small>冲突有具名裁决</small></div></li></ol></aside></div>
+      ${locked ? "" : dataNext}`;
   }
 
   function renderProducts() {
@@ -316,11 +357,14 @@
             <div class="configuration-list">${configurations}${state.configurationAdded ? `<article class="new-config"><div class="config-top"><span>${state.selectedProduct === "hrc" ? "D" : "A"}</span><div><strong>新增配置待完善</strong><small>请选择工厂、工艺和前体来源</small></div><span class="record-state warn">草稿</span></div><button class="text-button" type="button" data-page="work">让 Agent 帮我整理 →</button></article>` : ""}</div>
           </section>
         </section>
-      </div>`;
+      </div>
+      ${locked ? "" : state.configurationAdded && !state.answer ? nextAction("当前任务 · 2/5", "让 Agent 补齐新配置", "用业务语言确认工厂、工艺和钢坯来源；无需填写专业字段。", "回答配置问题", 'data-page="work"') : nextAction("当前任务 · 2/5 已核对", "收集本期数据与证据", "产品范围确定后，Agent 已生成按责任人拆分的材料清单。", "继续收集材料", 'data-page="data"')}`;
   }
 
   function renderResults() {
     const resolved = state.findingResolved;
+    const pathLabels = { parallel: "供应商请求 + 默认值并行", supplier: "等待供应商实测数据", conservative: "本期采用保守默认值" };
+    const decisionPanel = state.findingChoiceOpen && !resolved ? `<section class="panel decision-panel"><div class="decision-copy"><small>PATH DECISION · GAP-PRE-004</small><h2>钢坯数据暂时怎么处理？</h2><p>这项决定只影响当前计算版本，不会停止向供应商索取实测数据，也可以在新证据通过后撤回。</p></div><div class="decision-options" role="group" aria-label="选择数据处理路径"><button type="button" class="decision-option ${state.dataPathChoice === "parallel" ? "selected" : ""}" data-path-choice="parallel" aria-pressed="${state.dataPathChoice === "parallel"}"><strong>建议：两条路径并行</strong><span>先用默认值保持进度，同时继续追踪供应商数据</span></button><button type="button" class="decision-option ${state.dataPathChoice === "supplier" ? "selected" : ""}" data-path-choice="supplier" aria-pressed="${state.dataPathChoice === "supplier"}"><strong>等待供应商数据</strong><span>结果更完整，但当前核算和交付会继续等待</span></button><button type="button" class="decision-option ${state.dataPathChoice === "conservative" ? "selected" : ""}" data-path-choice="conservative" aria-pressed="${state.dataPathChoice === "conservative"}"><strong>本期使用默认值</strong><span>最快形成结果，预计证书成本最高</span></button></div><div class="decision-footer"><button class="button button--secondary" type="button" data-action="close-path-choice">暂不决定</button><button class="button button--primary" type="button" data-action="confirm-data-path" ${state.dataPathChoice ? "" : "disabled"}>确认${state.dataPathChoice ? `：${pathLabels[state.dataPathChoice]}` : "处理路径"}</button></div></section>` : "";
     $("#main").innerHTML = `
       ${pageHeader(`${state.year} · DATA STRATEGY SCENARIOS`, "成本与结果", yearBadge())}
       <section class="scenario-intro"><div><small>当前认可路径</small><strong>自身实测 + 前体默认</strong><p>同一产品、数量、年度、证书价格和规则版本下比较。实测并不保证一定降低成本。</p></div><div class="recognized-saving"><small>相对默认基线已确认减少</small><strong>¥1.08m</strong><span>另有约 ¥0.47m 潜在变化待核查</span></div></section>
@@ -329,14 +373,16 @@
         <article class="current"><header><span>B</span><div><small>CURRENT RECOGNIZED</small><h2>自身实测 + 前体默认</h2></div></header><strong>¥3.82m</strong><p>当前认可结果</p><dl><div><dt>数据构成</dt><dd>76% 实测 / 24% 默认</dd></div><div><dt>单位排放</dt><dd>1.83 tCO₂e/t</dd></div><div><dt>合规要求</dt><dd>监测计划、自身数据、核查</dd></div></dl><span class="scenario-state ok">当前核算 Run 04</span></article>
         <article><header><span>C</span><div><small>TARGET SCENARIO</small><h2>全链路实测</h2></div></header><strong>¥3.35m</strong><p>情景值 · 尚未认可</p><dl><div><dt>数据构成</dt><dd>预计 94% 实测</dd></div><div><dt>单位排放</dt><dd>1.60 tCO₂e/t</dd></div><div><dt>仍需完成</dt><dd>供应商数据与上游核查</dd></div></dl><span class="scenario-state warn">潜在变化，不是节省承诺</span></article>
       </section>
+      ${decisionPanel}
       <section class="panel reduction-ledger"><div class="panel-head"><div><h2>成本变化台账</h2><span>每一项变化都能回到工作、证据与计算版本</span></div><button class="text-button" type="button">查看计算假设</button></div><table class="data-table"><thead><tr><th>已完成 / 待完成工作</th><th>替代内容</th><th>影响数量</th><th>排放强度变化</th><th>证书成本影响</th><th>认可状态</th></tr></thead><tbody><tr><td><strong>完成上海一厂实测</strong><small>监测计划 Rev 3</small></td><td>工厂默认值</td><td>6,500 t</td><td>2.10 → 1.72</td><td class="text-success"><strong>−¥620k</strong></td><td><span class="record-state ok">已复核</span></td></tr><tr><td><strong>获得供应商甲数据</strong><small>Communication Form 草稿</small></td><td>钢坯默认值</td><td>2,100 t</td><td>1.85 → 1.54</td><td class="text-warning"><strong>约 −¥230k</strong></td><td><span class="record-state warn">待核查</span></td></tr><tr><td><strong>补齐 Q3 天然气</strong><small>江苏二厂</small></td><td>缺失期估算</td><td>1 个季度</td><td>待计算</td><td>待计算</td><td><span class="record-state">待材料</span></td></tr></tbody></table><p class="scenario-disclaimer">情景金额为演示。实际结果可能升高或降低，以适用规则、认可数据、核查结论和当期证书价格为准；监测、核查和供应商协作成本应另行评估。</p></section>
       <div class="content-split result-content">
         <section class="panel flat-panel"><div class="panel-head"><h2>需要处理的缺口</h2><span>${resolved ? "1" : "2"} 个阻塞项</span></div><div class="finding-list">
-          <article class="finding ${resolved ? "resolved" : ""}"><span class="finding-level">高</span><div><strong>${resolved ? "钢坯来源已说明" : "钢坯供应商排放数据缺失"}</strong><p>${resolved ? "已采用供应商请求 + 保守默认值并行路径，等待回函。" : "影响两个产品的前体嵌入排放。可以向供应商索取，或先使用保守默认值。"}</p><small>GAP-PRE-004 · 影响 37% 总排放</small></div>${resolved ? `<span class="record-state ok">已响应</span>` : `<button class="action primary-action" type="button" data-action="resolve-finding">选择处理方式</button>`}</article>
+          <article class="finding ${resolved ? "resolved" : ""}"><span class="finding-level">高</span><div><strong>${resolved ? "钢坯数据路径已确定" : "钢坯供应商排放数据缺失"}</strong><p>${resolved ? `已选择“${pathLabels[state.dataPathChoice] || pathLabels.parallel}”，等待后续证据。` : "影响两个产品的前体嵌入排放。可以向供应商索取，或先使用保守默认值。"}</p><small>GAP-PRE-004 · 影响 37% 总排放</small></div>${resolved ? `<span class="record-state ok">已记录决定</span>` : `<button class="action primary-action" type="button" data-action="resolve-finding">选择处理方式</button>`}</article>
           <article class="finding"><span class="finding-level medium">中</span><div><strong>6 月电费单尚未关联设施</strong><p>Agent 已识别用电量，需要确认账单覆盖一厂还是两座设施。</p><small>GAP-ENE-012 · 不影响当前试算</small></div><button class="action secondary-action" type="button" data-page="work">去确认</button></article>
         </div></section>
         <aside class="panel trace-panel"><div class="panel-head"><h2>结果从哪里来</h2></div><ol class="trace-list"><li><span>01</span><div><strong>业务事实</strong><small>42 条已确认 · 3 条待确认</small></div></li><li><span>02</span><div><strong>活动数据与证据</strong><small>28 份材料 · 76% 实测覆盖</small></div></li><li><span>03</span><div><strong>确定性计算</strong><small>Engine 0.4 · Run 04</small></div></li><li><span>04</span><div><strong>规则校验</strong><small>EU-CBAM-2027.1 · 2 个 Finding</small></div></li></ol><button class="text-button trace-action" type="button">查看完整计算血缘 →</button></aside>
-      </div>`;
+      </div>
+      ${resolved ? nextAction("当前任务 · 4/5 已完成", "检查交付准备度", "数据路径已记录，接下来核对监测计划、排放报告与 Communication Package 的缺口。", "继续检查交付", 'data-page="deliverables"') : nextAction("当前任务 · 4/5", "先处理阻塞的数据路径", "明确临时使用默认值还是等待供应商数据，项目才能进入复核。", "选择处理方式", 'data-action="resolve-finding"')}`;
   }
 
   function renderDeliverables() {
@@ -350,7 +396,8 @@
     $("#main").innerHTML = `
       ${pageHeader(`${state.year} · COMPLIANCE DELIVERABLES`, "合规交付", yearBadge())}
       <div class="delivery-intro"><div><small>年度交付路径</small><strong>${locked ? "全部完成并封存" : "现在先完成监测计划"}</strong><p>${locked ? "所有文件保留交付时版本、规则和接收记录。" : "同一份已确认事实会自动复用，不需要重复填写 Communication Form。"}</p></div><div class="stage-line"><i class="done"></i><i class="done"></i><i class="${locked ? "done" : "current"}"></i><i class="${locked ? "done" : ""}"></i></div></div>
-      <section class="delivery-list">${docs.map(([id, name, status, note], index) => `<article class="delivery-row ${state.deliveryExpanded === id ? "expanded" : ""}"><span class="delivery-index">0${index + 1}</span><div><small>${["PLAN", "REPORT", "VERIFY", "SHARE"][index]}</small><h2>${name}</h2><p>${status}</p>${state.deliveryExpanded === id ? `<div class="delivery-detail"><strong>来源和版本</strong><p>企业正式事实 · Calculation Run 04 · Rulepack EU-CBAM-${state.year}.1 · 所有未确认项以 GAP 标记。</p><button class="action secondary-action" type="button" data-action="document-preview">预览演示文件</button></div>` : ""}</div><span class="delivery-note">${note}</span><button class="round-action" type="button" data-delivery="${id}" aria-label="展开 ${name}">${state.deliveryExpanded === id ? "−" : "+"}</button></article>`).join("")}</section>`;
+      <section class="delivery-list">${docs.map(([id, name, status, note], index) => `<article class="delivery-row ${state.deliveryExpanded === id ? "expanded" : ""}"><span class="delivery-index">0${index + 1}</span><div><small>${["PLAN", "REPORT", "VERIFY", "SHARE"][index]}</small><h2>${name}</h2><p>${status}</p>${state.deliveryExpanded === id ? `<div class="delivery-detail"><strong>来源和版本</strong><p>企业正式事实 · Calculation Run 04 · Rulepack EU-CBAM-${state.year}.1 · 所有未确认项以 GAP 标记。</p><button class="action secondary-action" type="button" data-action="document-preview">预览演示文件</button></div>` : ""}</div><span class="delivery-note">${note}</span><button class="round-action" type="button" data-delivery="${id}" aria-label="展开 ${name}">${state.deliveryExpanded === id ? "−" : "+"}</button></article>`).join("")}</section>
+      ${locked ? nextAction("年度已封存", "返回年度路线图", "查看各阶段完成记录和交付时间。", "查看完整记录", 'data-page="roadmap"') : nextAction("当前任务 · 5/5", "先完成监测计划的 4 个缺口", "Agent 会继续复用已确认事实；无需重新填写 Communication Form。", "返回今日工作", 'data-page="work"')}`;
   }
 
   function renderTeam() {
@@ -564,8 +611,10 @@
     const answer = event.target.closest("[data-answer]");
     if (answer) {
       if (isLockedYear()) { toast("锁定年度不能原位修改；请先创建更正申请。"); return; }
-      state.answer = answer.dataset.answer; render(); toast(state.answer === "delegate" ? "任务已转交给生产负责人，并保留当前上下文。" : "回答已保存为待确认建议，不会直接覆盖正式数据。"); return;
+      state.answer = answer.dataset.answer; state.questionHelpOpen = false; render(); toast(state.answer === "delegate" ? "任务已转交给生产负责人，并保留当前上下文。下一步可以继续核对产品。" : "回答已保存为待确认建议。下一步请核对产品与生产配置。"); return;
     }
+    const pathChoice = event.target.closest("[data-path-choice]");
+    if (pathChoice) { state.dataPathChoice = pathChoice.dataset.pathChoice; render(); return; }
     const delivery = event.target.closest("[data-delivery]");
     if (delivery) { state.deliveryExpanded = state.deliveryExpanded === delivery.dataset.delivery ? null : delivery.dataset.delivery; render(); return; }
     const product = event.target.closest("[data-product]");
@@ -576,13 +625,17 @@
       if (isLockedYear() && ["mock-upload", "toggle-product-form", "add-configuration", "edit-product", "confirm-fact", "resolve-finding"].includes(action)) { toast("锁定年度为不可变快照；请通过更正申请创建新修订版。"); return; }
       if (action === "open-year-setup") { state.page = "annual-setup"; render(); }
       if (action === "review-trial") { state.page = "products"; render(); toast("试算信息已作为待核对线索带入，不会直接写入正式数据。"); }
-      if (action === "mock-upload") { state.uploadAdded = true; render(); toast("演示文件已加入处理队列；正式版本将调用文件上传与解析服务。"); }
+      if (action === "mock-upload") { state.uploadAdded = true; render(); toast("材料已解析。下一步请确认 Agent 提取的用量、账期和设施。"); }
+      if (action === "explain-question") { state.questionHelpOpen = !state.questionHelpOpen; render(); }
+      if (action === "revise-answer") { state.answer = null; render(); toast("可以重新回答；原建议尚未写入正式数据。"); }
       if (action === "toggle-product-form") { state.productFormOpen = !state.productFormOpen; render(); }
-      if (action === "add-configuration") { state.configurationAdded = true; render(); toast("已创建生产配置草稿；同一产品将按配置分别核算再汇总。"); }
+      if (action === "add-configuration") { state.configurationAdded = true; state.answer = null; render(); toast("已创建生产配置草稿。下一步由 Agent 用业务问题补齐工厂、工艺和前体来源。"); }
       if (action === "edit-product") { state.productFormOpen = true; render(); toast("已打开主档编辑草稿；已确认版本不会被原位覆盖。"); }
       if (action === "toggle-org-edit") { state.orgEditing = !state.orgEditing; render(); toast(state.orgEditing ? "正在编辑企业主档草稿。" : "企业主档草稿已保存；正式版本需管理员确认。" ); }
-      if (action === "confirm-fact") { state.factConfirmed = true; render(); toast("已保存为待专家复核的正式事实建议，并记录确认人。"); }
-      if (action === "resolve-finding") { state.findingResolved = true; render(); toast("已选择供应商请求与默认值并行路径，Finding 保持开放直至证据通过。"); }
+      if (action === "confirm-fact") { state.factConfirmed = true; render(); toast("提取结果已确认并进入 Run 05。下一步请查看成本与数据路径。"); }
+      if (action === "resolve-finding") { state.findingChoiceOpen = true; render(); document.querySelector(".decision-panel")?.scrollIntoView({ behavior: "smooth", block: "center" }); }
+      if (action === "close-path-choice") { state.findingChoiceOpen = false; state.dataPathChoice = null; render(); }
+      if (action === "confirm-data-path" && state.dataPathChoice) { state.findingResolved = true; state.findingChoiceOpen = false; render(); toast("数据处理路径已记录。下一步请检查合规交付准备度。"); }
       if (action === "document-preview") toast("这是交付预览占位；正式版本将从已批准数据生成带版本文件。");
       if (action === "invite-member") toast("成员邀请将按企业、年度和设施设置范围；原型未发送真实邀请。");
       if (action === "create-year") {
@@ -597,6 +650,15 @@
     }
     const action = event.target.closest("[data-staff-action]");
     if (action) toast(`${action.dataset.staffAction}。操作理由和影响范围将写入审计记录。`);
+    const detailButton = event.target.closest("button");
+    const detailMessages = {
+      "查找重复": "已扫描产品名称、编码和年度范围，未发现重复项。",
+      "责任人 ▾": "责任人筛选包含财务、采购、生产和项目协调人。",
+      "查看计算假设": "已打开 Run 05 的证书价格、默认值、benchmark 和汇率假设。",
+      "查看完整计算血缘 →": "已打开从业务事实、证据到 Calculation Run 05 的完整血缘。",
+      "查看权限矩阵 →": "已打开企业、年度、设施和数据敏感级别权限矩阵。",
+    };
+    if (detailButton && detailMessages[detailButton.textContent.trim()]) toast(detailMessages[detailButton.textContent.trim()]);
   });
 
   document.addEventListener("submit", (event) => {
