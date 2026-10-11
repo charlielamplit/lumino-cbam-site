@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles.css?v=20261011-4">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
@@ -70,7 +70,7 @@
       <a class="brand" href="../Lumino%20官网.dc.html" aria-label="返回 Lumino 官网"><span>LUMINO</span><i aria-hidden="true"></i></a>
       <span class="product-name">CBAM 工作门户</span>
       <div class="topbar-context">
-        <button class="company-switch" type="button"><small>当前企业</small><strong id="companyName">华星钢铁有限公司</strong><span>⌄</span></button>
+        <button class="company-switch" type="button"><small id="companyContextLabel">当前企业</small><strong id="companyName">华星钢铁有限公司</strong><span>⌄</span></button>
         <div class="project-period" aria-label="当前项目期间">
           <label class="year-switch"><small>年度项目</small><select id="yearSelect"></select></label>
           <label class="quarter-switch" id="quarterSwitch"><small>季度数据包</small><select id="quarterSelect"><option value="Q1">Q1</option><option value="Q2">Q2</option><option value="Q3">Q3</option><option value="Q4">Q4</option></select></label>
@@ -102,6 +102,15 @@
               <option value="ops">运营 / 客户成功</option>
               <option value="sales">商务 / 销售</option>
             </optgroup>
+            <optgroup label="外部协作方">
+              <option value="importer">欧盟进口商 / 申报人</option>
+              <option value="verifier">第三方核查员</option>
+              <option value="supplier">前体供应商</option>
+            </optgroup>
+            <optgroup label="平台治理">
+              <option value="support">平台支持</option>
+              <option value="platform_admin">平台管理员</option>
+            </optgroup>
           </select></label>
           <small>正式产品中由账号权限决定</small>
         </div>
@@ -119,6 +128,12 @@
   </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
-  <script src="./app.js" defer></script>
+  <script src="./domain/workflow-engine.js?v=20261011-4" defer></script>
+  <script src="./runtime/portal-config.js?v=20261011-4" defer></script>
+  <script src="./runtime/portal-core.js?v=20261011-4" defer></script>
+  <script src="./pages/customer-pages.js?v=20261011-4" defer></script>
+  <script src="./pages/role-pages.js?v=20261011-4" defer></script>
+  <script src="./runtime/portal-events.js?v=20261011-4" defer></script>
+  <script src="./app.js?v=20261011-4" defer></script>
 </body>
 </html>
